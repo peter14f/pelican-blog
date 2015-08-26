@@ -1,0 +1,114 @@
+001 Two Sum
+###########
+
+:date: 2015-8-25 9:09
+:tags: Hash Table
+:category: LeetCode
+:slug: 001-two-sum
+
+There are many ways the problem can be asked in an interview.
+Some will simply ask you to return the two numbers.
+LeetCode instead wants to know the location of two numbers found in the input array.
+An int array of size two needs to be returned.
+And ``index + 1`` is stored in the returned array where ``index`` is the index of the input array.
+
+An example::
+
+    nums = {0, 4, 3, 0}
+    target = 0
+
+``{1, 4}`` should be returned since adding the **first number** ``0`` and the **fourth number** ``0``
+gives you ``0`` (**target**).
+
+**O(n)** solution using a *HashMap*:
+
+.. code-block:: java
+
+  public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        // key is the number in the array
+        // value is the index of the number in the array
+
+        /* If the same number appears multiple times in the array, what the
+         * HashMap ends up saving is the highest index that contains the number
+         */
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i); // number, index
+        }
+
+        /* We traverse from index zero because the HashMap stores the highest
+         * index in the array that contains the number
+         *
+         * This way we make sure that the first number in the ans array is the
+         * smaller number since the second number is obtained from the HashMap
+         */
+        for (int i = 0; i < nums.length; i++) {
+            int diff = target - nums[i];
+
+            if (map.containsKey(diff) && map.get(diff) != i) {
+                int[] ans = new int[2];
+                ans[0] = i + 1;
+                ans[1] = map.get(diff) + 1;
+                return ans;
+            }
+
+        }
+        return new int[2];
+    }
+
+| **O(nlogn)** solution:
+| This does not require a HashMap, but we have to sort the array first.
+
+.. code-block:: java
+
+    public int[] twoSum(int[] nums, int target) {
+
+        int[] copy = new int[nums.length];
+
+        System.arraycopy(nums, 0, copy, 0, nums.length);
+
+        // sorting takes O(nlogn)
+        Arrays.sort(copy);
+
+        int left = 0;
+        int right = nums.length - 1;
+        int numA = 0;
+        int numB = 0;
+
+        int[] ans = new int[2];
+
+        while (left < right) {
+            int sum = copy[left] + copy[right];
+
+            if (sum == target) {
+                numA = copy[left];
+                numB = copy[right];
+                break;
+            }
+            else if (sum > target) {
+                right--;
+            }
+            else {
+                left++;
+            }
+        }
+
+        /* numA and numB are the two numbers, now we need to locate their
+         * indices in the array nums. This is another linear scan.
+         */
+        for (int i=0; i< nums.length; i++) {
+            if (nums[i] == numA && ans[0]==0)
+                ans[0] = i+1;
+            else if (nums[i] == numB && ans[1]==0)
+                ans[1] = i+1;
+        }
+
+        // need to satisfy the constraint ans[0] < ans[1]
+        if (ans[0] > ans[1]) {
+            int temp = ans[0];
+            ans[0] = ans[1];
+            ans[1] = temp;
+        }
+
+        return ans;
+    }
