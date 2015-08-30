@@ -2,8 +2,8 @@
 ###################
 
 :date: 2015-8-27 17:10
-:tags:
-:category:
+:tags: Linked List
+:category: LeetCode
 :slug: 002-add-two-numbers
 
 `LeetCode Problem Link <https://leetcode.com/problems/add-two-numbers/>`_
