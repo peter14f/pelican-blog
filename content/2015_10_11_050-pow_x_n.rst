@@ -1,0 +1,52 @@
+050-pow_x_n
+###########
+
+:date: 2015-10-11 18:17
+:tags: Power, Math
+:category: LeetCode
+:slug: 050-pow_x_n
+
+`LeetCode Problem Link <https://leetcode.com/problems/powx-n/>`_
+
+Use recursion to avoid re-computation.
+
+| x\ :superscript:`4` = x\ :superscript:`2` * x\ :superscript:`2`
+| x\ :superscript:`5` = x\ :superscript:`4` * x
+
+.. code-block:: java
+
+    public double myPow(double x, int n) {
+
+        if (n==0)
+            return 1;
+        else if (n==1)
+            return x;
+        else if (n==-1)
+            return 1/x;
+
+        boolean negative = false;
+
+        if (n<0)
+            negative = true;
+
+        if (n%2==0) {
+            // even power
+            int halfPower = n/2;
+            double halfPowerAns = myPow(x, halfPower);
+            return halfPowerAns*halfPowerAns;
+        }
+        else {
+            // odd power
+            if (negative) {
+                int evenPower = n + 1;
+
+                return myPow(x, evenPower) * (1/x);
+            }
+            else {
+                int evenPower = n - 1;
+                return myPow(x, evenPower) * x;
+            }
+        }
+    }
+
+
