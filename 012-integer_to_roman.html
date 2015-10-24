@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>012-integer_to_roman - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/012-integer_to_roman.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Roman Numerals" />
+        <meta name="description" content="LeetCode Problem Link Do problem 013-roman_to_integer before this problem. One thing the remember is that digits larger than five (but not nine) should be have the Roman Numeral for 5 inserted first. public String intToRoman(int num) { int divisor = 1000; StringBuffer sb = new StringBuffer(); for (int i=4; i&gt;=1; i--) { int digit = num / divisor; if (digit==4) { appendForFour(sb, divisor); } else if (digit==9) { appendForNine(sb, divisor); } else if (digit &gt;= 5) { appendForFive(sb, divisor); append(sb, divisor, digit-5); } else if (digit==1) { appendForOne(sb, divisor); } else if (digit &gt; 0){ append(sb, divisor, digit); } num = num - digit*divisor; divisor ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="012-integer_to_roman"/>
+        <meta property="og:url" content="/012-integer_to_roman.html"/>
+        <meta property="og:description" content="LeetCode Problem Link Do problem 013-roman_to_integer before this problem. One thing the remember is that digits larger than five (but not nine) should be have the Roman Numeral for 5 inserted first. public String intToRoman(int num) { int divisor = 1000; StringBuffer sb = new StringBuffer(); for (int i=4; i&gt;=1; i--) { int digit = num / divisor; if (digit==4) { appendForFour(sb, divisor); } else if (digit==9) { appendForNine(sb, divisor); } else if (digit &gt;= 5) { appendForFive(sb, divisor); append(sb, divisor, digit-5); } else if (digit==1) { appendForOne(sb, divisor); } else if (digit &gt; 0){ append(sb, divisor, digit); } num = num - digit*divisor; divisor ..."/>
+        <meta property="article:published_time" content="2015-09-07" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Roman Numerals" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="/012-integer_to_roman.html"
+                       rel="bookmark"
+                       title="Permalink to 012-integer_to_roman">
+                        012-integer_to_roman
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T20:14:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="/tag/roman-numerals.html">Roman Numerals</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/integer-to-roman/">LeetCode Problem Link</a></p>
+<p>Do problem <tt class="docutils literal"><span class="pre">013-roman_to_integer</span></tt> before this problem.</p>
+<p>One thing the remember is that digits larger than five (but not nine) should
+be have the Roman Numeral for 5 inserted first.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">intToRoman</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">divisor</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">;</span>
+    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">4</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+
+        <span class="kt">int</span> <span class="n">digit</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">divisor</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">digit</span><span class="o">==</span><span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">appendForFour</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span><span class="o">==</span><span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">appendForNine</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">appendForFive</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
+            <span class="n">append</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">,</span> <span class="n">digit</span><span class="o">-</span><span class="mi">5</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">appendForOne</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
+            <span class="n">append</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">,</span> <span class="n">digit</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">-</span> <span class="n">digit</span><span class="o">*</span><span class="n">divisor</span><span class="o">;</span>
+        <span class="n">divisor</span> <span class="o">=</span> <span class="n">divisor</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">appendForFour</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">,</span> <span class="kt">int</span> <span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="cm">/* L=50 C=100 D=500*/</span>
+        <span class="k">case</span> <span class="mi">100</span><span class="o">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;C&#39;</span><span class="o">);</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;D&#39;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;X&#39;</span><span class="o">);</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;L&#39;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;I&#39;</span><span class="o">);</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;V&#39;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">appendForNine</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">,</span> <span class="kt">int</span> <span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// L=50 C=100 D=500 M=1000</span>
+        <span class="k">case</span> <span class="mi">100</span><span class="o">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;C&#39;</span><span class="o">);</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;M&#39;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;X&#39;</span><span class="o">);</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;C&#39;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;I&#39;</span><span class="o">);</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;X&#39;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">appendForFive</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">,</span> <span class="kt">int</span> <span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">char</span> <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;D&#39;</span><span class="o">;</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">case</span> <span class="mi">100</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;D&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;L&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;V&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">toAppend</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">appendForOne</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">,</span> <span class="kt">int</span> <span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">char</span> <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;M&#39;</span><span class="o">;</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="mi">1000</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;M&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">100</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;C&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;I&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">toAppend</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">append</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">,</span> <span class="kt">int</span> <span class="n">divisor</span><span class="o">,</span> <span class="kt">int</span> <span class="n">digit</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">char</span> <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;M&#39;</span><span class="o">;</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="n">divisor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="mi">1000</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;M&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">100</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;C&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">10</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+            <span class="n">toAppend</span> <span class="o">=</span> <span class="sc">&#39;I&#39;</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">digit</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">toAppend</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

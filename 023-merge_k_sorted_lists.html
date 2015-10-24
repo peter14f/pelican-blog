@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>023-merge_k_sorted_lists - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/023-merge_k_sorted_lists.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Priority Queues" />
+        <meta name="description" content="LeetCode Problem Link We have k lists. We use a PriorityQueue&lt;ListNode&gt; and a HashMap&lt;ListNode, Integer&gt;. At all times, we make sure that each of these two data structures does not have more than k entries. The HashMap is to lookup which list this ListNode came from. Assuming the total number of nodes in these k lists is n. This should take n O(k) time. Make sure to check for lists that are initially empty. class ListNodeComparator implements Comparator&lt;ListNode&gt; { @Override public int compare(ListNode o1, ListNode o2) { if (o1.val &lt; o2.val) return -1; else if (o1 ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="023-merge_k_sorted_lists"/>
+        <meta property="og:url" content="/023-merge_k_sorted_lists.html"/>
+        <meta property="og:description" content="LeetCode Problem Link We have k lists. We use a PriorityQueue&lt;ListNode&gt; and a HashMap&lt;ListNode, Integer&gt;. At all times, we make sure that each of these two data structures does not have more than k entries. The HashMap is to lookup which list this ListNode came from. Assuming the total number of nodes in these k lists is n. This should take n O(k) time. Make sure to check for lists that are initially empty. class ListNodeComparator implements Comparator&lt;ListNode&gt; { @Override public int compare(ListNode o1, ListNode o2) { if (o1.val &lt; o2.val) return -1; else if (o1 ..."/>
+        <meta property="article:published_time" content="2015-09-07" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Priority Queues" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="/023-merge_k_sorted_lists.html"
+                       rel="bookmark"
+                       title="Permalink to 023-merge_k_sorted_lists">
+                        023-merge_k_sorted_lists
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T20:25:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="/tag/priority-queues.html">Priority Queues</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/merge-k-sorted-lists/">LeetCode Problem Link</a></p>
+<p>We have <tt class="docutils literal">k</tt> lists. We use a PriorityQueue&lt;ListNode&gt; and a HashMap&lt;ListNode, Integer&gt;. At all times, we make sure
+that each of these two data structures does not have more than <tt class="docutils literal">k</tt> entries.</p>
+<p>The HashMap is to lookup which list this ListNode came from.</p>
+<p>Assuming the total number of nodes in these <tt class="docutils literal">k</tt> lists is <tt class="docutils literal">n</tt>.</p>
+<p>This should take n O(k) time.</p>
+<p>Make sure to check for lists that are initially empty.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">ListNodeComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">o1</span><span class="o">,</span> <span class="n">ListNode</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">val</span><span class="o">)</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">o2</span><span class="o">.</span><span class="na">val</span><span class="o">)</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="c1">// k lists</span>
+<span class="c1">// 1: 1 2 3</span>
+<span class="c1">// 2: 4 5 6</span>
+<span class="c1">// 3: 7 8 9</span>
+<span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">mergeKLists</span><span class="o">(</span><span class="n">ListNode</span><span class="o">[]</span> <span class="n">lists</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">&gt;(</span><span class="k">new</span> <span class="n">ListNodeComparator</span><span class="o">());</span>
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">lists</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">lists</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+            <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">cur</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">tail</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">pqNode</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">tail</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">pqNode</span><span class="o">;</span>
+            <span class="n">tail</span> <span class="o">=</span> <span class="n">pqNode</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">pqNode</span><span class="o">;</span>
+            <span class="n">tail</span> <span class="o">=</span> <span class="n">pqNode</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">pqNode</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">pqNode</span><span class="o">);</span>
+
+        <span class="n">lists</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">pqNode</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">lists</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">lists</span><span class="o">[</span><span class="n">index</span><span class="o">]);</span>
+            <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">lists</span><span class="o">[</span><span class="n">index</span><span class="o">],</span> <span class="n">index</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

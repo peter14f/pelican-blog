@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>037-sudoku_solver - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/037-sudoku_solver.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Recursion,NP,DFS" />
+        <meta name="description" content="LeetCode Problem Link We will have to backtrack using a stack. Here are the information that we need when backtracking: 1) to which cell are we backtracking to? 2) what other numbers can we choose from now? public class Solution { public static final int SIZE = 9; public static final int SUBSIZE = 3; class Cell { int row; int col; HashSet&lt;Character&gt; numbers; public Cell(int row, int col, char[][] board) { this.row = row; this.col = col; numbers = new HashSet&lt;Character&gt;(); for (int i=1; i&lt;=SIZE; i++) { numbers.add((char) (&#39;0&#39; + i)); } // numbers already in the row for (int i=0 ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="037-sudoku_solver"/>
+        <meta property="og:url" content="/037-sudoku_solver.html"/>
+        <meta property="og:description" content="LeetCode Problem Link We will have to backtrack using a stack. Here are the information that we need when backtracking: 1) to which cell are we backtracking to? 2) what other numbers can we choose from now? public class Solution { public static final int SIZE = 9; public static final int SUBSIZE = 3; class Cell { int row; int col; HashSet&lt;Character&gt; numbers; public Cell(int row, int col, char[][] board) { this.row = row; this.col = col; numbers = new HashSet&lt;Character&gt;(); for (int i=1; i&lt;=SIZE; i++) { numbers.add((char) (&#39;0&#39; + i)); } // numbers already in the row for (int i=0 ..."/>
+        <meta property="article:published_time" content="2015-09-27" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Recursion" />
+            <meta property="article:tag" content="NP" />
+            <meta property="article:tag" content="DFS" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="/037-sudoku_solver.html"
+                       rel="bookmark"
+                       title="Permalink to 037-sudoku_solver">
+                        037-sudoku_solver
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-27T10:49:00-07:00"> Sep 27 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="/tag/recursion.html">Recursion</a>
+        /
+	<a href="/tag/np.html">NP</a>
+        /
+	<a href="/tag/dfs.html">DFS</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/sudoku-solver/">LeetCode Problem Link</a></p>
+<p>We will have to backtrack using a stack. Here are the information that we need when backtracking:</p>
+<div class="line-block">
+<div class="line">1) to which cell are we backtracking to?</div>
+<div class="line">2) what other numbers can we choose from now?</div>
+</div>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SIZE</span> <span class="o">=</span> <span class="mi">9</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SUBSIZE</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">row</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">col</span><span class="o">;</span>
+        <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">numbers</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">row</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">col</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
+
+            <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">SIZE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">numbers</span><span class="o">.</span><span class="na">add</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="o">(</span><span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">i</span><span class="o">));</span>
+            <span class="o">}</span>
+
+            <span class="c1">// numbers already in the row</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">numbers</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">numbers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">i</span><span class="o">]);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="c1">// numbers already in the column</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">numbers</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">col</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">numbers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">col</span><span class="o">]);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="c1">// numbers already in the subboard</span>
+            <span class="kt">int</span> <span class="n">subboardRow</span> <span class="o">=</span> <span class="o">(</span><span class="n">row</span><span class="o">/</span><span class="n">SUBSIZE</span><span class="o">)*</span><span class="n">SUBSIZE</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">subboardCol</span> <span class="o">=</span> <span class="o">(</span><span class="n">col</span><span class="o">/</span><span class="n">SUBSIZE</span><span class="o">)*</span><span class="n">SUBSIZE</span><span class="o">;</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">SUBSIZE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">SUBSIZE</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">numbers</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">subboardRow</span><span class="o">+</span><span class="n">i</span><span class="o">][</span><span class="n">subboardCol</span><span class="o">+</span><span class="n">j</span><span class="o">]))</span> <span class="o">{</span>
+                        <span class="n">numbers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">subboardRow</span><span class="o">+</span><span class="n">i</span><span class="o">][</span><span class="n">subboardCol</span><span class="o">+</span><span class="n">j</span><span class="o">]);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">solveSudoku</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;();</span>
+
+        <span class="c1">// find blank cells</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">Cell</span> <span class="n">cell</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Cell</span><span class="o">(</span><span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">board</span><span class="o">);</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">cell</span><span class="o">.</span><span class="na">numbers</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                        <span class="c1">// time to backtrack</span>
+                        <span class="k">do</span> <span class="o">{</span>
+                            <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+                                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;board cannot be solved&quot;</span><span class="o">);</span>
+
+                            <span class="n">cell</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+                            <span class="n">board</span><span class="o">[</span><span class="n">cell</span><span class="o">.</span><span class="na">row</span><span class="o">][</span><span class="n">cell</span><span class="o">.</span><span class="na">col</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="o">;</span>
+
+                        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">cell</span><span class="o">.</span><span class="na">numbers</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">());</span>
+
+                        <span class="n">row</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="na">row</span><span class="o">;</span>
+                        <span class="n">col</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="na">col</span><span class="o">;</span>
+                    <span class="o">}</span>
+
+                    <span class="kt">char</span> <span class="n">choice</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="na">numbers</span><span class="o">.</span><span class="na">iterator</span><span class="o">().</span><span class="na">next</span><span class="o">();</span>
+                    <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">choice</span><span class="o">;</span>
+                    <span class="n">cell</span><span class="o">.</span><span class="na">numbers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">choice</span><span class="o">);</span>
+                    <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cell</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

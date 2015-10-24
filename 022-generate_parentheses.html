@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>022-generate_parentheses - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/022-generate_parentheses.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Parentheses,DFS,NP" />
+        <meta name="description" content="LeetCode Problem Link We keep track of the number of opens and number of closes left in variables numOpen and numClose respectively. We use recursion. And one thing to note is that if inserting one more close symbol causes the number of open symbols left to be less than the number of closes left, then we should NOT consider inserting more close symbols. public List&lt;String&gt; generateParenthesis(int n) { int numOpen = n; int numClose = n; List&lt;String&gt; ans = new ArrayList&lt;String&gt;(); StringBuffer sb = new StringBuffer(); sb.append(&#39;(&#39;); numOpen--; generateParentheses(sb, ans, numOpen, numClose); return ans; } private void generateParentheses(StringBuffer sb ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="022-generate_parentheses"/>
+        <meta property="og:url" content="/022-generate_parentheses.html"/>
+        <meta property="og:description" content="LeetCode Problem Link We keep track of the number of opens and number of closes left in variables numOpen and numClose respectively. We use recursion. And one thing to note is that if inserting one more close symbol causes the number of open symbols left to be less than the number of closes left, then we should NOT consider inserting more close symbols. public List&lt;String&gt; generateParenthesis(int n) { int numOpen = n; int numClose = n; List&lt;String&gt; ans = new ArrayList&lt;String&gt;(); StringBuffer sb = new StringBuffer(); sb.append(&#39;(&#39;); numOpen--; generateParentheses(sb, ans, numOpen, numClose); return ans; } private void generateParentheses(StringBuffer sb ..."/>
+        <meta property="article:published_time" content="2015-09-07" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Parentheses" />
+            <meta property="article:tag" content="DFS" />
+            <meta property="article:tag" content="NP" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="/022-generate_parentheses.html"
+                       rel="bookmark"
+                       title="Permalink to 022-generate_parentheses">
+                        022-generate_parentheses
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T20:24:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="/tag/parentheses.html">Parentheses</a>
+        /
+	<a href="/tag/dfs.html">DFS</a>
+        /
+	<a href="/tag/np.html">NP</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/generate-parentheses/">LeetCode Problem Link</a></p>
+<p>We keep track of the number of opens and number of closes left in variables <tt class="docutils literal">numOpen</tt> and <tt class="docutils literal">numClose</tt> respectively.
+We use recursion. And one thing to note is that if inserting one more close symbol causes the number of open symbols
+left to be less than the number of closes left, then we should <strong>NOT</strong> consider inserting more close symbols.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">generateParenthesis</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">numOpen</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">numClose</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+
+    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;(&#39;</span><span class="o">);</span>
+    <span class="n">numOpen</span><span class="o">--;</span>
+
+    <span class="n">generateParentheses</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">ans</span><span class="o">,</span> <span class="n">numOpen</span><span class="o">,</span> <span class="n">numClose</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">generateParentheses</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">,</span>
+                                <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span><span class="o">,</span>
+                                <span class="kt">int</span> <span class="n">numOpen</span><span class="o">,</span>
+                                <span class="kt">int</span> <span class="n">numClose</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">numOpen</span> <span class="o">&lt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">numClose</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">numOpen</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;(&#39;</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">newSize</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="n">generateParentheses</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">ans</span><span class="o">,</span> <span class="n">numOpen</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">numClose</span><span class="o">);</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">deleteCharAt</span><span class="o">(</span><span class="n">newSize</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">numClose</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">numClose</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">numOpen</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;)&#39;</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">newSize</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="n">generateParentheses</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">ans</span><span class="o">,</span> <span class="n">numOpen</span><span class="o">,</span> <span class="n">numClose</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">deleteCharAt</span><span class="o">(</span><span class="n">newSize</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

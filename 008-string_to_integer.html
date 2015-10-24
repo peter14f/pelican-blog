@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>008-string_to_integer - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/008-string_to_integer.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="C String Functions" />
+        <meta name="description" content="LeetCode Problem Link I decided to do this problem in C since atoi() is a C function. We store the result in ans First we need to eat up blank spaces. As we find the first non-blank character, we need to start checking for the sign. The sign is either &#39;+&#39; or &#39;-&#39;, as we find the first non-sign character, we stop looking for the sign and expects numbers only... For each digit we see, we first shift ans to the right by 1 digit (by multiplying 10) and then add that digit to ans If a non-number is found, the current ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="008-string_to_integer"/>
+        <meta property="og:url" content="/008-string_to_integer.html"/>
+        <meta property="og:description" content="LeetCode Problem Link I decided to do this problem in C since atoi() is a C function. We store the result in ans First we need to eat up blank spaces. As we find the first non-blank character, we need to start checking for the sign. The sign is either &#39;+&#39; or &#39;-&#39;, as we find the first non-sign character, we stop looking for the sign and expects numbers only... For each digit we see, we first shift ans to the right by 1 digit (by multiplying 10) and then add that digit to ans If a non-number is found, the current ..."/>
+        <meta property="article:published_time" content="2015-09-07" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="C String Functions" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="/008-string_to_integer.html"
+                       rel="bookmark"
+                       title="Permalink to 008-string_to_integer">
+                        008-string_to_integer
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T17:22:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="/tag/c-string-functions.html">C String Functions</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/string-to-integer-atoi/">LeetCode Problem Link</a></p>
+<p>I decided to do this problem in C since <strong>atoi()</strong> is a C function.</p>
+<div class="line-block">
+<div class="line">We store the result in <tt class="docutils literal">ans</tt></div>
+<div class="line">First we need to eat up blank spaces.</div>
+<div class="line">As we find the first non-blank character, we need to start checking for the sign.</div>
+<div class="line">The sign is either '+' or '-', as we find the first non-sign character, we stop</div>
+<div class="line">looking for the sign and expects numbers only...</div>
+<div class="line">For each digit we see, we first shift <tt class="docutils literal">ans</tt> to the right by 1 digit (by multiplying 10)</div>
+<div class="line">and then add that digit to <tt class="docutils literal">ans</tt></div>
+<div class="line">If a non-number is found, the current <tt class="docutils literal">ans</tt> will be returned.</div>
+<div class="line">If overflow occurs and <tt class="docutils literal">ans</tt> is positive, return <tt class="docutils literal">0x7FFFFFFF</tt>.</div>
+<div class="line">If overflow occurs and <tt class="docutils literal">ans</tt> is negative, return <tt class="docutils literal">0x80000000</tt>.</div>
+</div>
+<div class="highlight"><pre><span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+
+<span class="cp">#define boolean unsigned char</span>
+<span class="cp">#define TRUE 1</span>
+<span class="cp">#define FALSE 0</span>
+
+<span class="kt">int</span> <span class="nf">myAtoi</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">boolean</span> <span class="n">check_blank</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+  <span class="n">boolean</span> <span class="n">check_sign</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+  <span class="n">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+  <span class="n">boolean</span> <span class="n">overflow</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">str</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">check_blank</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">is_blank_char</span><span class="p">(</span><span class="o">*</span><span class="n">str</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">check_blank</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+        <span class="k">continue</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">check_sign</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">str</span> <span class="o">==</span> <span class="sc">&#39;+&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">check_sign</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+        <span class="n">str</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">str</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">negative</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+        <span class="n">check_sign</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+        <span class="n">str</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="n">check_sign</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="kt">char</span> <span class="n">num</span> <span class="o">=</span> <span class="n">is_number</span><span class="p">(</span><span class="o">*</span><span class="n">str</span><span class="p">);</span>
+
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;  num %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">new_ans_multiply</span> <span class="o">=</span> <span class="n">ans</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">new_ans_multiply</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">!=</span> <span class="n">ans</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">overflow</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">new_ans_sum</span> <span class="o">=</span> <span class="n">new_ans_multiply</span> <span class="o">+</span> <span class="n">num</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">new_ans_sum</span> <span class="o">&lt;</span> <span class="n">new_ans_multiply</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">overflow</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">new_ans_sum</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">str</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">negative</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="n">ans</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">overflow</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ans</span> <span class="o">=</span> <span class="mh">0x80000000</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">overflow</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ans</span> <span class="o">=</span> <span class="mh">0x7FFFFFFF</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">boolean</span> <span class="nf">is_blank_char</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">9</span><span class="o">:</span>  <span class="cm">/* TAB */</span>
+    <span class="k">case</span> <span class="mi">10</span><span class="o">:</span> <span class="cm">/* LF */</span>
+    <span class="k">case</span> <span class="mi">11</span><span class="o">:</span> <span class="cm">/* VT */</span>
+    <span class="k">case</span> <span class="mi">12</span><span class="o">:</span> <span class="cm">/* FF */</span>
+    <span class="k">case</span> <span class="mi">13</span><span class="o">:</span> <span class="cm">/* CR */</span>
+    <span class="k">case</span> <span class="mi">32</span><span class="o">:</span> <span class="cm">/* Space */</span>
+      <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">char</span> <span class="nf">is_number</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="sc">&#39;0&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;1&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;2&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;3&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;4&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;5&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;6&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;7&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">7</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;8&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="k">case</span> <span class="sc">&#39;9&#39;</span><span class="o">:</span>
+      <span class="k">return</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
