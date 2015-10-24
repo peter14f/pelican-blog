@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>More Practice - Peter's Coding Notes</title>
+    <title>Math - Peter's Coding Notes</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="Peter Hsieh" />
-    <meta name="keywords" content="More Practice" />
+    <meta name="keywords" content="Math" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -67,6 +67,69 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/050-pow_x_n.html">050-pow_x_n</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-10-11T18:17:00-07:00"> Oct 11 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/power.html">Power</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/math.html">Math</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/powx-n/">LeetCode Problem Link</a></p>
+<p>Use recursion to avoid re-computation.</p>
+<div class="line-block">
+<div class="line">x<sup>4</sup> = x<sup>2</sup> * x<sup>2</sup></div>
+<div class="line">x<sup>5</sup> = x<sup>4</sup> * x</div>
+</div>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">double</span> <span class="nf">myPow</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==-</span><span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">;</span>
+
+    <span class="kt">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">)</span>
+        <span class="n">negative</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// even power</span>
+        <span class="kt">int</span> <span class="n">halfPower</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">halfPowerAns</span> <span class="o">=</span> <span class="n">myPow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">halfPower</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">halfPowerAns</span><span class="o">*</span><span class="n">halfPowerAns</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// odd power</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">negative</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">evenPower</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+
+            <span class="k">return</span> <span class="n">myPow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">evenPower</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">evenPower</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">myPow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">evenPower</span><span class="o">)</span> <span class="o">*</span> <span class="n">x</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/050-pow_x_n.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/029-divide_two_integers.html">029-divide_two_integers</a></h2>
                     <div>
