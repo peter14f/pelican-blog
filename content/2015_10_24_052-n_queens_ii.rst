@@ -1,0 +1,91 @@
+052-n_queens_ii
+###############
+
+:date: 2015-10-24 15:01
+:tags: DFS, NP, Recursion
+:category: LeetCode
+:slug: 052-n_queens_ii
+
+`LeetCode Problem Link <https://leetcode.com/problems/n-queens-ii/>`_
+
+Solving the previous problem solves this problem already.
+
+.. code-block:: java
+
+    public int totalNQueens(int n) {
+
+        char[][] board = new char[n][n];
+        for (int row=0; row<n; row++) {
+            for (int col=0; col<n; col++) {
+                board[row][col] = '.';
+            }
+        }
+        int[] ans = {0};
+        solveNQueens(board, 0, n, ans);
+        return ans[0];
+    }
+
+    private void solveNQueens(char[][] board, int row, int n, int[] ans) {
+
+        for (int col=0; col<n; col++) {
+            boolean allPassed = true;
+
+            // check previous rows in this column
+            for (int r=0; r<row; r++) {
+                if (board[r][col] == 'Q') {
+                    allPassed = false;
+                    break;
+                }
+            }
+
+            if (!allPassed)
+                continue;
+
+            int dist = 1;
+
+            // check previous rows along the diagonal
+            for (int r=row-1; r>=0; r--) {
+                if (col - dist < 0)
+                    break;
+
+                if (board[r][col-dist] == 'Q') {
+                    allPassed = false;
+                    break;
+                }
+
+                dist++;
+            }
+
+            if (!allPassed)
+                continue;
+
+            dist = 1;
+            // check previous rows along the reverse diagonal
+            for (int r=row-1; r>=0; r--) {
+                if (col + dist >= n) {
+                    break;
+                }
+
+                if (board[r][col+dist] == 'Q') {
+                    allPassed = false;
+                    break;
+                }
+
+                dist++;
+            }
+
+            if (!allPassed)
+                continue;
+
+            board[row][col] = 'Q';
+
+            if (row == n-1) {
+                // found 1 solution
+                ans[0]++;
+            }
+            else{
+                solveNQueens(board, row+1, n, ans);
+            }
+            board[row][col] = '.';
+        } // for each column in row
+    }

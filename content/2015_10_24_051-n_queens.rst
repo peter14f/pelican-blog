@@ -1,0 +1,101 @@
+051-n_queens
+############
+
+:date: 2015-10-24 12:34
+:tags: DFS, NP, Recursion
+:category: LeetCode
+:slug: 051-n_queens
+
+`LeetCode Problem Link <https://leetcode.com/problems/n-queens/>`_
+
+This problem is very similar to 037-sudoku_solver.
+
+Before we insert a Queen at a specific cell, we must check the the previous rows in the same column, the previous rows
+along the diagonal,  and the previous rows along the reverse diagonal.
+
+.. code-block:: java
+
+    public List<List<String>> solveNQueens(int n) {
+
+        List<List<String>> ans = new ArrayList<List<String>>();
+
+        char[][] board = new char[n][n];
+        for (int row=0; row<n; row++) {
+            for (int col=0; col<n; col++) {
+                board[row][col] = '.';
+            }
+        }
+
+        solveNQueens(board, ans, 0, n);
+
+        return ans;
+    }
+
+    private void solveNQueens(char[][] board, List<List<String>> ans, int row, int n) {
+
+        for (int col=0; col<n; col++) {
+            boolean allPassed = true;
+
+            // check previous rows in this column
+            for (int r=0; r<row; r++) {
+                if (board[r][col] == 'Q') {
+                    allPassed = false;
+                    break;
+                }
+            }
+
+            if (!allPassed)
+                continue;
+
+            int dist = 1;
+
+            // check previous rows along the diagonal
+            for (int r=row-1; r>=0; r--) {
+                if (col - dist < 0)
+                    break;
+
+                if (board[r][col-dist] == 'Q') {
+                    allPassed = false;
+                    break;
+                }
+
+                dist++;
+            }
+
+            if (!allPassed)
+                continue;
+
+            dist = 1;
+            // check previous rows along the reverse diagonal
+            for (int r=row-1; r>=0; r--) {
+                if (col + dist >= n) {
+                    break;
+                }
+
+                if (board[r][col+dist] == 'Q') {
+                    allPassed = false;
+                    break;
+                }
+
+                dist++;
+            }
+
+            if (!allPassed)
+                continue;
+
+            board[row][col] = 'Q';
+
+
+            if (row == n-1) {
+                List<String> newBoard = new ArrayList<String>();
+                for (int i=0; i<n; i++) {
+                    newBoard.add(new String(board[i]));
+                }
+                ans.add(newBoard);
+            }
+            else{
+                solveNQueens(board, ans, row+1, n);
+            }
+            board[row][col] = '.';
+        }
+    }

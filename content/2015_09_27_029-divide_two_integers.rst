@@ -2,7 +2,7 @@
 #######################
 
 :date: 2015-09-27 10:41
-:tags: Division, More Practice
+:tags: Division, More Practice, Math
 :category: LeetCode
 :slug: 029-divide_two_integers
 

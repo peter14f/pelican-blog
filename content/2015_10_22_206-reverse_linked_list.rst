@@ -5,6 +5,7 @@
 :tags: Linked Lists, Linked List Reversal
 :category: LeetCode
 :slug: 206-reverse_linked_list
+:status: draft
 
 `LeetCode Problem Link <https://leetcode.com/problems/reverse-nodes-in-k-group/>`_
 
