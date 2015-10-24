@@ -1,10 +1,12 @@
 008-string_to_integer
 #####################
 
-:date: 2015-9-16 17:22
-:tags:
-:category:
+:date: 2015-9-7 17:22
+:tags: C String Functions
+:category: LeetCode
 :slug: 008-string_to_integer
+
+`LeetCode Problem Link <https://leetcode.com/problems/string-to-integer-atoi/>`_
 
 I decided to do this problem in C since **atoi()** is a C function.
 

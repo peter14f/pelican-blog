@@ -1,0 +1,83 @@
+018-4sum
+########
+
+:date: 2015-09-07 20:20
+:tags: X-Sum
+:category: LeetCode
+:slug: 018-4sum
+
+`LeetCode Problem Link <https://leetcode.com/problems/4sum/>`_
+
+| Sort the array first as we do in other X-Sum problems.
+| In method ``threeSum``, notice that I insert 4 numbers in the ArrayList.
+| The first one is actually just a place holder.
+| We will actually replace the first number in ``fourSum``.
+| This will prevent inserting at the front of an ArrayList.
+
+.. code-block:: java
+
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+        for (int i=0; i<nums.length - 3; i++) {
+
+            int smallest = nums[i];
+
+            if (i-1 >=0 && nums[i-1] == smallest) {
+                continue;
+            }
+
+            List<List<Integer>> threeSumAns = threeSum(nums, i+1, target-smallest);
+            for (List<Integer> list : threeSumAns) {
+                list.set(0, smallest);
+            }
+            ans.addAll(threeSumAns);
+        }
+
+        return ans;
+    }
+
+    public List<List<Integer>> threeSum(int[] sortedNums, int start, int target) {
+
+        List<List<Integer>> ans = new LinkedList<List<Integer>>();
+
+        for (int i=start; i<sortedNums.length-2; i++) {
+            int cur = sortedNums[i];
+
+            if (i > start && sortedNums[i-1] == cur)
+                continue;
+
+            int t = target - cur;
+            int l = i + 1;
+            int h = sortedNums.length - 1;
+
+            while (l < h) {
+                int sum = sortedNums[l] + sortedNums[h];
+                if (sum == t) {
+                    List<Integer> tuple = new ArrayList<Integer>();
+                    tuple.add(0); // place holder
+                    tuple.add(cur);
+                    tuple.add(sortedNums[l]);
+                    tuple.add(sortedNums[h]);
+                    ans.add(tuple);
+                    do {
+                        h--;
+                    } while (l < h && sortedNums[h] == tuple.get(3));
+
+                    do {
+                        l++;
+                    } while (l < h && sortedNums[l] == tuple.get(2));
+                }
+                else if (sum > t) {
+                    h--;
+                }
+                else {
+                    l++;
+                }
+            }
+        }
+
+        return ans;
+    }

@@ -1,0 +1,43 @@
+055-jump_game
+#############
+
+:date: 2015-10-2 12:56
+:tags: Greedy Algorithm
+:category: LeetCode
+:slug: 055-jump_game
+
+`LeetCode Problem Link <https://leetcode.com/problems/jump-game/>`_
+
+Using **greedy algorithm**, we could solve this problem in O(n) time.
+
+What we need to do is keep track of the largest index that can be reached.
+
+Once the largest index reachable is greater than or equal to the last index, we
+can stop moving forward and return ``true``.
+
+.. code-block:: java
+
+    public boolean canJump(int[] nums) {
+        int maxReachableIndex = 0;
+
+        for (int i=0; i<=maxReachableIndex; i++) {
+            if (i >= nums.length)
+                break;
+
+            if (i + nums[i] > maxReachableIndex) {
+                maxReachableIndex = i+nums[i];
+
+                if (maxReachableIndex >= nums.length - 1)
+                    break;
+            }
+        }
+
+        return maxReachableIndex >= nums.length - 1;
+    }
+
+It was very tempting to use dynamic programming for this problem. But really what
+we are trying to figure out is just whether we could reach the last index if
+we started out at index 0.
+
+DP would be the solution if we are trying to figure how many different ways we
+can end up at the last index.

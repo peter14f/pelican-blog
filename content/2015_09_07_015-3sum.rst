@@ -1,0 +1,60 @@
+015-3sum
+########
+
+:date: 2015-09-07 20:17
+:tags: X-Sum
+:category: LeetCode
+:slug: 015-3sum
+
+`LeetCode Problem Link <https://leetcode.com/problems/3sum/>`_
+
+
+.. code-block:: java
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+
+        for (int i=0; i<nums.length; i++) {
+            int cur = nums[i];
+
+            if (i-1 >=0 && cur==nums[i-1]) {
+                continue;
+            }
+
+            int l = i+1;
+            int h = nums.length - 1;
+            int target = -cur;
+
+            while (l < h) {
+                int sum = nums[l] + nums[h];
+
+                if (sum == target) {
+                    List<Integer> newList = new ArrayList<Integer>();
+                    newList.add(cur);
+                    newList.add(nums[l]);
+                    newList.add(nums[h]);
+                    ans.add(newList);
+                    l++;
+                    while(l < nums.length && nums[l]==newList.get(1)){
+                        l++;
+                    }
+                    h--;
+                    while(h >=0 && nums[h]==newList.get(2)){
+                        h--;
+                    }
+                }
+                else if (sum > target) {
+                    // sum too big
+                    h--;
+                }
+                else {
+                    // sum too small
+                    l++;
+                }
+            }
+
+        }
+
+        return ans;
+    }

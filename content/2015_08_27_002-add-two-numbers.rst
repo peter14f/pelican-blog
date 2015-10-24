@@ -2,7 +2,7 @@
 ###################
 
 :date: 2015-8-27 17:10
-:tags: Linked List
+:tags: Linked Lists
 :category: LeetCode
 :slug: 002-add-two-numbers
 

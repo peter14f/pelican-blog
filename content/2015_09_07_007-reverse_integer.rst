@@ -3,7 +3,7 @@
 
 :date: 2015-9-7 17:09
 :tags:
-:category:
+:category: LeetCode
 :slug: 007-reverse_integer
 
 

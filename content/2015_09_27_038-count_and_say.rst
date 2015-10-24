@@ -1,0 +1,48 @@
+038-count_and_say
+#################
+
+:date: 2015-09-27 10:50
+:tags: Sequence, Recursion, Dynamic Programming
+:category: LeetCode
+:slug: 038-count_and_say
+
+`LeetCode Problem Link <https://leetcode.com/problems/count-and-say/>`_
+
+The first number in the sequence is 1. The following numbers in the sequence simply tries to count the previous number
+in the sequence. I am showing the recursive approach here. The DP approach is practically the same, just doing it
+bottom-up.
+
+.. code-block:: java
+
+    public String countAndSay(int n) {
+
+        if (n == 1) {
+            return "1";
+        }
+        else {
+            String prevNum = countAndSay(n-1);
+            char[] arr = prevNum.toCharArray();
+            char prev = arr[0];
+            int cnt = 1;
+            StringBuffer sb = new StringBuffer();
+
+            for (int i=1; i<arr.length; i++) {
+
+                if (arr[i] == prev) {
+                    cnt++;
+                }
+                else {
+                    sb.append(cnt);
+                    sb.append(prev);
+                    prev = arr[i];
+                    cnt = 1;
+                }
+            }
+
+            sb.append(cnt);
+            sb.append(prev);
+
+            return sb.toString();
+        }
+    }
+
