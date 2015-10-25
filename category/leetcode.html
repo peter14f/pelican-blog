@@ -70,6 +70,47 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/053-maximum_subarray.html">053-maximum_subarray</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-10-24T15:30:00-07:00"> Oct 24 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-subarray/">LeetCode Problem Link</a></p>
+<p>The obvious straightforward solution takes O(n) time. But we can do better than that.</p>
+<p>The only time we want to start counting from the current number is when the accumulated sum so far is negative and
+the current number bigger than the accumulated sum.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">maxSum</span> <span class="o">=</span> <span class="n">sum</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">sum</span><span class="o">)</span>
+            <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="k">else</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&gt;</span> <span class="n">maxSum</span><span class="o">)</span>
+            <span class="n">maxSum</span> <span class="o">=</span> <span class="n">sum</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">maxSum</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/053-maximum_subarray.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/052-n_queens_ii.html">052-n_queens_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -399,44 +440,6 @@ to the ending index of elements to be considered in the input. So when <tt class
 
 <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">permute</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/046-permutations.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/045-jump_game_ii.html">045-jump_game_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-03T12:50:00-07:00"> Oct 03 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/greedy-algorithm.html">Greedy Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/jump-game-ii/">LeetCode Problem Link</a></p>
-<p>Find the minimum number of steps needed to get to the last index.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">jump</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">maxReachableIndex</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="c1">// counts the number of jumps made</span>
-    <span class="kt">int</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span> <span class="c1">// how many more steps can I make to be considered having taken a total of only k jumps</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">maxReachableIndex</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="c1">// took one more step to reach index i</span>
-        <span class="n">steps</span><span class="o">--;</span>
-
-        <span class="c1">// if we&#39;ve arrived at the last index, simply return the minimum number of jumps took</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-            <span class="k">return ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/045-jump_game_ii.html">more ...</a>
                 </div>
             </article>
             <hr/>
