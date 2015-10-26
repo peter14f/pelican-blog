@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2015-10-26T17:24:00-07:00</updated><entry><title>058-length_of_last_word</title><link href="http://peter14f.github.io/pelican-blog/058-length_of_last_word.html" rel="alternate"></link><updated>2015-10-26T17:24:00-07:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-10-26:pelican-blog/058-length_of_last_word.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/length-of-last-word/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2015-10-26T17:48:00-07:00</updated><entry><title>059-spiral_matrix_ii</title><link href="http://peter14f.github.io/pelican-blog/059-spiral_matrix_ii.html" rel="alternate"></link><updated>2015-10-26T17:48:00-07:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-10-26:pelican-blog/059-spiral_matrix_ii.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/spiral-matrix-ii/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This problem is very similar to 054-spiral_matrix. We use the variable &lt;tt class="docutils literal"&gt;direction&lt;/tt&gt; to keep track of the current
+direction and it can take 4 values: &lt;tt class="docutils literal"&gt;RIGHT&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;DOWN&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;LEFT&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;UP&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;RIGHT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;DOWN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;LEFT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;UP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[][]&lt;/span&gt; &lt;span class="nf"&gt;generateMatrix&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+    &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[][]&lt;/span&gt; &lt;span class="n"&gt;matrix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;][&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;direction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RIGHT&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;wall&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="n"&gt;total&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;][&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+        &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;direction&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;RIGHT&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;wall&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;direction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DOWN&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;DOWN&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;wall&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;direction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LEFT&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;--;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;LEFT&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wall&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;direction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;UP&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;wall&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+                    &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;--;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;--;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;UP&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wall&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;direction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RIGHT&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;--;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="2D Array"></category></entry><entry><title>058-length_of_last_word</title><link href="http://peter14f.github.io/pelican-blog/058-length_of_last_word.html" rel="alternate"></link><updated>2015-10-26T17:24:00-07:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-10-26:pelican-blog/058-length_of_last_word.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/length-of-last-word/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Ignore the trailing spaces. This is how the &lt;tt class="docutils literal"&gt;split()&lt;/tt&gt; String method works anyways.&lt;/p&gt;
 &lt;p&gt;It turns out that I only had to check for spaces, not tabs or other weird characters.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;lengthOfLastWord&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
