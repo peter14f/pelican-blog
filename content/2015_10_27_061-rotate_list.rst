@@ -1,0 +1,54 @@
+061-rotate_list
+###############
+
+:date: 2015-10-27 12:54
+:tags: Linked Lists
+:category: LeetCode
+:slug: 061-rotate_list
+:status: draft
+
+`LeetCode Problem Link <https://leetcode.com/problems/rotate-list/>`_
+
+Calculate ``n`` in the first pass. Make tail's next point to the original head. And then determine the new head.
+And then set the new tail's next to null. Use modular arithmetic when k is bigger than n.
+
+.. code-block:: java
+
+    public ListNode rotateRight(ListNode head, int k) {
+
+        if (head==null)
+            return head;
+
+        int n = 0;
+
+        ListNode tail = head;
+
+        while (tail != null) {
+            n++;
+            if (tail.next == null) {
+                break;
+            }
+            tail = tail.next;
+        }
+
+        k = k - 1;
+        if (k >= n) {
+            k = k % n;
+        }
+
+        if (k==n-1)
+            return head;
+
+        tail.next = head;
+
+        for (int i=0; i<n-k-1; i++) {
+            head = head.next;
+        }
+        tail = head;
+        for (int i=1; i<n; i++) {
+            tail = tail.next;
+        }
+        tail.next = null;
+        return head;
+    }
+
