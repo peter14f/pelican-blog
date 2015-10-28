@@ -2,7 +2,7 @@
 ###################
 
 :date: 2015-10-28 18:14
-:tags: Dynamic Programming
+:tags: Dynamic Programming, 2D Grid Move Right Move Down
 :category: LeetCode
 :slug: 063-unique_paths_ii
 
