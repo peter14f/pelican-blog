@@ -2,7 +2,7 @@
 ####################
 
 :date: 2015-09-27 10:43
-:tags: Permutation
+:tags: Permutations
 :category: LeetCode
 :slug: 031-next_permutation
 

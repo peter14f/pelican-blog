@@ -1,0 +1,41 @@
+062-unique_paths
+################
+
+:date: 2015-10-28 17:58
+:tags: Dynamic Programming
+:category: LeetCode
+:slug: 062-unique_paths
+
+`LeetCode Problem Link <https://leetcode.com/problems/unique-paths/>`_
+
+Create a 2D int array ``board`` where ``board[i][j]`` is the number of ways the robot can get to row ``i`` and col
+``j`` from row ``0`` and column ``0``. Since the robot can only go down or go right, ``board[i][j]`` is simply
+``board[i-1][j] + board[i][j-1]`` besides that row ``0`` and column ``1`` should all be ``1``.
+
+.. code-block:: java
+
+    public int uniquePaths(int m, int n) {
+        if (m < 1 || n < 1) {
+            throw new IllegalArgumentException();
+        }
+
+        int[][] board = new int[m][n];
+
+        // first column
+        for (int row=0; row < m; row++) {
+            board[row][0] = 1;
+        }
+
+        // first row
+        for (int col=0; col < n; col++) {
+            board[0][col] = 1;
+        }
+
+        for (int row=1; row<m; row++) {
+            for (int col=1; col<n; col++) {
+                board[row][col] = board[row-1][col] + board[row][col-1];
+            }
+        }
+
+        return board[m-1][n-1];
+    }

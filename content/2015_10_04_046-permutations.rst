@@ -2,7 +2,7 @@
 ################
 
 :date: 2015-10-4 17:21
-:tags: Recursion, NP
+:tags: Recursion, NP, Permutations
 :category: LeetCode
 :slug: 046-permutations
 
