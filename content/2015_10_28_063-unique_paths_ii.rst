@@ -6,6 +6,8 @@
 :category: LeetCode
 :slug: 063-unique_paths_ii
 
+`LeetCode Problem Link <https://leetcode.com/problems/unique-paths-ii/>`_
+
 The solution is very much like the one to the previous problem. There is however no way to get a cell that is an
 obstacle.
 

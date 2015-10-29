@@ -6,6 +6,8 @@
 :category: LeetCode
 :slug: 064-minimum_path_sum
 
+`LeetCode Problem Link <https://leetcode.com/problems/minimum-path-sum/>`_
+
 The the grid contains only non-negative numbers. We can just choose to arrive to the current from top or from left
 based on which path produces a smaller sum.
 
