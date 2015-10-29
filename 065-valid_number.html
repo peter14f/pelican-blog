@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>065-valid_number - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/065-valid_number.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="description" content="LeetCode Problem Link Reminds me of the atoi problem 008-string_to_integer. This is one heck of an annoying problem since we have to deal with the scientific notation e. TC 1354: &#34;e&#34; TC 1414: &#34; &#34; TC 1415: &#34;3.&#34; TC 1469: &#34;.&#34; TC 1474: &#34;.e1&#34; TC 1478: &#34;6e6.5&#34; TC 1481: &#34;-e58 &#34; One thing that I don&#39;t quite understand is how come we cannot have a decimal number in the exponentail part. Once I hit an e, the same check has to happen on the remaining string. That&#39;s why I wrote the helper function checkPower. public boolean isNumber(String s) { if (s ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="065-valid_number"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/065-valid_number.html"/>
+        <meta property="og:description" content="LeetCode Problem Link Reminds me of the atoi problem 008-string_to_integer. This is one heck of an annoying problem since we have to deal with the scientific notation e. TC 1354: &#34;e&#34; TC 1414: &#34; &#34; TC 1415: &#34;3.&#34; TC 1469: &#34;.&#34; TC 1474: &#34;.e1&#34; TC 1478: &#34;6e6.5&#34; TC 1481: &#34;-e58 &#34; One thing that I don&#39;t quite understand is how come we cannot have a decimal number in the exponentail part. Once I hit an e, the same check has to happen on the remaining string. That&#39;s why I wrote the helper function checkPower. public boolean isNumber(String s) { if (s ..."/>
+        <meta property="article:published_time" content="2015-10-29" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/065-valid_number.html"
+                       rel="bookmark"
+                       title="Permalink to 065-valid_number">
+                        065-valid_number
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-10-29T19:08:00-07:00"> Oct 29 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/unique-paths/">LeetCode Problem Link</a></p>
+<p>Reminds me of the atoi problem 008-string_to_integer.</p>
+<p>This is one heck of an annoying problem since we have to deal with the scientific notation <strong>e</strong>.</p>
+<div class="line-block">
+<div class="line">TC 1354: <tt class="docutils literal">&quot;e&quot;</tt></div>
+<div class="line">TC 1414: <tt class="docutils literal">&quot; &quot;</tt></div>
+<div class="line">TC 1415: <tt class="docutils literal">&quot;3.&quot;</tt></div>
+<div class="line">TC 1469: <tt class="docutils literal">&quot;.&quot;</tt></div>
+<div class="line">TC 1474: <tt class="docutils literal">&quot;.e1&quot;</tt></div>
+<div class="line">TC 1478: <tt class="docutils literal">&quot;6e6.5&quot;</tt></div>
+<div class="line">TC 1481: <tt class="docutils literal"><span class="pre">&quot;-e58</span> &quot;</tt></div>
+</div>
+<p>One thing that I don't quite understand is how come we cannot have a decimal number in the exponentail part.</p>
+<p>Once I hit an <strong>e</strong>, the same check has to happen on the remaining string. That's why I wrote the helper function
+<strong>checkPower</strong>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">s_arr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">trim</span><span class="o">().</span><span class="na">toCharArray</span><span class="o">();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kt">boolean</span> <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">exponentSeen</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">decimalPointSeen</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">numberSeen</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">exponentBreak</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;+&#39;</span> <span class="o">||</span> <span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">signSeen</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">isANumber</span><span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">signSeen</span><span class="o">)</span>
+                <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">numberSeen</span><span class="o">)</span>
+                <span class="n">numberSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;e&#39;</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">signSeen</span><span class="o">)</span>
+                <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">exponentSeen</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">numberSeen</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="n">exponentSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="n">exponentBreak</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">decimalPointSeen</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">signSeen</span><span class="o">)</span>
+                <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">numberSeen</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+                    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;e&#39;</span><span class="o">)</span>
+                    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">decimalPointSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">exponentBreak</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">checkPower</span><span class="o">(</span><span class="n">s_arr</span><span class="o">,</span> <span class="n">exponentBreak</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">checkPower</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">s_arr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">decimalPointSeen</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">start</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span> <span class="o">||</span> <span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;+&#39;</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">signSeen</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">==</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+            <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">isANumber</span><span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">signSeen</span><span class="o">)</span>
+                <span class="n">signSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isANumber</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span><span class="sc">&#39;9&#39;</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

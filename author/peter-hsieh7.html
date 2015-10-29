@@ -67,6 +67,54 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/017-letter_combinations_of_a_phone_number.html">017-letter_combinations_of_a_phone_number</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T20:19:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/">LeetCode Problem Link</a></p>
+<p>We start from the first digit toward the last. StringBuffer only supports append.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">char</span><span class="o">[][]</span> <span class="n">table</span> <span class="o">=</span>
+    <span class="o">{{},</span>
+     <span class="o">{},</span>
+     <span class="o">{</span><span class="sc">&#39;a&#39;</span><span class="o">,</span> <span class="sc">&#39;b&#39;</span><span class="o">,</span> <span class="sc">&#39;c&#39;</span><span class="o">},</span>      <span class="c1">// 2</span>
+     <span class="o">{</span><span class="sc">&#39;d&#39;</span><span class="o">,</span> <span class="sc">&#39;e&#39;</span><span class="o">,</span> <span class="sc">&#39;f&#39;</span><span class="o">},</span>      <span class="c1">// 3</span>
+     <span class="o">{</span><span class="sc">&#39;g&#39;</span><span class="o">,</span> <span class="sc">&#39;h&#39;</span><span class="o">,</span> <span class="sc">&#39;i&#39;</span><span class="o">},</span>      <span class="c1">// 4</span>
+     <span class="o">{</span><span class="sc">&#39;j&#39;</span><span class="o">,</span> <span class="sc">&#39;k&#39;</span><span class="o">,</span> <span class="sc">&#39;l&#39;</span><span class="o">},</span>      <span class="c1">// 5</span>
+     <span class="o">{</span><span class="sc">&#39;m&#39;</span><span class="o">,</span> <span class="sc">&#39;n&#39;</span><span class="o">,</span> <span class="sc">&#39;o&#39;</span><span class="o">},</span>      <span class="c1">// 6</span>
+     <span class="o">{</span><span class="sc">&#39;p&#39;</span><span class="o">,</span> <span class="sc">&#39;q&#39;</span><span class="o">,</span> <span class="sc">&#39;r&#39;</span><span class="o">,</span> <span class="sc">&#39;s&#39;</span><span class="o">},</span> <span class="c1">// 7</span>
+     <span class="o">{</span><span class="sc">&#39;t&#39;</span><span class="o">,</span> <span class="sc">&#39;u&#39;</span><span class="o">,</span> <span class="sc">&#39;v&#39;</span><span class="o">},</span>      <span class="c1">// 8</span>
+     <span class="o">{</span><span class="sc">&#39;w&#39;</span><span class="o">,</span> <span class="sc">&#39;x&#39;</span><span class="o">,</span> <span class="sc">&#39;y&#39;</span><span class="o">,</span> <span class="sc">&#39;z&#39;</span><span class="o">}</span>  <span class="c1">// 9</span>
+    <span class="o">};</span>
+
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">letterCombinations</span><span class="o">(</span><span class="n">String</span> <span class="n">digits</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">addStrings</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">addStrings</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">arr ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/017-letter_combinations_of_a_phone_number.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/015-3sum.html">015-3sum</a></h2>
                     <div>
 <footer class="post-info">
@@ -392,44 +440,6 @@ can we solve the problem based on a subproblem whose inputs are ...</p>
 <div class="line">and then add that digit to <tt class="docutils literal">ans</tt></div>
 <div class="line">If a non-number is found, the current ...</div></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/008-string_to_integer.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/007-reverse_integer.html">007-reverse_integer</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T17:09:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-integer/">LeetCode Problem Link</a></p>
-<p>Get each digit of the input number <tt class="docutils literal">x</tt> from right to left.
-Let <tt class="docutils literal">ans</tt> store the revered result. Each time we get a new digit, we shift <tt class="docutils literal">ans</tt>
-to the right by 1 digit and then add that digit to <tt class="docutils literal">ans</tt>. Finally make sure that <tt class="docutils literal">ans</tt>
-has the same sign as <tt class="docutils literal">x</tt>.</p>
-<p>We also need to take care of overflowing. OJ wants us to return <tt class="docutils literal">0</tt> if the reversed
-number is overflowed.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">reverse</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">negative</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">do</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/007-reverse_integer.html">more ...</a>
                 </div>
             </article>
             <hr/>
