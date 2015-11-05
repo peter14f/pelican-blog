@@ -1,0 +1,92 @@
+075-sort_colors
+###############
+
+:date: 2015-11-5 21:32
+:tags: Sorting, Sorting Limited Types
+:category: LeetCode
+:slug: 075-sort_colors
+
+`LeetCode Problem Link <https://leetcode.com/problems/sort-colors/>`_
+
+Since we only have three types of things, 0, 1, or 2. We could easily do this in two pass. In the first pass, we count
+the number elements for all three types. In the second pass, we simply overwrite the existing elements.
+
+.. code-block:: java
+
+    public void sortColors(int[] nums) {
+        int zeroCnt = 0;
+        int oneCnt = 0;
+        int twoCnt = 0;
+
+        for (int i=0; i<nums.length; i++) {
+            if (nums[i] == 0)
+                zeroCnt++;
+            else if (nums[i] == 1)
+                oneCnt++;
+            else
+                twoCnt++;
+        }
+
+        int i=0;
+
+        while (zeroCnt > 0) {
+            nums[i] = 0;
+            i++;
+            zeroCnt--;
+        }
+
+        while (oneCnt > 0) {
+            nums[i] = 1;
+            i++;
+            oneCnt--;
+        }
+
+        while (twoCnt > 0) {
+            nums[i] = 2;
+            i++;
+            twoCnt--;
+        }
+    }
+
+In the follow up question, we're asked if one could do this in one pass with constant space. This is pretty tricky, we
+maintain the indices for three types of numbers to be stored in the array - ``oneIndex``, ``twoIndex``, and
+``threeIndex``. They are all initialized to zero. When we hit a 0, we increment all three indices. When we hit a 1, we
+increment ``oneIndex`` and ``twoIndex``. When we hit a 2, we increment only ``twoIndex``.
+
+The order in which we write to these indices in each iteration is also important. Start with the bigger numbers first.
+
+.. code-block:: java
+
+    public void sortColors(int[] nums) {
+
+        int twoIndex = -1;
+        int oneIndex = -1;
+        int zeroIndex = -1;
+
+        for (int i=0; i<nums.length; i++) {
+            if (nums[i] == 0) {
+                zeroIndex++;
+                oneIndex++;
+                twoIndex++;
+            }
+            else if (nums[i] == 1) {
+                oneIndex++;
+                twoIndex++;
+            }
+            else {
+                // 2
+                twoIndex++;
+            }
+
+            if (twoIndex >= 0 && nums[twoIndex] != 2)
+                nums[twoIndex] = 2;
+
+            if (oneIndex >= 0 && nums[oneIndex] != 1)
+                nums[oneIndex] = 1;
+
+            if (zeroIndex >= 0 && nums[zeroIndex] != 0)
+                nums[zeroIndex] = 0;
+
+        }
+    }
+    
