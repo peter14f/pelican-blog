@@ -1,0 +1,42 @@
+078-subsets
+###########
+
+:date: 2015-11-9 17:32
+:tags: Subsets
+:category: LeetCode
+:slug: 078-subsets
+
+`LeetCode Problem Link <https://leetcode.com/problems/subsets/>`_
+
+``subsets`` starts with having only one set, the empty set. As we encounter each number in ``nums``, for each existing
+subset in ``subsets``, we make a duplicate copy and then include the new number. So the existing subset either chooses
+to include the new number (in which case, the same subset with the new number added needs to be added to ``subsets``)
+or not to include the new nubmer (in which case, the subset remains the same)
+
+.. code-block:: java
+
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<List<Integer>>();
+
+        if (nums==null || nums.length==0) {
+            return subsets;
+        }
+
+        Arrays.sort(nums);
+
+        // empty set
+        subsets.add(new ArrayList<Integer>());
+
+        for (int i=0; i<nums.length; i++) {
+            int num = nums[i];
+            int numSets = subsets.size();
+
+            for (int j=0; j<numSets; j++) {
+                List<Integer> includeNum = new ArrayList<Integer>(subsets.get(j));
+                includeNum.add(num);
+                subsets.add(includeNum);
+            }
+        }
+
+        return subsets;
+    }
