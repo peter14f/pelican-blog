@@ -95,4 +95,3 @@ well. Therefore this takes O(n) time.
         else
             return new String(arrS, minStart, minLength);
     }
-    
