@@ -23,7 +23,7 @@ keep a counter to keep track of the number of times a number has show up in the 
         int lastNum = nums[0];
         int cnt = 1;
         int index = 1;
-        
+
         for (int i=1; i<nums.length; i++) {
             if (nums[i] == lastNum) {
                 cnt++;
