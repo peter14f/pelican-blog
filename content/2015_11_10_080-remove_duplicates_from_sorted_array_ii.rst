@@ -2,7 +2,7 @@
 ##########################################
 
 :date: 2015-11-10 22:25
-:tags: Remove Elements
+:tags: Remove Duplicates, Sorted Array
 :category: LeetCode
 :slug: 080-remove_duplicates_from_sorted_array_ii
 
