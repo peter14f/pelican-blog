@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>089-gray_code - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/089-gray_code.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Recursion,Dynamic Programming" />
+        <meta name="description" content="LeetCode Problem Link In the first try, I was just trying to come up with a way to generate a number that&#39;s one bit away from the current number. Nothing clever. choices helps me check if the generated number is actually the one I want. // n represents the total number of bits in the code // A gray code sequence must begin with 0 // two successive values differ in only one bit public List&lt;Integer&gt; grayCode(int n) { List&lt;Integer&gt; sequence = new ArrayList&lt;Integer&gt;(); sequence.add(0); int m = 1 &lt;&lt; n; // index zero is the most significant bit // index n ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="089-gray_code"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/089-gray_code.html"/>
+        <meta property="og:description" content="LeetCode Problem Link In the first try, I was just trying to come up with a way to generate a number that&#39;s one bit away from the current number. Nothing clever. choices helps me check if the generated number is actually the one I want. // n represents the total number of bits in the code // A gray code sequence must begin with 0 // two successive values differ in only one bit public List&lt;Integer&gt; grayCode(int n) { List&lt;Integer&gt; sequence = new ArrayList&lt;Integer&gt;(); sequence.add(0); int m = 1 &lt;&lt; n; // index zero is the most significant bit // index n ..."/>
+        <meta property="article:published_time" content="2015-11-15" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Recursion" />
+            <meta property="article:tag" content="Dynamic Programming" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/089-gray_code.html"
+                       rel="bookmark"
+                       title="Permalink to 089-gray_code">
+                        089-gray_code
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-15T21:10:00-08:00"> Nov 15 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/gray-code/">LeetCode Problem Link</a></p>
+<p>In the first try, I was just trying to come up with a way to generate a number that's one bit away from the current
+number. Nothing clever. <tt class="docutils literal">choices</tt> helps me check if the generated number is actually the one I want.</p>
+<div class="highlight"><pre><span class="c1">// n represents the total number of bits in the code</span>
+<span class="c1">// A gray code sequence must begin with 0</span>
+<span class="c1">// two successive values differ in only one bit</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">grayCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sequence</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">sequence</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="o">;</span>
+
+    <span class="c1">// index zero is the most significant bit</span>
+    <span class="c1">// index n - 1 is the least significant bit</span>
+    <span class="c1">// true means bit is set</span>
+    <span class="c1">// false means bit is not set</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">binaryNum</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">decimalNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">i</span><span class="o">;</span>
+
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">choices</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">choices</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">sequence</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="n">i</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="n">binaryNum</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">binaryNum</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="kt">int</span> <span class="n">decimalToTest</span> <span class="o">=</span> <span class="n">decimalNum</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">binaryNum</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                    <span class="n">decimalToTest</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">else</span>
+                    <span class="n">decimalToTest</span> <span class="o">+=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">&lt;&lt;(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">));</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                    <span class="n">decimalToTest</span> <span class="o">-=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">else</span>
+                    <span class="n">decimalToTest</span> <span class="o">=</span> <span class="n">decimalToTest</span> <span class="o">-</span> <span class="o">(</span><span class="mi">1</span><span class="o">&lt;&lt;(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">));</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">choices</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">decimalToTest</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">sequence</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">decimalToTest</span><span class="o">);</span>
+                <span class="n">choices</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">decimalToTest</span><span class="o">);</span>
+                <span class="n">decimalNum</span> <span class="o">=</span> <span class="n">decimalToTest</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="c1">// restore</span>
+            <span class="n">binaryNum</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">!</span><span class="n">binaryNum</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">sequence</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>As I was testing the implementaion above. I noticed that the solution to n=k actually expands on the solution to
+n=(k-1). This is a hint that we could use recursion for this problem. For n=0, the solution would just be [0].
+For other n, we first need to get the solution to n-1. And the we traverse the list from the end to the front, for each
+number we see, we add 2<sup>n-1</sup> to it and the append that to the solution.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">grayCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;n must be a non-negative integer&quot;</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">prevAns</span> <span class="o">=</span> <span class="n">grayCode</span><span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="kt">int</span> <span class="n">prevSize</span> <span class="o">=</span> <span class="n">prevAns</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">toAdd</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">prevSize</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">newNum</span> <span class="o">=</span> <span class="n">prevAns</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="n">toAdd</span><span class="o">;</span>
+            <span class="n">prevAns</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">newNum</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">prevAns</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>Of course, we can do it using the bottom up approach as well without having the recusive calls.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">grayCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;n must be a non-negative integer&quot;</span><span class="o">);</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">origSize</span> <span class="o">=</span> <span class="n">ans</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">toAdd</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">origSize</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">ans</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="o">+</span> <span class="n">toAdd</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
