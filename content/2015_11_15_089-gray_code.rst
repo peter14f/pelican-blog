@@ -1,0 +1,123 @@
+089-gray_code
+#############
+
+:date: 2015-11-15 21:10
+:tags: Recursion, Dynamic Programming
+:category: LeetCode
+:slug: 089-gray_code
+
+`LeetCode Problem Link <https://leetcode.com/problems/gray-code/>`_
+
+In the first try, I was just trying to come up with a way to generate a number that's one bit away from the current
+number. Nothing clever. ``choices`` helps me check if the generated number is actually the one I want.
+
+.. code-block:: java
+
+    // n represents the total number of bits in the code
+    // A gray code sequence must begin with 0
+    // two successive values differ in only one bit
+    public List<Integer> grayCode(int n) {
+        List<Integer> sequence = new ArrayList<Integer>();
+        sequence.add(0);
+
+        int m = 1 << n;
+
+        // index zero is the most significant bit
+        // index n - 1 is the least significant bit
+        // true means bit is set
+        // false means bit is not set
+        boolean[] binaryNum = new boolean[n];
+        int decimalNum = 0;
+
+        int i;
+
+        HashSet<Integer> choices = new HashSet<Integer>();
+        for (i=1; i<m; i++) {
+            choices.add(i);
+        }
+
+        while (sequence.size() < m) {
+
+            for (i=n-1; i>=0; i--) {
+                binaryNum[i] = !binaryNum[i];
+                int decimalToTest = decimalNum;
+                if (binaryNum[i]) {
+                    if (n-1-i == 0)
+                        decimalToTest += 1;
+                    else
+                        decimalToTest += (1 <<(n-1-i));
+                }
+                else {
+                    if (n-1-i == 0)
+                        decimalToTest -= 1;
+                    else
+                        decimalToTest = decimalToTest - (1<<(n-1-i));
+                }
+                if (choices.contains(decimalToTest)) {
+                    sequence.add(decimalToTest);
+                    choices.remove(decimalToTest);
+                    decimalNum = decimalToTest;
+                    break;
+                }
+                // restore
+                binaryNum[i] = !binaryNum[i];
+            }
+
+        }
+
+        return sequence;
+    }
+
+As I was testing the implementaion above. I noticed that the solution to n=k actually expands on the solution to
+n=(k-1). This is a hint that we could use recursion for this problem. For n=0, the solution would just be [0].
+For other n, we first need to get the solution to n-1. And the we traverse the list from the end to the front, for each
+number we see, we add 2\ :superscript:`n-1` to it and the append that to the solution.
+
+.. code-block:: java
+
+    public List<Integer> grayCode(int n) {
+
+        if (n < 0)
+            throw new IllegalArgumentException("n must be a non-negative integer");
+        if (n==0) {
+            List<Integer> ans = new ArrayList<Integer>();
+            ans.add(0);
+            return ans;
+        }
+        else {
+            List<Integer> prevAns = grayCode(n-1);
+
+            int prevSize = prevAns.size();
+            int toAdd = 1 << (n-1);
+
+            for (int i=prevSize-1; i>=0; i--) {
+                int newNum = prevAns.get(i) + toAdd;
+                prevAns.add(newNum);
+            }
+
+            return prevAns;
+        }
+    }
+
+Of course, we can do it using the bottom up approach as well without having the recusive calls.
+
+.. code-block:: java
+
+    public List<Integer> grayCode(int n) {
+        if (n < 0)
+            throw new IllegalArgumentException("n must be a non-negative integer");
+
+        List<Integer> ans = new ArrayList<Integer>();
+        ans.add(0);
+
+        for (int i=1; i<=n; i++) {
+            int origSize = ans.size();
+            int toAdd = 1 << (i-1);
+
+            for (int j=origSize - 1; j >= 0; j--) {
+                ans.add(ans.get(j) + toAdd);
+            }
+        }
+
+        return ans;
+    }
