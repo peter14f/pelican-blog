@@ -2,7 +2,7 @@
 ######################
 
 :date: 2015-9-27 11:04
-:tags: DFS, NP
+:tags: DFS, NP, Duplicates
 :category: LeetCode
 :slug: 040-combination_sum_ii
 
