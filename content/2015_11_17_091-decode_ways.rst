@@ -13,46 +13,49 @@ I will show the recursive solution first, which cannot pass the long test cases.
 .. code-block:: java
 
     public int numDecodings(String s) {
-
         char[] sArr = s.toCharArray();
-        int n = sArr.length;
+        int[] ans = {0};
 
-        int i = n - 1;
+        if (sArr.length == 0)
+            return ans[0];
 
-        int prev = 1;
-        int prevPrev = 0;
+        numDecodings(sArr, 0, ans);
 
-        int cnt = 0;
+        return ans[0];
+    }
 
-        while (i >= 0) {
-            int num = 0;
+    private void numDecodings(char[] sArr, int index, int[] ans) {
 
-            cnt = 0;
 
-            if (prev > 0) {
-                num = sArr[i] - '0';
-                if (num >= 1 && num <=9)
-                    cnt += prev;
+        int number = sArr[index] - '0';
+        if (number >= 1 && number <=9) {
+            if (index == sArr.length - 1) {
+                ans[0]++;
             }
+            else {
+                numDecodings(sArr, index+1, ans);
+            }
+        }
+        else {
+            return;
+        }
 
-            if (prevPrev > 0) {
-                num = sArr[i] - '0';
-                if (num >= 1 && num <=9) {
-                    num = num*10 + (sArr[i+1] - '0');
+        if (index + 1 < sArr.length) {
+            number = (sArr[index] - '0');
 
-                    if (num >= 10 && num <= 26) {
-                        cnt += prevPrev;
+            if (number == 1 || number == 2) {
+                number = 10*number + (sArr[index+1] - '0');
+
+                if (number >=10 && number <= 26) {
+                    if (index + 1 == sArr.length - 1) {
+                        ans[0]++;
+                    }
+                    else {
+                        numDecodings(sArr, index+2, ans);
                     }
                 }
             }
-
-            prevPrev = prev;
-            prev = cnt;
-
-            i--;
         }
-
-        return cnt;
     }
 
 Here is the dynamic programming approach. Index ``i`` starts from the last index and move toward ``0``. If the
