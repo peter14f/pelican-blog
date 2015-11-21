@@ -67,6 +67,48 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/018-4sum.html">018-4sum</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T20:20:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/x-sum.html">X-Sum</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/4sum/">LeetCode Problem Link</a></p>
+<div class="line-block">
+<div class="line">Sort the array first as we do in other X-Sum problems.</div>
+<div class="line">In method <tt class="docutils literal">threeSum</tt>, notice that I insert 4 numbers in the ArrayList.</div>
+<div class="line">The first one is actually just a place holder.</div>
+<div class="line">We will actually replace the first number in <tt class="docutils literal">fourSum</tt>.</div>
+<div class="line">This will prevent inserting at the front of an ArrayList.</div>
+</div>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">fourSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">nums</span><span class="o">);</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="kt">int</span> <span class="n">smallest</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="n">smallest</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">threeSumAns ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/018-4sum.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/017-letter_combinations_of_a_phone_number.html">017-letter_combinations_of_a_phone_number</a></h2>
                     <div>
 <footer class="post-info">
@@ -412,37 +454,6 @@ can we solve the problem based on a subproblem whose inputs are ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/008-string_to_integer.html">008-string_to_integer</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T17:22:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/c-string-functions.html">C String Functions</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/string-to-integer-atoi/">LeetCode Problem Link</a></p>
-<p>I decided to do this problem in C since <strong>atoi()</strong> is a C function.</p>
-<div class="line-block">
-<div class="line">We store the result in <tt class="docutils literal">ans</tt></div>
-<div class="line">First we need to eat up blank spaces.</div>
-<div class="line">As we find the first non-blank character, we need to start checking for the sign.</div>
-<div class="line">The sign is either '+' or '-', as we find the first non-sign character, we stop</div>
-<div class="line">looking for the sign and expects numbers only...</div>
-<div class="line">For each digit we see, we first shift <tt class="docutils literal">ans</tt> to the right by 1 digit (by multiplying 10)</div>
-<div class="line">and then add that digit to <tt class="docutils literal">ans</tt></div>
-<div class="line">If a non-number is found, the current ...</div></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/008-string_to_integer.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/index10.html">&laquo;</a>
@@ -471,6 +482,8 @@ can we solve the problem based on a subproblem whose inputs are ...</p>
                             href="http://peter14f.github.io/pelican-blog/index11.html">11</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index12.html">12</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index13.html">13</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index12.html">&raquo;</a></li>
         </ul>

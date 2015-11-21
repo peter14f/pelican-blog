@@ -67,6 +67,53 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/098-validate_binary_search_tree.html">098-validate_binary_search_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-21T11:50:00-08:00"> Nov 21 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/validate-binary-search-tree/">LeetCode Problem Link</a></p>
+<p>The check needs to be recursive. All nodes in <tt class="docutils literal">cur</tt>'s left subBST must be less than <tt class="docutils literal">cur</tt>.
+All nodes in <tt class="docutils literal">cur</tt>'s right subBST must be greater than <tt class="docutils literal">cur</tt>. And this check must be done on all subBSTs
+within the input BST.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValidBST</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">isValidBST</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">root</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+            <span class="n">isValidBST</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">root</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isValidBST</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">cur</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">min</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">min</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">min</span><span class="o">.</span><span class="na">val</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">max</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">&gt;=</span> <span class="n">max</span><span class="o">.</span><span class="na">val</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="c1">// left ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/098-validate_binary_search_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/097-interleaving_string.html">097-interleaving_string</a></h2>
                     <div>
 <footer class="post-info">
@@ -364,37 +411,6 @@ has been built. At each new index, we could have three different code paths:</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/090-subsets_ii.html">090-subsets_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-15T21:46:00-08:00"> Nov 15 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/subsets.html">Subsets</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/duplicates.html">Duplicates</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/subsets/">LeetCode Problem Link</a></p>
-<p>A followup problem of 078-subsets. The difference is now that the input collection of integers might contain
-duplicates.</p>
-<p>In the first try, this is what I got. If the current number at index <tt class="docutils literal">i</tt> is the same as the previous number at index
-<tt class="docutils literal"><span class="pre">i-1</span></tt>, I only add the current number to the existing subsets that have <tt class="docutils literal"><span class="pre">k-1</span></tt> occurences at the end of the list where
-<tt class="docutils literal">k</tt> is the number of consecutive times we've seen the number so far. This is a solution that passes the OJ, but
-checking the number of times current number occurs at ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/090-subsets_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -422,6 +438,8 @@ checking the number of times current number occurs at ...</p>
                             href="http://peter14f.github.io/pelican-blog/index11.html">11</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index12.html">12</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index13.html">13</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index2.html">&raquo;</a></li>
         </ul>

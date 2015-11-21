@@ -70,6 +70,46 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/082-remove_duplicates_from_sorted_list_ii.html">082-remove_duplicates_from_sorted_list_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-11T20:32:00-08:00"> Nov 11 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/remove-duplicates.html">Remove Duplicates</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorted-list.html">Sorted List</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/">LeetCode Problem Link</a></p>
+<p>What does it mean to be a distinct node in a sorted list? It's not the same as its previous node (if previous node
+exists) and it's not the same as its next node (if next node exists).</p>
+<p>And the I maintain the head and tail of this new list, so that I can easily add the newly found distinct node at the
+end of this new list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">deleteDuplicates</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">sortedListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">sortedListTail</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">next ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/082-remove_duplicates_from_sorted_list_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/081-search_in_rotated_sorted_array_ii.html">081-search_in_rotated_sorted_array_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -339,54 +379,6 @@ the number elements for all three types. In the second pass, we simply overwrite
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/074-search_a_2d_matrix.html">074-search_a_2d_matrix</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-05T20:39:00-08:00"> Nov 05 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-a-2d-matrix/">LeetCode Problem Link</a></p>
-<p>This problem is essentially binary search in disguise. Treat the 2d matrix as if its an 1d array and simply
-transform the index in the 1d array to the correct row and column index.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">searchMatrix</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">high</span> <span class="o">=</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="o">(</span><span class="n">high</span><span class="o">-</span><span class="n">low</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">getMiddleNum</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">middle</span><span class="o">);</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">num</span><span class="o">==</span><span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// num too small</span>
-            <span class="n">low</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="c1">// num too ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/074-search_a_2d_matrix.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/category/leetcode2.html">&laquo;</a>
@@ -415,6 +407,8 @@ transform the index in the 1d array to the correct row and column index.</p>
                             href="http://peter14f.github.io/pelican-blog/category/leetcode11.html">11</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode12.html">12</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode13.html">13</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode4.html">&raquo;</a></li>
         </ul>
