@@ -2,7 +2,7 @@
 ##############################
 
 :date: 2015-11-22 21:15
-:tags:
+:tags: Binary Search Tree
 :category: LeetCode
 :slug: 099-recover_binary_search_tree
 
@@ -12,7 +12,7 @@ This problem brings up a problem that has been overlooked by me. That is the spa
 function. The space complexity of a recursive call is the number of calls on the stack. So for
 inorder tree traversal, the space complexity is O(log n).
 
-I am going to present the O(log n) space solution first. The idea is to keep track of the previous node in
+I am going to present the O(n) space solution first. The idea is to keep track of the previous node in
 the inorder traversal. If ``prev`` is bigger than ``cur``, then we know there is problem. We insert both ``cur`` and
 ``prev`` into a list.
 
