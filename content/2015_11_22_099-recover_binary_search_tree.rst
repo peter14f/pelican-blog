@@ -69,4 +69,67 @@ only.
         inOrderTraversal(cur.right, toSwap, prev);
     }
 
-But LeetCode wants a solution that uses only O(1) space.
+But LeetCode wants a solution that uses only O(1) space. We must use Morris traversal then.
+
+.. code-block:: java
+
+    public void recoverTree(TreeNode root) {
+
+        TreeNode cur = root;
+        TreeNode current = null;
+        TreeNode prev = null;
+        TreeNode toSwapA = null;
+        TreeNode toSwapB = null;
+
+        while (cur != null) {
+
+            if (cur.left == null) {
+                prev = current;
+                current = cur;
+
+                if (prev != null && current.val < prev.val) {
+                    if (toSwapA == null) {
+                        toSwapA = prev;
+                    }
+                    toSwapB = current;
+                }
+
+                cur = cur.right;
+            }
+            else {
+
+                TreeNode t = cur.left;
+
+                while (t.right != null && t.right != cur) {
+                    t = t.right;
+                }
+
+                if (t.right == null) {
+                    t.right = cur;
+                    cur = cur.left;
+                }
+                else {
+                    t.right = null;
+
+                    prev = current;
+                    current = cur;
+
+                    if (prev != null && current.val < prev.val) {
+                        if (toSwapA == null) {
+                            toSwapA = prev;
+                        }
+                        toSwapB = current;
+                    }
+
+                    cur = cur.right;
+                }
+
+            }
+        }
+
+        if (toSwapA!=null && toSwapB!=null) {
+            int tmp = toSwapA.val;
+            toSwapA.val = toSwapB.val;
+            toSwapB.val = tmp;
+        }
+    }
