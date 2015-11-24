@@ -2,7 +2,7 @@
 ##############################
 
 :date: 2015-11-22 21:15
-:tags: Binary Search Tree
+:tags: Binary Search Trees, Morris Traversal
 :category: LeetCode
 :slug: 099-recover_binary_search_tree
 
