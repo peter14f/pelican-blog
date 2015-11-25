@@ -67,6 +67,44 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/032-longest_valid_parentheses.html">032-longest_valid_parentheses</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-27T10:44:00-07:00"> Sep 27 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/parentheses.html">Parentheses</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-valid-parentheses/">LeetCode Problem Link</a></p>
+<p>We will use a stack to store the indices for opening parentheses. We want to pass the following input cases:</p>
+<div class="line-block">
+<div class="line">(()</div>
+<div class="line">(()()</div>
+<div class="line">)))()</div>
+</div>
+<p>The trick is that after we pop the corresponding opening index from the stack, we need to check if the
+stack is empty or not. If the stack is not empty, the top of the stack contains the index <tt class="docutils literal">i</tt>
+of the previous opening parenthesis. <tt class="docutils literal">i+1</tt> should be used when calculating the length.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestValidParentheses</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">maxLength</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">s_arr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/032-longest_valid_parentheses.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/031-next_permutation.html">031-next_permutation</a></h2>
                     <div>
 <footer class="post-info">
@@ -354,58 +392,6 @@ the length of the string we're trying to find (needle).</p>
             <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
             <span class="n">newSublistHead</span> <span class="o">=</span> <span class="n">reverseSublist</span><span class="o">(</span><span class="n">sublistHead</span><span class="o">,</span> <span class="n">cur ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/025-reverse_nodes_in_k_group.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/024-swap_nodes_in_pairs.html">024-swap_nodes_in_pairs</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T20:26:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/swap-nodes-in-pairs/">LeetCode Problem Link</a></p>
-<p>The problem is not so hard, but manipulating linked lists always requires care. Is the list properly null-terminated?
-The next problem is the more difficult one.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">swapPairs</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">ListNode</span> <span class="n">newHead</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">oldNext</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
-                <span class="c1">// cur.next is null already</span>
-                <span class="c1">// cur is the last node in the linked list</span>
-            <span class="o">}</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">ListNode</span> <span class="n">newNext</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
-        <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// null ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/024-swap_nodes_in_pairs.html">more ...</a>
                 </div>
             </article>
             <hr/>
