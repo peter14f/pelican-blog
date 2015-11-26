@@ -38,4 +38,4 @@ Otherwise, we could have simply build a linked list.
 
         return root;
     }
-    
+
