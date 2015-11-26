@@ -2,7 +2,7 @@
 ################################
 
 :date: 2015-11-25 12:54
-:tags: Binary Trees, Tree Height
+:tags: Binary Trees, Tree Height, Recursion
 :category: LeetCode
 :slug: 104-maximum_depth_of_binary_tree
 

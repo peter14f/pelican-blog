@@ -1,15 +1,16 @@
-105-construct_binary_tree_from_preorder_and_inorder_traversal
-#############################################################
+106-construct_binary_tree_from_inorder_and_postorder_traversal
+##############################################################
 
-:date: 2015-11-25 21:58
+:date: 2015-11-26 12:40
 :tags: Binary Trees, Recursion
 :category: LeetCode
-:slug: 105-construct_binary_tree_from_preorder_and_inorder_traversal
+:slug: 106-construct_binary_tree_from_inorder_and_postorder_traversal
 
 `LeetCode Problem Link <https://leetcode.com/problems/maximum-depth-of-binary-tree/>`_
 
-Use recursion. ``preorder[pLow]`` is always the root. Try to find that value in ``inorder``. Once found, the numbers to
-the left belong in the left subtree and the numbers to the right belong in the right subtree.
+It's very similar to the previous problem 105-construct_binary_tree_from_preorder_and_inorder_traversal.
+Use recursion. ``postorder[pHigh]`` is always the root. Try to find that value in ``inorder``. Once found,
+the numbers to the left belong in the left subtree and the numbers to the right belong in the right subtree.
 
 .. code-block:: java
 
