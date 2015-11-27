@@ -1,0 +1,42 @@
+112-path_sum
+############
+
+:date: 2015-11-27 23:34
+:tags: Binary Trees, Recursion, DFS
+:category: LeetCode
+:slug: 112-path_sum
+
+`LeetCode Problem Link <https://leetcode.com/problems/minimum-depth-of-binary-tree/>`_
+
+If tree is empty, return false regardless what ``sum`` is. The base case is when we've reached a leaf node. If sum is
+zero, then we must have found a root-to-leaf path that sums up to the targeted sum.
+
+.. code-block:: java
+
+    public boolean hasPathSum(TreeNode root, int sum) {
+
+        if (root == null)
+            return false;
+
+        sum = sum - root.val;
+
+        if (root.left == null && root.right == null) {
+            // leaf node
+            return sum == 0;
+        }
+
+        boolean left = false;
+
+        if (root.left != null)
+            left = hasPathSum(root.left, sum);
+
+        if (left)
+            return true;
+
+        boolean right = false;
+
+        if (root.right != null)
+            right = hasPathSum(root.right, sum);
+
+        return right;
+    }
