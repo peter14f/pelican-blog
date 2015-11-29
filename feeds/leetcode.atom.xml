@@ -1,39 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2015-11-29T16:09:00-08:00</updated><entry><title>116-populating_next_right_pointers_in_each_node</title><link href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html" rel="alternate"></link><updated>2015-11-29T16:09:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-29:pelican-blog/116-populating_next_right_pointers_in_each_node.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/distinct-subsequences/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Very similar to 102-binary_tree_level_order_traversal.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2015-11-29T18:17:00-08:00</updated><entry><title>117-populating_next_right_pointers_in_each_node_ii</title><link href="http://peter14f.github.io/pelican-blog/117-populating_next_right_pointers_in_each_node_ii.html" rel="alternate"></link><updated>2015-11-29T18:17:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-29:pelican-blog/117-populating_next_right_pointers_in_each_node_ii.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Definitely solve the previous problem 116-populating_next_right_pointers_in_each_node first. The difference is now
+that the new &lt;tt class="docutils literal"&gt;listHead&lt;/tt&gt; may not always be the old &lt;tt class="docutils literal"&gt;listHead&lt;/tt&gt;'s left child. We must set it by ourselves.&lt;/p&gt;
+&lt;p&gt;The other thing that's different is connecting nodes in the next level always requires updating &lt;tt class="docutils literal"&gt;prev&lt;/tt&gt; pointer.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;connect&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
 
-    &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;TreeLinkNode&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;TreeLinkNode&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;listHead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 
-    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;nodes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-        &lt;span class="n"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-
-    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(!&lt;/span&gt;&lt;span class="n"&gt;nodes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isEmpty&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;listHead&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listHead&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
         &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;cnt&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;remove&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;nextListHead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-                &lt;span class="n"&gt;nodes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;listCur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
 
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-                &lt;span class="n"&gt;nodes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
 
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-                &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;nextListHead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
             &lt;span class="o"&gt;}&lt;/span&gt;
 
-            &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                    &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                    &lt;span class="n"&gt;nextListHead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="o"&gt;}&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+
+            &lt;span class="n"&gt;listCur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
         &lt;span class="o"&gt;}&lt;/span&gt;
 
-        &lt;span class="n"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;size&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;listHead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nextListHead&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
     &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="Binary Trees"></category></entry><entry><title>115-distinct_subsequences</title><link href="http://peter14f.github.io/pelican-blog/115-distinct_subsequences.html" rel="alternate"></link><updated>2015-11-28T20:49:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-28:pelican-blog/115-distinct_subsequences.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/distinct-subsequences/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+</summary><category term="Binary Trees"></category><category term="Breadth First Search"></category><category term="Linked List"></category></entry><entry><title>116-populating_next_right_pointers_in_each_node</title><link href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html" rel="alternate"></link><updated>2015-11-29T16:09:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-29:pelican-blog/116-populating_next_right_pointers_in_each_node.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/distinct-subsequences/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If we were allowed using non-constant extra space, we could use the way we solved 102-binary_tree_level_order_traversal.
+Since we are allowed only constant space.&lt;/p&gt;
+&lt;p&gt;We cannot use recursion either since the calls on the stack counts toward space usage as well.&lt;/p&gt;
+&lt;p&gt;Here is my solution. It is basically still using BFS but since the cur nodes in the previous level have already
+been linked together, there is no need to use a list.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;connect&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;listHead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;listHead&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listHead&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;TreeLinkNode&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;listCur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+                    &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+                &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+
+            &lt;span class="n"&gt;listCur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listCur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;next&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+
+        &lt;span class="n"&gt;listHead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;listHead&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="Binary Trees"></category><category term="Breadth First Search"></category><category term="Linked Lists"></category></entry><entry><title>115-distinct_subsequences</title><link href="http://peter14f.github.io/pelican-blog/115-distinct_subsequences.html" rel="alternate"></link><updated>2015-11-28T20:49:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-28:pelican-blog/115-distinct_subsequences.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/distinct-subsequences/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The first way is to use recursion. This won't pass the big test cases on OJ.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;numDistinct&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;sArr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toCharArray&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;

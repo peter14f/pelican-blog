@@ -67,6 +67,59 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/117-populating_next_right_pointers_in_each_node_ii.html">117-populating_next_right_pointers_in_each_node_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-29T18:17:00-08:00"> Nov 29 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/breadth-first-search.html">Breadth First Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/">LeetCode Problem Link</a></p>
+<p>Definitely solve the previous problem 116-populating_next_right_pointers_in_each_node first. The difference is now
+that the new <tt class="docutils literal">listHead</tt> may not always be the old <tt class="docutils literal">listHead</tt>'s left child. We must set it by ourselves.</p>
+<p>The other thing that's different is connecting nodes in the next level always requires updating <tt class="docutils literal">prev</tt> pointer.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">TreeLinkNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">TreeLinkNode</span> <span class="n">listHead</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">listHead</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TreeLinkNode</span> <span class="n">listCur</span> <span class="o">=</span> <span class="n">listHead</span><span class="o">;</span>
+        <span class="n">TreeLinkNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">TreeLinkNode</span> <span class="n">nextListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">listCur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">listCur</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">listCur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+                    <span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">prev</span> <span class="o">=</span> <span class="n">listCur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+                    <span class="n">nextListHead</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">listCur</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/117-populating_next_right_pointers_in_each_node_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html">116-populating_next_right_pointers_in_each_node</a></h2>
                     <div>
 <footer class="post-info">
@@ -80,43 +133,33 @@ Peter's Coding Notes            </a>
 
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/breadth-first-search.html">Breadth First Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/distinct-subsequences/">LeetCode Problem Link</a></p>
-<p>Very similar to 102-binary_tree_level_order_traversal.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">TreeLinkNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+<p>If we were allowed using non-constant extra space, we could use the way we solved 102-binary_tree_level_order_traversal.
+Since we are allowed only constant space.</p>
+<p>We cannot use recursion either since the calls on the stack counts toward space usage as well.</p>
+<p>Here is my solution. It is basically still using BFS but since the cur nodes in the previous level have already
+been linked together, there is no need to use a list.</p>
+<div class="highlight"><pre>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">TreeLinkNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">TreeLinkNode</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeLinkNode</span><span class="o">&gt;();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
 
-    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
-        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="o">}</span>
+    <span class="n">TreeLinkNode</span> <span class="n">listHead</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
 
-    <span class="k">while</span> <span class="o">(!</span><span class="n">nodes</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">listHead</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TreeLinkNode</span> <span class="n">listCur</span> <span class="o">=</span> <span class="n">listHead</span><span class="o">;</span>
         <span class="n">TreeLinkNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cnt</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">TreeLinkNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 
-            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-                <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">listCur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 
-            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-                <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
 
-            <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
-            <span class="o">}</span>
-
-            <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">cnt</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
+            <span class="k">if ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html">more ...</a>
                 </div>
             </article>
@@ -418,60 +461,6 @@ are balanced (not just the root).</p>
 </pre></div>
 
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/110-balanced_binary_tree.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/109-convert_sorted_list_to_binary_search_tree.html">109-convert_sorted_list_to_binary_search_tree</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-26T22:40:00-08:00"> Nov 26 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/">LeetCode Problem Link</a></p>
-<p>The top to bottom recursive approach is trivial. At the beginning of each call, we have to get to the middle of
-list. So the time complexity is O(nlogn).</p>
-<div class="highlight"><pre><span class="c1">// convert it to a height balanced BST</span>
-<span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">sortedListToBST</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-
-    <span class="k">do</span> <span class="o">{</span>
-        <span class="n">n</span><span class="o">++;</span>
-        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">);</span>
-
-    <span class="kt">int</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
-
-    <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-
-    <span class="n">ListNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">steps</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">prev</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
-        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">TreeNode</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">sortedListToBST ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/109-convert_sorted_list_to_binary_search_tree.html">more ...</a>
                 </div>
             </article>
             <hr/>

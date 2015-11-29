@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Linked List - Peter's Coding Notes</title>
+    <title>Breadth First Search - Peter's Coding Notes</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="Peter Hsieh" />
-    <meta name="keywords" content="Linked List" />
+    <meta name="keywords" content="Breadth First Search" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -121,11 +121,11 @@ that the new <tt class="docutils literal">listHead</tt> may not always be the ol
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/086-partition_list.html">086-partition_list</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html">116-populating_next_right_pointers_in_each_node</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-11-13T14:43:00-08:00"> Nov 13 2015</time>
+        <time datetime="2015-11-29T16:09:00-08:00"> Nov 29 2015</time>
     </span>
 
 
@@ -133,34 +133,35 @@ that the new <tt class="docutils literal">listHead</tt> may not always be the ol
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/breadth-first-search.html">Breadth First Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/partition-list/">LeetCode Problem Link</a></p>
-<p>Go through all nodes in the linked list and maintain two lists, one called <tt class="docutils literal">leftList</tt>, the other one called
-<tt class="docutils literal">rightList</tt>. In <tt class="docutils literal">leftList</tt>, I insert the
-nodes that have values smaller than <tt class="docutils literal">x</tt>. In <tt class="docutils literal">rightList</tt>, I insert node that have values equal to or larger than
-<tt class="docutils literal">x</tt>. Link <tt class="docutils literal">rightList</tt> to the end of <tt class="docutils literal">leftList</tt>.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">partition</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/distinct-subsequences/">LeetCode Problem Link</a></p>
+<p>If we were allowed using non-constant extra space, we could use the way we solved 102-binary_tree_level_order_traversal.
+Since we are allowed only constant space.</p>
+<p>We cannot use recursion either since the calls on the stack counts toward space usage as well.</p>
+<p>Here is my solution. It is basically still using BFS but since the cur nodes in the previous level have already
+been linked together, there is no need to use a list.</p>
+<div class="highlight"><pre>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">TreeLinkNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
 
-    <span class="c1">// smallList head and tail</span>
-    <span class="n">ListNode</span> <span class="n">leftListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">leftListTail</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">TreeLinkNode</span> <span class="n">listHead</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
 
-    <span class="c1">// rightList head and tail</span>
-    <span class="n">ListNode</span> <span class="n">rightListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">rightListTail</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">listHead</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TreeLinkNode</span> <span class="n">listCur</span> <span class="o">=</span> <span class="n">listHead</span><span class="o">;</span>
+        <span class="n">TreeLinkNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">listCur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">cur ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/086-partition_list.html">more ...</a>
+            <span class="k">if ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html">more ...</a>
                 </div>
             </article>
             <hr/>
