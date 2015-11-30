@@ -9,6 +9,7 @@
 `LeetCode Problem Link <https://leetcode.com/problems/pascals-triangle/>`_
 
 .. code-block:: java
+
     public List<Integer> getRow(int rowIndex) {
 
         List<Integer> prevRow = new ArrayList<Integer>();

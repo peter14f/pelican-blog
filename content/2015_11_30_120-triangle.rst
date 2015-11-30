@@ -1,0 +1,58 @@
+120-triangle
+############
+
+:date: 2015-11-30 20:00
+:tags: DFS, DP
+:category: LeetCode
+:slug: 120-triangle
+
+`LeetCode Problem Link <https://leetcode.com/problems/triangle/>`_
+
+The triangle may contain negative numbers, so the greedy approach won't work. One could do DFS and find the
+sums of all paths, but it will time out on Large test cases. So DP is the way to go. I'm modifying the input
+List<List<Integer>>, so no extra space is needed.
+
+.. code-block:: java
+
+    public int minimumTotal(List<List<Integer>> triangle) {
+
+        if (triangle.isEmpty())
+            return 0;
+
+        int row = 1;
+        int n = triangle.size();
+        int ans = Integer.MAX_VALUE;
+
+        if (n==1) {
+            return triangle.get(0).get(0);
+        }
+
+        while (row < n) {
+            List<Integer> nums = triangle.get(row);
+
+            for (int i=0; i<nums.size(); i++) {
+                if (i==0) {
+                    nums.set(i, nums.get(i) + triangle.get(row-1).get(i));
+                }
+                else if (i==nums.size()-1) {
+                    nums.set(i, nums.get(i) + triangle.get(row-1).get(i-1));
+                }
+                else {
+                    if (triangle.get(row-1).get(i-1) <= triangle.get(row-1).get(i))
+                        nums.set(i, nums.get(i) + triangle.get(row-1).get(i-1));
+                    else
+                        nums.set(i, nums.get(i) + triangle.get(row-1).get(i));
+                }
+
+                if (row==n-1) {
+                    if (nums.get(i) < ans) {
+                        ans = nums.get(i);
+                    }
+                }
+            }
+
+            row++;
+        }
+
+        return ans;
+    }
