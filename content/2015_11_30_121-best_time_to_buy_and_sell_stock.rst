@@ -8,6 +8,8 @@
 
 `LeetCode Problem Link <https://leetcode.com/problems/best-time-to-buy-and-sell-stock/>`_
 
+In this problem, we're only allowed to make one trade. That means we can only buy once at time ``i`` and then
+sell once at time ``j`` where ``j>i``.
 Keep track of the ``maxProfit`` and ``buyIndex``. Update ``buyIndex`` if current price is lower than price at
 ``buyIndex``. This take O(n) time.
 
