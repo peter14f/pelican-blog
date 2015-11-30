@@ -67,6 +67,54 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/066-plus_one.html">066-plus_one</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-10-29T21:12:00-07:00"> Oct 29 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/plus-one/">LeetCode Problem Link</a></p>
+<p>The problem is simple when the input array does not just contain only the number <tt class="docutils literal">9</tt>.</p>
+<p>When you do, you have to allocate an array of size <tt class="docutils literal">n+1</tt> and set the first element to <tt class="docutils literal">1</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">plusOne</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">digits</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">digits</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">digits</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">digits</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="n">digits</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">return</span> <span class="n">digits</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">i</span><span class="o">--;</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">newDigits</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="n">newDigits</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">newDigits</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/066-plus_one.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/065-valid_number.html">065-valid_number</a></h2>
                     <div>
 <footer class="post-info">
@@ -384,57 +432,6 @@ direction and it can take 4 values: <tt class="docutils literal">RIGHT</tt>, <tt
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/058-length_of_last_word.html">058-length_of_last_word</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-26T17:24:00-07:00"> Oct 26 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/length-of-last-word/">LeetCode Problem Link</a></p>
-<p>Ignore the trailing spaces. This is how the <tt class="docutils literal">split()</tt> String method works anyways.</p>
-<p>It turns out that I only had to check for spaces, not tabs or other weird characters.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">lengthOfLastWord</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">s_arr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">s_arr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">cnt</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">i</span><span class="o">--;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
-            <span class="k">break</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">s_arr</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="sc">&#39; &#39;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">cnt</span><span class="o">++;</span>
-        <span class="o">}</span>
-
-        <span class="n">i</span><span class="o">--;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">cnt</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/058-length_of_last_word.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/index7.html">&laquo;</a>
@@ -469,6 +466,8 @@ direction and it can take 4 values: <tt class="docutils literal">RIGHT</tt>, <tt
                             href="http://peter14f.github.io/pelican-blog/index14.html">14</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index15.html">15</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index16.html">16</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index9.html">&raquo;</a></li>
         </ul>

@@ -67,6 +67,49 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/106-construct_binary_tree_from_inorder_and_postorder_traversal.html">106-construct_binary_tree_from_inorder_and_postorder_traversal</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-26T12:40:00-08:00"> Nov 26 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">LeetCode Problem Link</a></p>
+<p>It's very similar to the previous problem 105-construct_binary_tree_from_preorder_and_inorder_traversal.
+Use recursion. <tt class="docutils literal">postorder[pHigh]</tt> is always the root. Try to find that value in <tt class="docutils literal">inorder</tt>. Once found,
+the numbers to the left belong in the left subtree and the numbers to the right belong in the right subtree.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">buildTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">inorder</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">postorder</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">inorder</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">postorder</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">inorder</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">buildTree</span><span class="o">(</span><span class="n">inorder</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">postorder</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="n">TreeNode</span> <span class="nf">buildTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">inorder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">iLow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">iHigh</span><span class="o">,</span>
+                           <span class="kt">int</span><span class="o">[]</span> <span class="n">postorder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pLow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pHigh</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">TreeNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/106-construct_binary_tree_from_inorder_and_postorder_traversal.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/105-construct_binary_tree_from_preorder_and_inorder_traversal.html">105-construct_binary_tree_from_preorder_and_inorder_traversal</a></h2>
                     <div>
 <footer class="post-info">
@@ -377,53 +420,6 @@ the inorder traversal. If <tt class="docutils literal">prev</tt> is bigger than 
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/098-validate_binary_search_tree.html">098-validate_binary_search_tree</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-21T11:50:00-08:00"> Nov 21 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/validate-binary-search-tree/">LeetCode Problem Link</a></p>
-<p>The check needs to be recursive. All nodes in <tt class="docutils literal">cur</tt>'s left subBST must be less than <tt class="docutils literal">cur</tt>.
-All nodes in <tt class="docutils literal">cur</tt>'s right subBST must be greater than <tt class="docutils literal">cur</tt>. And this check must be done on all subBSTs
-within the input BST.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValidBST</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-
-    <span class="k">return</span> <span class="n">isValidBST</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">root</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
-            <span class="n">isValidBST</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">root</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isValidBST</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">cur</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">min</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">min</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">min</span><span class="o">.</span><span class="na">val</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">max</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">&gt;=</span> <span class="n">max</span><span class="o">.</span><span class="na">val</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="c1">// left ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/098-validate_binary_search_tree.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh2.html">&laquo;</a>
@@ -458,6 +454,8 @@ within the input BST.</p>
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh14.html">14</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh15.html">15</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh16.html">16</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh4.html">&raquo;</a></li>
         </ul>
