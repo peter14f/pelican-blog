@@ -60,7 +60,7 @@ We just don't return the this value.
 
 Since the of a path for this problem must contain at this one node. We initialize ``max[0]`` to ``root.val``.
 Each node in the binary tree is visited once so this takes O(n) time. The space complexity is O(n) which is number of
-function calls on the stack in the worst case. 
+function calls on the stack in the worst case.
 
 .. code-block:: java
 
