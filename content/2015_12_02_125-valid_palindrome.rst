@@ -13,6 +13,8 @@ index ``0`` and the other starts at index ``n-1``.
 
 It takes O(n) time.
 
+.. code-block:: java
+
     public boolean isPalindrome(String s) {
         if (s.isEmpty())
             return true;
