@@ -1,0 +1,70 @@
+127-word_ladder
+###############
+
+:date: 2015-12-4 12:18
+:tags: Breadth First Search
+:category: LeetCode
+:slug: 127-word_ladder
+
+This is the classic BFS problem. Words that are 1-character different from the current character and in the
+dictionary are considered the current character's neighbors. We need to prevent the same word being added onto
+the queue twice so a HashSet is needed. Lastly, we must keep track of the number of words on the queue for the current
+level and the next level.
+
+.. code-block:: java
+
+    // we want the shortest transformation, so we need to do a BFS
+    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+        List<String> q = new ArrayList<String>();
+        q.add(beginWord);
+        int level = 1;
+        int size = 1;
+        int nextLevelSize = 0;
+        HashSet<String> dup = new HashSet<String>();
+        dup.add(beginWord);
+
+        while (!q.isEmpty()) {
+            String cur = q.remove(0);
+            int len = cur.length();
+            char[] arr = cur.toCharArray();
+
+            for (int i=0; i<len; i++) {
+                char oldC = arr[i];
+
+                for (char c='a'; c<='z'; c++) {
+                    if (c==cur.charAt(i))
+                        continue;
+
+                    arr[i] = c;
+
+                    String modified = new String(arr);
+
+                    // either on the q or has been visited
+                    if (dup.contains(modified))
+                        continue;
+
+                    if (modified.equals(endWord)) {
+                        return level + 1;
+                    }
+
+                    if (wordList.contains(modified)) {
+                        q.add(modified);
+                        dup.add(modified);
+                        nextLevelSize++;
+                    }
+                }
+
+                arr[i] = oldC;
+            }
+
+            size--;
+
+            if (size==0) {
+                level++;
+                size = nextLevelSize;
+                nextLevelSize = 0;
+            }
+        }
+
+        return 0;
+    }
