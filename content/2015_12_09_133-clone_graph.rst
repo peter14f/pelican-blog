@@ -1,0 +1,39 @@
+133-clone_graph
+###############
+
+:date: 2015-12-9 20:57
+:tags: DFS
+:category: LeetCode
+:slug: 133-clone_graph
+
+`LeetCode Problem Link <https://leetcode.com/problems/clone-graph/>`_
+
+Use recursion and DFS to deep copy the graph. ``mapping`` is a mapping from the UndirectedGraphNode in the original
+graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
+terminate.
+
+.. code-block:: java
+
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if (node==null)
+            return null;
+
+        HashMap<UndirectedGraphNode, UndirectedGraphNode> mapping = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
+        dfsCopy(node, mapping);
+
+        return mapping.get(node);
+    }
+
+    private void dfsCopy(UndirectedGraphNode node, HashMap<UndirectedGraphNode, UndirectedGraphNode> mapping) {
+        if (mapping.containsKey(node)) {
+            return;
+        }
+
+        UndirectedGraphNode newNode = new UndirectedGraphNode(node.label);
+        mapping.put(node, newNode);
+
+        for (UndirectedGraphNode neighbor: node.neighbors) {
+            dfsCopy(neighbor, mapping);
+            newNode.neighbors.add(mapping.get(neighbor));
+        }
+    }
