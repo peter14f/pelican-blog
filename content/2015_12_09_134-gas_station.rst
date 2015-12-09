@@ -1,0 +1,76 @@
+134-gas_station
+###############
+
+:date: 2015-12-9 21:20
+:tags:
+:category:
+:slug: 134-gas_station
+
+My first attempt is a O(n\ :superscript:`2`) time solution. Basically start at each possible starting location and
+then try to go around the circle. This won't pass the large test case on OJ though.
+
+.. code-block:: java
+
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.length;
+
+        for (int start=0; start<n; start++) {
+            int tank = gas[start];
+            int cur = start;
+
+            while (tank >= cost[cur]) {
+                tank = tank - cost[cur];
+                cur++;
+
+                if (cur == n)
+                    cur = 0;
+
+                if (cur==start)
+                    return start;
+
+                tank += gas[cur];
+            }
+        }
+
+        return -1;
+    }
+
+My guess is that we will have to come up with a O(n) time solution. How can we do this? We must realize that if
+we had started at index ``i`` and have arrived now at index ``j`` and realized that it's not possible to reach index
+``j+1``, that there is no need to try to start at indices ``i+1`` to ``j-1`` as well. Starting at a later index that's
+larger than ``i`` but smaller than ``j`` just means that by the time we reach index ``j`` the tank will be even smaller.
+So it's not possible to get to index ``j+1`` as well. So we can set ``start`` to ``j+1`` and reset ``tank`` back to 0
+in this case. The next ``start`` index must be larger than the current ``start`` index.
+
+.. code-block:: java
+
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.length;
+
+        for (int start=0; start<n; start++) {
+            System.out.println("start=" + start);
+
+            int tank = gas[start];
+            int cur = start;
+
+            while (tank >= cost[cur]) {
+                tank -= cost[cur];
+                cur++;
+
+                if (cur==n)
+                    cur = 0;
+
+                if (cur==start)
+                    return start;
+
+                tank += gas[cur];
+            }
+
+            if (cur+1 <= start)
+                break;
+            start = cur;
+            tank = 0;
+        }
+
+        return -1;
+    }
