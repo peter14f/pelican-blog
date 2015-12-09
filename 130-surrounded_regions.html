@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>130-surrounded_regions - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="DFS,Blob Analysis" />
+        <meta name="description" content="LeetCode Problem Link This is the recursive solution. Go through all &#39;O&#39;s at the edge and recursive mark its connected &#39;O&#39; cells to &#39;o&#39;. These &#39;O&#39;s cannot be enclosed by &#39;X&#39;. Once this is done, go through the board again, mark all other &#39;O&#39;s to &#39;X&#39; and change &#39;o&#39;s to &#39;O&#39;s. This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping track of the xMin, xMax, yMin, and yMax. We can tell if the blob of &#39;O&#39;s are touching the edge. If not, they ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="130-surrounded_regions"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html"/>
+        <meta property="og:description" content="LeetCode Problem Link This is the recursive solution. Go through all &#39;O&#39;s at the edge and recursive mark its connected &#39;O&#39; cells to &#39;o&#39;. These &#39;O&#39;s cannot be enclosed by &#39;X&#39;. Once this is done, go through the board again, mark all other &#39;O&#39;s to &#39;X&#39; and change &#39;o&#39;s to &#39;O&#39;s. This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping track of the xMin, xMax, yMin, and yMax. We can tell if the blob of &#39;O&#39;s are touching the edge. If not, they ..."/>
+        <meta property="article:published_time" content="2015-12-08" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="DFS" />
+            <meta property="article:tag" content="Blob Analysis" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html"
+                       rel="bookmark"
+                       title="Permalink to 130-surrounded_regions">
+                        130-surrounded_regions
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-08T13:02:00-08:00"> Dec 08 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
+<p>This is the recursive solution. Go through all 'O's at the edge and recursive mark its connected 'O' cells to 'o'.
+These 'O's cannot be enclosed by 'X'. Once this is done, go through the board again, mark all other 'O's to 'X' and
+change 'o's to 'O's.</p>
+<p>This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping
+track of the <tt class="docutils literal">xMin</tt>, <tt class="docutils literal">xMax</tt>, <tt class="docutils literal">yMin</tt>, and <tt class="docutils literal">yMax</tt>. We can tell if the blob of 'O's are touching the edge. If not,
+they will be changed to 'X's.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+
+    <span class="kd">class</span> <span class="nc">BlobProperties</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">xMin</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">xMax</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">yMin</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">yMax</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*    U</span>
+<span class="cm">     *  L X</span>
+<span class="cm">     */</span>
+
+    <span class="c1">// the 2D char array contains only &#39;O&#39; and &#39;X&#39;</span>
+    <span class="c1">// Eat up all regions of &#39;O&#39;s that are surrounded by &#39;X&#39;s</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">solve</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
+            <span class="k">return</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">blobs</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+        <span class="kt">int</span> <span class="n">blobNum</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lookup</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="kt">int</span> <span class="n">topBlob</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                    <span class="kt">int</span> <span class="n">leftBlob</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="o">)</span>
+                        <span class="n">topBlob</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="o">)</span>
+                        <span class="n">leftBlob</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">topBlob</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>  <span class="n">leftBlob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">topBlob</span><span class="o">;</span>
+                        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">leftBlob</span><span class="o">;</span>
+                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">top</span><span class="o">))</span>
+                            <span class="n">top</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">top</span><span class="o">);</span>
+
+                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">left</span><span class="o">))</span>
+                            <span class="n">left</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">left</span><span class="o">);</span>
+
+                        <span class="kt">int</span> <span class="n">smallerBlobNum</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">top</span><span class="o">,</span> <span class="n">left</span><span class="o">);</span>
+
+                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">smallerBlobNum</span><span class="o">;</span>
+
+                        <span class="k">if</span> <span class="o">(</span><span class="n">smallerBlobNum</span> <span class="o">&lt;</span> <span class="n">top</span><span class="o">)</span>
+                            <span class="n">lookup</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">top</span><span class="o">,</span> <span class="n">smallerBlobNum</span><span class="o">);</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">smallerBlobNum</span> <span class="o">&lt;</span> <span class="n">left</span><span class="o">)</span>
+                            <span class="n">lookup</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">smallerBlobNum</span><span class="o">);</span>
+                    <span class="o">}</span>
+                    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">topBlob</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">leftBlob</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// use a brand new blob number</span>
+                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">blobNum</span><span class="o">;</span>
+                        <span class="n">blobNum</span><span class="o">++;</span>
+                    <span class="o">}</span>
+                    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">topBlob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">topBlob</span><span class="o">))</span>
+                            <span class="n">topBlob</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">topBlob</span><span class="o">);</span>
+
+                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">topBlob</span><span class="o">;</span>
+                    <span class="o">}</span>
+                    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">leftBlob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">leftBlob</span><span class="o">))</span>
+                            <span class="n">leftBlob</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">leftBlob</span><span class="o">);</span>
+
+                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">leftBlob</span><span class="o">;</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span> <span class="n">maxBlobNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+
+                    <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">b</span><span class="o">))</span>
+                        <span class="n">b</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="n">maxBlobNum</span><span class="o">)</span>
+                        <span class="n">maxBlobNum</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+
+                    <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="n">BlobProperties</span><span class="o">[]</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BlobProperties</span><span class="o">[</span><span class="n">maxBlobNum</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">properties</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">BlobProperties</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BlobProperties</span><span class="o">();</span>
+            <span class="n">b</span><span class="o">.</span><span class="na">xMax</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+            <span class="n">b</span><span class="o">.</span><span class="na">yMax</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+            <span class="n">b</span><span class="o">.</span><span class="na">xMin</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+            <span class="n">b</span><span class="o">.</span><span class="na">yMin</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+            <span class="n">properties</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMin</span><span class="o">)</span>
+                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMin</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">&gt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMax</span><span class="o">)</span>
+                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMax</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">&lt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMin</span><span class="o">)</span>
+                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMin</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">&gt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMax</span><span class="o">)</span>
+                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMax</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+
+                <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">BlobProperties</span> <span class="n">prop</span> <span class="o">=</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">prop</span><span class="o">.</span><span class="na">xMin</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">prop</span><span class="o">.</span><span class="na">yMin</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+                        <span class="n">prop</span><span class="o">.</span><span class="na">xMax</span> <span class="o">!=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">prop</span><span class="o">.</span><span class="na">yMax</span> <span class="o">!=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="o">;</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span> <span class="o">=</span> <span class="o">{{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">},</span>
+                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
+                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
+                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
+                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
+                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">}};</span>
+
+        <span class="n">Solution</span> <span class="n">sol</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Solution</span><span class="o">();</span>
+
+        <span class="n">sol</span><span class="o">.</span><span class="na">solve</span><span class="o">(</span><span class="n">board</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">deepToString</span><span class="o">(</span><span class="n">board</span><span class="o">));</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
