@@ -2,7 +2,7 @@
 #################
 
 :date: 2015-12-11 19:52
-:tags: XOR
+:tags: XOR, Bit Manipulation
 :category: LeetCode
 :slug: 136-single_number
 
