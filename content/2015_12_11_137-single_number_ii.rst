@@ -32,7 +32,7 @@ We can use an int array to store the 32 bits.
        return result;
     }
 
-This solution uses extra memory though. The following the solution that uses 3 int variables. 
+This solution uses extra memory though. The following the solution that uses 3 int variables.
 
 .. code-block:: java
 
