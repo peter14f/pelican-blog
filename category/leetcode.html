@@ -73,6 +73,129 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">138-copy_list_with_random_pointer</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-12T12:35:00-08:00"> Dec 12 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/copy-list-with-random-pointer/">LeetCode Problem Link</a></p>
+<p>For each node in the original list append a duplicated node.</p>
+<p>Copy the random pointer as well.</p>
+<p>This is the first pass.</p>
+<p>In the second pass, we correct the random pointers for every other node on the list. Advance the random pointers by
+one node. Notice how these random pointer point to the duplicated nodes now.</p>
+<p>In the third pass, we separate the original nodes from the duplicated nodes.</p>
+<p>Then we can simply return the head of the duplicated list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">RandomListNode</span> <span class="nf">copyRandomList</span><span class="o">(</span><span class="n">RandomListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">RandomListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">RandomListNode</span> <span class="n">newListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">137-single_number_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-11T21:01:00-08:00"> Dec 11 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/single-number-ii/">LeetCode Problem Link</a></p>
+<p>We can use an int array to store the 32 bits.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kt">int</span><span class="o">[]</span> <span class="n">bits</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">32</span><span class="o">];</span>
+   <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
+           <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">+=</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">;</span>
+           <span class="k">if</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span>
+               <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
+       <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span><span class="o">);</span>
+   <span class="o">}</span>
+
+   <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>This solution uses extra memory though. The following the solution that uses 3 int variables.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">twos</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">threes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/136-single_number.html">136-single_number</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-11T19:52:00-08:00"> Dec 11 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/xor.html">XOR</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/single-number/">LeetCode Problem Link</a></p>
+<p>a XOR a = 0</p>
+<div class="highlight"><pre><span class="cm">/* asked to do a O(n) time solution that does not use extra space</span>
+<span class="cm"> * every element appears twice except for one</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">single</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">single</span> <span class="o">=</span> <span class="n">single</span> <span class="o">^</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">single</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/136-single_number.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/135-candy.html">135-candy</a></h2>
                     <div>
 <footer class="post-info">
@@ -241,124 +364,6 @@ change 'o's to 'O's.</p>
 track of the <tt class="docutils literal">xMin</tt>, <tt class="docutils literal">xMax</tt>, <tt class="docutils literal">yMin</tt>, and <tt class="docutils literal">yMax</tt>. We can tell if the blob of 'O's are touching the edge. If not,
 they ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">129-sum_root_to_leaf_numbers</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-06T16:11:00-08:00"> Dec 06 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sum-root-to-leaf-numbers/">LeetCode Problem Link</a></p>
-<p>The nodes in the binary tree have integer values from 0 to 9.</p>
-<div class="highlight"><pre><span class="c1">// values are integers from 0 to 9 only</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">curNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">totalSum</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
-
-    <span class="n">sumNumbers</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">curNum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">curSum</span> <span class="o">=</span> <span class="n">curSum</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+=</span> <span class="n">curSum</span><span class="o">;</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-<span class="o">}</span>
-</pre></div>
-<p>Each node is visited once so the time complexity is ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">128-longest_consecutive_sequence</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-05T23:04:00-08:00"> Dec 05 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-consecutive-sequence/">LeetCode Problem Link</a></p>
-<p>This problem can be done using one HashSet of integers. We first insert all the numbers in the array into
-the Hashset. Then as we go through each number in the int array, we use the HashSet to quickly look up if
-the adjacent numbers are also in the input array. If so, we remove the number from the HashSet so that
-we don't attempt to find the sequence for that number again.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestConsecutive</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/126-word_ladder_ii.html">126-word_ladder_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-05T16:39:00-08:00"> Dec 05 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/find-all-shortest-paths.html">Find All Shortest Paths</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/two-way-bfs.html">Two-Way BFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-ladder-ii/">LeetCode Problem Link</a></p>
-<p>We must first perform BFS find out the length of the shortest path. While doing this, we should
-save the choices at each level. When we have found the length of the shortest path and the
-choices at each level, we can then perform DFS to find all shortest paths. What info do we need
-when we perform the DFS? We must know the neighbors of each word at each level. Therefore, it is important
-that we build the neighbors as part of the BFS. I used a HashMap&lt;String, HashSet&gt; for this. The key is string ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/126-word_ladder_ii.html">more ...</a>
                 </div>
             </article>
             <hr/>

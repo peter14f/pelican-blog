@@ -70,6 +70,116 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/042-trapping_rain_water.html">042-trapping_rain_water</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-28T15:59:00-07:00"> Sep 28 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/water.html">water</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/trapping-rain-water/">LeetCode Problem Link</a></p>
+<p>The straightforward solution take O(n<sup>2</sup>) time.</p>
+<p>For each height at index <tt class="docutils literal">i</tt></p>
+<blockquote>
+<div class="line-block">
+<div class="line">Find its tallest left wall and its tallest right wall if available.</div>
+<div class="line">volume += Math.min(rightWall, leftWall) - height[i]</div>
+</div>
+</blockquote>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">trap</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">height</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">leftPeak</span> <span class="o">=</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">rightPeak</span> <span class="o">=</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+
+        <span class="c1">// find left peak</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">l</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">l</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">height</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">leftPeak</span><span class="o">)</span>
+                <span class="n">leftPeak</span> <span class="o">=</span> <span class="n">height</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">leftPeak</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
+            <span class="k">continue</span><span class="o">;</span>
+
+        <span class="c1">// find right peak</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">height</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">r</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">height</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">rightPeak</span><span class="o">)</span>
+                <span class="n">rightPeak ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/042-trapping_rain_water.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/041-first_missing_positive.html">041-first_missing_positive</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-27T19:50:00-07:00"> Sep 27 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/first-missing-positive/">LeetCode Problem Link</a></p>
+<p>The input array <tt class="docutils literal">nums</tt> is of size <tt class="docutils literal">n</tt> and could have integers &lt; 1.</p>
+<p>In the first pass, we try to place the number (<tt class="docutils literal">nums[i]</tt>) in the correct bin if the number
+is &gt;= 1 and &lt;= n. The correct bin is at index <tt class="docutils literal">nums[i] - 1</tt>.</p>
+<p>1 should be stored at index 1, 2 should be stored at index 1, ... etc.</p>
+<dl class="docutils">
+<dt>We continue swapping the number at index <tt class="docutils literal">i</tt> with the number at the desired index until either index <tt class="docutils literal">i</tt> now stores</dt>
+<dd>the number <tt class="docutils literal">i+1</tt> or the number at index <tt class="docutils literal">i</tt> cannot be placed in the desired ...</dd></dl>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/041-first_missing_positive.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/040-combination_sum_ii.html">040-combination_sum_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-27T11:04:00-07:00"> Sep 27 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/duplicates.html">Duplicates</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/combination-sum-ii/">LeetCode Problem Link</a></p>
+<p>Unlike <strong>040-combination_sum</strong>, <tt class="docutils literal">candidates</tt> can have duplicates.</p>
+<p>So the tricky part is to make sure that we do not have duplicates in the answer.</p>
+<p>For example, <tt class="docutils literal"><span class="pre">candidates={1,</span> 1, 1, 2}</tt> and <tt class="docutils literal">target=3</tt>.</p>
+<p>We want to make sure <tt class="docutils literal"><span class="pre">ans={{1,</span> 1, 1}, {1, 2}}</tt></p>
+<p>In other words, <tt class="docutils literal">{1, 2}</tt> occurs only once in the answer.</p>
+<p>How do we do this?</p>
+<p>In the code path where we are NOT including the current number in
+the <tt class="docutils literal">workingList</tt>, we will skip all the following indices that
+also have the same number as the current number.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">combinationSum2 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/040-combination_sum_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/039-combination_sum.html">039-combination_sum</a></h2>
                     <div>
 <footer class="post-info">
@@ -308,122 +418,6 @@ number were to be inserted.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/034-search_for_a_range.html">034-search_for_a_range</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-27T10:46:00-07:00"> Sep 27 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-for-a-range/">LeetCode Problem Link</a></p>
-<p>Run the regular binary search, once the <tt class="docutils literal">target</tt> if found, we cannot just stop searching. We must continue looking
-for a higher index and a lower index that also store <tt class="docutils literal">target</tt>.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">searchRange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">{-</span><span class="mi">1</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">};</span>
-
-    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="o">(</span><span class="n">h</span><span class="o">-</span><span class="n">l</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">middle</span><span class="o">]</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">middle</span><span class="o">;</span>
-            <span class="n">ans</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">middle</span><span class="o">;</span>
-
-            <span class="c1">// look for a lower low index</span>
-            <span class="n">lookForLowIndex</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">middle</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
-
-            <span class="c1">// look for a higher high index</span>
-            <span class="n">lookForHighIndex</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">middle</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">middle</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">target ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/034-search_for_a_range.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/033-search_in_rotated_sorted_array.html">033-search_in_rotated_sorted_array</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-27T10:45:00-07:00"> Sep 27 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-in-rotated-sorted-array/">LeetCode Problem Link</a></p>
-<p>The best way is to list all rotated versions of a sorted array and then think about all cases.</p>
-<div class="line-block">
-<div class="line">[1, 2, 3, 4, 5, 6, 7]</div>
-<div class="line">[2, 3, 4, 5, 6, 7, 1]</div>
-<div class="line">[3, 4, 5, 6, 7, 1, 2]</div>
-<div class="line">[4, 5, 6, 7, 1, 2, 3]</div>
-<div class="line">[5, 6, 7, 1, 2, 3, 4]</div>
-<div class="line">[6, 7, 1, 2, 3, 4, 5]</div>
-<div class="line">[7, 1, 2, 3, 4, 5, 6]</div>
-<div class="line"><br /></div>
-<div class="line">nums[l] to nums[m] can be sorted like in case 1 ~ case 4.</div>
-<div class="line">otherwise nums[m] to nums[h] must be sorted like in case 5 ~ case 7 ...</div></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/033-search_in_rotated_sorted_array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/032-longest_valid_parentheses.html">032-longest_valid_parentheses</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-27T10:44:00-07:00"> Sep 27 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/parentheses.html">Parentheses</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-valid-parentheses/">LeetCode Problem Link</a></p>
-<p>We will use a stack to store the indices for opening parentheses. We want to pass the following input cases:</p>
-<div class="line-block">
-<div class="line">(()</div>
-<div class="line">(()()</div>
-<div class="line">)))()</div>
-</div>
-<p>The trick is that after we pop the corresponding opening index from the stack, we need to check if the
-stack is empty or not. If the stack is not empty, the top of the stack contains the index <tt class="docutils literal">i</tt>
-of the previous opening parenthesis. <tt class="docutils literal">i+1</tt> should be used when calculating the length.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestValidParentheses</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">maxLength</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">s_arr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-
-    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/032-longest_valid_parentheses.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh12.html">&laquo;</a>
@@ -462,6 +456,8 @@ of the previous opening parenthesis. <tt class="docutils literal">i+1</tt> shoul
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh16.html">16</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh17.html">17</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh18.html">18</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh14.html">&raquo;</a></li>
         </ul>
