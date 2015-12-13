@@ -2,7 +2,7 @@
 ###########################
 
 :date: 2015-12-8 19:05
-:tags: DFS, Memoization, Palindromes
+:tags: DFS, Memoization, Palindromes, String Partitions
 :category: LeetCode
 :slug: 131-palindrome_partitioning
 

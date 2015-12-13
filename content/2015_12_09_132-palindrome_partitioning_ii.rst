@@ -2,7 +2,7 @@
 ##############################
 
 :date: 2015-12-9 13:11
-:tags: Dynamic Programming, Palindromes
+:tags: Dynamic Programming, Palindromes, String Partitions
 :category: LeetCode
 :slug: 132-palindrome_partitioning_ii
 

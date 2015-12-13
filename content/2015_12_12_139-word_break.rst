@@ -1,0 +1,59 @@
+139-word_break
+##############
+
+:date: 2015-12-12 17:06
+:tags: String Partitions
+:category: LeetCode
+:slug: 139-word_break
+
+`LeetCode Problem Link <https://leetcode.com/problems/word-break/>`_
+
+131-palindrome_partitioning is actually a harder problem of this. Here we just need to check if each partition
+is in the dictionary. I use a 2D boolean ``dict``. ``dict[i][j]`` is true if the substring s(i, j) is in the
+dictionary. We need to the fill in the 2D array first. And then I create a 1D boolean array ``canBreak``.
+
+``canBrea[i]`` is true if the substring s(i, n-1) can be partitioned into groups where all group words are
+in the dictionary. This array will be filled from right to left. And finally ``canBreak[0]`` is returned.
+
+.. code-block:: java
+
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        int n = s.length();
+
+        boolean[][] dict = new boolean[n][n];
+        char[] sArr = s.toCharArray();
+
+        for (int start=0; start<n; start++) {
+            for (int end=start; end<n; end++) {
+                String str = new String(sArr, start, end-start+1);
+
+                if (wordDict.contains(str)) {
+                    dict[start][end] = true;
+                }
+            }
+        }
+
+        // canBreak[i] is true is s(i,n-1) is breakable
+        boolean[] canBreak = new boolean[n];
+
+        for (int start=n-1; start >=0; start--) {
+            if (dict[start][n-1]) {
+                canBreak[start] = true;
+            }
+            else {
+                for (int cut=start; cut<n-1; cut++) {
+                    if (dict[start][cut] && canBreak[cut+1]) {
+                        canBreak[start] = true;
+                        // already figured out that s(start, n-1) is breakable
+                        // move to the next start index
+                        break;
+                    }
+                }
+            }
+        }
+
+        return canBreak[0];
+    }
+
+Filling out ``dict`` takes O(n\ :superscript:`2`) time and filling out ``canBreak`` takes O(n) time.
+So the time complexity is O(n\ :superscript:`2`).

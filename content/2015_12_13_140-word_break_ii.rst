@@ -1,0 +1,85 @@
+140-word_break_ii
+#################
+
+:date: 2015-12-13 0:20
+:tags: String Partitions
+:category: LeetCode
+:slug: 140-word_break_ii
+
+`LeetCode Problem Link <https://leetcode.com/problems/word-break-ii/>`_
+
+This problem is very similar to 132-palindrome_partitioning. After the 2D boolean array ``inDict`` is filled in.
+We just need to perform dfs on it to find all the partitions. This alone will be too slow when running
+the big test case thought. So like in the previous problem we must fill in the 1D boolean array ``canBreak`` as
+well. And we only need to perform the dfs if ``canBreak[0]`` is true. Otherwise, we know that there is simply
+no way to partition the input string ``s`` into words that are in the dictionary.
+
+.. code-block:: java
+
+    public List<String> wordBreak(String s, Set<String> wordDict) {
+        char[] sArr = s.toCharArray();
+        int n = sArr.length;
+        boolean[][] inDict = new boolean[n][n];
+
+        for (int start=0; start<n; start++) {
+            for (int end=start; end<n; end++) {
+                String str = new String(sArr, start, end-start+1);
+
+                if (wordDict.contains(str)) {
+                    inDict[start][end] = true;
+                }
+            }
+        }
+
+        boolean[] canBreak = new boolean[n];
+
+        for (int start=n-1; start>=0; start--) {
+
+            if (inDict[start][n-1]) {
+                canBreak[start] = true;
+            }
+            else {
+                for (int cut=start; cut<n; cut++) {
+                    if (inDict[start][cut] && canBreak[cut+1]) {
+                        canBreak[start] = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        List<String> partitions = new ArrayList<String>();
+
+        if (canBreak[0])
+            dfs(inDict, 0, partitions, new ArrayList<String>(), sArr);
+
+        return partitions;
+    }
+
+    private void dfs(boolean[][] inDict, int start, List<String> partitions, List<String> curList, char[] sArr) {
+        int n = inDict.length;
+
+        for (int end=start; end<n; end++) {
+            if (inDict[start][end]) {
+                String str = new String(sArr, start, end-start+1);
+                curList.add(str);
+
+                if (end < n-1) {
+                    dfs(inDict, end+1, partitions, curList, sArr);
+                }
+                else {
+                    StringBuffer sb = new StringBuffer();
+                    int i=0;
+                    for (; i<curList.size()-1; i++) {
+                        sb.append(curList.get(i));
+                        sb.append(" ");
+                    }
+                    sb.append(curList.get(i));
+
+                    partitions.add(sb.toString());
+                }
+
+                curList.remove(curList.size() - 1);
+            }
+        }
+    }
