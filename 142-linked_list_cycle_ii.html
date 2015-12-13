@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>142-linked_list_cycle_ii - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Linked List,Linked List Cycle" />
+        <meta name="description" content="LeetCode Problem Link The implementation for this problem is not difficult. Once fast catches up with slow, at location x. We set cur to the head of the list and then try to advance both x and cur at the same rate. The location where x meets with cur is the start of the cycle. We can show why this is the case with some modular arithmetic. Let&#39;s say it takes x steps for slow to reach the start of the cycle at which point fast has take 2x steps in total and has taken x steps since it ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="142-linked_list_cycle_ii"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html"/>
+        <meta property="og:description" content="LeetCode Problem Link The implementation for this problem is not difficult. Once fast catches up with slow, at location x. We set cur to the head of the list and then try to advance both x and cur at the same rate. The location where x meets with cur is the start of the cycle. We can show why this is the case with some modular arithmetic. Let&#39;s say it takes x steps for slow to reach the start of the cycle at which point fast has take 2x steps in total and has taken x steps since it ..."/>
+        <meta property="article:published_time" content="2015-12-13" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Linked List" />
+            <meta property="article:tag" content="Linked List Cycle" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html"
+                       rel="bookmark"
+                       title="Permalink to 142-linked_list_cycle_ii">
+                        142-linked_list_cycle_ii
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T15:38:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle-ii/">LeetCode Problem Link</a></p>
+<p>The implementation for this problem is not difficult. Once <tt class="docutils literal">fast</tt> catches up with <tt class="docutils literal">slow</tt>, at location <tt class="docutils literal">x</tt>.
+We set <tt class="docutils literal">cur</tt> to the head of the list and then try to advance both <tt class="docutils literal">x</tt> and <tt class="docutils literal">cur</tt> at the same rate.
+The location where <tt class="docutils literal">x</tt> meets with <tt class="docutils literal">cur</tt> is the start of the cycle.</p>
+<p>We can show why this is the case with some modular arithmetic. Let's say it takes <tt class="docutils literal">x</tt> steps for <tt class="docutils literal">slow</tt> to
+reach the start of the cycle at which point <tt class="docutils literal">fast</tt> has take <tt class="docutils literal">2x</tt> steps in total and has taken <tt class="docutils literal">x</tt> steps
+since it entered the cycle.</p>
+<p>Keep in mind <tt class="docutils literal">slow</tt> is now at <tt class="docutils literal">0 mod m</tt>, the start of the cycle and <tt class="docutils literal">fast</tt> is now at <tt class="docutils literal">x mod m</tt>, somewhere
+within the cycle. <tt class="docutils literal">m</tt> is just the size of the cycle. Now let's say after <tt class="docutils literal">slow</tt> taking <tt class="docutils literal">y</tt> steps, the two pointers finally meet. <tt class="docutils literal">slow</tt> is at
+<tt class="docutils literal">y mod m</tt> and <tt class="docutils literal">fast</tt> is at <tt class="docutils literal">(x + 2y) mod m</tt>. These two values are actually at the same spot.</p>
+<p>So <tt class="docutils literal">y mod m</tt> = <tt class="docutils literal">(x + 2y) mod m</tt></p>
+<p>Now the question wants us to find out the beginning of the cycle which is <tt class="docutils literal">0 mod m</tt>.
+<tt class="docutils literal">0 mod m</tt> = <tt class="docutils literal">(x + y) mod m</tt>.</p>
+<p>That means if we just take another <tt class="docutils literal">x</tt> steps from where the two pointers meet, we will be at the start of the
+cycle. <tt class="docutils literal">x</tt> is the distance from head to the start of the cycle.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">detectCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">hasCycle</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">slow</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span> <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">fastAdvancedTwice</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="o">==</span><span class="n">slow</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">hasCycle</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">fastAdvancedTwice</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(!</span><span class="n">hasCycle</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">==</span><span class="n">slow</span><span class="o">)</span>
+            <span class="k">return</span> <span class="n">cur</span><span class="o">;</span>
+
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">cur</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
