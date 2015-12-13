@@ -6,7 +6,7 @@
 :category: LeetCode
 :slug: 141-linked_list_cycle
 
-`LeetCode Problem Link <https://leetcode.com/problems/word-break-ii/>`_
+`LeetCode Problem Link <https://leetcode.com/problems/linked-list-cycle/>`_
 
 Use two pointers, ``fast`` and ``slow`` both start at the head of the list. Make ``fast`` take two steps
 and ``slow`` take one step in each iteration. If there's a cycle in the linked list. The ``fast`` pointer
