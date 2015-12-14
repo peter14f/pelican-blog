@@ -1,0 +1,143 @@
+143-reorder_list
+################
+
+:date: 2015-12-13 15:56
+:tags: Linked Lists
+:category: LeetCode
+:slug: 143-reorder_list
+
+`LeetCode Problem Link <https://leetcode.com/problems/reorder-list/>`_
+
+The O(n\ :superscript:`2`) time solution would be too slow for OJ's large test case.
+
+.. code-block:: java
+
+    public void reorderList(ListNode head) {
+        if (head == null)
+            return;
+
+        ListNode cur = head;
+
+        while (cur != null) {
+            ListNode oldNext = cur.next;
+
+            if (oldNext != null && oldNext.next != null) {
+                ListNode prevN = cur;
+                ListNode curN = oldNext;
+
+                while (curN.next != null) {
+                    prevN = curN;
+                    curN = curN.next;
+                }
+
+                // curN is the current tail
+                prevN.next = null;
+                cur.next = curN;
+                curN.next = oldNext;
+            }
+
+            cur = oldNext;
+        }
+
+    }
+
+The next idea is to use a Stack so the top element is always the current tail. The time complexity becomes O(n).
+But this uses extra memory.
+
+.. code-block:: java
+
+    public void reorderList(ListNode head) {
+        ListNode cur = head;
+        Stack<ListNode> stk = new Stack<ListNode>();
+
+        while (cur != null) {
+            stk.push(cur);
+            cur = cur.next;
+        }
+
+        cur = head;
+
+        while (cur != null) {
+            ListNode oldNext = cur.next;
+
+            if (oldNext != null && oldNext.next != null) {
+
+                ListNode curTail = stk.pop();
+
+                cur.next = curTail;
+                curTail.next = oldNext;
+                stk.peek().next = null;
+
+            }
+
+            cur = oldNext;
+        }
+
+    }
+
+Can we achieve this with O(n) time and O(1) space? Step 1: Break the list into halves, each is itself a list.
+Step 2: Reverse the second half.
+Step 3: Interleave the nodes from the two lists.
+
+To break the list into halves, we can use two pointers ``fast`` and ``slow``. ``fast`` takes two steps in each
+iteration and ``slow`` takes only one step in each iteration. We stop the loop when ``fast`` reaches the last
+node in the list. ``slow`` will be the middle node in the list.
+
+These operations have all actually been done in other problems. 141-linked_list_cycle and 206-reverse_linked_list.
+
+.. code-block:: java
+
+    public void reorderList(ListNode head) {
+
+        if (head==null)
+            return;
+
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast.next != null) {
+            fast = fast.next;
+
+            if (fast.next == null)
+                break;
+
+            fast = fast.next;
+
+            slow = slow.next;
+        }
+
+        reverseList(slow.next, fast);
+        slow.next = null;
+
+        ListNode a = head;
+        ListNode b = fast;
+
+        while (a!=null && b!=null) {
+            ListNode oldANext = a.next;
+            ListNode oldBNext = b.next;
+
+            a.next = b;
+            b.next = oldANext;
+
+            a = oldANext;
+            b = oldBNext;
+        }
+
+    }
+
+    private void reverseList(ListNode from, ListNode to) {
+
+        ListNode cur = from;
+        ListNode prev = null;
+
+        while (cur != null) {
+            ListNode oldNext = cur.next;
+            cur.next = prev;
+
+            if (cur == to)
+                break;
+
+            prev = cur;
+            cur = oldNext;
+        }
+    }
