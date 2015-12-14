@@ -71,6 +71,59 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/143-reorder_list.html">143-reorder_list</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T15:56:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reorder-list/">LeetCode Problem Link</a></p>
+<p>The O(n<sup>2</sup>) time solution would be too slow for OJ's large test case.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">reorderList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">oldNext</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ListNode</span> <span class="n">prevN</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
+            <span class="n">ListNode</span> <span class="n">curN</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">prevN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
+                <span class="n">curN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">// curN is the current tail</span>
+            <span class="n">prevN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
+            <span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+<p>The next idea is to use a Stack so the top element is always the current tail. The time complexity becomes O(n).
+But this ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/143-reorder_list.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">141-linked_list_cycle</a></h2>
                     <div>
 <footer class="post-info">
@@ -405,77 +458,6 @@ The next problem is the more difficult one.</p>
         <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
         <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// null ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/024-swap_nodes_in_pairs.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/021-merge_two_sorted_lists.html">021-merge_two_sorted_lists</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T20:23:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/merge-two-sorted-lists/">LeetCode Problem Link</a></p>
-<p>Merging two sorted linked lists.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">mergeTwoLists</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">l1</span><span class="o">,</span> <span class="n">ListNode</span> <span class="n">l2</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">l1</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">l2</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">l2</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">l1</span><span class="o">;</span>
-
-    <span class="n">ListNode</span> <span class="n">cur1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">cur2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">tail</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">cur1</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
-        <span class="n">cur1</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="o">{</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
-        <span class="n">cur2</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">cur1</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
-            <span class="n">cur1</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
-            <span class="n">cur2</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
-        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/021-merge_two_sorted_lists.html">more ...</a>
                 </div>
             </article>
             <hr/>

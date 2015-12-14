@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>143-reorder_list - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/143-reorder_list.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Linked Lists" />
+        <meta name="description" content="LeetCode Problem Link The O(n2) time solution would be too slow for OJ&#39;s large test case. public void reorderList(ListNode head) { if (head == null) return; ListNode cur = head; while (cur != null) { ListNode oldNext = cur.next; if (oldNext != null &amp;&amp; oldNext.next != null) { ListNode prevN = cur; ListNode curN = oldNext; while (curN.next != null) { prevN = curN; curN = curN.next; } // curN is the current tail prevN.next = null; cur.next = curN; curN.next = oldNext; } cur = oldNext; } } The next idea is to use a Stack so the top element is always the current tail. The time complexity becomes O(n). But this ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="143-reorder_list"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/143-reorder_list.html"/>
+        <meta property="og:description" content="LeetCode Problem Link The O(n2) time solution would be too slow for OJ&#39;s large test case. public void reorderList(ListNode head) { if (head == null) return; ListNode cur = head; while (cur != null) { ListNode oldNext = cur.next; if (oldNext != null &amp;&amp; oldNext.next != null) { ListNode prevN = cur; ListNode curN = oldNext; while (curN.next != null) { prevN = curN; curN = curN.next; } // curN is the current tail prevN.next = null; cur.next = curN; curN.next = oldNext; } cur = oldNext; } } The next idea is to use a Stack so the top element is always the current tail. The time complexity becomes O(n). But this ..."/>
+        <meta property="article:published_time" content="2015-12-13" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Linked Lists" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/143-reorder_list.html"
+                       rel="bookmark"
+                       title="Permalink to 143-reorder_list">
+                        143-reorder_list
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T15:56:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/reorder-list/">LeetCode Problem Link</a></p>
+<p>The O(n<sup>2</sup>) time solution would be too slow for OJ's large test case.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">reorderList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">oldNext</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ListNode</span> <span class="n">prevN</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
+            <span class="n">ListNode</span> <span class="n">curN</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">prevN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
+                <span class="n">curN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">// curN is the current tail</span>
+            <span class="n">prevN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
+            <span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+<p>The next idea is to use a Stack so the top element is always the current tail. The time complexity becomes O(n).
+But this uses extra memory.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">reorderList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">&gt;();</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">oldNext</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="n">ListNode</span> <span class="n">curTail</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+
+            <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">curTail</span><span class="o">;</span>
+            <span class="n">curTail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">().</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="o">}</span>
+
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+<p>Can we achieve this with O(n) time and O(1) space? Step 1: Break the list into halves, each is itself a list.
+Step 2: Reverse the second half.
+Step 3: Interleave the nodes from the two lists.</p>
+<p>To break the list into halves, we can use two pointers <tt class="docutils literal">fast</tt> and <tt class="docutils literal">slow</tt>. <tt class="docutils literal">fast</tt> takes two steps in each
+iteration and <tt class="docutils literal">slow</tt> takes only one step in each iteration. We stop the loop when <tt class="docutils literal">fast</tt> reaches the last
+node in the list. <tt class="docutils literal">slow</tt> will be the middle node in the list.</p>
+<p>These operations have all actually been done in other problems. 141-linked_list_cycle and 206-reverse_linked_list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">reorderList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">fast</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">reverseList</span><span class="o">(</span><span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">,</span> <span class="n">fast</span><span class="o">);</span>
+    <span class="n">slow</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">a</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">b</span> <span class="o">=</span> <span class="n">fast</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">a</span><span class="o">!=</span><span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">oldANext</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">oldBNext</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="n">a</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+        <span class="n">b</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oldANext</span><span class="o">;</span>
+
+        <span class="n">a</span> <span class="o">=</span> <span class="n">oldANext</span><span class="o">;</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">oldBNext</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">reverseList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">from</span><span class="o">,</span> <span class="n">ListNode</span> <span class="n">to</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">from</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">to</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
