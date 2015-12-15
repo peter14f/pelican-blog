@@ -70,6 +70,54 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/074-search_a_2d_matrix.html">074-search_a_2d_matrix</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-05T20:39:00-08:00"> Nov 05 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-a-2d-matrix/">LeetCode Problem Link</a></p>
+<p>This problem is essentially binary search in disguise. Treat the 2d matrix as if its an 1d array and simply
+transform the index in the 1d array to the correct row and column index.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">searchMatrix</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">high</span> <span class="o">=</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="o">(</span><span class="n">high</span><span class="o">-</span><span class="n">low</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">getMiddleNum</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">middle</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span><span class="o">==</span><span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// num too small</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// num too ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/074-search_a_2d_matrix.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/073-set_matrix_zeroes.html">073-set_matrix_zeroes</a></h2>
                     <div>
 <footer class="post-info">
@@ -335,54 +383,6 @@ end of the word until the length reaches <strong>maxWidth</strong>. Therefore, f
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/066-plus_one.html">066-plus_one</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-29T21:12:00-07:00"> Oct 29 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/plus-one/">LeetCode Problem Link</a></p>
-<p>The problem is simple when the input array does not just contain only the number <tt class="docutils literal">9</tt>.</p>
-<p>When you do, you have to allocate an array of size <tt class="docutils literal">n+1</tt> and set the first element to <tt class="docutils literal">1</tt>.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">plusOne</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">digits</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">digits</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">digits</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+=</span><span class="mi">1</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">digits</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="o">{</span>
-        <span class="n">digits</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="o">;</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
-                <span class="k">return</span> <span class="n">digits</span><span class="o">;</span>
-            <span class="o">}</span>
-            <span class="n">i</span><span class="o">--;</span>
-        <span class="o">}</span>
-
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">newDigits</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-
-        <span class="n">newDigits</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">newDigits</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/066-plus_one.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh9.html">&laquo;</a>
@@ -423,6 +423,8 @@ end of the word until the length reaches <strong>maxWidth</strong>. Therefore, f
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh17.html">17</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh18.html">18</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh19.html">19</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh11.html">&raquo;</a></li>
         </ul>

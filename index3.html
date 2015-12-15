@@ -70,6 +70,35 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-08T13:02:00-08:00"> Dec 08 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
+<p>This is the recursive solution. Go through all 'O's at the edge and recursive mark its connected 'O' cells to 'o'.
+These 'O's cannot be enclosed by 'X'. Once this is done, go through the board again, mark all other 'O's to 'X' and
+change 'o's to 'O's.</p>
+<p>This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping
+track of the <tt class="docutils literal">xMin</tt>, <tt class="docutils literal">xMax</tt>, <tt class="docutils literal">yMin</tt>, and <tt class="docutils literal">yMax</tt>. We can tell if the blob of 'O's are touching the edge. If not,
+they ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">129-sum_root_to_leaf_numbers</a></h2>
                     <div>
 <footer class="post-info">
@@ -349,55 +378,6 @@ any of the ways making two transactions yields more profit.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/122-best_time_to_buy_and_sell_stock_ii.html">122-best_time_to_buy_and_sell_stock_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-30T22:43:00-08:00"> Nov 30 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/">LeetCode Problem Link</a></p>
-<p>The problem is different from the previous problem 121-best_time_to_buy_and_sell_stock in that
-we are now allowed to make multiple trades. The idea is pretty much the same.</p>
-<div class="highlight"><pre><span class="c1">// multiple transactions allowed</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">buyIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">sellIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex</span><span class="o">)</span>
-                <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">];</span>
-
-            <span class="n">buyIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex</span><span class="o">)</span>
-                <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">];</span>
-
-            <span class="n">buyIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/122-best_time_to_buy_and_sell_stock_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/index2.html">&laquo;</a>
@@ -438,6 +418,8 @@ we are now allowed to make multiple trades. The idea is pretty much the same.</p
                             href="http://peter14f.github.io/pelican-blog/index17.html">17</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index18.html">18</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index19.html">19</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index4.html">&raquo;</a></li>
         </ul>
