@@ -70,6 +70,53 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">137-single_number_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-11T21:01:00-08:00"> Dec 11 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/single-number-ii/">LeetCode Problem Link</a></p>
+<p>We can use an int array to store the 32 bits.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+   <span class="kt">int</span><span class="o">[]</span> <span class="n">bits</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">32</span><span class="o">];</span>
+   <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
+           <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">+=</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">;</span>
+           <span class="k">if</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span>
+               <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
+       <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span><span class="o">);</span>
+   <span class="o">}</span>
+
+   <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>This solution uses extra memory though. The following the solution that uses 3 int variables.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">twos</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">threes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/136-single_number.html">136-single_number</a></h2>
                     <div>
 <footer class="post-info">
@@ -326,61 +373,6 @@ change 'o's to 'O's.</p>
 track of the <tt class="docutils literal">xMin</tt>, <tt class="docutils literal">xMax</tt>, <tt class="docutils literal">yMin</tt>, and <tt class="docutils literal">yMax</tt>. We can tell if the blob of 'O's are touching the edge. If not,
 they ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">129-sum_root_to_leaf_numbers</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-06T16:11:00-08:00"> Dec 06 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sum-root-to-leaf-numbers/">LeetCode Problem Link</a></p>
-<p>The nodes in the binary tree have integer values from 0 to 9.</p>
-<div class="highlight"><pre><span class="c1">// values are integers from 0 to 9 only</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">curNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">totalSum</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
-
-    <span class="n">sumNumbers</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">curNum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">curSum</span> <span class="o">=</span> <span class="n">curSum</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+=</span> <span class="n">curSum</span><span class="o">;</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-<span class="o">}</span>
-</pre></div>
-<p>Each node is visited once so the time complexity is ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">more ...</a>
                 </div>
             </article>
             <hr/>
