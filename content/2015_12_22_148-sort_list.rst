@@ -1,0 +1,165 @@
+148-sort_list
+#############
+
+:date: 2015-12-22 13:22
+:tags: Sorting, Linked Lists, Merge Sort
+:category: LeetCode
+:slug: 148-sort_list
+
+`LeetCode Problem Link <https://leetcode.com/problems/sort-list/>`_
+
+If we do merge sort using recursion, the size of the call stack can is O(log n) in the worst case. So
+this will actually not be constant space.
+
+First I will show the recursive solution. By the time the ``fast`` pointer reaches null, the ``slow`` pointer
+is at the middle. ``prev`` is the previous node of ``slow``. If we set the next pointer of ``prev`` to null, then
+we have successfully divided the linked list into halves. ``head`` is the first part of the list. ``slow`` is the
+second part of the list.
+
+.. code-block:: java
+
+    public ListNode sortList(ListNode head) {
+        return mergeSort(head);
+    }
+
+    private ListNode mergeSort(ListNode head) {
+        if (head == null)
+            return null;
+
+        if (head.next == null)
+            return head;
+
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+
+        while (fast != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != null) {
+                fast = fast.next;
+            }
+        }
+
+        ListNode a = head;
+        ListNode b = slow;
+        prev.next = null;
+
+        a = mergeSort(a);
+        b = mergeSort(b);
+
+        ListNode curA = a;
+        ListNode curB = b;
+
+        ListNode sortedHead = null;
+        ListNode sortedTail = null;
+
+        if (a.val <= b.val) {
+            sortedHead = a;
+            sortedTail = a;
+            curA = a.next;
+        }
+        else {
+            sortedHead = b;
+            sortedTail = b;
+            curB = b.next;
+        }
+
+
+
+        while (curA != null || curB != null) {
+            if (curB == null || (curA != null && curA.val <= curB.val)) {
+                sortedTail.next = curA;
+                sortedTail = curA;
+                curA = curA.next;
+                sortedTail.next = null;
+            }
+            else if (curA == null || (curB!=null && curA.val > curB.val)){
+                sortedTail.next = curB;
+                sortedTail = curB;
+                curB = curB.next;
+                sortedTail.next = null;
+            }
+        }
+
+        return sortedHead;
+    }
+
+The constant space solution is quite tricky. Please see Simon Tatham's explanation
+`here <http://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html>`_. ``k`` is a power of 2 and
+is the unit of the linked list size that we are trying merge right now.
+
+.. code-block:: java
+
+    public ListNode sortList(ListNode head) {
+        ListNode p = head;
+        int k = 1;
+
+        while (true) {
+            ListNode tail = null;
+            int numMerges = 0;
+
+            while (p != null) {
+                numMerges++;
+
+                ListNode q = p;
+                int pSize = 0;
+                int qSize = k;
+
+                while (q != null && pSize < k) {
+                    q = q.next;
+                    pSize++;
+                }
+
+                if (pSize < k) {
+                    qSize = 0;
+                }
+
+                while (pSize > 0 || (qSize > 0 && q != null)) {
+                    ListNode e = null;
+
+                    if (pSize == 0) {
+                        e = q;
+                        q = q.next;
+                        qSize--;
+                    }
+                    else if (qSize == 0 || q == null) {
+                        e = p;
+                        p = p.next;
+                        pSize--;
+                    }
+                    else if (p.val <= q.val) {
+                        e = p;
+                        p = p.next;
+                        pSize--;
+                    }
+                    else {
+                        e = q;
+                        q = q.next;
+                        qSize--;
+                    }
+
+                    if (tail == null) {
+                        head = e;
+                        tail = e;
+                    }
+                    else {
+                        tail.next = e;
+                        tail = e;
+                    }
+
+                    tail.next = null;
+                }
+
+                p = q;
+            }
+
+            if (numMerges <= 1)
+                return head;
+
+            p = head;
+            k = k * 2;
+        }
+    }
+
