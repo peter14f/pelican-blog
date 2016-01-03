@@ -2,7 +2,7 @@
 ####################
 
 :date: 2015-10-24 15:30
-:tags:
+:tags: Contiguous Subarray
 :category: LeetCode
 :slug: 053-maximum_subarray
 
