@@ -73,6 +73,49 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">146-lru_cache</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-16T19:28:00-08:00"> Dec 16 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/lru.html">LRU</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lru-cache/">LeetCode Problem Link</a></p>
+<p>LRU itself can be implemented with a doubly linked list. For constant time <tt class="docutils literal">get()</tt> and <tt class="docutils literal">set()</tt> operation,
+we must use a hashtable. The data being accessed is moved to the head. The head is the most recently accessed data.
+The tail is the last recently accessed data. When evicting an old data, remove the data at the tail node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LRUCache</span> <span class="o">{</span>
+    <span class="kd">class</span> <span class="nc">ListNode</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">next</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">prev</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">ListNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacity</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">head</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">tail</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">ListNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/145-binary_tree_postorder_traversal.html">145-binary_tree_postorder_traversal</a></h2>
                     <div>
 <footer class="post-info">
@@ -375,43 +418,6 @@ dictionary. We need to the fill in the 2D array first. And then I create a 1D bo
 <p><tt class="docutils literal">canBrea[i]</tt> is true if the substring s(i, n-1) can be partitioned into groups where all group words are
 in the dictionary. This array will be filled from right to left. And finally <tt class="docutils literal">canBreak[0 ...</tt></p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/139-word_break.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">138-copy_list_with_random_pointer</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-12T12:35:00-08:00"> Dec 12 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/copy-list-with-random-pointer/">LeetCode Problem Link</a></p>
-<p>For each node in the original list append a duplicated node.</p>
-<p>Copy the random pointer as well.</p>
-<p>This is the first pass.</p>
-<p>In the second pass, we correct the random pointers for every other node on the list. Advance the random pointers by
-one node. Notice how these random pointer point to the duplicated nodes now.</p>
-<p>In the third pass, we separate the original nodes from the duplicated nodes.</p>
-<p>Then we can simply return the head of the duplicated list.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">RandomListNode</span> <span class="nf">copyRandomList</span><span class="o">(</span><span class="n">RandomListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="n">RandomListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">RandomListNode</span> <span class="n">newListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">while ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">more ...</a>
                 </div>
             </article>
             <hr/>
