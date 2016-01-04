@@ -49,3 +49,5 @@ we can find the middle index ``m`` and throw away the sorted part of the array.
 
         return Integer.MIN_VALUE;
     }
+
+It takes O(log n) time.
