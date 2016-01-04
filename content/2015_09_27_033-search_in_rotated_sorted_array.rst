@@ -2,7 +2,7 @@
 ##################################
 
 :date: 2015-09-27 10:45
-:tags: Binary Search
+:tags: Binary Search, Rotated Sorted Array
 :category: LeetCode
 :slug: 033-search_in_rotated_sorted_array
 
