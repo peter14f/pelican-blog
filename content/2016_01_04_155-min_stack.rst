@@ -1,0 +1,48 @@
+155-min_stack
+#############
+
+:date: 2016-1-4 23:02
+:tags: Stacks
+:category: LeetCode
+:slug: 155-min_stack
+
+`LeetCode Problem Link <https://leetcode.com/problems/min-stack/>`_
+
+We can use two stacks.
+
+.. code-block:: java
+
+  public class MinStack {
+    Stack<Integer> stk;
+    Stack<Integer> min;
+
+    public MinStack() {
+      stk = new Stack<Integer>();
+      min = new Stack<Integer>();
+    }
+
+    public void push(int x) {
+      stk.push(x);
+
+      if (min.isEmpty() || x <= min.peek()) {
+        min.push(x);
+      }
+    }
+
+    public void pop() {
+      int top = stk.peek();
+
+      if (min.peek() == top)
+        min.pop();
+
+      stk.pop();
+    }
+
+    public int top() {
+      return stk.peek();
+    }
+
+    public int getMin() {
+      return min.peek();
+    }
+  }
