@@ -8,21 +8,15 @@
 
 `LeetCode Problem Link <https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/>`_
 
-
+Use a queue to store store the characters read using ``read4``.
 
 .. code-block:: java
 
-    /* The read4 API is defined in the parent class Reader4.
-          int read4(char[] buf); */
-
     public class Solution extends Reader4 {
-
-        char[] buffer;
-        int cnt;
+        Queue<Character> q;
 
         public Solution() {
-            buffer = new char[4];
-            cnt = 0;
+            this.q = new LinkedList<Character>();
         }
         /**
          * @param buf Destination buffer
@@ -30,50 +24,31 @@
          * @return    The number of characters read
          */
         public int read(char[] buf, int n) {
-            int numLeft = n;
-            int tot = 0;
+            char[] temp = new char[4];
+            int numWritten = 0; // number of chars written into buf
             boolean done = false;
-            int z=0;
 
-            while (numLeft > 0) {
-                if (cnt==0) {
-                    cnt = read4(this.buffer);
-                    if (cnt < 4)
+            while (numWritten < n) {
+                if (q.isEmpty()) {
+                    int k = read4(temp);
+
+                    if (k < 4)
                         done = true;
-                }
 
-                if (cnt > numLeft) {
-                    int i=0;
-                    int k = numLeft;
-                    for (; i<k; i++) {
-                        buf[z] = buffer[i];
-                        tot++;
-                        numLeft--;
-                        cnt--;
-                        z++;
-                    }
-
-                    if (i < 4) {
-                        for (int j=0; j<cnt; j++) {
-                            buffer[j] = buffer[i];
-                            i++;
-                        }
-                    }
-                }
-                else {
-                    int k = cnt;
                     for (int i=0; i<k; i++) {
-                        buf[z] = buffer[i];
-                        tot++;
-                        numLeft--;
-                        cnt--;
-                        z++;
+                        this.q.offer(temp[i]);
                     }
                 }
+
+                while (numWritten < n && !q.isEmpty()) {
+                    buf[numWritten] = q.poll();
+                    numWritten++;
+                }
+
                 if (done)
                     break;
             }
 
-            return tot;
+            return numWritten;
         }
     }
