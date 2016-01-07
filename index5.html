@@ -70,6 +70,37 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">128-longest_consecutive_sequence</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-05T23:04:00-08:00"> Dec 05 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-consecutive-sequence/">LeetCode Problem Link</a></p>
+<p>This problem can be done using one HashSet of integers. We first insert all the numbers in the array into
+the Hashset. Then as we go through each number in the int array, we use the HashSet to quickly look up if
+the adjacent numbers are also in the input array. If so, we remove the number from the HashSet so that
+we don't attempt to find the sequence for that number again.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestConsecutive</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/126-word_ladder_ii.html">126-word_ladder_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -351,49 +382,6 @@ Keep track of the <tt class="docutils literal">maxProfit</tt> and <tt class="doc
 </pre></div>
 
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/121-best_time_to_buy_and_sell_stock.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/120-triangle.html">120-triangle</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-30T20:00:00-08:00"> Nov 30 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dp.html">DP</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/triangle/">LeetCode Problem Link</a></p>
-<p>The triangle may contain negative numbers, so the greedy approach won't work. One could do DFS and find the
-sums of all paths, but it will time out on Large test cases. So DP is the way to go. I'm modifying the input
-List&lt;List&lt;Integer&gt;&gt;, so no extra space is needed.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minimumTotal</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">triangle</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">triangle</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">triangle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/120-triangle.html">more ...</a>
                 </div>
             </article>
             <hr/>
