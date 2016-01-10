@@ -6,7 +6,7 @@
 :category: LeetCode
 :slug: 163-missing_ranges
 
-`LeetCode Problem Link <https://leetcode.com/problems/find-peak-element/>`_
+`LeetCode Problem Link <https://leetcode.com/problems/missing-ranges/>`_
 
 This takes O(n) time.
 
