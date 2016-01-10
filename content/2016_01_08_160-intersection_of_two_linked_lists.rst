@@ -6,7 +6,7 @@
 :category: LeetCode
 :slug: 160-intersection_of_two_linked_lists
 
-`LeetCode Problem Link <https://leetcode.com/problems/one-edit-distance/>`_
+`LeetCode Problem Link <https://leetcode.com/problems/intersection-of-two-linked-lists/>`_
 
 Get the length of list A and list B first. Advance the longer list pointer such that two pointers have the same list
 lengths. Start advancing two pointers until the common node is found. This takes O(n) time and O(1) space.
