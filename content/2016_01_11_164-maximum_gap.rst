@@ -1,0 +1,110 @@
+164-maximum_gap
+###############
+
+:date: 2016-1-11 13:14
+:tags: Pigeonhole Principle
+:category: LeetCode
+:slug: 164-maximum_gap
+
+`LeetCode Problem Link <https://leetcode.com/problems/maximum-gap/>`_
+
+The problem is asking for the largest gap between two element in the sorted version of the input array.
+
+The hard part is to do in in linear time. We all know that comparison-based sorting algorithms take O(n log n) time.
+
+Let ``n`` be the size of the input array.
+
+1) In the first pass get ``max`` and ``min``.
+2) Allocate an array of ``Bucket`` of size ``n-1``.
+
+class ``Bucket`` has two fields ``max`` and ``min``.
+
+Let ``delta`` (a double) be ``(max - min) / (n-1)``
+
+Skipping ``max`` and ``min``, we have at most n-2 numbers left to place into n-1 buckets.
+
+Using the pigeonhole principe, at least one bucket will be empty. So the minimum gap between two elements in the
+sorted version of the array is at least delta.
+
+
+3) Second Pass -> For each number that's not ``max`` and not ``min``, find out which bucket it belongs to and update the bucket's max and min value if needed.
+
+4) Third Pass -> Scan the buckets array and find out gap and update ``maxGap``.
+
+.. code-block:: java
+
+    class Bucket {
+        int min;
+        int max;
+
+        public Bucket() {
+            this.min = -1;
+            this.max = -1;
+        }
+    }
+
+    public int maximumGap(int[] nums) {
+        int n = nums.length;
+
+        if (n < 2)
+            return 0;
+
+        int max = nums[0];
+        int min = nums[0];
+
+        for (int i=0; i<n; i++) {
+            max = Math.max(max, nums[i]);
+            min = Math.min(min, nums[i]);
+        }
+
+        double delta = max-min;
+        delta = delta/(n-1);
+
+        Bucket[] buckets = new Bucket[n-1];
+        for (int k=0; k<buckets.length; k++)
+            buckets[k] = new Bucket();
+
+        for (int i=0; i<n; i++) {
+            if (nums[i] == min || nums[i] == max)
+                continue;
+
+            int k = (int) ((nums[i] - min)/delta);
+
+            if (buckets[k].min == -1 || nums[i] < buckets[k].min)
+                buckets[k].min = nums[i];
+
+            if (buckets[k].max == -1 || nums[i] > buckets[k].max)
+                buckets[k].max = nums[i];
+        }
+
+        int maxGap = 0;
+        int a = min;
+        boolean inGap = false;
+
+        for (int k=0; k<buckets.length; k++) {
+            if (buckets[k].min ==-1 && buckets[k].max == -1) {
+                if (!inGap)
+                    inGap = true;
+            }
+            else {
+                if (inGap) {
+                    int gap = buckets[k].min - a;
+                    if (gap > maxGap)
+                        maxGap = gap;
+
+                    inGap = false;
+                }
+                a = buckets[k].max;
+            }
+        }
+
+        if (inGap) {
+            int gap = max - a;
+            if (gap > maxGap)
+                maxGap = gap;
+        }
+
+        return maxGap;
+    }
+
+This approach takes O(n) time and O(n) space.
