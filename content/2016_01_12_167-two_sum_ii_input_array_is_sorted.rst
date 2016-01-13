@@ -37,4 +37,4 @@ Since the input array is sorted, we can do this in O(n) time.
 
         return ans;
     }
-    
+
