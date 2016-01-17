@@ -2,7 +2,7 @@
 ############################
 
 :date: 2016-1-13 23:13
-:tags:
+:tags: Excel
 :category: LeetCode
 :slug: 168-excel_sheet_column_title
 
