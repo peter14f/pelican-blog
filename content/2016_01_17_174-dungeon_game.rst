@@ -1,0 +1,62 @@
+173-dungeon_game
+################
+
+:date: 2016-1-17 23:32
+:tags: Memoization
+:category: LeetCode
+:slug: 173-dungeon_game
+
+`LeetCode Problem Link <https://leetcode.com/problems/dungeon-game/>`_
+
+Create a 2D int array ``minLife`` of the same size of ``dungeon``. We will work backward from the
+location of the princess.
+
+.. code-block:: java
+
+    public int calculateMinimumHP(int[][] dungeon) {
+        int m = dungeon.length;
+        int n = dungeon[0].length;
+
+        int[][] minLife = new int[m][n];
+
+        if (dungeon[m-1][n-1] < 0)
+            minLife[m-1][n-1] = 1 + Math.abs(dungeon[m-1][n-1]);
+        else
+            minLife[m-1][n-1] = 1;
+
+        // last row
+        for (int col=n-2; col>=0; col--) {
+            if (dungeon[m-1][col] < 0)
+                minLife[m-1][col] = minLife[m-1][col+1] + Math.abs(dungeon[m-1][col]);
+            else if (dungeon[m-1][col] >= minLife[m-1][col+1])
+                minLife[m-1][col] = 1;
+            else
+                minLife[m-1][col] = minLife[m-1][col+1] - dungeon[m-1][col];
+        }
+
+        // last col
+        for (int row=m-2; row>=0; row--) {
+            if (dungeon[row][n-1] < 0)
+                minLife[row][n-1] = minLife[row+1][n-1] + Math.abs(dungeon[row][n-1]);
+            else if (dungeon[row][n-1] >= minLife[row+1][n-1] )
+                minLife[row][n-1] = 1;
+            else
+                minLife[row][n-1] = minLife[row+1][n-1] - dungeon[row][n-1];
+        }
+
+        for (int row=m-2; row>=0; row--) {
+            for (int col=n-2; col>=0; col--) {
+                if (dungeon[row][col] < 0)
+                    minLife[row][col] = Math.min(minLife[row+1][col], minLife[row][col+1]) +
+                    Math.abs(dungeon[row][col]);
+                else if (dungeon[row][col] >= Math.min(minLife[row+1][col], minLife[row][col+1]))
+                    minLife[row][col] = 1;
+                else
+                    minLife[row][col] = Math.min(minLife[row+1][col], minLife[row][col+1]) - dungeon[row][col];
+            }
+        }
+
+        return minLife[0][0];
+    }
+
+This takes O(mn) space and O(mn) time.
