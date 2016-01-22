@@ -12,6 +12,7 @@
 <link rel="canonical" href="http://peter14f.github.io/pelican-blog/122-best_time_to_buy_and_sell_stock_ii.html">
 
         <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Greedy Algorithm" />
         <meta name="description" content="LeetCode Problem Link The problem is different from the previous problem 121-best_time_to_buy_and_sell_stock in that we are now allowed to make multiple trades. The idea is pretty much the same. // multiple transactions allowed public int maxProfit(int[] prices) { int buyIndex = 0; int sellIndex = 0; int profit = 0; for (int i=1; i&lt;prices.length; i++) { if (prices[i] &lt; prices[buyIndex]) { if (sellIndex &gt; buyIndex) profit += prices[sellIndex] - prices[buyIndex]; buyIndex = i; sellIndex = i; } else if (prices[i] &lt; prices[sellIndex]) { if (sellIndex &gt; buyIndex) profit += prices[sellIndex] - prices[buyIndex]; buyIndex = i; sellIndex = i; } else if (prices[i] &gt; prices[buyIndex]) { sellIndex = i; } } if (sellIndex &gt; buyIndex ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -21,6 +22,7 @@
         <meta property="og:description" content="LeetCode Problem Link The problem is different from the previous problem 121-best_time_to_buy_and_sell_stock in that we are now allowed to make multiple trades. The idea is pretty much the same. // multiple transactions allowed public int maxProfit(int[] prices) { int buyIndex = 0; int sellIndex = 0; int profit = 0; for (int i=1; i&lt;prices.length; i++) { if (prices[i] &lt; prices[buyIndex]) { if (sellIndex &gt; buyIndex) profit += prices[sellIndex] - prices[buyIndex]; buyIndex = i; sellIndex = i; } else if (prices[i] &lt; prices[sellIndex]) { if (sellIndex &gt; buyIndex) profit += prices[sellIndex] - prices[buyIndex]; buyIndex = i; sellIndex = i; } else if (prices[i] &gt; prices[buyIndex]) { sellIndex = i; } } if (sellIndex &gt; buyIndex ..."/>
         <meta property="article:published_time" content="2015-11-30" />
             <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Greedy Algorithm" />
             <meta property="article:author" content="Peter Hsieh" />
 
 
@@ -94,6 +96,8 @@ Peter's Coding Notes            </a>
 
 
 
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/greedy-algorithm.html">Greedy Algorithm</a>
     
 </footer><!-- /.post-info -->                <div class="full-article">
                 <p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/">LeetCode Problem Link</a></p>
@@ -132,6 +136,24 @@ we are now allowed to make multiple trades. The idea is pretty much the same.</p
     <span class="k">return</span> <span class="n">profit</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
+<p>The previous approach turns out to be too much. We can use greedy algorithm even though we cannot
+make more than one transaction on one day. In the case of <tt class="docutils literal">[1, 2, 3, 4]</tt>, even though we are
+adding to profit three times, conseucutive addition will be counted as  one transaction. We are
+still buying at day <tt class="docutils literal">0</tt> and selling at day <tt class="docutils literal">3</tt>. So we should sell at day <tt class="docutils literal">i</tt> as long as the
+price at day <tt class="docutils literal">i</tt> is higher than the price at day <tt class="docutils literal"><span class="pre">i-1</span></tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">profit</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>This also takes O(n) time only.</p>
 
                 </div>
             </div>

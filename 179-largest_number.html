@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>179-largest_number - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/179-largest_number.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Custom Comparator" />
+        <meta name="description" content="LeetCode Problem Link This one took me quite a well. The first idea that came up to my mind is sort the numbers lexically. But this won&#39;t work for 3 and 30 for example. Trying to write a custom comparator character by character was also very difficult. In the end simply think of what makes one string greater than the aother string. If the integer a concatenated with b is larger than the interger b concatenated with a, then a is considered larger than b. class MyComparator implements Comparator&lt;String&gt; { @Override public int compare(String o1, String o2) { long ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="179-largest_number"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/179-largest_number.html"/>
+        <meta property="og:description" content="LeetCode Problem Link This one took me quite a well. The first idea that came up to my mind is sort the numbers lexically. But this won&#39;t work for 3 and 30 for example. Trying to write a custom comparator character by character was also very difficult. In the end simply think of what makes one string greater than the aother string. If the integer a concatenated with b is larger than the interger b concatenated with a, then a is considered larger than b. class MyComparator implements Comparator&lt;String&gt; { @Override public int compare(String o1, String o2) { long ..."/>
+        <meta property="article:published_time" content="2016-01-18" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Custom Comparator" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/179-largest_number.html"
+                       rel="bookmark"
+                       title="Permalink to 179-largest_number">
+                        179-largest_number
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-18T21:34:00-08:00"> Jan 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/custom-comparator.html">Custom Comparator</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/largest-number/">LeetCode Problem Link</a></p>
+<p>This one took me quite a well. The first idea that came up to my mind is sort the numbers lexically.
+But this won't work for 3 and 30 for example. Trying to write a custom comparator character by
+character was also very difficult. In the end simply think of what makes one string greater than
+the aother string. If the integer <tt class="docutils literal">a</tt> concatenated with <tt class="docutils literal">b</tt> is larger than the interger <tt class="docutils literal">b</tt>
+concatenated with <tt class="docutils literal">a</tt>, then <tt class="docutils literal">a</tt> is considered larger than <tt class="docutils literal">b</tt>.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">MyComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">o1</span><span class="o">,</span> <span class="n">String</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">o1</span> <span class="o">+</span> <span class="n">o2</span><span class="o">);</span>
+        <span class="kt">long</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">o2</span> <span class="o">+</span> <span class="n">o1</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">largestNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+
+    <span class="n">String</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="o">}</span>
+
+    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="k">new</span> <span class="n">MyComparator</span><span class="o">());</span>
+
+    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+
+    <span class="kt">boolean</span> <span class="n">beenZero</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">beenZero</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;0&quot;</span><span class="o">))</span>
+                <span class="n">beenZero</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">else</span>
+                <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">beenZero</span><span class="o">)</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
