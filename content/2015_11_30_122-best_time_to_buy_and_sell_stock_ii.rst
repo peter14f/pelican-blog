@@ -2,7 +2,7 @@
 ######################################
 
 :date: 2015-11-30 22:43
-:tags: Greedy Algorithm
+:tags: Greedy Algorithm, Best Time To Buy/Sell
 :category: LeetCode
 :slug: 122-best_time_to_buy_and_sell_stock_ii
 

@@ -2,7 +2,7 @@
 #######################################
 
 :date: 2015-12-1 17:56
-:tags: Dynamic Programming
+:tags: Dynamic Programming, Best Time To Buy/Sell
 :category: LeetCode
 :slug: 123-best_time_to_buy_and_sell_stock_iii
 
