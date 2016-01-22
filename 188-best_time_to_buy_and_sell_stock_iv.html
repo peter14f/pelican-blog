@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>188-best_time_to_buy_and_sell_stock_iv - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/188-best_time_to_buy_and_sell_stock_iv.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Best Time To Buy/Sell,Dynamic Programming" />
+        <meta name="description" content="LeetCode Problem Link Before we make any trade, our cash position is 0. Buying a stock at price p reduces our cash position to -p. Selling a stock at price z increases our cash position to (-p + z). And the final cash position we&#39;re left with is the profit we make. allPositionClosed[i][j] is the maximum cash position we have at j-th day with at most i trades and considering prices 0, ..., j. All we have is cash. When we encounter a new price at j-th day, we can choose to sell the stock at j-th day or ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="188-best_time_to_buy_and_sell_stock_iv"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/188-best_time_to_buy_and_sell_stock_iv.html"/>
+        <meta property="og:description" content="LeetCode Problem Link Before we make any trade, our cash position is 0. Buying a stock at price p reduces our cash position to -p. Selling a stock at price z increases our cash position to (-p + z). And the final cash position we&#39;re left with is the profit we make. allPositionClosed[i][j] is the maximum cash position we have at j-th day with at most i trades and considering prices 0, ..., j. All we have is cash. When we encounter a new price at j-th day, we can choose to sell the stock at j-th day or ..."/>
+        <meta property="article:published_time" content="2016-01-22" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Best Time To Buy/Sell" />
+            <meta property="article:tag" content="Dynamic Programming" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/188-best_time_to_buy_and_sell_stock_iv.html"
+                       rel="bookmark"
+                       title="Permalink to 188-best_time_to_buy_and_sell_stock_iv">
+                        188-best_time_to_buy_and_sell_stock_iv
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-22T15:19:00-08:00"> Jan 22 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/">LeetCode Problem Link</a></p>
+<p>Before we make any trade, our cash position is <tt class="docutils literal">0</tt>.
+Buying a stock at price <tt class="docutils literal">p</tt> reduces our cash position to <tt class="docutils literal"><span class="pre">-p</span></tt>.
+Selling a stock at price <tt class="docutils literal">z</tt> increases our cash position to <tt class="docutils literal"><span class="pre">(-p</span> + z)</tt>.
+And the final cash position we're left with is the profit we make.</p>
+<p><tt class="docutils literal"><span class="pre">allPositionClosed[i][j]</span></tt> is the maximum cash position we have at j-th day with at most
+<tt class="docutils literal">i</tt> trades and considering prices 0, ..., j. All we have is cash.</p>
+<p>When we encounter a new price at j-th day, we can choose to sell the stock at j-th day or
+be content with the cash position we have so far.</p>
+<p><tt class="docutils literal">minEffectOneNakedBuy</tt> is the minimum effect on the cash position when we make one buy on
+any day in the past. <tt class="docutils literal">t</tt> is the current day.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">maxProfitAsMany</span><span class="o">(</span><span class="n">prices</span><span class="o">);</span>
+
+    <span class="cm">/* before we make any trade, our cash position is 0</span>
+<span class="cm">     * buying a stock at price p reduces our cash position to -p</span>
+<span class="cm">     * selling a stock at price z increases our cash position to (-p + z)</span>
+<span class="cm">     * and the final cash position we&#39;re left with is the profit we make</span>
+<span class="cm">     */</span>
+
+    <span class="cm">/* allPositionClosed[i][j] - the max profit we have realized at j-th day with at most</span>
+<span class="cm">     * i trades, and all we hold is cash.</span>
+<span class="cm">     *</span>
+<span class="cm">     * at j-th day, we can choose to use and not use the j-th price.</span>
+<span class="cm">     *</span>
+<span class="cm">     * If we do not use the j-th price, then we have cash position allPositionClosed[i][j-1],</span>
+<span class="cm">     * i.e., yesterday&#39;s cash position.</span>
+<span class="cm">     *</span>
+<span class="cm">     * If we choose the j-th price, we must pair it with a previous naked buy position because</span>
+<span class="cm">     * we want to exit with cash and without any stocks.</span>
+<span class="cm">     *</span>
+<span class="cm">     * minEffectOneNakedBuy + prices[j] precisely does this. Here we use &quot;+&quot; because after sell,</span>
+<span class="cm">     * we keep prices[j] in pocket</span>
+<span class="cm">     *</span>
+<span class="cm">     */</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">allPositionClosed</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+    <span class="cm">/* minEffectOneNakedBuy - the minimum effect on our cash position when we hold a single</span>
+<span class="cm">     * buy position considering the prices in the past</span>
+<span class="cm">     *</span>
+<span class="cm">     * t is the current day</span>
+<span class="cm">     *</span>
+<span class="cm">     *  (remember, buy always lowers our cash position, that&#39;s why oneNakedBuyPosition is</span>
+<span class="cm">     *  initialized to -prices[0], indicated exactly by its name, after we open a naked buy,</span>
+<span class="cm">     *  it lowers our cash position to -prices[0].)</span>
+<span class="cm">     *</span>
+<span class="cm">     */</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">m</span><span class="o">&lt;=</span><span class="n">k</span><span class="o">;</span> <span class="n">m</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">minEffectOneNakedBuy</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">t</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">t</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">allPositionClosed</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">t</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">allPositionClosed</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span>
+                                               <span class="n">minEffectOneNakedBuy</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">t</span><span class="o">]);</span>
+            <span class="n">minEffectOneNakedBuy</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">minEffectOneNakedBuy</span><span class="o">,</span>
+                                            <span class="n">allPositionClosed</span><span class="o">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">t</span><span class="o">]);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">allPositionClosed</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">maxProfitAsMany</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">profit</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
