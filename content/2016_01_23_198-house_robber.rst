@@ -1,0 +1,43 @@
+198-house_robber
+################
+
+:date: 2016-1-23 17:37
+:tags: Memoization, Robbing Houses
+:category: LeetCode
+:slug: 198-house_robber
+
+`LeetCode Problem Link <https://leetcode.com/problems/house-robber/>`_
+
+The street is a straight street. What's the max profit when the street has only one house?
+Well in this case, we should rob that house. What's the max profit when the street has
+two house? We should rob the house that has more money.
+
+So when we arrive at a new house, we have a decision to make. Rob this one or not.
+If robbing the previous house and not current one yields more profit, we should not
+rob the current house.
+
+.. code-block:: java
+
+    public int rob(int[] nums) {
+        if (nums.length == 0)
+            return 0;
+        if (nums.length == 1)
+            return nums[0];
+
+        int[] moneyRobbed = new int[nums.length];
+        moneyRobbed[0] = nums[0];
+        moneyRobbed[1] = Math.max(nums[0], nums[1]);
+
+        for (int i=2; i<nums.length; i++) {
+            int a = moneyRobbed[i-2] + nums[i];
+            int b = moneyRobbed[i-1];
+
+            moneyRobbed[i] = Math.max(a, b);
+        }
+
+        return moneyRobbed[nums.length-1];
+    }
+
+Robbing all the even-indexed houses or all the odd-indexed houses won't work. Here is one example [2, 1, 1, 2].
+The ideal profit is 4. Robbing all the even-indexed houses will give you 3. Robbing all the odd-indexed houses will
+give you 3 as well.
