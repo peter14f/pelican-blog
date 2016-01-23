@@ -1,0 +1,61 @@
+190-reverse_bits
+################
+
+:date: 2016-1-22 18:41
+:tags: Bit Manipulation
+:category: LeetCode
+:slug: 190-reverse_bits
+
+`LeetCode Problem Link <https://leetcode.com/problems/reverse-bits/>`_
+
+We could do it bit by bit. ANDing the current number with 1 gives us the least significant bit.
+
+.. code-block:: java
+
+    public int reverseBits(int n) {
+        int num = 0;
+
+        for (int i=0; i<32; i++) {
+            int b = n & 1;
+            num = num | (b << (31-i));
+            n = n>>1;
+        }
+
+        return num;
+    }
+
+To shorten the number of iterations of the loop, we could do 4 bits at a time. ANDing the
+current number with 0xF gives us the least significant 4 bits.
+
+.. code-block:: java
+
+    public int reverseBitsOptimized(int n) {
+        int[] table = new int[16];
+        table[1] = 8;
+        table[2] = 4;
+        table[3] = 12;
+        table[4] = 2;
+        table[5] = 10;
+        table[6] = 6; // 0110
+        table[7] = 14; // 0111
+        table[8] = 1; // 1000
+        table[9] = 9; // 1001
+        table[10] = 5; // 1010
+        table[11] = 13; // 1011
+        table[12] = 3; // 1100
+        table[13] = 11;   // 1101
+        table[14] = 7;    // 1110
+        table[15] = 15;   // 1111
+
+        int number = 0;
+
+        for (int i=0; i<8; i++) {
+            int a = n & 0xF;
+
+            number = number | (table[a] << 4*(7-i));
+
+            n = n >> 4;
+        }
+
+        return number;
+    }
