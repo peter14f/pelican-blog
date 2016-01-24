@@ -2,176 +2,113 @@
 ######################
 
 :date: 2015-12-8 13:02
-:tags: DFS, Blob Analysis
+:tags: BFS, Blob Analysis, Connected Components
 :category: LeetCode
 :slug: 130-surrounded_regions
 
 `LeetCode Problem Link <https://leetcode.com/problems/surrounded-regions/>`_
 
-This is the recursive solution. Go through all 'O's at the edge and recursive mark its connected 'O' cells to 'o'.
-These 'O's cannot be enclosed by 'X'. Once this is done, go through the board again, mark all other 'O's to 'X' and
-change 'o's to 'O's.
+Use BFS, start from all four edges, more 'O's that are connected to all four edges to 'P'.
 
-This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping
-track of the ``xMin``, ``xMax``, ``yMin``, and ``yMax``. We can tell if the blob of 'O's are touching the edge. If not,
-they will be changed to 'X's.
+Go through the board, the remining 'O's are not connected to the edges, so they must be set to 'X'. Reset 'P's to 'O'.
+
+Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack.
+
+There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to
+remember.
 
 .. code-block:: java
 
-    public class Solution {
+    class Cell {
+        int x;
+        int y;
 
-        class BlobProperties {
-            int xMin;
-            int xMax;
-            int yMin;
-            int yMax;
+        public Cell(int row, int col) {
+            y = row;
+            x = col;
         }
+    }
 
-        /*    U
-         *  L X
-         */
+    public void solve(char[][] board) {
+        int m = board.length;
 
-        // the 2D char array contains only 'O' and 'X'
-        // Eat up all regions of 'O's that are surrounded by 'X's
-        public void solve(char[][] board) {
-            int m = board.length;
+        if (m==0)
+            return;
 
-            if (m < 1)
-                return;
+        int n = board[0].length;
 
-            int n = board[0].length;
+        if (m==1 || n==1)
+            return;
 
-            int[][] blobs = new int[m][n];
+        boolean[][] visited = new boolean[m][n];
 
-            int blobNum = 1;
-            HashMap<Integer, Integer> lookup = new HashMap<Integer, Integer>();
+        ArrayList<Cell> q = new ArrayList<Cell>();
 
-            for (int row=0; row<m; row++) {
-                for(int col=0; col<n; col++) {
-                    if (board[row][col] == 'O') {
-                        int topBlob = 0;
-                        int leftBlob = 0;
+        // first row, last row
+        for (int row=0; row < m; row=row+m-1) {
 
-                        if (row - 1 >= 0 && board[row-1][col] == 'O')
-                            topBlob = blobs[row-1][col];
-
-                        if (col - 1 >= 0 && board[row][col-1] == 'O')
-                            leftBlob = blobs[row][col-1];
-
-                        if (topBlob > 0 &&  leftBlob > 0) {
-                            int top = topBlob;
-                            int left = leftBlob;
-                            while (lookup.containsKey(top))
-                                top = lookup.get(top);
-
-                            while (lookup.containsKey(left))
-                                left = lookup.get(left);
-
-                            int smallerBlobNum = Math.min(top, left);
-
-                            blobs[row][col] = smallerBlobNum;
-
-                            if (smallerBlobNum < top)
-                                lookup.put(top, smallerBlobNum);
-                            if (smallerBlobNum < left)
-                                lookup.put(left, smallerBlobNum);
-                        }
-                        else if (topBlob == 0 && leftBlob == 0) {
-                            // use a brand new blob number
-                            blobs[row][col] = blobNum;
-                            blobNum++;
-                        }
-                        else if (topBlob > 0) {
-                            while (lookup.containsKey(topBlob))
-                                topBlob = lookup.get(topBlob);
-
-                            blobs[row][col] = topBlob;
-                        }
-                        else if (leftBlob > 0) {
-                            while (lookup.containsKey(leftBlob))
-                                leftBlob = lookup.get(leftBlob);
-
-                            blobs[row][col] = leftBlob;
-                        }
-                    }
-                }
-            }
-
-            int maxBlobNum = 0;
-
-            for (int row=0; row<m; row++) {
-                for(int col=0; col<n; col++) {
-                    if (blobs[row][col] > 0) {
-                        int b = blobs[row][col];
-
-                        while (lookup.containsKey(b))
-                            b = lookup.get(b);
-
-                        if (b > maxBlobNum)
-                            maxBlobNum = b;
-
-                        blobs[row][col] = b;
-                    }
-                }
-            }
-
-            BlobProperties[] properties = new BlobProperties[maxBlobNum];
-            for (int i=0; i<properties.length; i++) {
-                BlobProperties b = new BlobProperties();
-                b.xMax = Integer.MIN_VALUE;
-                b.yMax = Integer.MIN_VALUE;
-                b.xMin = Integer.MAX_VALUE;
-                b.yMin = Integer.MAX_VALUE;
-                properties[i] = b;
-            }
-
-            for (int row=0; row<m; row++) {
-                for(int col=0; col<n; col++) {
-                    if (blobs[row][col] > 0) {
-                        int b = blobs[row][col];
-
-                        if (row < properties[b-1].yMin)
-                            properties[b-1].yMin = row;
-                        if (row > properties[b-1].yMax)
-                            properties[b-1].yMax = row;
-                        if (col < properties[b-1].xMin)
-                            properties[b-1].xMin = col;
-                        if (col > properties[b-1].xMax)
-                            properties[b-1].xMax = col;
-                    }
-                }
-            }
-
-            for (int row=0; row<m; row++) {
-                for(int col=0; col<n; col++) {
-                    int b = blobs[row][col];
-
-                    if (b > 0) {
-                        BlobProperties prop = properties[b-1];
-                        if (prop.xMin != 0 && prop.yMin != 0 &&
-                            prop.xMax != n-1 && prop.yMax != m-1) {
-                            board[row][col] = 'X';
-                        }
-                    }
+            for (int col=0; col<n; col++) {
+                if (board[row][col] == 'O' && !visited[row][col]) {
+                    process(board, row, col, visited, q);
                 }
             }
         }
 
-
-        public static void main(String[] args) {
-
-            char[][] board = {{'O', 'O', 'O', 'O', 'X', 'X'},
-                              {'O', 'O', 'O', 'O', 'O', 'O'},
-                              {'O', 'X', 'O', 'X', 'O', 'O'},
-                              {'O', 'X', 'O', 'O', 'X', 'O'},
-                              {'O', 'X', 'O', 'X', 'O', 'O'},
-                              {'O', 'X', 'O', 'O', 'O', 'O'}};
-
-            Solution sol = new Solution();
-
-            sol.solve(board);
-
-            System.out.println(Arrays.deepToString(board));
+        // first col, last col
+        for (int col=0; col < n; col=col+n-1) {
+            for (int row=0; row<m; row++) {
+                if (board[row][col] == 'O' && !visited[row][col]) {
+                    process(board, row, col, visited, q);
+                }
+            }
         }
 
+        for (int row=0; row<m; row++) {
+            for (int col=0; col<n; col++) {
+                if (board[row][col] == 'O') {
+                    board[row][col] = 'X';
+                }
+                else if (board[row][col] == 'P') {
+                    board[row][col] = 'O';
+                }
+            }
+        }
+    }
+
+    private void process(char[][]board, int row, int col, boolean[][] visited, ArrayList<Cell> q) {
+        int m = board.length;
+        int n = board[0].length;
+
+        visited[row][col] = true;
+
+        q.add(new Cell(row, col));
+
+        while (!q.isEmpty()) {
+            Cell c = q.remove(0);
+            board[c.y][c.x] = 'P';
+
+            // up
+            if (c.y-1 >= 0 && board[c.y-1][c.x] == 'O' && !visited[c.y-1][c.x]) {
+                visited[c.y-1][c.x] = true;
+                q.add(new Cell(c.y-1, c.x));
+            }
+
+            // down
+            if (c.y+1 < m && board[c.y+1][c.x] == 'O' && !visited[c.y+1][c.x]) {
+                visited[c.y+1][c.x] = true;
+                q.add(new Cell(c.y+1, c.x));
+            }
+
+            // left
+            if (c.x-1 >= 0 && board[c.y][c.x-1] == 'O' && !visited[c.y][c.x-1]) {
+                visited[c.y][c.x-1] = true;
+                q.add(new Cell(c.y, c.x-1));
+            }
+
+            // right
+            if (c.x + 1 < n && board[c.y][c.x+1] == 'O' && !visited[c.y][c.x+1]) {
+                visited[c.y][c.x+1] = true;
+                q.add(new Cell(c.y, c.x+1));
+            }
+        }
     }
