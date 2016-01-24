@@ -71,6 +71,51 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html">116-populating_next_right_pointers_in_each_node</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-29T16:09:00-08:00"> Nov 29 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/breadth-first-search.html">Breadth First Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/distinct-subsequences/">LeetCode Problem Link</a></p>
+<p>If we were allowed using non-constant extra space, we could use the way we solved 102-binary_tree_level_order_traversal.
+Since we are allowed only constant space.</p>
+<p>We cannot use recursion either since the calls on the stack counts toward space usage as well.</p>
+<p>Here is my solution. It is basically still using BFS but since the cur nodes in the previous level have already
+been linked together, there is no need to use a list.</p>
+<div class="highlight"><pre>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span><span class="n">TreeLinkNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">TreeLinkNode</span> <span class="n">listHead</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">listHead</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">TreeLinkNode</span> <span class="n">listCur</span> <span class="o">=</span> <span class="n">listHead</span><span class="o">;</span>
+        <span class="n">TreeLinkNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">listCur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+
+
+            <span class="k">if ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/116-populating_next_right_pointers_in_each_node.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/114-flatten_binary_tree_to_linked_list.html">114-flatten_binary_tree_to_linked_list</a></h2>
                     <div>
 <footer class="post-info">
@@ -335,6 +380,8 @@ are balanced (not just the root).</p>
 
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/level-order-traversal.html">Level Order Traversal</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/">LeetCode Problem Link</a></p>
@@ -409,51 +456,6 @@ the numbers to the left belong in the left subtree and the numbers to the right 
 
     <span class="n">TreeNode ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/106-construct_binary_tree_from_inorder_and_postorder_traversal.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/105-construct_binary_tree_from_preorder_and_inorder_traversal.html">105-construct_binary_tree_from_preorder_and_inorder_traversal</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-25T21:58:00-08:00"> Nov 25 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">LeetCode Problem Link</a></p>
-<p>Use recursion. <tt class="docutils literal">preorder[pLow]</tt> is always the root. Try to find that value in <tt class="docutils literal">inorder</tt>. Once found, the numbers to
-the left belong in the left subtree and the numbers to the right belong in the right subtree.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">buildTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">inorder</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">postorder</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">inorder</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">postorder</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
-
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">inorder</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">return</span> <span class="n">buildTree</span><span class="o">(</span><span class="n">inorder</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">postorder</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="n">TreeNode</span> <span class="nf">buildTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">inorder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">iLow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">iHigh</span><span class="o">,</span>
-                           <span class="kt">int</span><span class="o">[]</span> <span class="n">postorder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pLow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pHigh</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">TreeNode</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">(</span><span class="n">postorder</span><span class="o">[</span><span class="n">pHigh</span><span class="o">]);</span>
-
-    <span class="kt">int</span> <span class="n">rootIndex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-    <span class="k">for ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/105-construct_binary_tree_from_preorder_and_inorder_traversal.html">more ...</a>
                 </div>
             </article>
             <hr/>

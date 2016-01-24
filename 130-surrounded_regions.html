@@ -12,18 +12,19 @@
 <link rel="canonical" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">
 
         <meta name="author" content="Peter Hsieh" />
-        <meta name="keywords" content="DFS,Blob Analysis" />
-        <meta name="description" content="LeetCode Problem Link This is the recursive solution. Go through all &#39;O&#39;s at the edge and recursive mark its connected &#39;O&#39; cells to &#39;o&#39;. These &#39;O&#39;s cannot be enclosed by &#39;X&#39;. Once this is done, go through the board again, mark all other &#39;O&#39;s to &#39;X&#39; and change &#39;o&#39;s to &#39;O&#39;s. This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping track of the xMin, xMax, yMin, and yMax. We can tell if the blob of &#39;O&#39;s are touching the edge. If not, they ..." />
+        <meta name="keywords" content="BFS,Blob Analysis,Connected Components" />
+        <meta name="description" content="LeetCode Problem Link Use BFS, start from all four edges, more &#39;O&#39;s that are connected to all four edges to &#39;P&#39;. Go through the board, the remining &#39;O&#39;s are not connected to the edges, so they must be set to &#39;X&#39;. Reset &#39;P&#39;s to &#39;O&#39;. Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack. There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to remember. class Cell { int x; int y; public Cell(int row ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="130-surrounded_regions"/>
         <meta property="og:url" content="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html"/>
-        <meta property="og:description" content="LeetCode Problem Link This is the recursive solution. Go through all &#39;O&#39;s at the edge and recursive mark its connected &#39;O&#39; cells to &#39;o&#39;. These &#39;O&#39;s cannot be enclosed by &#39;X&#39;. Once this is done, go through the board again, mark all other &#39;O&#39;s to &#39;X&#39; and change &#39;o&#39;s to &#39;O&#39;s. This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping track of the xMin, xMax, yMin, and yMax. We can tell if the blob of &#39;O&#39;s are touching the edge. If not, they ..."/>
+        <meta property="og:description" content="LeetCode Problem Link Use BFS, start from all four edges, more &#39;O&#39;s that are connected to all four edges to &#39;P&#39;. Go through the board, the remining &#39;O&#39;s are not connected to the edges, so they must be set to &#39;X&#39;. Reset &#39;P&#39;s to &#39;O&#39;. Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack. There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to remember. class Cell { int x; int y; public Cell(int row ..."/>
         <meta property="article:published_time" content="2015-12-08" />
             <meta property="article:section" content="LeetCode" />
-            <meta property="article:tag" content="DFS" />
+            <meta property="article:tag" content="BFS" />
             <meta property="article:tag" content="Blob Analysis" />
+            <meta property="article:tag" content="Connected Components" />
             <meta property="article:author" content="Peter Hsieh" />
 
 
@@ -98,174 +99,111 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/connected-components.html">Connected Components</a>
     
 </footer><!-- /.post-info -->                <div class="full-article">
                 <p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
-<p>This is the recursive solution. Go through all 'O's at the edge and recursive mark its connected 'O' cells to 'o'.
-These 'O's cannot be enclosed by 'X'. Once this is done, go through the board again, mark all other 'O's to 'X' and
-change 'o's to 'O's.</p>
-<p>This will pass the large test case though. The following the blob analysis solution. For each blob, we are keeping
-track of the <tt class="docutils literal">xMin</tt>, <tt class="docutils literal">xMax</tt>, <tt class="docutils literal">yMin</tt>, and <tt class="docutils literal">yMax</tt>. We can tell if the blob of 'O's are touching the edge. If not,
-they will be changed to 'X's.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+<p>Use BFS, start from all four edges, more 'O's that are connected to all four edges to 'P'.</p>
+<p>Go through the board, the remining 'O's are not connected to the edges, so they must be set to 'X'. Reset 'P's to 'O'.</p>
+<p>Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack.</p>
+<p>There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to
+remember.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
 
-    <span class="kd">class</span> <span class="nc">BlobProperties</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">xMin</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">xMax</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">yMin</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">yMax</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
     <span class="o">}</span>
+<span class="o">}</span>
 
-    <span class="cm">/*    U</span>
-<span class="cm">     *  L X</span>
-<span class="cm">     */</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">solve</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
 
-    <span class="c1">// the 2D char array contains only &#39;O&#39; and &#39;X&#39;</span>
-    <span class="c1">// Eat up all regions of &#39;O&#39;s that are surrounded by &#39;X&#39;s</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">solve</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
-            <span class="k">return</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
 
-        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">1</span> <span class="o">||</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
 
-        <span class="kt">int</span><span class="o">[][]</span> <span class="n">blobs</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+    <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
 
-        <span class="kt">int</span> <span class="n">blobNum</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lookup</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;();</span>
 
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="kt">int</span> <span class="n">topBlob</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-                    <span class="kt">int</span> <span class="n">leftBlob</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="c1">// first row, last row</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">=</span><span class="n">row</span><span class="o">+</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 
-                    <span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="o">)</span>
-                        <span class="n">topBlob</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
-
-                    <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="o">)</span>
-                        <span class="n">leftBlob</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
-
-                    <span class="k">if</span> <span class="o">(</span><span class="n">topBlob</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>  <span class="n">leftBlob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">topBlob</span><span class="o">;</span>
-                        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">leftBlob</span><span class="o">;</span>
-                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">top</span><span class="o">))</span>
-                            <span class="n">top</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">top</span><span class="o">);</span>
-
-                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">left</span><span class="o">))</span>
-                            <span class="n">left</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">left</span><span class="o">);</span>
-
-                        <span class="kt">int</span> <span class="n">smallerBlobNum</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">top</span><span class="o">,</span> <span class="n">left</span><span class="o">);</span>
-
-                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">smallerBlobNum</span><span class="o">;</span>
-
-                        <span class="k">if</span> <span class="o">(</span><span class="n">smallerBlobNum</span> <span class="o">&lt;</span> <span class="n">top</span><span class="o">)</span>
-                            <span class="n">lookup</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">top</span><span class="o">,</span> <span class="n">smallerBlobNum</span><span class="o">);</span>
-                        <span class="k">if</span> <span class="o">(</span><span class="n">smallerBlobNum</span> <span class="o">&lt;</span> <span class="n">left</span><span class="o">)</span>
-                            <span class="n">lookup</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">smallerBlobNum</span><span class="o">);</span>
-                    <span class="o">}</span>
-                    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">topBlob</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">leftBlob</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="c1">// use a brand new blob number</span>
-                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">blobNum</span><span class="o">;</span>
-                        <span class="n">blobNum</span><span class="o">++;</span>
-                    <span class="o">}</span>
-                    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">topBlob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">topBlob</span><span class="o">))</span>
-                            <span class="n">topBlob</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">topBlob</span><span class="o">);</span>
-
-                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">topBlob</span><span class="o">;</span>
-                    <span class="o">}</span>
-                    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">leftBlob</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">leftBlob</span><span class="o">))</span>
-                            <span class="n">leftBlob</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">leftBlob</span><span class="o">);</span>
-
-                        <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">leftBlob</span><span class="o">;</span>
-                    <span class="o">}</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="kt">int</span> <span class="n">maxBlobNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
-
-                    <span class="k">while</span> <span class="o">(</span><span class="n">lookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">b</span><span class="o">))</span>
-                        <span class="n">b</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
-
-                    <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="n">maxBlobNum</span><span class="o">)</span>
-                        <span class="n">maxBlobNum</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
-
-                    <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="n">BlobProperties</span><span class="o">[]</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BlobProperties</span><span class="o">[</span><span class="n">maxBlobNum</span><span class="o">];</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">properties</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">BlobProperties</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BlobProperties</span><span class="o">();</span>
-            <span class="n">b</span><span class="o">.</span><span class="na">xMax</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
-            <span class="n">b</span><span class="o">.</span><span class="na">yMax</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
-            <span class="n">b</span><span class="o">.</span><span class="na">xMin</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
-            <span class="n">b</span><span class="o">.</span><span class="na">yMin</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
-            <span class="n">properties</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
-
-                    <span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMin</span><span class="o">)</span>
-                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMin</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
-                    <span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">&gt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMax</span><span class="o">)</span>
-                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">yMax</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
-                    <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">&lt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMin</span><span class="o">)</span>
-                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMin</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
-                    <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">&gt;</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMax</span><span class="o">)</span>
-                        <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">].</span><span class="na">xMax</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">blobs</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
-
-                <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">BlobProperties</span> <span class="n">prop</span> <span class="o">=</span> <span class="n">properties</span><span class="o">[</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
-                    <span class="k">if</span> <span class="o">(</span><span class="n">prop</span><span class="o">.</span><span class="na">xMin</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">prop</span><span class="o">.</span><span class="na">yMin</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
-                        <span class="n">prop</span><span class="o">.</span><span class="na">xMax</span> <span class="o">!=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">prop</span><span class="o">.</span><span class="na">yMax</span> <span class="o">!=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="o">;</span>
-                    <span class="o">}</span>
-                <span class="o">}</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">process</span><span class="o">(</span><span class="n">board</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">visited</span><span class="o">,</span> <span class="n">q</span><span class="o">);</span>
             <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
 
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span> <span class="o">=</span> <span class="o">{{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">},</span>
-                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
-                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
-                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
-                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">},</span>
-                          <span class="o">{</span><span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">,</span> <span class="sc">&#39;O&#39;</span><span class="o">}};</span>
-
-        <span class="n">Solution</span> <span class="n">sol</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Solution</span><span class="o">();</span>
-
-        <span class="n">sol</span><span class="o">.</span><span class="na">solve</span><span class="o">(</span><span class="n">board</span><span class="o">);</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">deepToString</span><span class="o">(</span><span class="n">board</span><span class="o">));</span>
+    <span class="c1">// first col, last col</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">=</span><span class="n">col</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">process</span><span class="o">(</span><span class="n">board</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">visited</span><span class="o">,</span> <span class="n">q</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
     <span class="o">}</span>
 
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;P&#39;</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;O&#39;</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">process</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span><span class="n">board</span><span class="o">,</span> <span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">visited</span><span class="o">,</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">q</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">board</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="n">visited</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Cell</span><span class="o">(</span><span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">));</span>
+
+    <span class="k">while</span> <span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">Cell</span> <span class="n">c</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="n">board</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;P&#39;</span><span class="o">;</span>
+
+        <span class="c1">// up</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Cell</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="c1">// down</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Cell</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="c1">// left</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">1</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Cell</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="c1">// right</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">board</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;O&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">+</span><span class="mi">1</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">visited</span><span class="o">[</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">][</span><span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Cell</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">c</span><span class="o">.</span><span class="na">x</span><span class="o">+</span><span class="mi">1</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
