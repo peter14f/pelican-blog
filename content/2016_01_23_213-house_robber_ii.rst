@@ -8,7 +8,7 @@
 
 `LeetCode Problem Link <https://leetcode.com/problems/house-robber-ii/>`_
 
-Unlike the preivous problem 198-house_robber, we are not sure if robbing the first house is the right choice.
+Unlike the previous problem 198-house_robber, we are not sure if robbing the first house is the right choice.
 
 When there is only one house, of course we will still rob this one house.
 When there are two houses, like in the previous problem, we should rob the house with more money (or second one

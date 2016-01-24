@@ -2,7 +2,7 @@
 ########################################
 
 :date: 2015-11-26 13:11
-:tags: Binary Trees
+:tags: Binary Trees, Level Order Traversal
 :category: LeetCode
 :slug: 107-binary_tree_level_order_traversal_ii
 
