@@ -1,0 +1,39 @@
+202-happy_number
+################
+
+:date: 2016-1-25 18:03
+:tags:
+:category: LeetCode
+:slug: 202-happy_number
+
+`LeetCode Problem Link <https://leetcode.com/problems/happy-number/>`_
+
+I use a HashSet<Integer> to keep track of numbers that we've already seen to terminate the loop.
+
+.. code-block:: java
+
+    public boolean isHappy(int n) {
+        HashSet<Integer> seen = new HashSet<Integer>();
+
+        while (n != 1) {
+            if (seen.contains(n))
+                return false;
+            seen.add(n);
+
+            List<Integer> list = new ArrayList<Integer>();
+
+            while (n > 0) {
+                int d = n % 10;
+                list.add(d);
+                n = n / 10;
+            }
+
+            while (!list.isEmpty()) {
+                int num = list.remove(0);
+                n = n + num*num;
+            }
+        }
+
+        return true;
+    }
+    
