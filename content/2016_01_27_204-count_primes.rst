@@ -1,0 +1,55 @@
+204-count_primes
+################
+
+:date: 2016-1-25 20:19
+:tags: Prime Numbers
+:category: LeetCode
+:slug: 204-count_primes
+
+`LeetCode Problem Link <https://leetcode.com/problems/count-primes/>`_
+
+Create an boolean array of size ``n`` call it ``isPrime``. Initialize all entries in the array to ``true``.
+
+Start ``factor`` at ``2`` and loop until ``factor*factor < n``.
+
+    If ``isPrime[factor]`` is false. Continue.
+
+    Start ``multiple`` at ``factor`` until ``multiple * factor < n``.
+
+        Set ``isPrime[factor*multiple]`` to ``false``.
+
+Once this is all done. Count how many entries in ``isPrime`` is still true starting at index ``2`` of course.
+
+.. code-block:: java
+
+    public int countPrimes(int n) {
+
+        boolean[] isNotPrime = new boolean[n];
+
+        for (int i=2; i*i < n; i++) {
+
+            /* if a number has been marked not prime, its multiples must
+             * have also been marked as well
+             */
+            if (isNotPrime[i])
+                continue;
+
+            /* multiple starts at i because all multiples of smaller numbers
+             * have been marked
+             */
+            for (int mult=i; mult*i < n; mult++) {
+                if (!isNotPrime[mult*i])
+                    isNotPrime[mult*i] = true;
+            }
+        }
+
+
+        int cnt = 0;
+
+        for (int i=2; i<n; i++) {
+            if (!isNotPrime[i])
+                cnt++;
+        }
+
+        return cnt;
+    }
