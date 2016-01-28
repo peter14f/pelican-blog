@@ -5,7 +5,6 @@
 :tags: Directed Graph, Detecting Cycles in Directed Graphs, BFS, DFS
 :category: LeetCode
 :slug: 207-course_schedule
-:status: draft
 
 `LeetCode Problem Link <https://leetcode.com/problems/course-schedule/>`_
 
