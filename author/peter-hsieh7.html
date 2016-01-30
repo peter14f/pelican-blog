@@ -56,6 +56,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/trie-dfs.html">Trie, dfs</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -69,6 +72,167 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">146-lru_cache</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-16T19:28:00-08:00"> Dec 16 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/lru.html">LRU</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lru-cache/">LeetCode Problem Link</a></p>
+<p>LRU itself can be implemented with a doubly linked list. For constant time <tt class="docutils literal">get()</tt> and <tt class="docutils literal">set()</tt> operation,
+we must use a hashtable. The data being accessed is moved to the head. The head is the most recently accessed data.
+The tail is the last recently accessed data. When evicting an old data, remove the data at the tail node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LRUCache</span> <span class="o">{</span>
+    <span class="kd">class</span> <span class="nc">ListNode</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">next</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">prev</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">ListNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacity</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">head</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">tail</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">ListNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/binary_tree_traversals.html">binary_tree_traversals</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-15T17:05:00-08:00"> Dec 15 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-tree-traversals.html">Binary Tree Traversals</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>Here I will list the iterative ways to do binary tree traversals. Inorder and preorder traversals are more
+striaghtforward whereas postorder traversal is a little more tricky.</p>
+<p>Preorder traversal -</p>
+<div class="highlight"><pre>    TreeNode cur = root;
+    Stack&lt;TreeNode&gt; stk = new Stack&lt;TreeNode&gt;();
+
+    while (cur != null || !stk.isEmpty()) {
+        if (cur != null) {
+            nodes.add(cur.val);
+            stk.push(cur);
+            cur = cur.left;
+        }
+        else {
+            TreeNode top = stk.pop();
+
+            if (top.right != null) {
+                cur = top.right;
+            }
+            // else cur remains null
+        }
+    }
+
+    return nodes;
+}
+</pre></div>
+<p>Inorder traversal -</p>
+<div class="highlight"><pre>    TreeNode cur = root;
+
+    while (cur != null || !stk.isEmpty()) {
+        if (cur != null) {
+            stk.push(cur);
+            cur = cur.left;
+        }
+        else {
+            TreeNode top = stk.pop();
+            nodes.add ...</pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/binary_tree_traversals.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/145-binary_tree_postorder_traversal.html">145-binary_tree_postorder_traversal</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-14T20:57:00-08:00"> Dec 14 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-tree-traversals.html">Binary Tree Traversals</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/postorder-traversal.html">Postorder Traversal</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-postorder-traversal/">LeetCode Problem Link</a></p>
+<p>This is the hardest iterative traversal using a stack.</p>
+<p>The check <tt class="docutils literal"><span class="pre">top.right!=null</span> &amp;&amp; prev == top.left</tt> won't work because <tt class="docutils literal">top</tt> node may not have a left child.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">postorderTraversal</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="n">TreeNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">TreeNode</span> <span class="n">top</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">top</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">prev</span> <span class="o">!=</span> <span class="n">top</span><span class="o">.</span><span class="na">right</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">else</span>
+            <span class="o">{</span>
+                <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">top</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+                <span class="n">prev</span> <span class="o">=</span> <span class="n">top</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">nodes</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/145-binary_tree_postorder_traversal.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/144-binary_tree_preorder_traversal.html">144-binary_tree_preorder_traversal</a></h2>
                     <div>
@@ -289,116 +453,6 @@ no way to partition the input string <tt class="docutils literal">s</tt> into wo
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/139-word_break.html">139-word_break</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-12T17:06:00-08:00"> Dec 12 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-break/">LeetCode Problem Link</a></p>
-<p>131-palindrome_partitioning is actually a harder problem of this. Here we just need to check if each partition
-is in the dictionary. I use a 2D boolean <tt class="docutils literal">dict</tt>. <tt class="docutils literal"><span class="pre">dict[i][j]</span></tt> is true if the substring s(i, j) is in the
-dictionary. We need to the fill in the 2D array first. And then I create a 1D boolean array <tt class="docutils literal">canBreak</tt>.</p>
-<p><tt class="docutils literal">canBrea[i]</tt> is true if the substring s(i, n-1) can be partitioned into groups where all group words are
-in the dictionary. This array will be filled from right to left. And finally <tt class="docutils literal">canBreak[0 ...</tt></p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/139-word_break.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">138-copy_list_with_random_pointer</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-12T12:35:00-08:00"> Dec 12 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/copy-list-with-random-pointer/">LeetCode Problem Link</a></p>
-<p>For each node in the original list append a duplicated node.</p>
-<p>Copy the random pointer as well.</p>
-<p>This is the first pass.</p>
-<p>In the second pass, we correct the random pointers for every other node on the list. Advance the random pointers by
-one node. Notice how these random pointer point to the duplicated nodes now.</p>
-<p>In the third pass, we separate the original nodes from the duplicated nodes.</p>
-<p>Then we can simply return the head of the duplicated list.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">RandomListNode</span> <span class="nf">copyRandomList</span><span class="o">(</span><span class="n">RandomListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="n">RandomListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">RandomListNode</span> <span class="n">newListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">while ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">137-single_number_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-11T21:01:00-08:00"> Dec 11 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/single-number-ii/">LeetCode Problem Link</a></p>
-<p>We can use an int array to store the 32 bits.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-   <span class="kt">int</span><span class="o">[]</span> <span class="n">bits</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">32</span><span class="o">];</span>
-   <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
-           <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">+=</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">;</span>
-           <span class="k">if</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span>
-               <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-       <span class="o">}</span>
-   <span class="o">}</span>
-
-   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
-       <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span><span class="o">);</span>
-   <span class="o">}</span>
-
-   <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>This solution uses extra memory though. The following the solution that uses 3 int variables.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">twos</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">threes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh6.html">&laquo;</a>
@@ -451,6 +505,8 @@ one node. Notice how these random pointer point to the duplicated nodes now.</p>
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh23.html">23</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh24.html">24</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh25.html">25</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh8.html">&raquo;</a></li>
         </ul>
