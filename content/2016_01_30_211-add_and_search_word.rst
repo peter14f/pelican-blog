@@ -2,8 +2,8 @@
 #######################
 
 :date: 2016-1-30 12:08
-:tags:
-:category: Trie, DFS
+:tags: Trie, DFS
+:category: LeetCode
 :slug: 211-add_and_search_word
 
 `LeetCode Problem Link <https://leetcode.com/problems/add-and-search-word-data-structure-design/>`_
