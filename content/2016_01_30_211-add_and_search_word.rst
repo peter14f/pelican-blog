@@ -9,7 +9,7 @@
 `LeetCode Problem Link <https://leetcode.com/problems/add-and-search-word-data-structure-design/>`_
 
 Since we are told that strings contains letters from 'a' to 'z', we can should use fixed size array in
-the Trie implementation. For the wildcard character searching, I just use recurstion and DFS.
+the Trie implementation. For the wildcard character searching, I just use recursion and DFS.
 
 .. code-block:: java
 
