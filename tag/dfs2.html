@@ -57,9 +57,6 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
-                        <li >
-                            <a href="http://peter14f.github.io/pelican-blog/category/trie-dfs.html">Trie, dfs</a>
-                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -73,6 +70,102 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/120-triangle.html">120-triangle</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-30T20:00:00-08:00"> Nov 30 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dp.html">DP</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/triangle/">LeetCode Problem Link</a></p>
+<p>The triangle may contain negative numbers, so the greedy approach won't work. One could do DFS and find the
+sums of all paths, but it will time out on Large test cases. So DP is the way to go. I'm modifying the input
+List&lt;List&lt;Integer&gt;&gt;, so no extra space is needed.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minimumTotal</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">triangle</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">triangle</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">triangle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/120-triangle.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/113-path_sum_ii.html">113-path_sum_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-28T00:09:00-08:00"> Nov 28 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/path-sum-ii/">LeetCode Problem Link</a></p>
+<p>Like a lot of the NP problems, we use recursion and a current working list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">pathSum</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">path</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+        <span class="n">getPathToSum</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">path</span><span class="o">,</span> <span class="n">sum</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">getPathToSum</span><span class="o">(</span>
+        <span class="n">TreeNode</span> <span class="n">cur</span><span class="o">,</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">path</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">sum</span><span class="o">,</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">path</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+            <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">path</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">getPathToSum</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">path</span><span class="o">,</span> <span class="n">sum</span><span class="o">,</span> <span class="n">ans ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/113-path_sum_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/112-path_sum.html">112-path_sum</a></h2>
                     <div>
@@ -338,103 +431,6 @@ with a <tt class="docutils literal">remove</tt> so that the workingList maintain
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/037-sudoku_solver.html">037-sudoku_solver</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-27T10:49:00-07:00"> Sep 27 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sudoku-solver/">LeetCode Problem Link</a></p>
-<p>We will have to backtrack using a stack. Here are the information that we need when backtracking:</p>
-<div class="line-block">
-<div class="line">1) to which cell are we backtracking to?</div>
-<div class="line">2) what other numbers can we choose from now?</div>
-</div>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SIZE</span> <span class="o">=</span> <span class="mi">9</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SUBSIZE</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-
-    <span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">row</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">col</span><span class="o">;</span>
-        <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">numbers</span><span class="o">;</span>
-
-        <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">row</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">col</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
-
-            <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;();</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">SIZE</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="n">numbers</span><span class="o">.</span><span class="na">add</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="o">(</span><span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">i</span><span class="o">));</span>
-            <span class="o">}</span>
-
-            <span class="c1">// numbers already in the row</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/037-sudoku_solver.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/022-generate_parentheses.html">022-generate_parentheses</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T20:24:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/parentheses.html">Parentheses</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/generate-parentheses/">LeetCode Problem Link</a></p>
-<p>We keep track of the number of opens and number of closes left in variables <tt class="docutils literal">numOpen</tt> and <tt class="docutils literal">numClose</tt> respectively.
-We use recursion. And one thing to note is that if inserting one more close symbol causes the number of open symbols
-left to be less than the number of closes left, then we should <strong>NOT</strong> consider inserting more close symbols.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">generateParenthesis</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">numOpen</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">numClose</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
-
-    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-
-    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;(&#39;</span><span class="o">);</span>
-    <span class="n">numOpen</span><span class="o">--;</span>
-
-    <span class="n">generateParentheses</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">ans</span><span class="o">,</span> <span class="n">numOpen</span><span class="o">,</span> <span class="n">numClose</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">generateParentheses</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">sb ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/022-generate_parentheses.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">&laquo;</a>
@@ -443,7 +439,10 @@ left to be less than the number of closes left, then we should <strong>NOT</stro
                             href="http://peter14f.github.io/pelican-blog/tag/dfs.html">1</a></li>
                     <li class="active"><a
                             href="http://peter14f.github.io/pelican-blog/tag/dfs2.html">2</a></li>
-                <li class="next disabled"><a href="#">&raquo;</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/tag/dfs3.html">3</a></li>
+                <li class="next"><a
+                        href="http://peter14f.github.io/pelican-blog/tag/dfs3.html">&raquo;</a></li>
         </ul>
         </div>
     </div>
