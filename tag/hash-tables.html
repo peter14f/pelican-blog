@@ -71,6 +71,82 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/219-contains_duplicate_ii.html">219-contains_duplicate_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-01T16:32:00-08:00"> Feb 01 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/hash-tables.html">Hash Tables</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate-ii/">LeetCode Problem Link</a></p>
+<p>Sorting wouldn't work in this case because we would lose the information of where an element was originally
+stored at. So we can solve this problem in one pass with a HashMap&lt;Integer, Integer&gt;. The key is the
+element and the value is the index we last saw the element.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsNearbyDuplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lastIndex</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+
+     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">lastIndex</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+             <span class="kt">int</span> <span class="n">lastSeen</span> <span class="o">=</span> <span class="n">lastIndex</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">lastSeen</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">)</span>
+                 <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="n">lastIndex</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="k">return ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/219-contains_duplicate_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/217-contains_duplicate.html">217-contains_duplicate</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-01T15:49:00-08:00"> Feb 01 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/hash-tables.html">Hash Tables</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate/">LeetCode Problem Link</a></p>
+<p>There are two ways to do this problem. The first approach uses a HashSet&lt;Integer&gt; and can detect the duplicated
+item in one pass.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsDuplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">set</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">else</span>
+            <span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>The second way is to sort the array first and then the duplicated items will be adjacent to one another.</p>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/217-contains_duplicate.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/205-isomorphic_strings.html">205-isomorphic_strings</a></h2>
                     <div>
 <footer class="post-info">
