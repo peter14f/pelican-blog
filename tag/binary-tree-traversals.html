@@ -91,39 +91,34 @@ Peter's Coding Notes            </a>
                 <div class="summary article-summary"><p>Here I will list the iterative ways to do binary tree traversals. Inorder and preorder traversals are more
 striaghtforward whereas postorder traversal is a little more tricky.</p>
 <p>Preorder traversal -</p>
-<div class="highlight"><pre>    TreeNode cur = root;
-    Stack&lt;TreeNode&gt; stk = new Stack&lt;TreeNode&gt;();
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">preorder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
 
-    while (cur != null || !stk.isEmpty()) {
-        if (cur != null) {
-            nodes.add(cur.val);
-            stk.push(cur);
-            cur = cur.left;
-        }
-        else {
-            TreeNode top = stk.pop();
+    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
 
-            if (top.right != null) {
-                cur = top.right;
-            }
-            // else cur remains null
-        }
-    }
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">TreeNode</span> <span class="n">top</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
 
-    return nodes;
-}
+            <span class="k">if</span> <span class="o">(</span><span class="n">top</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="c1">// else cur remains null</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">nodes</span><span class="o">;</span>
+<span class="o">}</span>
 </pre></div>
 <p>Inorder traversal -</p>
-<div class="highlight"><pre>    TreeNode cur = root;
-
-    while (cur != null || !stk.isEmpty()) {
-        if (cur != null) {
-            stk.push(cur);
-            cur = cur.left;
-        }
-        else {
-            TreeNode top = stk.pop();
-            nodes.add ...</pre></div>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">inorder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/binary_tree_traversals.html">more ...</a>
                 </div>
             </article>
