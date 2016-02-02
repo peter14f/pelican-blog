@@ -29,4 +29,3 @@ element and the value is the index we last saw the element.
 
         return false;
     }
-    

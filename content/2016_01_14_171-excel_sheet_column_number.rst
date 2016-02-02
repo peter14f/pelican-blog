@@ -3,7 +3,7 @@
 
 :date: 2016-1-14 21:43
 :tags: Excel
-:category:
+:category: LeetCode
 :slug: 171-excel_sheet_column_number
 
 `LeetCode Problem Link <https://leetcode.com/problems/excel-sheet-column-number/>`_

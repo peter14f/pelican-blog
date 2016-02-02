@@ -3,7 +3,7 @@
 
 :date: 2016-1-11 17:39
 :tags:
-:category:
+:category: LeetCode
 :slug: 165-compare_version_numbers
 
 `LeetCode Problem Link <https://leetcode.com/problems/compare-version-numbers/>`_
