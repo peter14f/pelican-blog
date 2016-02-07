@@ -73,6 +73,158 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">133-clone_graph</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-09T20:57:00-08:00"> Dec 09 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/clone-graph/">LeetCode Problem Link</a></p>
+<p>Use recursion and DFS to deep copy the graph. <tt class="docutils literal">mapping</tt> is a mapping from the UndirectedGraphNode in the original
+graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
+terminate.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">UndirectedGraphNode</span> <span class="nf">cloneGraph</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;();</span>
+    <span class="n">dfsCopy</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">mapping</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsCopy</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">UndirectedGraphNode</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UndirectedGraphNode</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">label</span><span class="o">);</span>
+    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">newNode</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">neighbors</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">dfsCopy</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">mapping ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">132-palindrome_partitioning_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-09T13:11:00-08:00"> Dec 09 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning-ii/">LeetCode Problem Link</a></p>
+<p>First, build the 2D boolean array as we did in the previous problem, 131-palindrome_partitioning.</p>
+<p>Let <tt class="docutils literal">n</tt> be the length of the input string. Allocate a boolean array of size <tt class="docutils literal">n</tt> and call it <tt class="docutils literal">minCuts</tt>.</p>
+<p><tt class="docutils literal">minCuts[i]</tt> is the minimum number of ways to cut the substring starting at index <tt class="docutils literal">i</tt></p>
+<p>We will fill in the elements of this array from right to left and finally return <tt class="docutils literal">minCuts[0]</tt> as the answer
+since we are looking for the minimum number of cuts needed to partition the input string <tt class="docutils literal">s</tt> into palindromes.</p>
+<p>We will first initialize all elements to ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">131-palindrome_partitioning</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-08T19:05:00-08:00"> Dec 08 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning/">LeetCode Problem Link</a></p>
+<p><tt class="docutils literal">isPalindrome</tt> is a 2D boolean array. <tt class="docutils literal"><span class="pre">isPalindrome[i][j]</span></tt> tells us if the substring s[i..j] is a palindrome.
+Notice that we will only be filling in the upper right half of the 2D array. Once this is built, we can do a
+dfs and obtain all the parlindrone partitions.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">partition</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">partitions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">partitions</span><span class="o">;</span>
+
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">isPalindrome</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">isPalindrome</span><span class="o">[</span><span class="n">row ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-08T13:02:00-08:00"> Dec 08 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/connected-components.html">Connected Components</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
+<p>Use BFS, start from all four edges, more 'O's that are connected to all four edges to 'P'.</p>
+<p>Go through the board, the remining 'O's are not connected to the edges, so they must be set to 'X'. Reset 'P's to 'O'.</p>
+<p>Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack.</p>
+<p>There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to
+remember.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">129-sum_root_to_leaf_numbers</a></h2>
                     <div>
 <footer class="post-info">
@@ -220,193 +372,6 @@ level and the next level.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/125-valid_palindrome.html">125-valid_palindrome</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-02T22:53:00-08:00"> Dec 02 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindrome.html">Palindrome</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/valid-palindrome/">LeetCode Problem Link</a></p>
-<p>Non-alphanumeric characters are skipped. Keep two poienters <tt class="docutils literal">i</tt> and <tt class="docutils literal">j</tt>, one that starts at
-index <tt class="docutils literal">0</tt> and the other starts at index <tt class="docutils literal"><span class="pre">n-1</span></tt>.</p>
-<p>It takes O(n) time.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-
-    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">().</span><span class="na">trim</span><span class="o">();</span>
-
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-
-    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="k">if</span> <span class="o">(!</span><span class="n">isAlphaNumeric</span><span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
-            <span class="n">i</span><span class="o">++;</span>
-            <span class="k">continue</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(!</span><span class="n">isAlphaNumeric</span><span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">j</span><span class="o">]))</span> <span class="o">{</span>
-            <span class="n">j</span><span class="o">--;</span>
-            <span class="k">continue</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="n">sArr</span><span class="o">[</span><span class="n">j</span><span class="o">])</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">i</span><span class="o">++;</span>
-        <span class="n">j</span><span class="o">--;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isAlphaNumeric</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">((</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">c ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/125-valid_palindrome.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/124-binary_tree_maximum_path_sum.html">124-binary_tree_maximum_path_sum</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-01T21:02:00-08:00"> Dec 01 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">LeetCode Problem Link</a></p>
-<p>For this problem, a path must contain at least one node in the binary tree unless the</p>
-<p>I want to do DFS, but we are missing the parent link. One way we could solve this problem is build a HashMap to find
-the parent of a node and then perform DFS from each and every node. But this takes exponential time and will not pass
-the large test case on OJ.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxPathSum</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">,</span> <span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">parents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/124-binary_tree_maximum_path_sum.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/123-best_time_to_buy_and_sell_stock_iii.html">123-best_time_to_buy_and_sell_stock_iii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-01T17:56:00-08:00"> Dec 01 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/">LeetCode Problem Link</a></p>
-<p>We can make at most two transactions. That means if i goes from <tt class="docutils literal">1</tt> to <tt class="docutils literal"><span class="pre">n-2</span></tt>, we would go
-through all the possible ways to partition the prices into two groups. The first group is prices[0..i]
-and second group is prices[i+1, n-1].</p>
-<p>So here is one way we could solve the problem. We see if making one transaction yields more profit or
-any of the ways making two transactions yields more profit.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">maxProfit</span> <span class="o">=</span> <span class="n">maxProfitOne</span><span class="o">(</span><span class="n">prices</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/123-best_time_to_buy_and_sell_stock_iii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/122-best_time_to_buy_and_sell_stock_ii.html">122-best_time_to_buy_and_sell_stock_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-30T22:43:00-08:00"> Nov 30 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/greedy-algorithm.html">Greedy Algorithm</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/">LeetCode Problem Link</a></p>
-<p>The problem is different from the previous problem 121-best_time_to_buy_and_sell_stock in that
-we are now allowed to make multiple trades. The idea is pretty much the same.</p>
-<div class="highlight"><pre><span class="c1">// multiple transactions allowed</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">buyIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">sellIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex</span><span class="o">)</span>
-                <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">];</span>
-
-            <span class="n">buyIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex</span><span class="o">)</span>
-                <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">];</span>
-
-            <span class="n">buyIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/122-best_time_to_buy_and_sell_stock_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/category/leetcode9.html">&laquo;</a>
@@ -461,6 +426,8 @@ we are now allowed to make multiple trades. The idea is pretty much the same.</p
                             href="http://peter14f.github.io/pelican-blog/category/leetcode24.html">24</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode25.html">25</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode26.html">26</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode11.html">&raquo;</a></li>
         </ul>
