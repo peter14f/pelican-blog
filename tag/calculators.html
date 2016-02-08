@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Stacks - Peter's Coding Notes</title>
+    <title>Calculators - Peter's Coding Notes</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="Peter Hsieh" />
-    <meta name="keywords" content="Stacks" />
+    <meta name="keywords" content="Calculators" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -110,65 +110,6 @@ from left to right.</p>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/225-implement_stack_using_queues.html">225-implement_stack_using_queues</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-08T15:54:00-08:00"> Feb 08 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/stacks.html">Stacks</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/queues.html">Queues</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/implement-stack-using-queues/">LeetCode Problem Link</a></p>
-<p>Use two queues. Here after each operation, I always put elements back into  <tt class="docutils literal">q1</tt>.</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">MyStack</span> <span class="o">{</span>
-    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q1</span><span class="o">;</span>
-    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q2</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">MyStack</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">q1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-        <span class="n">q2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Push element x onto stack.</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">q1</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Removes the element on top of the stack.</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-            <span class="k">return</span><span class="o">;</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>
-            <span class="n">q2</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
-
-        <span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
-
-        <span class="k">while</span> <span class="o">(!</span><span class="n">q2</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-            <span class="n">q1</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">q2</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Get the top element.</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">top</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>
-            <span class="n">q2</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
-
-        <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
-        <span class="n">q2 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/225-implement_stack_using_queues.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/224-basic_calculator.html">224-basic_calculator</a></h2>
                     <div>
 <footer class="post-info">
@@ -200,64 +141,6 @@ we need to evaluate the expression from left to right.</p>
         <span class="k">if</span> <span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">sb</span><span class="o">.</span><span class="na">append ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/224-basic_calculator.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/155-min_stack.html">155-min_stack</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-04T23:02:00-08:00"> Jan 04 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/stacks.html">Stacks</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/min-stack/">LeetCode Problem Link</a></p>
-<p>We can use two stacks.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MinStack</span> <span class="o">{</span>
-  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stk</span><span class="o">;</span>
-  <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">min</span><span class="o">;</span>
-
-  <span class="kd">public</span> <span class="nf">MinStack</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="n">min</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">min</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">min</span><span class="o">.</span><span class="na">peek</span><span class="o">())</span> <span class="o">{</span>
-      <span class="n">min</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">min</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">==</span> <span class="n">top</span><span class="o">)</span>
-      <span class="n">min</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-
-    <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">top</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
-  <span class="o">}</span>
-
-  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getMin</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">min</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/155-min_stack.html">more ...</a>
                 </div>
             </article>
             <hr/>
