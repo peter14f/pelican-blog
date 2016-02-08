@@ -6,6 +6,8 @@
 :category: LeetCode
 :slug: 220-contains_duplicate_iii
 
+`LeetCode Problem Link <https://leetcode.com/problems/contains-duplicate-iii/>`_
+
 To pass this on OJ, we need a data structure that have fast retrieval time and we need to be able to
 maintain ordering. In Java, using TreeMap<Integer, Integer> is the way to go.
 

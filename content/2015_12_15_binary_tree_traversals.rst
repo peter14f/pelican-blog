@@ -12,6 +12,7 @@ striaghtforward whereas postorder traversal is a little more tricky.
 Preorder traversal -
 
 .. code-block:: java
+
     public List<Integer> preorder(TreeNode root) {
         List<Integer> nodes = new ArrayList<Integer>();
 
@@ -40,6 +41,7 @@ Preorder traversal -
 Inorder traversal -
 
 .. code-block:: java
+
     public List<Integer> inorder(TreeNode root) {
         List<Integer> nodes = new ArrayList<Integer>();
         Stack<TreeNode> stk = new Stack<TreeNode>();

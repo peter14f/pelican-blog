@@ -6,7 +6,7 @@
 :category: LeetCode
 :slug: 224-basic_calculator
 
-`LeetCode Problem Link <https://leetcode.com/problems/rectangle-area/>`_
+`LeetCode Problem Link <https://leetcode.com/problems/basic-calculator/>`_
 
 The original idea is to modify the string getting rid of 1 pair of parentheses at a time. But this gets me TLE.
 
