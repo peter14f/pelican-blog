@@ -70,6 +70,58 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/035-search_insert_position.html">035-search_insert_position</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-27T10:47:00-07:00"> Sep 27 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-insert-position/">LeetCode Problem Link</a></p>
+<p>Use binary search. If the number is not found, the <tt class="docutils literal">l</tt> pointer actually will be the correct index if the
+number were to be inserted.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">searchInsert</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="o">(</span><span class="n">h</span><span class="o">-</span><span class="n">l</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">middleNum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">middle</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">middleNum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">middle</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">middleNum</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// look in the left part</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// look in the right part</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+    <span class="c1">// not found, and now l == h + 1</span>
+    <span class="k">return</span> <span class="n">l</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/035-search_insert_position.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/034-search_for_a_range.html">034-search_for_a_range</a></h2>
                     <div>
 <footer class="post-info">
@@ -342,54 +394,6 @@ the length of the string we're trying to find (needle).</p>
     <span class="p">}</span>
     <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">needle_len ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/028-implement_strstr.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/027-remove_element.html">027-remove_element</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T20:29:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/remove-elements.html">Remove Elements</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/remove-element/">LeetCode Problem Link</a></p>
-<p>We are asked to remove elements of the specified value in the array. We must return the new length or the array.</p>
-<p>Basically we want these elements to be moved to the end of the array.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">removeElement</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">h</span><span class="o">=</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">val</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="o">==</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">h</span><span class="o">--;</span>
-    <span class="o">}</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">h</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">h</span><span class="o">];</span>
-            <span class="n">h</span><span class="o">--;</span>
-            <span class="k">while</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="o">==</span> <span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">val</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">h</span><span class="o">--;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">h</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>This method requires fewer number of writes than ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/027-remove_element.html">more ...</a>
                 </div>
             </article>
             <hr/>

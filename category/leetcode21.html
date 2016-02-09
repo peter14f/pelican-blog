@@ -73,6 +73,39 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/049_group-anagrams.html">049_group-anagrams</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-10-11T18:16:00-07:00"> Oct 11 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/anagrams.html">Anagrams</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/anagrams/">LeetCode Problem Link</a></p>
+<p>This problem just tests to see if you can lump all the anagrams together. If two words are anagrams, their sorted
+versions must be the same. OJ wants words within each inner list to be sorted lexicographically. The easiest way
+to achieve this is to sort the input string array at the very beginning.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">groupAnagrams</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">strs</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="cm">/* we sort the input array right away because OJ requires that the</span>
+<span class="cm">     * inner lists be in lexicographical order</span>
+<span class="cm">     */</span>
+    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">strs</span><span class="o">);</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">anagrams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/049_group-anagrams.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/048-rotate_image.html">048-rotate_image</a></h2>
                     <div>
 <footer class="post-info">
@@ -352,55 +385,6 @@ the right way.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/042-trapping_rain_water.html">042-trapping_rain_water</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-28T15:59:00-07:00"> Sep 28 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/water.html">water</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/trapping-rain-water/">LeetCode Problem Link</a></p>
-<p>The straightforward solution take O(n<sup>2</sup>) time.</p>
-<p>For each height at index <tt class="docutils literal">i</tt></p>
-<blockquote>
-<div class="line-block">
-<div class="line">Find its tallest left wall and its tallest right wall if available.</div>
-<div class="line">volume += Math.min(rightWall, leftWall) - height[i]</div>
-</div>
-</blockquote>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">trap</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">height</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">leftPeak</span> <span class="o">=</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-        <span class="kt">int</span> <span class="n">rightPeak</span> <span class="o">=</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-        <span class="c1">// find left peak</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">l</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">l</span><span class="o">--)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">height</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">leftPeak</span><span class="o">)</span>
-                <span class="n">leftPeak</span> <span class="o">=</span> <span class="n">height</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">leftPeak</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
-            <span class="k">continue</span><span class="o">;</span>
-
-        <span class="c1">// find right peak</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">height</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">r</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">height</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">rightPeak</span><span class="o">)</span>
-                <span class="n">rightPeak ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/042-trapping_rain_water.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/category/leetcode20.html">&laquo;</a>
@@ -457,6 +441,8 @@ the right way.</p>
                             href="http://peter14f.github.io/pelican-blog/category/leetcode25.html">25</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode26.html">26</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode27.html">27</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode22.html">&raquo;</a></li>
         </ul>
