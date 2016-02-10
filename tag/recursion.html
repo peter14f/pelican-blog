@@ -71,6 +71,40 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/230-kth_smallest_element_in_a_bst.html">230-kth_smallest_element_in_a_bst</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-10T18:27:00-08:00"> Feb 10 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">LeetCode Problem Link</a></p>
+<p>I use recursion to solve the original problem. In the method, I find the size of the left subtree first. If the left
+subtree has a size of <tt class="docutils literal">l</tt> and <tt class="docutils literal">k</tt> happens to be <tt class="docutils literal">l+1</tt>, then we know the root is the answer. If <tt class="docutils literal"><span class="pre">k&lt;=l</span></tt>, then
+we know the answer is in the left subtree. If <tt class="docutils literal">k &gt; l+1</tt>, then we know the answer is in the right subtree.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">kthSmallest</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">leftSize</span> <span class="o">=</span> <span class="n">getTreeSize</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">leftSize</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">k</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">&lt;=</span> <span class="n">leftSize</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">kthSmallest</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/230-kth_smallest_element_in_a_bst.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/227-invert_binary_tree.html">227-invert_binary_tree</a></h2>
                     <div>
 <footer class="post-info">
@@ -379,59 +413,6 @@ though.</p>
         <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
             <span class="n">getPathToSum</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">path</span><span class="o">,</span> <span class="n">sum</span><span class="o">,</span> <span class="n">ans ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/113-path_sum_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/112-path_sum.html">112-path_sum</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-27T23:34:00-08:00"> Nov 27 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/minimum-depth-of-binary-tree/">LeetCode Problem Link</a></p>
-<p>If tree is empty, return false regardless what <tt class="docutils literal">sum</tt> is. The base case is when we've reached a leaf node. If sum is
-zero, then we must have found a root-to-leaf path that sums up to the targeted sum.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasPathSum</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// leaf node</span>
-        <span class="k">return</span> <span class="n">sum</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kt">boolean</span> <span class="n">left</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">left</span> <span class="o">=</span> <span class="n">hasPathSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">sum</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">left</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-
-    <span class="kt">boolean</span> <span class="n">right</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">right</span> <span class="o">=</span> <span class="n">hasPathSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">sum</span><span class="o">);</span>
-
-    <span class="k">return ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/112-path_sum.html">more ...</a>
                 </div>
             </article>
             <hr/>
