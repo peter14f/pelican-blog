@@ -6,7 +6,7 @@
 :category: LeetCode
 :slug: 230-kth_smallest_element_in_a_bst
 
-`LeetCode Problem Link <https://leetcode.com/problems/majority-element-ii/>`_
+`LeetCode Problem Link <https://leetcode.com/problems/kth-smallest-element-in-a-bst/>`_
 
 I use recursion to solve the original problem. In the method, I find the size of the left subtree first. If the left
 subtree has a size of ``l`` and ``k`` happens to be ``l+1``, then we know the root is the answer. If ``k<=l``, then
