@@ -70,6 +70,159 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-08T13:02:00-08:00"> Dec 08 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/connected-components.html">Connected Components</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
+<p>Use BFS, start from all four edges, more 'O's that are connected to all four edges to 'P'.</p>
+<p>Go through the board, the remining 'O's are not connected to the edges, so they must be set to 'X'. Reset 'P's to 'O'.</p>
+<p>Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack.</p>
+<p>There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to
+remember.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">129-sum_root_to_leaf_numbers</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-06T16:11:00-08:00"> Dec 06 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sum-root-to-leaf-numbers/">LeetCode Problem Link</a></p>
+<p>The nodes in the binary tree have integer values from 0 to 9.</p>
+<div class="highlight"><pre><span class="c1">// values are integers from 0 to 9 only</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">curNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">totalSum</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
+
+    <span class="n">sumNumbers</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">curNum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">curSum</span> <span class="o">=</span> <span class="n">curSum</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+=</span> <span class="n">curSum</span><span class="o">;</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<p>Each node is visited once so the time complexity is ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">128-longest_consecutive_sequence</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-05T23:04:00-08:00"> Dec 05 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-consecutive-sequence/">LeetCode Problem Link</a></p>
+<p>This problem can be done using one HashSet of integers. We first insert all the numbers in the array into
+the Hashset. Then as we go through each number in the int array, we use the HashSet to quickly look up if
+the adjacent numbers are also in the input array. If so, we remove the number from the HashSet so that
+we don't attempt to find the sequence for that number again.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestConsecutive</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/126-word_ladder_ii.html">126-word_ladder_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-05T16:39:00-08:00"> Dec 05 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/find-all-shortest-paths.html">Find All Shortest Paths</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/two-way-bfs.html">Two-Way BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-ladder-ii/">LeetCode Problem Link</a></p>
+<p>We must first perform BFS find out the length of the shortest path. While doing this, we should
+save the choices at each level. When we have found the length of the shortest path and the
+choices at each level, we can then perform DFS to find all shortest paths. What info do we need
+when we perform the DFS? We must know the neighbors of each word at each level. Therefore, it is important
+that we build the neighbors as part of the BFS. I used a HashMap&lt;String, HashSet&gt; for this. The key is string ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/126-word_ladder_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/127-word_ladder.html">127-word_ladder</a></h2>
                     <div>
 <footer class="post-info">
@@ -233,200 +386,6 @@ any of the ways making two transactions yields more profit.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/122-best_time_to_buy_and_sell_stock_ii.html">122-best_time_to_buy_and_sell_stock_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-30T22:43:00-08:00"> Nov 30 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/greedy-algorithm.html">Greedy Algorithm</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/">LeetCode Problem Link</a></p>
-<p>The problem is different from the previous problem 121-best_time_to_buy_and_sell_stock in that
-we are now allowed to make multiple trades. The idea is pretty much the same.</p>
-<div class="highlight"><pre><span class="c1">// multiple transactions allowed</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">buyIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">sellIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex</span><span class="o">)</span>
-                <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">];</span>
-
-            <span class="n">buyIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex</span><span class="o">)</span>
-                <span class="n">profit</span> <span class="o">+=</span> <span class="n">prices</span><span class="o">[</span><span class="n">sellIndex</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">];</span>
-
-            <span class="n">buyIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">sellIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">sellIndex</span> <span class="o">&gt;</span> <span class="n">buyIndex ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/122-best_time_to_buy_and_sell_stock_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/121-best_time_to_buy_and_sell_stock.html">121-best_time_to_buy_and_sell_stock</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-30T22:11:00-08:00"> Nov 30 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">LeetCode Problem Link</a></p>
-<p>In this problem, we're only allowed to make one trade. That means we can only buy once at time <tt class="docutils literal">i</tt> and then
-sell once at time <tt class="docutils literal">j</tt> where <tt class="docutils literal">j&gt;i</tt>.
-Keep track of the <tt class="docutils literal">maxProfit</tt> and <tt class="docutils literal">buyIndex</tt>. Update <tt class="docutils literal">buyIndex</tt> if current price is lower than price at
-<tt class="docutils literal">buyIndex</tt>. This take O(n) time.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">maxProfit</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">buyIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">buyIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">maxProfit</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">maxProfit</span> <span class="o">=</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">buyIndex</span><span class="o">];</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">maxProfit</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>Here is another way ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/121-best_time_to_buy_and_sell_stock.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/120-triangle.html">120-triangle</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-30T20:00:00-08:00"> Nov 30 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dp.html">DP</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/triangle/">LeetCode Problem Link</a></p>
-<p>The triangle may contain negative numbers, so the greedy approach won't work. One could do DFS and find the
-sums of all paths, but it will time out on Large test cases. So DP is the way to go. I'm modifying the input
-List&lt;List&lt;Integer&gt;&gt;, so no extra space is needed.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minimumTotal</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">triangle</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">triangle</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">triangle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/120-triangle.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/119-pscals_triangle_ii.html">119-pscals_triangle_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-29T23:23:00-08:00"> Nov 29 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/pascals-triangle/">LeetCode Problem Link</a></p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">getRow</span><span class="o">(</span><span class="kt">int</span> <span class="n">rowIndex</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">prevRow</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="n">prevRow</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">rowIndex</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">prevRow</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="n">rowIndex</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">tmp</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">row</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">j</span><span class="o">==</span><span class="n">row</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">tmp</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-            <span class="o">}</span>
-            <span class="k">else</span> <span class="o">{</span>
-                <span class="n">tmp</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">prevRow</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="o">+</span> <span class="n">prevRow</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">row</span><span class="o">==</span><span class="n">rowIndex</span><span class="o">)</span>
-            <span class="k">return</span> <span class="n">tmp</span><span class="o">;</span>
-
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">prevRow</span><span class="o">;</span>
-        <span class="n">prevRow</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">prevRow</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/119-pscals_triangle_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh11.html">&laquo;</a>
@@ -485,6 +444,8 @@ List&lt;List&lt;Integer&gt;&gt;, so no extra space is needed.</p>
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh26.html">26</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh27.html">27</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh28.html">28</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh13.html">&raquo;</a></li>
         </ul>
