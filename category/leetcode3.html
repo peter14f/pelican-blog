@@ -73,6 +73,44 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/219-contains_duplicate_ii.html">219-contains_duplicate_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-01T16:32:00-08:00"> Feb 01 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/hash-tables.html">Hash Tables</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate-ii/">LeetCode Problem Link</a></p>
+<p>Sorting wouldn't work in this case because we would lose the information of where an element was originally
+stored at. So we can solve this problem in one pass with a HashMap&lt;Integer, Integer&gt;. The key is the
+element and the value is the index we last saw the element.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsNearbyDuplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lastIndex</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+
+     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">lastIndex</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+             <span class="kt">int</span> <span class="n">lastSeen</span> <span class="o">=</span> <span class="n">lastIndex</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">lastSeen</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">)</span>
+                 <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="n">lastIndex</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="k">return ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/219-contains_duplicate_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/218-the_skyline_problem.html">218-the_skyline_problem</a></h2>
                     <div>
 <footer class="post-info">
@@ -361,39 +399,6 @@ the Trie implementation. For the wildcard character searching, I just use recurs
             <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">children</span><span class="o">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">]</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
                 <span class="n">cur</span><span class="o">.</span><span class="na">children</span><span class="o">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="k">new ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/211-add_and_search_word.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/210-course_scheduel_ii.html">210-course_scheduel_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-27T18:27:00-08:00"> Jan 27 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/topological-ordering.html">Topological Ordering</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/course-schedule-ii/">LeetCode Problem Link</a></p>
-<p>I will show the BFS solution first. Like in 207-course_scheulde, we start with <strong>source nodes</strong>, nodes whose
-in-degree is zero. We insert them into a queue. The source nodes should be the classes to take last because it has
-prerequisites but no other classes depend on it. As we take out nodes from the queue, we assign the node in the right
-spot in the array at the tail. Then we remove edges coming from the node and update the in-degrees of the affected
-nodes.</p>
-<p>If the total number of nodes retrieved from the queue does not ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/210-course_scheduel_ii.html">more ...</a>
                 </div>
             </article>
             <hr/>
