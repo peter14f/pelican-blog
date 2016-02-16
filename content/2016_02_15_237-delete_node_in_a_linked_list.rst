@@ -34,4 +34,4 @@ node you want to delete. So all we can do is copy the values from the following 
         }
     }
 
-It's impossible to delete if the node given is the tail node. 
+It's impossible to delete if the node given is the tail node.

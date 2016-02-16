@@ -6,6 +6,8 @@
 :category: LeetCode
 :slug: 233-number_of_digit_one
 
+`LeetCode Problem Link <https://leetcode.com/problems/number-of-digit-one/>`_
+
 This problem is asking how many 1s are seen in non-negative integer <= ``n``.
 
 Here is the simplest solution that will get you TLE for a large ``n``.

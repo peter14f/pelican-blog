@@ -2,7 +2,7 @@
 ##################################################
 
 :date: 2016-2-13 23:28
-:tags: Binary Search Trees
+:tags: Binary Search Trees, Common Ancestor
 :category: LeetCode
 :slug: 235-lowest_common_ancestor_of_a_binary_search_tree
 
