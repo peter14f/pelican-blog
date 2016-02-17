@@ -70,6 +70,76 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/241-different_ways_to_add_parentheses.html">241-different_ways_to_add_parentheses</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-16T22:39:00-08:00"> Feb 16 2016</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/different-ways-to-add-parentheses/">LeetCode Problem Link</a></p>
+<p>The solution to this problem turns out to be very similar to the recursive solution to
+095-unique_binary_search_tree_ii.</p>
+<p>Note that the current test cases seems to assume that the integers in the string are all single digit integers.</p>
+<div class="highlight"><pre><span class="c1">// the test cases assumes that the numbers are all one-digit itegers</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">diffWaysToCompute</span><span class="o">(</span><span class="n">String</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">input</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">input</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">input</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;+&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;-&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39;*&#39;</span><span class="o">)</span>
+            <span class="k">continue</span><span class="o">;</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">leftResults</span> <span class="o">=</span> <span class="n">diffWaysToCompute</span><span class="o">(</span><span class="n">input</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">i</span><span class="o">));</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">rightResults ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/241-different_ways_to_add_parentheses.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/240-search_a_2d_matrix_ii.html">240-search_a_2d_matrix_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-16T21:58:00-08:00"> Feb 16 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/2d-matrix.html">2D Matrix</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-a-2d-matrix-ii/">LeetCode Problem Link</a></p>
+<p>Let <tt class="docutils literal">m</tt> be the number of rows and <tt class="docutils literal">n</tt> be the number of columns.</p>
+<p>Solution 1: O(n+m) time</p>
+<p>I'm starting at the lower-left corner, but this should work if you start at the upper-right corner as well.
+In the worst case, the element is not in the matrix and you have to walk to the opposite corner to find that out.
+So  a total of <tt class="docutils literal">(n + m)</tt> steps need to be taken.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">searchMatrix</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">matrix</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/240-search_a_2d_matrix_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/239-sliding_window_maximum.html">239-sliding_window_maximum</a></h2>
                     <div>
 <footer class="post-info">
@@ -320,113 +390,6 @@ share the same parent. Note that <tt class="docutils literal">findNode()</tt> re
 <p>The second solution uses recursion and no extra space. But technically the functions calls on the call stack
 should still count toward the memory usage. So this ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/234-palindrome_linked_list.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/233-number_of_digit_one.html">233-number_of_digit_one</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-11T19:36:00-08:00"> Feb 11 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/math.html">Math</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/number-of-digit-one/">LeetCode Problem Link</a></p>
-<p>This problem is asking how many 1s are seen in non-negative integer &lt;= <tt class="docutils literal">n</tt>.</p>
-<p>Here is the simplest solution that will get you TLE for a large <tt class="docutils literal">n</tt>.</p>
-<div class="highlight"><pre><span class="kd">private</span> <span class="kt">int</span> <span class="nf">countOnes</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">((</span><span class="n">n</span> <span class="o">%</span> <span class="mi">10</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span>
-            <span class="n">num</span><span class="o">++;</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">num</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">countDigitOne</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">countOnes</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
-        <span class="n">sum</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
-        <span class="n">n</span><span class="o">--;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>In the following solution, I am counting the number of non-negative integers less than or equal to <tt class="docutils literal">n</tt> that
-has a 1 at each digit. We are starting from ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/233-number_of_digit_one.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/232-implement_queue_using_stacks.html">232-implement_queue_using_stacks</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-11T11:22:00-08:00"> Feb 11 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/stacks.html">Stacks</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/queues.html">Queues</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/implement-queue-using-stacks/">LeetCode Problem Link</a></p>
-<p>Use two stacks. After each queue operation, I make sure that elements end up in <tt class="docutils literal">stk1</tt>.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyQueue</span> <span class="o">{</span>
-    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stk1</span><span class="o">;</span>
-    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stk2</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">MyQueue</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">stk1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-        <span class="n">stk2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Push element x to the back of queue.</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">stk1</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Removes the element from in front of queue.</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">stk1</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">stk2</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">stk1</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span>
-        <span class="o">}</span>
-        <span class="n">stk1</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-        <span class="k">while</span> <span class="o">(!</span><span class="n">stk2</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">stk1</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">stk2</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Get the front element.</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">peek</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">ret</span><span class="o">;</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">stk1</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">stk2</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">stk1</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span>
-        <span class="o">}</span>
-
-        <span class="n">ret ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/232-implement_queue_using_stacks.html">more ...</a>
                 </div>
             </article>
             <hr/>

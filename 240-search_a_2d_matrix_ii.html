@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>240-search_a_2d_matrix_ii - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/240-search_a_2d_matrix_ii.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="2D Matrix" />
+        <meta name="description" content="LeetCode Problem Link Let m be the number of rows and n be the number of columns. Solution 1: O(n+m) time I&#39;m starting at the lower-left corner, but this should work if you start at the upper-right corner as well. In the worst case, the element is not in the matrix and you have to walk to the opposite corner to find that out. So a total of (n + m) steps need to be taken. public boolean searchMatrix(int[][] matrix, int target) { if (matrix.length == 0) return false; int m = matrix.length; int n = matrix[0].length ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="240-search_a_2d_matrix_ii"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/240-search_a_2d_matrix_ii.html"/>
+        <meta property="og:description" content="LeetCode Problem Link Let m be the number of rows and n be the number of columns. Solution 1: O(n+m) time I&#39;m starting at the lower-left corner, but this should work if you start at the upper-right corner as well. In the worst case, the element is not in the matrix and you have to walk to the opposite corner to find that out. So a total of (n + m) steps need to be taken. public boolean searchMatrix(int[][] matrix, int target) { if (matrix.length == 0) return false; int m = matrix.length; int n = matrix[0].length ..."/>
+        <meta property="article:published_time" content="2016-02-16" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="2D Matrix" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/240-search_a_2d_matrix_ii.html"
+                       rel="bookmark"
+                       title="Permalink to 240-search_a_2d_matrix_ii">
+                        240-search_a_2d_matrix_ii
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-16T21:58:00-08:00"> Feb 16 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/2d-matrix.html">2D Matrix</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/search-a-2d-matrix-ii/">LeetCode Problem Link</a></p>
+<p>Let <tt class="docutils literal">m</tt> be the number of rows and <tt class="docutils literal">n</tt> be the number of columns.</p>
+<p>Solution 1: O(n+m) time</p>
+<p>I'm starting at the lower-left corner, but this should work if you start at the upper-right corner as well.
+In the worst case, the element is not in the matrix and you have to walk to the opposite corner to find that out.
+So  a total of <tt class="docutils literal">(n + m)</tt> steps need to be taken.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">searchMatrix</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">matrix</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// too small</span>
+            <span class="n">col</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// too big</span>
+            <span class="n">row</span><span class="o">--;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>There is also the divide-and-conquer approach. You break the matrix into 4 parts: upper-left, upper-right,
+lower-left, and lower-right. At the first few attempts, I keep getting stack overflows due to never ending
+recursive calls. I suggest drawing out the rectangles and labeling each rectangles not thrown away as
+A, B, and C.</p>
+<p>The recurrence relation is <tt class="docutils literal">T(nm) = 3T(nm/4) + c</tt>. Since we are throwing away a quarter of the input at a time,
+the time complexity is not quite O(log (nm)).</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">searchMatrix</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">matrix</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">search</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">search</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">beginRow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">endRow</span><span class="o">,</span>
+                       <span class="kt">int</span> <span class="n">beginCol</span><span class="o">,</span> <span class="kt">int</span> <span class="n">endCol</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">beginRow</span> <span class="o">&gt;</span> <span class="n">endRow</span> <span class="o">||</span> <span class="n">beginCol</span> <span class="o">&gt;</span> <span class="n">endCol</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">beginRow</span> <span class="o">+</span> <span class="o">(</span><span class="n">endRow</span> <span class="o">-</span> <span class="n">beginRow</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">beginCol</span> <span class="o">+</span> <span class="o">(</span><span class="n">endCol</span> <span class="o">-</span> <span class="n">beginCol</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// too big</span>
+        <span class="k">return</span> <span class="n">search</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">beginRow</span><span class="o">,</span> <span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">endCol</span><span class="o">,</span> <span class="n">target</span><span class="o">)</span> <span class="o">||</span>
+                <span class="n">search</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">beginRow</span><span class="o">,</span> <span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">beginCol</span><span class="o">,</span> <span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">)</span> <span class="o">||</span>
+                <span class="n">search</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">endRow</span><span class="o">,</span> <span class="n">beginCol</span><span class="o">,</span> <span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// too small</span>
+        <span class="k">return</span> <span class="n">search</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">beginRow</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">endCol</span><span class="o">,</span> <span class="n">target</span><span class="o">)</span> <span class="o">||</span>
+                <span class="n">search</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">endRow</span><span class="o">,</span> <span class="n">col</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">endCol</span><span class="o">,</span> <span class="n">target</span><span class="o">)</span> <span class="o">||</span>
+                <span class="n">search</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">endRow</span><span class="o">,</span> <span class="n">beginCol</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">target</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

@@ -73,6 +73,35 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">142-linked_list_cycle_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T15:38:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle-ii/">LeetCode Problem Link</a></p>
+<p>The implementation for this problem is not difficult. Once <tt class="docutils literal">fast</tt> catches up with <tt class="docutils literal">slow</tt>, at location <tt class="docutils literal">x</tt>.
+We set <tt class="docutils literal">cur</tt> to the head of the list and then try to advance both <tt class="docutils literal">x</tt> and <tt class="docutils literal">cur</tt> at the same rate.
+The location where <tt class="docutils literal">x</tt> meets with <tt class="docutils literal">cur</tt> is the start of the cycle.</p>
+<p>We can show why this is the case with some modular arithmetic. Let's say it takes <tt class="docutils literal">x</tt> steps for <tt class="docutils literal">slow</tt> to
+reach the start of the cycle at which point <tt class="docutils literal">fast</tt> has take <tt class="docutils literal">2x</tt> steps in total and has taken <tt class="docutils literal">x</tt> steps
+since it ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">141-linked_list_cycle</a></h2>
                     <div>
 <footer class="post-info">
@@ -331,51 +360,6 @@ In the first loop, set the current number of candy to the previous + 1 if the cu
 previous rating. Otherwise set <tt class="docutils literal">numCandy[i]</tt> to 1.</p>
 <p>Int the second loop, if the ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/135-candy.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/134-gas_station.html">134-gas_station</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-09T21:20:00-08:00"> Dec 09 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>My first attempt is a O(n<sup>2</sup>) time solution. Basically start at each possible starting location and
-then try to go around the circle. This won't pass the large test case on OJ though.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">canCompleteCircuit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">gas</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">cost</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">gas</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">start</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">start</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">tank</span> <span class="o">=</span> <span class="n">gas</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
-        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">tank</span> <span class="o">&gt;=</span> <span class="n">cost</span><span class="o">[</span><span class="n">cur</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">tank</span> <span class="o">=</span> <span class="n">tank</span> <span class="o">-</span> <span class="n">cost</span><span class="o">[</span><span class="n">cur</span><span class="o">];</span>
-            <span class="n">cur</span><span class="o">++;</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">n</span><span class="o">)</span>
-                <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">==</span><span class="n">start</span><span class="o">)</span>
-                <span class="k">return</span> <span class="n">start</span><span class="o">;</span>
-
-            <span class="n">tank</span> <span class="o">+=</span> <span class="n">gas</span><span class="o">[</span><span class="n">cur</span><span class="o">];</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>My guess is that we will have to come up with a O(n) time ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/134-gas_station.html">more ...</a>
                 </div>
             </article>
             <hr/>

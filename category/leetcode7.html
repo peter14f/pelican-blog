@@ -73,6 +73,37 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/179-largest_number.html">179-largest_number</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-18T21:34:00-08:00"> Jan 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/custom-comparator.html">Custom Comparator</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/largest-number/">LeetCode Problem Link</a></p>
+<p>This one took me quite a well. The first idea that came up to my mind is sort the numbers lexically.
+But this won't work for 3 and 30 for example. Trying to write a custom comparator character by
+character was also very difficult. In the end simply think of what makes one string greater than
+the aother string. If the integer <tt class="docutils literal">a</tt> concatenated with <tt class="docutils literal">b</tt> is larger than the interger <tt class="docutils literal">b</tt>
+concatenated with <tt class="docutils literal">a</tt>, then <tt class="docutils literal">a</tt> is considered larger than <tt class="docutils literal">b</tt>.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">MyComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">o1</span><span class="o">,</span> <span class="n">String</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/179-largest_number.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/173-dungeon_game.html">173-dungeon_game</a></h2>
                     <div>
 <footer class="post-info">
@@ -361,47 +392,6 @@ element ...</strong></p>
 </pre></div>
 
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/168-excel_sheet_column_title.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/166-fraction_to_recurring_decimal.html">166-fraction_to_recurring_decimal</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-12T18:20:00-08:00"> Jan 12 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/division.html">Division</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/fraction-to-recurring-decimal/">LeetCode Problem Link</a></p>
-<p>The key is use a HashMap where the key is the remainder and the value is the decimal position in which the remainder is
-generated.</p>
-<p>And every time we are dealing with division, we always need to take of overflowing and the sign of the result.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">fractionToDecimal</span><span class="o">(</span><span class="kt">int</span> <span class="n">numerator</span><span class="o">,</span> <span class="kt">int</span> <span class="n">denominator</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-
-    <span class="kt">long</span> <span class="n">remainder</span> <span class="o">=</span> <span class="n">numerator</span><span class="o">;</span>
-    <span class="kt">long</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">denominator</span><span class="o">;</span>
-    <span class="kt">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="kt">boolean</span> <span class="n">empty</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="kt">boolean</span> <span class="n">recurring</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">dict</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="n">StringBuffer</span> <span class="n">decimalNum</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">position</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">remainder</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">denom</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">negative</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="n">remainder</span> <span class="o">=</span> <span class="o">-</span><span class="n">remainder</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">else ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/166-fraction_to_recurring_decimal.html">more ...</a>
                 </div>
             </article>
             <hr/>
