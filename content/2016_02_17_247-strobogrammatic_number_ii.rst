@@ -2,7 +2,7 @@
 #############################
 
 :date: 2016-2-17 14:58
-:tags: Strobogrammatic Numbers
+:tags: Strobogrammatic Numbers, Recursion, Buttom-Up, Memoization
 :category: LeetCode
 :slug: 247-strobogrammatic_number_ii
 
@@ -72,4 +72,10 @@ and the cases where leading zeros are not allowed.
 
         return ans;
     }
+
+We can also solve this using the buttom-up approach with memoization. There is no clear advange in doing it this way
+for this problem. But you will see when you have to in 248-strobogrammatic_number_iii get the list for two different
+values of ``n``, avoiding recomputation helps tremendously.
+
+
 
