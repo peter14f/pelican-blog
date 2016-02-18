@@ -90,9 +90,44 @@ won't be considered overlapping.
 
 Found another solution online where we don't have to create a Edge class. Instead, we simply store the start times
 in one list and the end times in another. Both lists need to be sorted, and then we use two pointers ``i`` and ``j`` to
-traverse the two lists and to decide the number of overlaps.
+traverse the two lists and to decide the number of overlaps. We also don't need a custom comparator in this case since
+we are just sorting Integers.
 
+.. code-block:: java
 
+    public int minMeetingRooms(Interval[] intervals) {
 
+        List<Integer> startTimes = new ArrayList<Integer>();
+        List<Integer> endTimes = new ArrayList<Integer>();
 
+        for (int i=0; i<intervals.length; i++) {
+            startTimes.add(intervals[i].start);
+            endTimes.add(intervals[i].end);
+        }
 
+        Collections.sort(startTimes);
+        Collections.sort(endTimes);
+
+        int i=0;
+        int j=0;
+
+        int maxRoomsNeeded = 0;
+        int curRoomsNeeded = 0;
+
+        while (i<startTimes.size() && j < endTimes.size()) {
+            if (startTimes.get(i) < endTimes.get(j)) {
+                curRoomsNeeded++;
+
+                if (curRoomsNeeded > maxRoomsNeeded)
+                    maxRoomsNeeded = curRoomsNeeded;
+
+                i++;
+            }
+            else {
+                curRoomsNeeded--;
+                j++;
+            }
+        }
+
+        return maxRoomsNeeded;
+    }
