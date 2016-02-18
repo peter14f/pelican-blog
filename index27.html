@@ -70,6 +70,49 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/026-remove_duplicates_from_sorted_array.html">026-remove_duplicates_from_sorted_array</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T20:28:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/remove-duplicates.html">Remove Duplicates</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorted-array.html">Sorted Array</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-nodes-in-k-group/">LeetCode Problem Link</a></p>
+<p>The solution I came up with is to simply overwrite the array as we go.</p>
+<p><tt class="docutils literal">i</tt> should start at 1 as nums[0] must be the smallest number.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">removeDuplicates</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">i</span><span class="o">++;</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/026-remove_duplicates_from_sorted_array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/025-reverse_nodes_in_k_group.html">025-reverse_nodes_in_k_group</a></h2>
                     <div>
 <footer class="post-info">
@@ -392,48 +435,6 @@ In the first pass, I count the number of nodes. In the second pass, I skip the n
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/018-4sum.html">018-4sum</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T20:20:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/x-sum.html">X-Sum</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/4sum/">LeetCode Problem Link</a></p>
-<div class="line-block">
-<div class="line">Sort the array first as we do in other X-Sum problems.</div>
-<div class="line">In method <tt class="docutils literal">threeSum</tt>, notice that I insert 4 numbers in the ArrayList.</div>
-<div class="line">The first one is actually just a place holder.</div>
-<div class="line">We will actually replace the first number in <tt class="docutils literal">fourSum</tt>.</div>
-<div class="line">This will prevent inserting at the front of an ArrayList.</div>
-</div>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">fourSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">nums</span><span class="o">);</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-
-        <span class="kt">int</span> <span class="n">smallest</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="n">smallest</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">continue</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">threeSumAns ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/018-4sum.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/index26.html">&laquo;</a>
@@ -496,6 +497,8 @@ In the first pass, I count the number of nodes. In the second pass, I skip the n
                             href="http://peter14f.github.io/pelican-blog/index28.html">28</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index29.html">29</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index30.html">30</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index28.html">&raquo;</a></li>
         </ul>
