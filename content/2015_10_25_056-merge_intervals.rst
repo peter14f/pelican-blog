@@ -2,7 +2,7 @@
 ###################
 
 :date: 2015-10-25 22:40
-:tags:  Custom Comparators
+:tags:  Custom Comparators, Checking Interval Overlaps
 :category: LeetCode
 :slug: 056-merge_intervals
 

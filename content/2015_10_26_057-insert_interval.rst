@@ -2,13 +2,13 @@
 ###################
 
 :date: 2015-10-26 12:41
-:tags:
+:tags: Checking Interval Overlaps
 :category: LeetCode
 :slug: 057-insert_interval
 
 `LeetCode Problem Link <https://leetcode.com/problems/insert-interval/>`_
 
-As shown in the exmaple, the interval being inserted may overlap with multiple intervals.
+As shown in the example, the interval being inserted may overlap with multiple intervals.
 Or the interval being inserted may NOT overlap with any existing interval in the list.
 
 I use the pointers ``start`` and ``end`` to mark the first and last interval that overlap with the
