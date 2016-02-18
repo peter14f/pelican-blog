@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>247-strobogrammatic_number_ii - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/247-strobogrammatic_number_ii.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Strobogrammatic Numbers,Recursion,Buttom-Up,Memoization" />
+        <meta name="description" content="LeetCode Problem Link The tests does not allow leading zeros. So we must distinguish the cases where leading zeros are allowed and the cases where leading zeros are not allowed. public List&lt;String&gt; findStrobogrammatic(int n) { return findStrobogrammatic(n, false); } private List&lt;String&gt; findStrobogrammatic(int n, boolean leadingZero) { List&lt;String&gt; ans = new ArrayList&lt;String&gt;(); if (n &lt;= 0) return ans; if (n==1) { // single digit strobogrammatic characters are &#39;0&#39;, &#39;1&#39;, &#39;8&#39; ans.add(&#34;0&#34;); ans.add(&#34;1&#34;); ans.add(&#34;8&#34;); return ans; } if (n==2) { if (leadingZero) ans.add(&#34;00&#34;); ans.add(&#34;11&#34;); ans.add(&#34;69&#34;); ans.add(&#34;88&#34;); ans.add ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="247-strobogrammatic_number_ii"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/247-strobogrammatic_number_ii.html"/>
+        <meta property="og:description" content="LeetCode Problem Link The tests does not allow leading zeros. So we must distinguish the cases where leading zeros are allowed and the cases where leading zeros are not allowed. public List&lt;String&gt; findStrobogrammatic(int n) { return findStrobogrammatic(n, false); } private List&lt;String&gt; findStrobogrammatic(int n, boolean leadingZero) { List&lt;String&gt; ans = new ArrayList&lt;String&gt;(); if (n &lt;= 0) return ans; if (n==1) { // single digit strobogrammatic characters are &#39;0&#39;, &#39;1&#39;, &#39;8&#39; ans.add(&#34;0&#34;); ans.add(&#34;1&#34;); ans.add(&#34;8&#34;); return ans; } if (n==2) { if (leadingZero) ans.add(&#34;00&#34;); ans.add(&#34;11&#34;); ans.add(&#34;69&#34;); ans.add(&#34;88&#34;); ans.add ..."/>
+        <meta property="article:published_time" content="2016-02-17" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Strobogrammatic Numbers" />
+            <meta property="article:tag" content="Recursion" />
+            <meta property="article:tag" content="Buttom-Up" />
+            <meta property="article:tag" content="Memoization" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/247-strobogrammatic_number_ii.html"
+                       rel="bookmark"
+                       title="Permalink to 247-strobogrammatic_number_ii">
+                        247-strobogrammatic_number_ii
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-17T14:58:00-08:00"> Feb 17 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/strobogrammatic-numbers.html">Strobogrammatic Numbers</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/buttom-up.html">Buttom-Up</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/strobogrammatic-number-ii/">LeetCode Problem Link</a></p>
+<p>The tests does not allow leading zeros. So we must distinguish the cases where leading zeros are allowed
+and the cases where leading zeros are not allowed.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findStrobogrammatic</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">findStrobogrammatic</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findStrobogrammatic</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">leadingZero</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// single digit strobogrammatic characters are &#39;0&#39;, &#39;1&#39;, &#39;8&#39;</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;0&quot;</span><span class="o">);</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;1&quot;</span><span class="o">);</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;8&quot;</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">leadingZero</span><span class="o">)</span>
+            <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;00&quot;</span><span class="o">);</span>
+
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;11&quot;</span><span class="o">);</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;69&quot;</span><span class="o">);</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;88&quot;</span><span class="o">);</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;96&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strs</span> <span class="o">=</span> <span class="n">findStrobogrammatic</span><span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">left</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">leadingZero</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">left</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;0&#39;</span><span class="o">);</span>
+        <span class="n">right</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;0&#39;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">left</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;1&#39;</span><span class="o">);</span>
+    <span class="n">right</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;1&#39;</span><span class="o">);</span>
+    <span class="n">left</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;6&#39;</span><span class="o">);</span>
+    <span class="n">right</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;9&#39;</span><span class="o">);</span>
+    <span class="n">left</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;8&#39;</span><span class="o">);</span>
+    <span class="n">right</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;8&#39;</span><span class="o">);</span>
+    <span class="n">left</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;9&#39;</span><span class="o">);</span>
+    <span class="n">right</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="sc">&#39;6&#39;</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">:</span> <span class="n">strs</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">left</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">left</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">right</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+            <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>We can also solve this using the buttom-up approach with memoization. There is no clear advange in doing it this way
+for this problem. But you will see when you have to in 248-strobogrammatic_number_iii get the list for two different
+values of <tt class="docutils literal">n</tt>, avoiding recomputation helps tremendously.</p>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

@@ -70,6 +70,139 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/227-invert_binary_tree.html">227-invert_binary_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-08T18:38:00-08:00"> Feb 08 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/invert-binary-tree/">LeetCode Problem Link</a></p>
+<p>Use recursion. The base case is the empty true where the tree root is simply returned.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">invertTree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">invertTree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+    <span class="n">invertTree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+
+    <span class="n">TreeNode</span> <span class="n">oldLeft</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+    <span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+    <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">oldLeft</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/227-invert_binary_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/225-implement_stack_using_queues.html">225-implement_stack_using_queues</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-08T15:54:00-08:00"> Feb 08 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/stacks.html">Stacks</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/queues.html">Queues</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/implement-stack-using-queues/">LeetCode Problem Link</a></p>
+<p>Use two queues. Here after each operation, I always put elements back into  <tt class="docutils literal">q1</tt>.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">MyStack</span> <span class="o">{</span>
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q1</span><span class="o">;</span>
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q2</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MyStack</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">q1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+        <span class="n">q2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Push element x onto stack.</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">q1</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Removes the element on top of the stack.</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+            <span class="k">return</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>
+            <span class="n">q2</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
+
+        <span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+
+        <span class="k">while</span> <span class="o">(!</span><span class="n">q2</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+            <span class="n">q1</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">q2</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Get the top element.</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">top</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>
+            <span class="n">q2</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
+
+        <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">q1</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+        <span class="n">q2 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/225-implement_stack_using_queues.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/224-basic_calculator.html">224-basic_calculator</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-07T17:12:00-08:00"> Feb 07 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/calculators.html">Calculators</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/stacks.html">Stacks</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/basic-calculator/">LeetCode Problem Link</a></p>
+<p>The original idea is to modify the string getting rid of 1 pair of parentheses at a time. But this gets me TLE.</p>
+<p>Here I present a solution using two stacks, a Stack&lt;Integer&gt; to store the numbers and a Stack&lt;Character&gt; to store
+the operations.</p>
+<p>Note that in both <tt class="docutils literal">evaluateInsideParenthesis()</tt> and <tt class="docutils literal">evaluate()</tt>, I had to create two temporary stacks because
+we need to evaluate the expression from left to right.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">calculate</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/224-basic_calculator.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/223-rectangle_area.html">223-rectangle_area</a></h2>
                     <div>
 <footer class="post-info">
@@ -270,104 +403,6 @@ element and the value is the index we last saw the element.</p>
 
      <span class="k">return ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/219-contains_duplicate_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/218-the_skyline_problem.html">218-the_skyline_problem</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T15:50:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/the-skyline-problem/">LeetCode Problem Link</a></p>
-<p>If we're seeing an increase in height, the head of the rectangle should be stored in <tt class="docutils literal">skyline</tt>.
-If we're seeing a decrease in height, the tail of the rectangle should be stored in <tt class="docutils literal">skyline</tt>.</p>
-<p>Let <tt class="docutils literal">n</tt> be the number of total buildings.</p>
-<p><em>Dumb Solution # 1</em></p>
-<p>The straightforward solution stores all the heights at each x coordinate. This requires two nested for loops.
-Assume that <tt class="docutils literal">m</tt> is the average width of the <tt class="docutils literal">n</tt> buildings. This would take O(nm) time. Not only is this
-not time efficient. This also requires a lot of memory. In the ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/218-the_skyline_problem.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/217-contains_duplicate.html">217-contains_duplicate</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T15:49:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/hash-tables.html">Hash Tables</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate/">LeetCode Problem Link</a></p>
-<p>There are two ways to do this problem. The first approach uses a HashSet&lt;Integer&gt; and can detect the duplicated
-item in one pass.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsDuplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">set</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">else</span>
-            <span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>The second way is to sort the array first and then the duplicated items will be adjacent to one another.</p>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/217-contains_duplicate.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/216-combination_sum_iii.html">216-combination_sum_iii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T15:25:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/combination-sum-iii/">LeetCode Problem Link</a></p>
-<p>When we see a new number, we have two choices, choose to include it in the list or choose not
-to include it in the list. Since <tt class="docutils literal">choices</tt> was built by ourselves, we make sure it's sorted.
-This makes it easier to break out from the recursion as early as possible. When the <tt class="docutils literal">curSum</tt>
-already exceeds <tt class="docutils literal">target</tt>, we know there is no point looking further down in the <tt class="docutils literal">choices</tt>
-list since future choices will only be even larger.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">combinationSum3</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
-
-    <span class="k">if ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/216-combination_sum_iii.html">more ...</a>
                 </div>
             </article>
             <hr/>
