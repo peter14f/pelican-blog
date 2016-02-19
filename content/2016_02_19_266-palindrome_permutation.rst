@@ -2,7 +2,7 @@
 ##########################
 
 :date: 2016-2-19 10:29
-:tags: Palindrome Permutation
+:tags: Palindrome Permutation, Palindromes
 :category: LeetCode
 :slug: 266-palindrome_permutation
 
