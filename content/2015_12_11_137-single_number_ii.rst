@@ -2,7 +2,7 @@
 ####################
 
 :date: 2015-12-11 21:01
-:tags: Bit Manipulation
+:tags: Bit Manipulation, Single Number
 :category: LeetCode
 :slug: 137-single_number_ii
 
