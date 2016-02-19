@@ -1,0 +1,60 @@
+259-3sum_smaller
+################
+
+:date: 2016-2-18 20:38
+:tags: X-Sum
+:category: LeetCode
+:slug: 259-3sum_smaller
+
+`LeetCode Problem Link <https://leetcode.com/problems/add-digits/>`_
+
+Another way of asking the origin 3-Sum problem.
+
+Sort the array first. The outer for loop goes through the array up to index n-3.
+Get the twoSum target, now as long as nums[j] + nums[k] >= twoSumTarget, the two sum
+is considered too big, so we decrement ``k``.
+
+If twoSumTarget is too small, we know that if fix ``j`` and continue decremnting ``k``,
+for each ``k`` values up to ``j-1``, the sum also be too small.
+
+.. code-block:: java
+
+    public int threeSumSmaller(int[] nums, int target) {
+        if (nums.length < 3)
+            return 0;
+
+        int cnt = 0;
+        Arrays.sort(nums);
+
+        for (int i=0; i<nums.length-2; i++) {
+            int a = nums[i];
+            //System.out.println("a=" + a);
+
+            int j = i+1;
+            int k = nums.length - 1;
+
+            int twoSumTarget = target - a;
+            //System.out.println("twoSumTarget=" + twoSumTarget);
+
+            while (j < k) {
+                int sum = nums[j] + nums[k];
+                //System.out.println("  sum=" + sum);
+                if (sum >= twoSumTarget) {
+                    // too big
+                    k--;
+                }
+                else {
+                    // if we fix j and decrement k until k = j+1
+                    // each of these sum will be too small
+                    cnt += (k-j);
+
+                    // too small
+                    j++;
+                }
+                //System.out.println("  cnt=" + cnt);
+            }
+        }  // for
+
+        return cnt;
+    }
+
