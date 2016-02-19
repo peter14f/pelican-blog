@@ -1,0 +1,100 @@
+256-paint_house
+###############
+
+:date: 2016-2-18 15:47
+:tags: Dynamic Programming, Memoization
+:category: LeetCode
+:slug: 256-paint_house
+
+`LeetCode Problem Link <https://leetcode.com/problems/paint-house/>`_
+
+Greedy algorithm won't work in this case. The cost at the ith house for each color has got to depend on two
+of the costs at the (i-1)th house.
+
+``minCostR[i]`` is the minimum cost up to the ith house if ith house is painted Red
+``minCostG[i]`` is the minimum cost up to the ith house if ith house is painted Green
+``minCostB[i]`` is the minimum cost up to the ith house if ith house is painted Blue
+
+``minCostR[0]`` is initialized to ``costs[0][0]``
+``minCostG[0]`` is initialized to ``cost[0][1]``
+``minCostB[0]`` is initialized to ``cost[0][2]``
+
+.. code-block:: java
+
+    public int minCost(int[][] costs) {
+        int n = costs.length;
+
+        if (n==0)
+            return 0;
+
+        // minCostR[i] is the minimum cost up to the ith house
+        // with the ith house painted red
+        int[] minCostR = new int[n];
+
+        // minCostG[i] is the minimum cost up to the ith house
+        // with the ith house painted green
+        int[] minCostG = new int[n];
+
+        // minCostB[i] is the minimum cost up to the ith house
+        // with the ith house painted blue
+        int[] minCostB = new int[n];
+
+        minCostR[0] = costs[0][0];
+        minCostG[0] = costs[0][1];
+        minCostB[0] = costs[0][2];
+
+        for (int i=1; i<n; i++) {
+
+            // minCost if I'm painting the ith house Red
+            // prevHouse has got to be Blue or Green
+            minCostR[i] = Math.min(minCostB[i-1], minCostG[i-1]) + costs[i][0];
+
+            // minCost if I'm painting the ith house Green
+            // prevHouse has got to be Red or Blue
+            minCostG[i] = Math.min(minCostR[i-1], minCostB[i-1]) + costs[i][1];
+
+            // minCost if I'm painting the ith house Blue
+            // prevHouse has got to be Red or Green
+            minCostB[i] = Math.min(minCostR[i-1], minCostG[i-1]) + costs[i][2];
+        }
+
+        return Math.min(minCostR[n-1], Math.min(minCostG[n-1], minCostB[n-1]));
+    }
+
+We don't actually need to use an array since we only need the last value in the array.
+
+Here's the solution with using just a variable for each color.
+
+.. code-block:: java
+
+    public int minCost(int[][] costs) {
+        int n = costs.length;
+
+        if (n == 0)
+            return 0;
+
+        int minCostR = costs[0][0];
+        int minCostG = costs[0][1];
+        int minCostB = costs[0][2];
+
+        for (int i=1; i<n; i++) {
+            int prevMinCostR = minCostR;
+            int prevMinCostG = minCostG;
+            int prevMinCostB = minCostB;
+
+            minCostR = costs[i][0] + Math.min(prevMinCostG, prevMinCostB);
+            minCostG = costs[i][1] + Math.min(prevMinCostR, prevMinCostB);
+            minCostB = costs[i][2] + Math.min(prevMinCostR, prevMinCostG);
+        }
+
+        return Math.min(minCostR, Math.min(minCostG, minCostB));
+    }
+
+Here's a good input prices
+
+Input:
+[[5,8,6],[19,14,13],[7,5,12],[14,15,17],[3,20,10]]
+Output:
+45
+Expected:
+43
