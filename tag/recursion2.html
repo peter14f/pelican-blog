@@ -71,6 +71,50 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/156-binary_tree_upside_down.html">156-binary_tree_upside_down</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-05T19:10:00-08:00"> Jan 05 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-upside-down/">LeetCode Problem Link</a></p>
+<p>Properly null-terminate the left and right child is very important, just like when we are
+reversing a linked list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">upsideDownBinaryTree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+          <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+      <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+          <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
+
+      <span class="n">TreeNode</span> <span class="n">origLeft</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+      <span class="n">TreeNode</span> <span class="n">treeRoot</span> <span class="o">=</span> <span class="n">upsideDownBinaryTree</span><span class="o">(</span><span class="n">origLeft</span><span class="o">);</span>
+      <span class="n">origLeft</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+      <span class="n">origLeft</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+      <span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+      <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+      <span class="k">return</span> <span class="n">treeRoot</span><span class="o">;</span>
+  <span class="o">}</span>
+</pre></div>
+<p>Since we are using recursion, the space complexity is again the O(h) where <tt class="docutils literal">h</tt> is the height of the binary tree.</p>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/156-binary_tree_upside_down.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">129-sum_root_to_leaf_numbers</a></h2>
                     <div>
 <footer class="post-info">
@@ -424,58 +468,6 @@ list. So the time complexity is O(nlogn).</p>
         <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
         <span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">sortedListToBST ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/109-convert_sorted_list_to_binary_search_tree.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/108-convert_sorted_array_to_binary_search_tree.html">108-convert_sorted_array_to_binary_search_tree</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-26T17:57:00-08:00"> Nov 26 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/">LeetCode Problem Link</a></p>
-<p>Use recursion. The middle element is already the root. This is because we're trying to build a height balanced BST.
-Otherwise, we could have simply build a linked list.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">sortedArrayToBST</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">return</span> <span class="n">sortedArrayToBST</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
-
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="n">TreeNode</span> <span class="nf">sortedArrayToBST</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="o">(</span><span class="n">high</span><span class="o">-</span><span class="n">low</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
-
-    <span class="n">TreeNode</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">middle</span><span class="o">]);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">low</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">high</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/108-convert_sorted_array_to_binary_search_tree.html">more ...</a>
                 </div>
             </article>
             <hr/>

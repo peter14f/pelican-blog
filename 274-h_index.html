@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>274-h_index - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/274-h_index.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="H-Index" />
+        <meta name="description" content="LeetCode Problem Link The input array&#39;s size n is the number of papers in total. The straightforward solution starts checking h-index value h at n and decrement h and continues the check until h becomes zero. This would take O(n 2) time. public int hIndex(int[] citations) { int n = citations.length; int h = n; while (h &gt; 0) { if (satisfyH(h, citations)) { return h; } h--; } return h; } private boolean satisfyH(int h, int[] citations) { int numEnough = 0; // # papers having &gt;= h citations for (int i=0; i&lt;citations.length; i++) { if (citations[i] &gt;= h) numEnough++; } return numEnough &gt;= h; } Surprisingly, no ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="274-h_index"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/274-h_index.html"/>
+        <meta property="og:description" content="LeetCode Problem Link The input array&#39;s size n is the number of papers in total. The straightforward solution starts checking h-index value h at n and decrement h and continues the check until h becomes zero. This would take O(n 2) time. public int hIndex(int[] citations) { int n = citations.length; int h = n; while (h &gt; 0) { if (satisfyH(h, citations)) { return h; } h--; } return h; } private boolean satisfyH(int h, int[] citations) { int numEnough = 0; // # papers having &gt;= h citations for (int i=0; i&lt;citations.length; i++) { if (citations[i] &gt;= h) numEnough++; } return numEnough &gt;= h; } Surprisingly, no ..."/>
+        <meta property="article:published_time" content="2016-02-20" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="H-Index" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/274-h_index.html"
+                       rel="bookmark"
+                       title="Permalink to 274-h_index">
+                        274-h_index
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-20T19:10:00-08:00"> Feb 20 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/h-index.html">H-Index</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/h-index/">LeetCode Problem Link</a></p>
+<p>The input array's size <tt class="docutils literal">n</tt> is the number of papers in total.</p>
+<p>The straightforward solution starts checking h-index value <tt class="docutils literal">h</tt> at <tt class="docutils literal">n</tt> and decrement <tt class="docutils literal">h</tt>
+and continues the check until <tt class="docutils literal">h</tt> becomes zero.</p>
+<p>This would take O(n <sup>2</sup>) time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hIndex</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">citations</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">citations</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">satisfyH</span><span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">citations</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">h</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">h</span><span class="o">--;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">h</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">satisfyH</span><span class="o">(</span><span class="kt">int</span> <span class="n">h</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">citations</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">numEnough</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// # papers having &gt;= h citations</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">citations</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">citations</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">h</span><span class="o">)</span>
+            <span class="n">numEnough</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">numEnough</span> <span class="o">&gt;=</span> <span class="n">h</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Surprisingly, no TLE using this solution.</p>
+<p>Well, the hint suggests that we sort the input array first.</p>
+<p>Once the input array is sorted, we know that the h-index could be the smallest value <tt class="docutils literal">c</tt> given that <tt class="docutils literal">n &gt;= c</tt></p>
+<p>We can continue trying a larger <tt class="docutils literal">c</tt> value while decrementing the number of papers having more than <tt class="docutils literal">c</tt> citations.</p>
+<p>Just remember that the <tt class="docutils literal">c</tt> value you find at the end may be smaller than the remaining size.</p>
+<pre class="literal-block">
+For example [0, 0, 4, 4]
+
+Using our algorithm, when ``cIndex`` reaches ``2`` which is ``c=4`` , the remaining size is 2.
+We would be tempted to return the previous ``c`` value which would be zero. But we actually want to
+return 2 instead.
+</pre>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hIndex</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">citations</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">citations</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">citations</span><span class="o">);</span>
+
+    <span class="c1">// start at the smallest number</span>
+    <span class="kt">int</span> <span class="n">cIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">citations</span><span class="o">[</span><span class="n">cIndex</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">n</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">citations</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cIndex</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="n">citations</span><span class="o">[</span><span class="n">cIndex</span><span class="o">])</span> <span class="o">{</span>
+        <span class="n">size</span><span class="o">--;</span>
+        <span class="n">cIndex</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+
+    <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">citations</span><span class="o">[</span><span class="n">cIndex</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span>
+                    <span class="n">size</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<p>The hint then says a faster solution requires that you use more space.</p>
+<p>If there are <tt class="docutils literal">n</tt> papers in total, the largest <tt class="docutils literal">h</tt> value you can have is <tt class="docutils literal">n</tt> regardless of how many citations
+each of these papers have.</p>
+<p>We can use an idea similar to bucket sort where the index is the the number of citations, and the value
+store at the index is the number of papers have that many citations.</p>
+<p>The array <tt class="docutils literal">cnt</tt> will have <tt class="docutils literal">n+1</tt> buckets and <tt class="docutils literal">cnt[n]</tt> will keep track of the number of papers that
+have <tt class="docutils literal">&gt;= n</tt> citations.</p>
+<div class="highlight"><pre><span class="c1">// note that it&#39;s impossible for a paper to have</span>
+<span class="c1">// a negative number of citations</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">hIndex</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">citations</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">citations</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// no papers</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">cnt</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">citations</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// this paper has n+ citations -&gt; use the last bucket to cnt</span>
+            <span class="n">cnt</span><span class="o">[</span><span class="n">n</span><span class="o">]++;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// this paper has x citations -&gt; it&#39;s got its own bucket</span>
+            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">citations</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">cnt</span><span class="o">[</span><span class="n">x</span><span class="o">]++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">numPapers</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+        <span class="n">numPapers</span> <span class="o">+=</span> <span class="n">cnt</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">numPapers</span> <span class="o">&gt;=</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

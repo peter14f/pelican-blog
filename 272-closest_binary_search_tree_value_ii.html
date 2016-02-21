@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>272-closest_binary_search_tree_value_ii - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/272-closest_binary_search_tree_value_ii.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Binary Search Trees,Closest Value In BST" />
+        <meta name="description" content="LeetCode Problem Link The problem seems very intimidating at first. Reading the followup question right away does not help either. What you need is to use a simple BST as an example. 7 / \ 5 8 / \ 3 10 / \ 1 25 Say target is 7 and k is 4, the the answer should be [7, 5, 8, 10] The straightforward solution would be first get the preorder traversal of the BST. We know that the preorder traversal results in a sorted list. In this case, the preorder traversal results in [1, 3, 5, 7, 8, 10, 25] Find the element closest to ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="272-closest_binary_search_tree_value_ii"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/272-closest_binary_search_tree_value_ii.html"/>
+        <meta property="og:description" content="LeetCode Problem Link The problem seems very intimidating at first. Reading the followup question right away does not help either. What you need is to use a simple BST as an example. 7 / \ 5 8 / \ 3 10 / \ 1 25 Say target is 7 and k is 4, the the answer should be [7, 5, 8, 10] The straightforward solution would be first get the preorder traversal of the BST. We know that the preorder traversal results in a sorted list. In this case, the preorder traversal results in [1, 3, 5, 7, 8, 10, 25] Find the element closest to ..."/>
+        <meta property="article:published_time" content="2016-02-20" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Binary Search Trees" />
+            <meta property="article:tag" content="Closest Value In BST" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/272-closest_binary_search_tree_value_ii.html"
+                       rel="bookmark"
+                       title="Permalink to 272-closest_binary_search_tree_value_ii">
+                        272-closest_binary_search_tree_value_ii
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-20T11:18:00-08:00"> Feb 20 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/closest-value-in-bst.html">Closest Value In BST</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/closest-binary-search-tree-value-ii/">LeetCode Problem Link</a></p>
+<p>The problem seems very intimidating at first. Reading the followup question right away does not help either.</p>
+<p>What you need is to use a simple BST as an example.</p>
+<pre class="literal-block">
+      7
+     / \
+    5   8
+   /     \
+  3       10
+ /         \
+1          25
+</pre>
+<p>Say <tt class="docutils literal">target</tt> is 7 and <tt class="docutils literal">k</tt> is 4, the the answer should be</p>
+<pre class="literal-block">
+[7, 5, 8, 10]
+</pre>
+<p>The straightforward solution would be first get the preorder traversal of the BST.
+We know that the preorder traversal results in a sorted list.
+In this case, the preorder traversal results in</p>
+<pre class="literal-block">
+[1, 3, 5, 7, 8, 10, 25]
+</pre>
+<p>Find the element closest to target, record the index of that element, call it <tt class="docutils literal">minIndex</tt>.</p>
+<p>If <tt class="docutils literal">k=1</tt>, that's the only element you need.</p>
+<p>If <tt class="docutils literal">k&lt;1</tt>, then use pointers <tt class="docutils literal">i</tt>, and <tt class="docutils literal">j</tt> to point to the next smaller and bigger element.</p>
+<p>Initialize <tt class="docutils literal">i</tt> to <tt class="docutils literal"><span class="pre">minIndex-1</span></tt> and <tt class="docutils literal">j</tt> to <tt class="docutils literal">minIndex+1</tt>.</p>
+<p>Insert whichever element closer to <tt class="docutils literal">target</tt> and move the pointer accordingly.</p>
+<p>The time complexity is O(n) since we need to get the preorder traversal of the BST.</p>
+<div class="highlight"><pre><span class="c1">// assume k is valid</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">closestKValues</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">double</span> <span class="n">target</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sorted</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">kValues</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">inorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">sorted</span><span class="o">);</span>
+
+    <span class="kt">double</span> <span class="n">minDiff</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">minIndex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">sorted</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">sorted</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">-</span> <span class="n">target</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="n">minDiff</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">minDiff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">;</span>
+            <span class="n">minIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">minIndex</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">minIndex</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">kValues</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">sorted</span><span class="o">.</span><span class="na">size</span><span class="o">())</span> <span class="o">{</span>
+            <span class="kt">double</span> <span class="n">diffI</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">sorted</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+            <span class="kt">double</span> <span class="n">diffJ</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">sorted</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">));</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">diffI</span> <span class="o">&lt;=</span> <span class="n">diffJ</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">kValues</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sorted</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+                <span class="n">i</span><span class="o">--;</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="n">kValues</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sorted</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">));</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">kValues</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sorted</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+            <span class="n">i</span><span class="o">--;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">kValues</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sorted</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">));</span>
+            <span class="n">j</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">kValues</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">inorderTraversal</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sorted</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">inorderTraversal</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">sorted</span><span class="o">);</span>
+    <span class="n">sorted</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+    <span class="n">inorderTraversal</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">sorted</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<p>Now the followup asks us</p>
+<pre class="literal-block">
+Assume that the BST is balanced, could you solve it in less than O(n) runtime (where n = total nodes)?
+</pre>
+<p>What we want is two stacks one with values &lt;= target, and the other with value &gt; target.</p>
+<p>The two stacks must store the values in sorted order with top element closer to <tt class="docutils literal">target</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">closestKValues</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">double</span> <span class="n">target</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">preStk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sucStk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">getPredeccesors</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">preStk</span><span class="o">);</span>
+    <span class="n">getSuccessors</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">sucStk</span><span class="o">);</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">ans</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">preStk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">sucStk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">smaller</span> <span class="o">=</span> <span class="n">preStk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">bigger</span> <span class="o">=</span> <span class="n">sucStk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+
+            <span class="kt">double</span> <span class="n">diff1</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">smaller</span><span class="o">);</span>
+            <span class="kt">double</span> <span class="n">diff2</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">bigger</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">diff1</span> <span class="o">&lt;=</span> <span class="n">diff2</span><span class="o">)</span>
+                <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">preStk</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span>
+            <span class="k">else</span>
+                <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sucStk</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(!</span><span class="n">preStk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">preStk</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(!</span><span class="n">sucStk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sucStk</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// this means k is larger than n</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="c1">// predeccesor are node values &lt;= taget</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">getPredeccesors</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">double</span> <span class="n">target</span><span class="o">,</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">preStk</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">getPredeccesors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">preStk</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">preStk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+
+    <span class="n">getPredeccesors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">preStk</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">getSuccessors</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">double</span> <span class="n">target</span><span class="o">,</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sucStk</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">getSuccessors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">sucStk</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">target</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">sucStk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+
+    <span class="n">getSuccessors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span> <span class="n">sucStk</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<p>What's the time complexity?</p>
+<pre class="literal-block">
+log(h) + k
+</pre>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
