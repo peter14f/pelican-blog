@@ -1,0 +1,143 @@
+274-h_index
+###########
+
+:date: 2016-2-20 19:10
+:tags: H-Index
+:category: LeetCode
+:slug: 274-h_index
+
+`LeetCode Problem Link <https://leetcode.com/problems/h-index/>`_
+
+The input array's size ``n`` is the number of papers in total.
+
+The straightforward solution starts checking h-index value ``h`` at ``n`` and decrement ``h``
+and continues the check until ``h`` becomes zero.
+
+This would take O(n \ :superscript:`2`) time.
+
+.. code-block:: java
+
+    public int hIndex(int[] citations) {
+        int n = citations.length;
+
+        int h = n;
+
+        while (h > 0) {
+
+            if (satisfyH(h, citations)) {
+                return h;
+            }
+
+            h--;
+        }
+
+        return h;
+    }
+
+    private boolean satisfyH(int h, int[] citations) {
+        int numEnough = 0; // # papers having >= h citations
+
+        for (int i=0; i<citations.length; i++) {
+            if (citations[i] >= h)
+                numEnough++;
+        }
+
+        return numEnough >= h;
+    }
+
+Surprisingly, no TLE using this solution.
+
+Well, the hint suggests that we sort the input array first.
+
+Once the input array is sorted, we know that the h-index could be the smallest value ``c`` given that ``n >= c``
+
+We can continue trying a larger ``c`` value while decrementing the number of papers having more than ``c`` citations.
+
+Just remember that the ``c`` value you find at the end may be smaller than the remaining size.
+
+::
+
+    For example [0, 0, 4, 4]
+
+    Using our algorithm, when ``cIndex`` reaches ``2`` which is ``c=4`` , the remaining size is 2.
+    We would be tempted to return the previous ``c`` value which would be zero. But we actually want to
+    return 2 instead.
+
+.. code-block:: java
+
+    public int hIndex(int[] citations) {
+        int n = citations.length;
+        if (n==0)
+            return 0;
+
+        Arrays.sort(citations);
+
+        // start at the smallest number
+        int cIndex = 0;
+
+        if (n < citations[cIndex]) {
+            return n;
+        }
+
+        int size = citations.length;
+
+        while (cIndex < n && size >= citations[cIndex]) {
+            size--;
+            cIndex++;
+        }
+
+
+        return Math.max(citations[cIndex-1],
+                        size);
+    }
+
+The hint then says a faster solution requires that you use more space.
+
+If there are ``n`` papers in total, the largest ``h`` value you can have is ``n`` regardless of how many citations
+each of these papers have.
+
+We can use an idea similar to bucket sort where the index is the the number of citations, and the value
+store at the index is the number of papers have that many citations.
+
+The array ``cnt`` will have ``n+1`` buckets and ``cnt[n]`` will keep track of the number of papers that
+have ``>= n`` citations.
+
+.. code-block:: java
+
+    // note that it's impossible for a paper to have
+    // a negative number of citations
+    public int hIndex(int[] citations) {
+        int n = citations.length;
+
+        if (n == 0) {
+            // no papers
+            return 0;
+        }
+
+        int[] cnt = new int[n+1];
+
+        for (int i=0; i<n; i++) {
+
+            if (citations[i] >= n) {
+                // this paper has n+ citations -> use the last bucket to cnt
+                cnt[n]++;
+            }
+            else {
+                // this paper has x citations -> it's got its own bucket
+                int x = citations[i];
+                cnt[x]++;
+            }
+        }
+
+        int numPapers = 0;
+        for (int i=n; i>=0; i--) {
+            numPapers += cnt[i];
+
+            if (numPapers >= i) {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+

@@ -8,12 +8,17 @@
 
 `LeetCode Problem Link <https://leetcode.com/problems/encode-and-decode-strings/>`_
 
-Here is my format: n:a, b, c:xxxxxxxxxxxxxxxx
+Here is my format
 
-``n`` is the number strings in the list
+::
+
+    3:a,b,c,xxxxxxxxxxxxxxxx
+
+``3`` is the number of strings in the list, this case, 3
 **:** marks the end of ``n``
 ``a`` is the length of string 1, ``,`` marks the end of ``a``
 ``b`` is the length of string 2, ``,`` marks the end of ``b``
+``c`` is the length of string 3, ``,`` marks the end of ``c``
 
 After the last ``,`` the real data begins. Since the receiver has the length of each string, he knows
 how many characters to read for each string.

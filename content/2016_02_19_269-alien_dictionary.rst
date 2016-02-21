@@ -8,19 +8,14 @@
 
 `LeetCode Problem Link <https://leetcode.com/problems/alien-dictionary/>`_
 
-First, we have to understand that the input array is sorted, not the word itself.
+First, we have to understand that the input array is sorted, not the word itself. Just like in English a sorted word
+list could be ["air", "baseball", "cat"]. But "air" is not a sorted string. "baseball" is not a sorted string.
+"cat" is not a sorted string.
 
-Just like in English a sorted word list could be
+I've seen some solutions online assuming that each word is sorted. They are solving a different problem. In the
+given example, the sorted input array is
 
-["air", "baseball", "cat"]
-
-but "air" is not a sorted string.
-    "baseball" is not a sorted string.
-    "cat" is not a sorted string.
-
-I've seen some solutions online assuming that each word is sorted. They are solving a different problem.
-
-In the given example, the sorted input array is
+::
 
  [
   "wrt",
@@ -28,7 +23,7 @@ In the given example, the sorted input array is
   "er",
   "ett",
   "rftt"
-]
+ ]
 
 We should build the graph "w->e->r->t->f".
 

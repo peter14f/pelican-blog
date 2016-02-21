@@ -2,7 +2,7 @@
 ####################################
 
 :date: 2016-2-19 23:13
-:tags: Binary Search Trees
+:tags: Binary Search Trees, Closest Value In BST
 :category: LeetCode
 :slug: 270-closest_binary_search_tree_value
 
