@@ -1,0 +1,64 @@
+276-paint_fence
+###############
+
+:date: 2016-2-20 21:32
+:tags:
+:category: LeetCode
+:slug: 276-paint_fence
+
+`LeetCode Problem Link <https://leetcode.com/problems/paint-fence/>`_
+
+When n=1, the number of ways to paint the fence is ``k``.
+
+When n=2, the number of ways to paint the fence is ``diffColorCnt + sameColorCnt`` where
+
+::
+
+    diffColorCnt = (k)  *  (k-1) = k*(k-1) // 1st house you get k choices, 2nd house you get (k-1) choices
+    sameColorCnt = (k)  *  (1)   = k       // 1st house you get k choices, 2nd house you get 1 choice
+
+
+When n = 3, the number of ways to paint the fence is ``diffColorCnt + sameColorCnt`` where
+
+::
+
+    oldDiffColorCnt = diffColorCnt
+    diffColorCnt = (diffColorCnt+sameColorCnt) * (k-1) // you get (k-1) choices
+    sameColorCnt = oldDiffColorCnt * (1)        // you get 1 choice, but house 1 and house 2 must have different colors
+
+Repeat the same calculation until you reach the ``n`` number you want.
+
+.. code-block:: java
+
+    public int numWays(int n, int k) {
+
+        if (n<1)
+            return 0;
+
+        if (n==1) {
+            // one house only
+            return k;
+        }
+
+        int sameColorCnt = k * 1; // 1st house you get k choices, 2nd house you must
+                                  // choose the color used in the prev house
+
+        int diffColorCnt = k * (k-1); // 1st house you get k choices, 2nd house you
+                                      // get (k-1) choices
+
+        int totalNumCnt = sameColorCnt + diffColorCnt;
+
+        for (int i=3; i<=n; i++) {
+            int oldDiffColorCnt = diffColorCnt;
+            diffColorCnt = (k-1)*totalNumCnt; // get (k-1) choices
+                                              // just don't use the prev color used
+
+            sameColorCnt = oldDiffColorCnt;
+
+            totalNumCnt = diffColorCnt + sameColorCnt;
+        }
+
+        return totalNumCnt;
+    }
+
+O(n) time O(1) space. Man, this is EASY?
