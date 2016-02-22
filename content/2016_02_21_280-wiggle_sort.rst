@@ -1,0 +1,91 @@
+280-wiggle_sort
+###############
+
+:date: 2016-2-21 15:34
+:tags: Sorting
+:category: LeetCode
+:slug: 280-wiggle_sort
+
+`LeetCode Problem Link <https://leetcode.com/problems/wiggle-sort/>`_
+
+The straightforward solution takes O(n \ :superscript:`2`) time.
+
+Just continue replacing the current element with either the largest or the smallest element in the
+remaining array.
+
+.. code-block:: java
+
+    public void wiggleSort(int[] nums) {
+
+        for (int i=0; i<nums.length; i++) {
+            if (i%2 == 0) {
+                // find small
+                replaceLWithSmallest(nums, i);
+            }
+            else {
+                // find big
+                replaceLWithBiggest(nums, i);
+            }
+        }
+    }
+
+    private void replaceLWithSmallest(int[] nums, int l) {
+        int min = nums[l];
+        int minIndex = l;
+
+        for (int i=l; i<nums.length; i++) {
+            if (nums[i] < min) {
+                min = nums[i];
+                minIndex = i;
+            }
+        }
+
+        int t = nums[l];
+        nums[l] = min;
+        nums[minIndex] = t;
+    }
+
+    private void replaceLWithBiggest(int[] nums, int l) {
+        int max = nums[l];
+        int maxIndex = l;
+
+        for (int i=l; i<nums.length; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
+                maxIndex = i;
+            }
+        }
+
+        int t = nums[l];
+        nums[l] = max;
+        nums[maxIndex] = t;
+    }
+
+Here's the O(n) solution.
+
+.. code-block:: java
+
+    public void wiggleSort(int[] nums) {
+        int n = nums.length;
+
+        for (int i=0; i<nums.length; i++) {
+            if ((i % 2) == 0) {
+                // even index
+                if (i+1 < n && nums[i] > nums[i+1]) {
+                    swap(nums, i, i+1);
+                }
+            }
+            else {
+                // odd index
+                if (i+1 < n && nums[i] < nums[i+1]) {
+                    swap(nums, i, i+1);
+                }
+            }
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+    }
