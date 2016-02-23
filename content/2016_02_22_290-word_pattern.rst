@@ -1,0 +1,51 @@
+290-word_pattern
+################
+
+:date: 2016-2-22 18:17
+:tags: Hash Tables
+:category: LeetCode
+:slug: 290-word_pattern
+
+`LeetCode Problem Link <https://leetcode.com/problems/word-pattern/>`_
+
+There are two mappings Character->String, String->Character.
+
+For both mappings, we cannot have two different inputs that lead to the same output.
+
+The last thing to check is the number of chars in ``pattern`` must be the same as the number words in ``str``.
+
+.. code-block:: java
+
+    // str contains lowercase letters separated by a single space
+    // pattern contains only lowercase letters
+    public boolean wordPattern(String pattern, String str) {
+
+        HashMap<Character, String> map = new HashMap<Character, String>();
+        HashMap<String, Character> reverseMap = new HashMap<String, Character>();
+        String[] strs = str.split(" ");
+
+        int i=0;
+        for (; i<pattern.length(); i++) {
+            char c = pattern.charAt(i);
+
+            if (i >= strs.length)
+                return false;
+
+            if (map.containsKey(c)) {
+                if (!map.get(c).equals(strs[i]))
+                    return false;
+            }
+            else {
+                if (!reverseMap.containsKey(strs[i]))
+                    reverseMap.put(strs[i], c);
+                else if (c != reverseMap.get(strs[i]))
+                    return false;
+
+                map.put(c, strs[i]);
+            }
+        }
+
+        return i==strs.length;
+    }
+
+This takes O(n) time and O(n) space.

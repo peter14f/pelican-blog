@@ -1,0 +1,45 @@
+293-flip_game
+#############
+
+:date: 2016-2-22 21:41
+:tags: Flip Game
+:category: LeetCode
+:slug: 293-flip_game
+:status: draft
+
+`LeetCode Problem Link <https://leetcode.com/problems/flip-game/>`_
+
+Characters in the string are either '+' or '-'. You and your friend take turns to flip two *consecutive* '+'s into
+two *consecutive* '-'s.
+
+I did this using one for loop.
+
+.. code-block:: java
+
+    public List<String> generatePossibleNextMoves(String s) {
+        List<String> nextState = new ArrayList<String>();
+
+        StringBuffer sb = new StringBuffer(s);
+
+        for (int start=0; start<s.length()-1; start++) {
+
+            if (s.charAt(start) == '+' && s.charAt(start+1) == '+') {
+                // temporary flip sb
+                sb.setCharAt(start, '-');
+                sb.setCharAt(start+1, '-');
+
+                // save a copy into nextState
+                nextState.add(sb.toString());
+
+                // undo the change on sb
+                sb.setCharAt(start, '+');
+                sb.setCharAt(start+1, '+');
+            }
+
+        }
+
+        return nextState;
+    }
+
+
+

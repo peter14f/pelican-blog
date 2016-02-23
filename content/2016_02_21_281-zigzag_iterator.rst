@@ -2,7 +2,7 @@
 ###################
 
 :date: 2016-2-21 16:39
-:tags: Merge Sort
+:tags: Merge Sort, Iterators
 :category: LeetCode
 :slug: 281-zigzag_iterator
 

@@ -2,7 +2,7 @@
 ##################
 
 :date: 2015-09-07 20:29
-:tags: Remove Elements
+:tags: Remove Elements, Remove Elements In Arrays
 :category: LeetCode
 :slug: 027-remove_element
 

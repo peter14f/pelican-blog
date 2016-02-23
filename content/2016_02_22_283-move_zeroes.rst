@@ -1,0 +1,77 @@
+283-move_zeroes
+###############
+
+:date: 2016-2-22 0:59
+:tags: Two Pointers, Remove Elements In Arrays
+:category: LeetCode
+:slug: 283-move_zeroes
+
+`LeetCode Problem Link <https://leetcode.com/problems/expression-add-operators/>`_
+
+We're told to move zero entries to the end of the array while maintaining the relative order of the other non-zero
+elements. Do this in-place. Don't make a copy of the array.
+
+So we cannot just swap with the tail element. We must percolate the zero element to the right one element at a time.
+
+.. code-block:: java
+
+    public void moveZeroes(int[] nums) {
+
+        for (int i=0; i<nums.length; i++) {
+            if (nums[i] == 0) {
+                int r = i+1;
+                int l = i;
+
+                while (r < nums.length) {
+                    if (nums[r] != 0) {
+                        int t = nums[r];
+                        nums[r] = 0;
+                        nums[l] = t;
+
+                        r++;
+                        l++;
+
+                    }
+                    else {
+                        // skip this for now, it will be processed later anyways
+                        r++;
+                    }
+                }
+            }
+        }
+    }
+
+This is clearly not O(n) time. The other way is to use two pointers, when you find a non-zero element
+simply overwrite what's at the front of the array. Finally a O(n) time solution.
+
+.. code-block:: java
+
+    public void moveZeroes(int[] nums) {
+        int i = 0;
+
+        int j = 0; // the index of to write the value to
+
+        while (i < nums.length) {
+
+            if (nums[i] != 0) {
+                // write to location i, bump both i and j
+
+                nums[i] = nums[j];
+                i++;
+                j++;
+            }
+            else {
+                // the location to write to remains the same
+
+                i++;
+            }
+        }
+
+        // now j is the location to write the next element, but
+        // there no more non-zero elements to write, so let's null
+        // out elements starting at index j
+        while (j < nums.length) {
+            nums[j] = 0;
+            j++;
+        }
+    }
