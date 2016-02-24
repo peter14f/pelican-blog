@@ -2,7 +2,7 @@
 #############################
 
 :date: 2016-2-19 23:43
-:tags:
+:tags: Serialization
 :category: LeetCode
 :slug: 271-encode_and_decode_strings
 
