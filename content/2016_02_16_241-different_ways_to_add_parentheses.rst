@@ -2,8 +2,8 @@
 #####################################
 
 :date: 2016-2-16 22:39
-:tags:
-:category:
+:tags: Parentheses
+:category: LeetCode
 :slug: 241-different_ways_to_add_parentheses
 
 `LeetCode Problem Link <https://leetcode.com/problems/different-ways-to-add-parentheses/>`_

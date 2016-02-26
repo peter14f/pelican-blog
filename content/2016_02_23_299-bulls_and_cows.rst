@@ -3,7 +3,7 @@
 
 :date: 2016-2-23 10:14
 :tags:
-:category:
+:category: LeetCode
 :slug: 299-bulls_and_cows
 
 `LeetCode Problem Link <https://leetcode.com/problems/bulls-and-cows/>`_

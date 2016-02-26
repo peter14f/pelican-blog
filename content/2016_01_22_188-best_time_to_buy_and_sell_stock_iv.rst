@@ -87,3 +87,65 @@ any day in the past. ``t`` is the current day.
         }
         return profit;
     }
+
+
+Another way to think of the problem.
+My solution to 309-best_time_to_buy_and_sell_stock_with_cooldown is closer to this one.
+
+.. code-block:: java
+
+    // at most k transactions
+    public int maxProfit(int k, int[] prices) {
+
+        int n = prices.length;
+
+        // with n prices, you can make at most n/2 trades
+        // if k >= n/2, it's equivalent to being able to
+        // make a unlimited number of trades
+        if (k >= n/2)
+            return maxProfitAsMany(prices);
+
+        if (n==0 || k==0)
+            return 0;
+
+        // buy[i][j] is the max profit on day j with at most i transactions
+        //           with stock position in hand
+        int[][] maxProfitBuy = new int[k+1][n];
+
+        // sell[i][j] is the max profit on day i with at most i transactions
+        //            with no stock position in hand
+        //
+        int[][] maxProfitSell = new int[k+1][n];
+
+        for (int i=1; i<=k; i++) {
+            // making at most i transactions
+
+            maxProfitBuy[i][0] = -prices[0];
+
+            for (int j=1; j<n; j++) {
+
+                // be content with the profit I held yesterday or
+                // sell at today
+                maxProfitSell[i][j] = Math.max(
+                        maxProfitSell[i][j-1],
+                        maxProfitBuy[i][j-1] + prices[j]);
+
+                maxProfitBuy[i][j] = Math.max(maxProfitBuy[i][j-1],
+                                              maxProfitSell[i-1][j-1] - prices[j]);
+            }
+        }
+
+        return maxProfitSell[k][n-1];
+    }
+
+    private int maxProfitAsMany(int[] prices) {
+        int profit = 0;
+
+        for (int i=1; i<prices.length; i++) {
+            if (prices[i] > prices[i-1]) {
+                profit += prices[i] - prices[i-1];
+            }
+        }
+
+        return profit;
+    }
