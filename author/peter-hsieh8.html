@@ -70,314 +70,311 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/221-maximal_square.html">221-maximal_square</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/256-paint_house.html">256-paint_house</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-04T15:34:00-08:00"> Feb 04 2016</time>
+        <time datetime="2016-02-18T15:47:00-08:00"> Feb 18 2016</time>
     </span>
 
 
 
 
 
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/paint-house.html">Paint House</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximal-square/">LeetCode Problem Link</a></p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maximalSquare</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/paint-house/">LeetCode Problem Link</a></p>
+<p>Greedy algorithm won't work in this case. The cost at the ith house for each color has got to depend on two
+of the costs at the (i-1)th house.</p>
+<p><tt class="docutils literal">minCostR[i]</tt> is the minimum cost up to the ith house if ith house is painted Red
+<tt class="docutils literal">minCostG[i]</tt> is the minimum cost up to the ith house if ith house is painted Green
+<tt class="docutils literal">minCostB[i]</tt> is the minimum cost up to the ith house if ith house is painted Blue</p>
+<p><tt class="docutils literal">minCostR[0]</tt> is initialized to <tt class="docutils literal"><span class="pre">costs[0][0]</span></tt>
+<tt class="docutils literal">minCostG[0]</tt> is initialized to <tt class="docutils literal"><span class="pre">cost[0 ...</span></tt></p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/256-paint_house.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/255-verify_preorder_sequence_in_binary_search_tree.html">255-verify_preorder_sequence_in_binary_search_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T13:34:00-08:00"> Feb 18 2016</time>
+    </span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/inorder-traversal.html">Inorder Traversal</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/">LeetCode Problem Link</a></p>
+<p>In a preorder traversal sequence, the first element is always the root. The first element you find that is greater
+than root marks the beginning of the right subtree. All elements starting from it must be greater than root. Then
+we must use recursion to check the left subtree and the right subtree.</p>
+<div class="highlight"><pre><span class="c1">// could assume each number in the sequence is unique</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verifyPreorder</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">preorder</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">preorder</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">isPreorder</span><span class="o">(</span><span class="n">preorder</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">preorder</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isPreorder</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">preorder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">==</span><span class="n">end</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">root</span> <span class="o">=</span> <span class="n">preorder ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/255-verify_preorder_sequence_in_binary_search_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">254-factor_combinations</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T10:52:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/factor-combinations/">LeetCode Problem Link</a></p>
+<p>I am using recursion to solve this problem. To avoid excessive number of recursive calls, we've got to
+make sure that we only make a recursive call for a valid factor.</p>
+<p><tt class="docutils literal">factorAhead</tt> is the previous factor found. The problem wants each list of factors to be in non-decreasing
+order.</p>
+<div class="highlight"><pre><span class="c1">// do not return 1 and n</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">getFactors</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">lists</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">lists</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">firstFactorToTry</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="o">%</span><span class="n">firstFactorToTry</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">firstFactorToTry</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span>
+        <span class="n">findListsOfFactors</span><span class="o">(</span>
+                <span class="n">n</span><span class="o">,</span> <span class="n">firstFactorToTry</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(),</span>
+                <span class="mi">0</span><span class="o">,</span> <span class="n">lists ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/253-meeting_rooms_ii.html">253-meeting_rooms_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T00:46:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/checking-interval-overlaps.html">Checking Interval Overlaps</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/detect-maximum-number-of-overlaps.html">Detect Maximum Number of Overlaps</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/custom-comparator.html">Custom Comparator</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/meeting-rooms-ii/">LeetCode Problem Link</a></p>
+<p>Again, this is very similar to the problem 218-the_skyline_problem.</p>
+<p>The most number of intervals that overlap at any given time is the minimum number of meeting rooms required.</p>
+<p>What did we do in 218-the_skyline_problem? We defined an Edge class that has a field that denotes whether
+it is the left edge of an interval or the right edge of an interval.</p>
+<p>The intervals in this problem does not contain a height like in 218-the_skyline_problem.
+But we still need a custom comparator so that we could sort the edges.</p>
+<p>In my solution, I use a Stack&lt;Edge&gt; to ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/253-meeting_rooms_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/252-meeting_rooms.html">252-meeting_rooms</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T00:24:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/checking-interval-overlaps.html">Checking Interval Overlaps</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/custom-comparators.html">Custom Comparators</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/meeting-rooms/">LeetCode Problem Link</a></p>
+<p><strong>056-merge_intervals</strong>
+<strong>057-insert_intervals</strong></p>
+<p>Reminds me of <strong>218-the_skyline_problem</strong> because we need to check if intervals overlap at any location.</p>
+<p>As discussed in that blog post, the most straightforward way to check for interval overlaps is to use
+two nested for loops which takes O(n<sup>2</sup>) time.</p>
+<p>If an overlap is found we can immediately return <tt class="docutils literal">false</tt> as we are sure that it's impossible to attend
+all the meetings. Note that if two meetings start at the same time, it is also impossible to attend both meetings.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canAttendMeetings</span><span class="o">(</span><span class="n">Interval</span><span class="o">[]</span> <span class="n">intervals</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">intervals ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/252-meeting_rooms.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/251-flatten_2d_vector.html">251-flatten_2d_vector</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T00:18:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/iterator.html">Iterator</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/flatten-2d-vector/">LeetCode Problem Link</a></p>
+<p>Just note that that there could be consecutive empty rows before a non-empty shows up.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Vector2D</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">l</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">m</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Vector2DB</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">vec2d</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">vec2d</span><span class="o">;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">toReturn</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">row</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="n">col</span><span class="o">);</span>
+        <span class="n">col</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="n">toReturn</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">col</span> <span class="o">&lt;</span> <span class="n">l</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">row</span><span class="o">).</span><span class="na">size</span><span class="o">())</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+            <span class="n">row</span><span class="o">++;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/251-flatten_2d_vector.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/250-count_univalue_subtrees.html">250-count_univalue_subtrees</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-17T23:22:00-08:00"> Feb 17 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/univalue-trees.html">Univalue Trees</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/count-univalue-subtrees/">LeetCode Problem Link</a></p>
+<p>Use recursion and an int array so that I can increment count and preserve the changes across recursive calls.</p>
+<div class="highlight"><pre><span class="c1">// empty tree is not considered a unival tree</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">countUnivalSubtrees</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
         <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">cnt</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
 
-    <span class="kt">int</span> <span class="n">maxArea</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="n">isUnivalSubtree</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">cnt</span><span class="o">);</span>
 
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="o">)</span>
-                <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-            <span class="k">else</span>
-                <span class="n">h</span><span class="o">++;</span>
+    <span class="k">return</span> <span class="n">cnt</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+<span class="o">}</span>
 
-            <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span><span class="n">h</span><span class="o">;</span>
-        <span class="o">}</span>
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isUnivalSubtree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">cnt</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//System.out.println(root.val + &quot; &quot; + root);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//System.out.println(&quot;leaf&quot;);</span>
+        <span class="n">cnt</span><span class="o">[</span><span class="mi">0</span><span class="o">]++;</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
     <span class="o">}</span>
-
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">row</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">--)</span> <span class="o">{</span>
-        <span class="kt">char</span><span class="o">[]</span> <span class="n">heights</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">];</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">heights</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">heights</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-            <span class="k">while</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">*</span><span class="n">h</span> <span class="o">&gt;</span> <span class="n">maxArea</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">+</span><span class="n">h</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="kt">boolean</span> <span class="n">allTaller</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-
-                    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/221-maximal_square.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/220-contains_duplicate_iii.html">220-contains_duplicate_iii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-02T12:28:00-08:00"> Feb 02 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate-iii/">LeetCode Problem Link</a></p>
-<p>To pass this on OJ, we need a data structure that have fast retrieval time and we need to be able to
-maintain ordering. In Java, using TreeMap&lt;Integer, Integer&gt; is the way to go.</p>
-<p>Need to worry about overflow for this problem. Call <tt class="docutils literal">floorKey()</tt> to look for smaller keys. Call
-<tt class="docutils literal">ceilingKey()</tt> to look for larger keys. The time complexity is O(nk log n)???</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsNearbyAlmostDuplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// key is the value stored in nums, value is the last seen index</span>
-    <span class="n">TreeMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/220-contains_duplicate_iii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/219-contains_duplicate_ii.html">219-contains_duplicate_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T16:32:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/hash-tables.html">Hash Tables</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate-ii/">LeetCode Problem Link</a></p>
-<p>Sorting wouldn't work in this case because we would lose the information of where an element was originally
-stored at. So we can solve this problem in one pass with a HashMap&lt;Integer, Integer&gt;. The key is the
-element and the value is the index we last saw the element.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsNearbyDuplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-     <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lastIndex</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
-
-     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-         <span class="k">if</span> <span class="o">(</span><span class="n">lastIndex</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
-             <span class="kt">int</span> <span class="n">lastSeen</span> <span class="o">=</span> <span class="n">lastIndex</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-             <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">lastSeen</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">)</span>
-                 <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-         <span class="o">}</span>
-
-         <span class="n">lastIndex</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
-     <span class="o">}</span>
-
-     <span class="k">return ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/219-contains_duplicate_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/218-the_skyline_problem.html">218-the_skyline_problem</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T15:50:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/checking-inteverval-overlaps.html">Checking Inteverval Overlaps</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/the-skyline-problem/">LeetCode Problem Link</a></p>
-<p>If we're seeing an increase in height, the head of the rectangle should be stored in <tt class="docutils literal">skyline</tt>.
-If we're seeing a decrease in height, the tail of the rectangle should be stored in <tt class="docutils literal">skyline</tt>.</p>
-<p>Let <tt class="docutils literal">n</tt> be the number of total buildings.</p>
-<p><em>Dumb Solution # 1</em></p>
-<p>The straightforward solution stores all the heights at each x coordinate. This requires two nested for loops.
-Assume that <tt class="docutils literal">m</tt> is the average width of the <tt class="docutils literal">n</tt> buildings. This would take O(nm) time. Not only is this
-not time efficient. This also requires a lot of memory. In the ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/218-the_skyline_problem.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/217-contains_duplicate.html">217-contains_duplicate</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T15:49:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/hash-tables.html">Hash Tables</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/contains-duplicate/">LeetCode Problem Link</a></p>
-<p>There are two ways to do this problem. The first approach uses a HashSet&lt;Integer&gt; and can detect the duplicated
-item in one pass.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsDuplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">set</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isUnivalSubtree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">cnt</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">cnt</span><span class="o">[</span><span class="mi">0</span><span class="o">]++;</span>
             <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">else</span>
-            <span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="o">}</span>
     <span class="o">}</span>
-
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>The second way is to sort the array first and then the duplicated items will be adjacent to one another.</p>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/217-contains_duplicate.html">more ...</a>
+    <span class="k">else ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/250-count_univalue_subtrees.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/216-combination_sum_iii.html">216-combination_sum_iii</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/249-group_shifted_strings.html">249-group_shifted_strings</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-01T15:25:00-08:00"> Feb 01 2016</time>
+        <time datetime="2016-02-17T21:56:00-08:00"> Feb 17 2016</time>
     </span>
 
 
 
 
 
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/combination-sum-iii/">LeetCode Problem Link</a></p>
-<p>When we see a new number, we have two choices, choose to include it in the list or choose not
-to include it in the list. Since <tt class="docutils literal">choices</tt> was built by ourselves, we make sure it's sorted.
-This makes it easier to break out from the recursion as early as possible. When the <tt class="docutils literal">curSum</tt>
-already exceeds <tt class="docutils literal">target</tt>, we know there is no point looking further down in the <tt class="docutils literal">choices</tt>
-list since future choices will only be even larger.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">combinationSum3</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/group-shifted-strings/">LeetCode Problem Link</a></p>
+<p>The distance between consecutive characters in a string may not be constant.
+Take &quot;cno&quot; as an example. 'n' - 'c' = 11 but 'o' - 'n' = 1.</p>
+<p>If we transform each string such that the first character is 'a' while maintaining the distance between consecutive
+characters, we get a signature of the string. If two strings have the same signature, then they just be in the same
+group. This idea is very similar to how we can find out if two strings are anagrams.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">groupStrings</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">strings</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="k">if ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/216-combination_sum_iii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/215-kth_largest_element_in_an_array.html">215-kth_largest_element_in_an_array</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T13:10:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/quick-select.html">Quick Select</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/kth-largest-element-in-an-array/">LeetCode Problem Link</a></p>
-<p><tt class="docutils literal">left</tt> is the final location where the pivot element should be placed.
-In this implementation, we always pick the element at <tt class="docutils literal">end</tt> index as the pivot.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findKthLargest</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1</span> <span class="o">||</span> <span class="n">k</span><span class="o">&gt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
-
-    <span class="k">return</span> <span class="n">findKth</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">k</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">int</span> <span class="nf">findKth</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">,</span>  <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">end</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">pivot</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">swap</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">);</span>
-            <span class="n">right</span><span class="o">--;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">left</span><span class="o">++;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="c1">// left is the final position where the pivot element should be ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/215-kth_largest_element_in_an_array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/214-shortest_palindrome.html">214-shortest_palindrome</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-31T18:18:00-08:00"> Jan 31 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/shortest-palindrome/">LeetCode Problem Link</a></p>
-<p>Remember <tt class="docutils literal">i</tt>, <tt class="docutils literal">j</tt>, and <tt class="docutils literal">end</tt> and StringBuffer's <tt class="docutils literal">reverse()</tt> method.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">shortestPalindrome</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">chs</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">chs</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">end</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">chs</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">chs</span><span class="o">[</span><span class="n">j</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">i</span><span class="o">++;</span>
-            <span class="n">j</span><span class="o">--;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">end</span><span class="o">--;</span>
-            <span class="n">j</span><span class="o">=</span><span class="n">end</span><span class="o">;</span>
-            <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">));</span>
-    <span class="n">sb</span><span class="o">.</span><span class="na">reverse</span><span class="o">();</span>
-    <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="n">s</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>The best case runtime complexity is obviously O(n). The worst case runtime complexity is O(n<sup>2</sup>).</p>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/214-shortest_palindrome.html">more ...</a>
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">signatures</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/249-group_shifted_strings.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -451,6 +448,14 @@ In this implementation, we always pick the element at <tt class="docutils litera
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh32.html">32</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh33.html">33</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh34.html">34</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh35.html">35</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh36.html">36</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh37.html">37</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh9.html">&raquo;</a></li>
         </ul>

@@ -73,11 +73,11 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/057-insert_interval.html">057-insert_interval</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/093-restore_ip_addresses.html">093-restore_ip_addresses</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-10-26T12:41:00-07:00"> Oct 26 2015</time>
+        <time datetime="2015-11-17T22:11:00-08:00"> Nov 17 2015</time>
     </span>
 
 
@@ -85,339 +85,266 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/checking-interval-overlaps.html">Checking Interval Overlaps</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/insert-interval/">LeetCode Problem Link</a></p>
-<p>As shown in the example, the interval being inserted may overlap with multiple intervals.
-Or the interval being inserted may NOT overlap with any existing interval in the list.</p>
-<p>I use the pointers <tt class="docutils literal">start</tt> and <tt class="docutils literal">end</tt> to mark the first and last interval that overlap with the
-interval being inserted.</p>
-<p>And I wrote a overlaps helper method to determine if two intervals actually overlap.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Interval</span><span class="o">&gt;</span> <span class="nf">insert</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Interval</span><span class="o">&gt;</span> <span class="n">intervals</span><span class="o">,</span> <span class="n">Interval</span> <span class="n">newInterval</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Interval</span> <span class="n">start</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="n">Interval</span> <span class="n">end</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">intervals</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">Interval</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">intervals</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">overlaps</span><span class="o">(</span><span class="n">newInterval</span><span class="o">,</span> <span class="n">cur</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">if ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/057-insert_interval.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/056-merge_intervals.html">056-merge_intervals</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-25T22:40:00-07:00"> Oct 25 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/custom-comparators.html">Custom Comparators</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/checking-interval-overlaps.html">Checking Interval Overlaps</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/merge-intervals/">LeetCode Problem Link</a></p>
-<p>We need to write our own Comparator class for Intervals. If the start is smaller, the Interval is considered smaller.
-If the start is the same, then if the end is smaller, the Interval is considered smaller.</p>
-<p>We sort the input list of Interval. And the merging becomes easy.</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">IntervalComp</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Interval</span><span class="o">&gt;</span> <span class="o">{</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Interval</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Interval</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">start</span> <span class="o">&lt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">start</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">start</span> <span class="o">&gt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">start</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">end</span> <span class="o">&lt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">end</span><span class="o">)</span>
-                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-            <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">end</span> <span class="o">&gt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">end</span><span class="o">)</span>
-                <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-            <span class="k">else</span>
-                <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-<span class="o">}</span>
-
-<span class="kd">public ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/056-merge_intervals.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/054-spiral_matrix.html">054-spiral_matrix</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-25T16:08:00-07:00"> Oct 25 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/2d-array.html">2D Array</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/spiral-matrix/">LeetCode Problem Link</a></p>
-<p>I use the variable <tt class="docutils literal">direction</tt> to keep track the direction we are going right now. Another variable needed is
-<tt class="docutils literal">wall</tt>.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">RIGHT</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DOWN</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">LEFT</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">UP</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">spiralOrder</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">matrix</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-            <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
-
-        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="o">;</span>
-
-        <span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">wall</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">RIGHT</span><span class="o">;</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">ans</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">cnt</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ans ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/054-spiral_matrix.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/053-maximum_subarray.html">053-maximum_subarray</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-24T15:30:00-07:00"> Oct 24 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/contiguous-subarray.html">Contiguous Subarray</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-subarray/">LeetCode Problem Link</a></p>
-<p>The obvious straightforward solution takes O(n) time. But we can do better than that.</p>
-<p>The only time we want to start counting from the current number is when the accumulated sum so far is negative and
-the current number bigger than the accumulated sum.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-    <span class="kt">int</span> <span class="n">maxSum</span> <span class="o">=</span> <span class="n">sum</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">sum</span><span class="o">)</span>
-            <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-        <span class="k">else</span>
-            <span class="n">sum</span> <span class="o">+=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&gt;</span> <span class="n">maxSum</span><span class="o">)</span>
-            <span class="n">maxSum</span> <span class="o">=</span> <span class="n">sum</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">maxSum</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/053-maximum_subarray.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/052-n_queens_ii.html">052-n_queens_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-24T15:01:00-07:00"> Oct 24 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
-        /
 	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/n-queens-ii/">LeetCode Problem Link</a></p>
-<p>Solving the previous problem solves this problem already.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalNQueens</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/restore-ip-addresses/">LeetCode Problem Link</a></p>
+<p>The approach is very similar to the NP problems (051-n_queens, 037-sudoku_solver). We have a current list where we store the current ip address that
+has been built. At each new index, we could have three different code paths:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>put a '.' right after the current index (forms a one-digit number)</li>
+<li>put a '.' right after the next index (forms a two-digit number)</li>
+<li>put a '.' right after the next next index (forms a three-digit number)</li>
+</ol>
+</blockquote>
+<p>However, we also need to check how many characters are left after the dot. The number of characters cannot be more than
+<tt class="docutils literal"><span class="pre">3*(4</span> - group ...</tt></p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/093-restore_ip_addresses.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/092-reverse_linked_list_ii.html">092-reverse_linked_list_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-17T20:23:00-08:00"> Nov 17 2015</time>
+    </span>
 
-    <span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="o">;</span>
-        <span class="o">}</span>
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-linked-list-ii/">LeetCode Problem Link</a></p>
+<p>I chose to do this problem iteratively. Reversing a linked list iteratively requires using a <tt class="docutils literal">prev</tt> pointer.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">reverseBetween</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">m</span><span class="o">==</span><span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
     <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">reverseBetween</span><span class="o">(</span><span class="n">head</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">i</span><span class="o">++;</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">);</span>
+
+        <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">reverseBetween</span><span class="o">(</span><span class="n">cur</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+
+<span class="o">}</span>
+
+<span class="cm">/* Given m, n satisfy the following condition:</span>
+<span class="cm"> *  1 ≤ m ≤ n ≤ length of list.</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="n">ListNode</span> <span class="nf">reverseBetween</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">from</span><span class="o">,</span> <span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/092-reverse_linked_list_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/091-decode_ways.html">091-decode_ways</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-17T12:43:00-08:00"> Nov 17 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/count-ways.html">Count Ways</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/decode-ways/">LeetCode Problem Link</a></p>
+<p>I will show the recursive solution first, which cannot pass the long test cases.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numDecodings</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
     <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
-    <span class="n">solveNQueens</span><span class="o">(</span><span class="n">board</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">sArr</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+
+    <span class="n">numDecodings</span><span class="o">(</span><span class="n">sArr</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
+
     <span class="k">return</span> <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
 <span class="o">}</span>
 
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">solveNQueens</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">,</span> <span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">boolean</span> <span class="n">allPassed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-
-        <span class="c1">// check previous rows in this column</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">r</span><span class="o">&lt;</span><span class="n">row</span><span class="o">;</span> <span class="n">r</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">board</span><span class="o">[</span><span class="n">r</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39;Q&#39;</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">allPassed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(!</span><span class="n">allPassed</span><span class="o">)</span>
-            <span class="k">continue</span><span class="o">;</span>
-
-        <span class="kt">int</span> <span class="n">dist</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-
-        <span class="c1">// check previous ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/052-n_queens_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/051-n_queens.html">051-n_queens</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-24T12:34:00-07:00"> Oct 24 2015</time>
-    </span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">numDecodings</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span><span class="o">)</span> <span class="o">{</span>
 
 
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/n-queens/">LeetCode Problem Link</a></p>
-<p>This problem is very similar to 037-sudoku_solver.</p>
-<p>Before we insert a Queen at a specific cell, we must check the the previous rows in the same column, the previous rows
-along the diagonal,  and the previous rows along the reverse diagonal.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">solveNQueens</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
-
-    <span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">board</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="n">solveNQueens</span><span class="o">(</span><span class="n">board</span><span class="o">,</span> <span class="n">ans</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">solveNQueens</span><span class="o">(</span><span class="kt">char</span><span class="o">[][]</span> <span class="n">board</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">ans</span><span class="o">,</span> <span class="kt">int</span> <span class="n">row ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/051-n_queens.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/050-pow_x_n.html">050-pow_x_n</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-10-11T18:17:00-07:00"> Oct 11 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/power.html">Power</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/math.html">Math</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/powx-n/">LeetCode Problem Link</a></p>
-<p>Use recursion to avoid re-computation.</p>
-<div class="line-block">
-<div class="line">x<sup>4</sup> = x<sup>2</sup> * x<sup>2</sup></div>
-<div class="line">x<sup>5</sup> = x<sup>4</sup> * x</div>
-</div>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">double</span> <span class="nf">myPow</span><span class="o">(</span><span class="kt">double</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==-</span><span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">;</span>
-
-    <span class="kt">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">)</span>
-        <span class="n">negative</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// even power</span>
-        <span class="kt">int</span> <span class="n">halfPower</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
-        <span class="kt">double</span> <span class="n">halfPowerAns</span> <span class="o">=</span> <span class="n">myPow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">halfPower</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">halfPowerAns</span><span class="o">*</span><span class="n">halfPowerAns</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="o">{</span>
-        <span class="c1">// odd power</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">negative</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">evenPower</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-
-            <span class="k">return</span> <span class="n">myPow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">evenPower</span><span class="o">)</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">sArr</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">number</span> <span class="o">&lt;=</span><span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">]++;</span>
         <span class="o">}</span>
         <span class="k">else</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">evenPower</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-            <span class="k">return</span> <span class="n">myPow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">evenPower</span><span class="o">)</span> <span class="o">*</span> <span class="n">x</span><span class="o">;</span>
+            <span class="n">numDecodings</span><span class="o">(</span><span class="n">sArr</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
         <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">number</span> <span class="o">+</span> <span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">number ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/091-decode_ways.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/090-subsets_ii.html">090-subsets_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-15T21:46:00-08:00"> Nov 15 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/subsets.html">Subsets</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/duplicates.html">Duplicates</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/subsets/">LeetCode Problem Link</a></p>
+<p>A followup problem of 078-subsets. The difference is now that the input collection of integers might contain
+duplicates.</p>
+<p>In the first try, this is what I got. If the current number at index <tt class="docutils literal">i</tt> is the same as the previous number at index
+<tt class="docutils literal"><span class="pre">i-1</span></tt>, I only add the current number to the existing subsets that have <tt class="docutils literal"><span class="pre">k-1</span></tt> occurences at the end of the list where
+<tt class="docutils literal">k</tt> is the number of consecutive times we've seen the number so far. This is a solution that passes the OJ, but
+checking the number of times current number occurs at ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/090-subsets_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/089-gray_code.html">089-gray_code</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-15T21:10:00-08:00"> Nov 15 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/gray-code/">LeetCode Problem Link</a></p>
+<p>In the first try, I was just trying to come up with a way to generate a number that's one bit away from the current
+number. Nothing clever. <tt class="docutils literal">choices</tt> helps me check if the generated number is actually the one I want.</p>
+<div class="highlight"><pre><span class="c1">// n represents the total number of bits in the code</span>
+<span class="c1">// A gray code sequence must begin with 0</span>
+<span class="c1">// two successive values differ in only one bit</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">grayCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sequence</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">sequence</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="o">;</span>
+
+    <span class="c1">// index zero is the most significant bit</span>
+    <span class="c1">// index n ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/089-gray_code.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/088-merge_sorted_array.html">088-merge_sorted_array</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-15T17:49:00-08:00"> Nov 15 2015</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/merge-sorted-array/">LeetCode Problem Link</a></p>
+<p><tt class="docutils literal">num1</tt> actually has <tt class="docutils literal">n</tt> slots after the first <tt class="docutils literal">m</tt> elements. We must insert from the end, so that we
+don't lose the elements in <tt class="docutils literal">num1</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">merge</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">p1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">p2</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">nums1</span><span class="o">[</span><span class="n">p1</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">nums2</span><span class="o">[</span><span class="n">p2</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums1</span><span class="o">[</span><span class="n">p1</span><span class="o">];</span>
+            <span class="n">p1</span><span class="o">--;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="o">[</span><span class="n">p2</span><span class="o">];</span>
+            <span class="n">p2</span><span class="o">--;</span>
+        <span class="o">}</span>
+        <span class="n">i</span><span class="o">--;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// done inserting elements from array2</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">p1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="c1">// done inserting elements from array1</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="o">[</span><span class="n">p2</span><span class="o">];</span>
+        <span class="n">p2</span><span class="o">--;</span>
+        <span class="n">i</span><span class="o">--;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/050-pow_x_n.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/088-merge_sorted_array.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/049_group-anagrams.html">049_group-anagrams</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/087-scramble_string.html">087-scramble_string</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-10-11T18:16:00-07:00"> Oct 11 2015</time>
+        <time datetime="2015-11-13T15:34:00-08:00"> Nov 13 2015</time>
     </span>
 
 
@@ -425,23 +352,67 @@ along the diagonal,  and the previous rows along the reverse diagonal.</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/anagrams.html">Anagrams</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/3d-space-dp.html">3D space DP</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/anagrams/">LeetCode Problem Link</a></p>
-<p>This problem just tests to see if you can lump all the anagrams together. If two words are anagrams, their sorted
-versions must be the same. OJ wants words within each inner list to be sorted lexicographically. The easiest way
-to achieve this is to sort the input string array at the very beginning.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">groupAnagrams</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">strs</span><span class="o">)</span> <span class="o">{</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/scramble-string/">LeetCode Problem Link</a></p>
+<p>If <tt class="docutils literal">s2</tt> is a scrambled version of <tt class="docutils literal">s1</tt>, there must exist a way to partition s1 and s2 such that
+(isScramble(s11, s21) is True and isScramble(s12, s22) is True) OR (isScramble(s11, s22) is True and
+is Scramble(s12, s21) is True).</p>
+<p>The check is therefore recursive. The base case is when both input strings are of length 1. In the base case,
+we simply check if the one character in s1 matches the one character in s2.</p>
+<p>When taking this recursive approach, we must add checks to prevent the unneeded recursive calls. The checks ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/087-scramble_string.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/086-partition_list.html">086-partition_list</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-13T14:43:00-08:00"> Nov 13 2015</time>
+    </span>
 
-    <span class="cm">/* we sort the input array right away because OJ requires that the</span>
-<span class="cm">     * inner lists be in lexicographical order</span>
-<span class="cm">     */</span>
-    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">strs</span><span class="o">);</span>
 
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">anagrams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/049_group-anagrams.html">more ...</a>
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/partition-list/">LeetCode Problem Link</a></p>
+<p>Go through all nodes in the linked list and maintain two lists, one called <tt class="docutils literal">leftList</tt>, the other one called
+<tt class="docutils literal">rightList</tt>. In <tt class="docutils literal">leftList</tt>, I insert the
+nodes that have values smaller than <tt class="docutils literal">x</tt>. In <tt class="docutils literal">rightList</tt>, I insert node that have values equal to or larger than
+<tt class="docutils literal">x</tt>. Link <tt class="docutils literal">rightList</tt> to the end of <tt class="docutils literal">leftList</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">partition</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="c1">// smallList head and tail</span>
+    <span class="n">ListNode</span> <span class="n">leftListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">leftListTail</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="c1">// rightList head and tail</span>
+    <span class="n">ListNode</span> <span class="n">rightListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">rightListTail</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/086-partition_list.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -513,6 +484,16 @@ to achieve this is to sort the input string array at the very beginning.</p>
                             href="http://peter14f.github.io/pelican-blog/category/leetcode31.html">31</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode32.html">32</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode33.html">33</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode34.html">34</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode35.html">35</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode36.html">36</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode37.html">37</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode27.html">&raquo;</a></li>
         </ul>

@@ -71,6 +71,90 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/305-number_of_islands_ii.html">305-number_of_islands_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-24T10:13:00-08:00"> Feb 24 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/union-find.html">Union Find</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/number-of-islands-ii/">LeetCode Problem Link</a></p>
+<p>This problem requires using union-find. The union-find data structure should have the 3 APIs - <tt class="docutils literal">union(a, b)</tt>,
+<tt class="docutils literal">find(a)</tt>, and <tt class="docutils literal">getSize()</tt>.</p>
+<p>Here I implement the union-find using a <tt class="docutils literal">HashMap&lt;Integer, Integer&gt;</tt>. Note that <tt class="docutils literal">union(a, b)</tt> and <tt class="docutils literal">find(a)</tt> are
+both O(n) time. Since we are adding <tt class="docutils literal">n</tt> points, the whole numIslands2() method will take O(n <sup>2</sup>)
+time.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">UnionFind</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">blobs</span><span class="o">;</span>
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">UnionFind</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">blobs</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">);</span>
+        <span class="n">blobs</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">find</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">!=</span> <span class="n">x ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/305-number_of_islands_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/302-smallest_rectangle_enclosing_black_pixels.html">302-smallest_rectangle_enclosing_black_pixels</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T18:21:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/">LeetCode Problem Link</a></p>
+<p><tt class="docutils literal">0</tt> as white pixel and <tt class="docutils literal">1</tt> as black pixel.</p>
+<p><tt class="docutils literal">x</tt> specifies the row and <tt class="docutils literal">y</tt> specifies the col. I find this kind of weird.</p>
+<p>This problem is essentially asking you to do a blob analysis and find out the blob's minX, minY, maxX, and maxY.</p>
+<p>The smallest rectangle enclosing the black blob is simply <tt class="docutils literal">(maxX - minX + 1) * (maxY - minY + 1)</tt>.</p>
+<p>4-connected components are considered neighbors in this problem, not 8.</p>
+<p>BFS would work.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">row</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">col</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">row</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">col ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/302-smallest_rectangle_enclosing_black_pixels.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
                     <div>
 <footer class="post-info">
@@ -113,7 +197,7 @@ remember.</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Peter Hsieh
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>285-inorder_successor_in_bst - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Binary Search Trees" />
+        <meta name="description" content="LeetCode Problem Link Seems like for the test cases on OJ, we can assume that p is in the BST. If that&#39;s the case, then we can use the approach to find the successors as in 272-closest_binary_search_tree_values_ii. We use a stack to store nodes that are larger than p. And the top of the stack contains the closest value that&#39;s larger. That will be successor node if p is indeed in the BST. public TreeNode inorderSuccessor(TreeNode root, TreeNode p) { Stack&lt;TreeNode&gt; stk = new Stack&lt;TreeNode&gt;(); findSuccessors(root, p.val, stk); if (stk.isEmpty()) return null; return stk ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="285-inorder_successor_in_bst"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html"/>
+        <meta property="og:description" content="LeetCode Problem Link Seems like for the test cases on OJ, we can assume that p is in the BST. If that&#39;s the case, then we can use the approach to find the successors as in 272-closest_binary_search_tree_values_ii. We use a stack to store nodes that are larger than p. And the top of the stack contains the closest value that&#39;s larger. That will be successor node if p is indeed in the BST. public TreeNode inorderSuccessor(TreeNode root, TreeNode p) { Stack&lt;TreeNode&gt; stk = new Stack&lt;TreeNode&gt;(); findSuccessors(root, p.val, stk); if (stk.isEmpty()) return null; return stk ..."/>
+        <meta property="article:published_time" content="2016-02-22" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Binary Search Trees" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html"
+                       rel="bookmark"
+                       title="Permalink to 285-inorder_successor_in_bst">
+                        285-inorder_successor_in_bst
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-22T07:08:00-08:00"> Feb 22 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/inorder-successor-in-bst/">LeetCode Problem Link</a></p>
+<p>Seems like for the test cases on OJ, we can assume that <tt class="docutils literal">p</tt> is in the BST.</p>
+<p>If that's the case, then we can use the approach to find the successors as in 272-closest_binary_search_tree_values_ii.</p>
+<p>We use a stack to store nodes that are larger than p. And the top of the stack contains the closest value
+that's larger. That will be successor node if <tt class="docutils literal">p</tt> is indeed in the BST.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">inorderSuccessor</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">val</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">findSuccessors</span><span class="o">(</span>
+        <span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">v</span><span class="o">,</span>
+        <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<p>In fact, since we only care about the successor, we don't need a stack. We just need the storage space for one
+node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">inorderSuccessor</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">val</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">findSuccessors</span><span class="o">(</span>
+        <span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">v</span><span class="o">,</span>
+        <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<p>Well, here's another recursive solution that simply does the inorder traversal and if p is previously traversed
+node, we just return the next node. This solution is good even if <tt class="docutils literal">p</tt> is not found in the BST. <tt class="docutils literal">null</tt> will be
+returned in that case.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">inorderSuccessor</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">TreeNode</span><span class="o">[]</span> <span class="n">prev</span> <span class="o">=</span> <span class="o">{</span><span class="kc">null</span><span class="o">};</span>
+    <span class="n">TreeNode</span> <span class="n">successor</span> <span class="o">=</span> <span class="n">inorder</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">prev</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">successor</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="n">TreeNode</span> <span class="nf">inorder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">TreeNode</span><span class="o">[]</span> <span class="n">prev</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">TreeNode</span> <span class="n">leftResult</span> <span class="o">=</span> <span class="n">inorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">prev</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">leftResult</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">leftResult</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">prev</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="n">p</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+
+    <span class="n">prev</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+
+    <span class="n">TreeNode</span> <span class="n">rightResult</span> <span class="o">=</span> <span class="n">inorder</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">prev</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">rightResult</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Here's another solution. We look at two cases.</p>
+<ol class="arabic simple">
+<li>p has a right child: Then find the smallest node in the right subtree.</li>
+<li>p does not have a right child: Then need to find the smallest node that's larger than p.</li>
+</ol>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">inorderSuccessor</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// return the smallest node in the right subtree</span>
+
+        <span class="n">TreeNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// need to find the smallest node that&#39;s bigger than p</span>
+
+        <span class="n">TreeNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+        <span class="n">TreeNode</span> <span class="n">successor</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&gt;</span> <span class="n">p</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// record it</span>
+                <span class="n">successor</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+
+                <span class="c1">// want to see if a smaller node that&#39;s bigger than p exists</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">p</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// nodes smaller are not of interest</span>
+                <span class="c1">// find bigger nodes</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">successor</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>This last solution is O(h) time and O(1) space since no stacks and no recursion were used.</p>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

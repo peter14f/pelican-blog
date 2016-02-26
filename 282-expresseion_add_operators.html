@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>282-expresseion_add_operators - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/282-expresseion_add_operators.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="DFS" />
+        <meta name="description" content="LeetCode Problem Link This problem asks us to find all possible ways to insert binary operators +, -, * into the string such that the result is target. Please note that not inserting anything is one way as well. Let&#39;s solve an easier problem first, say the binary operators are only &#39;+&#39; and &#39;-&#39;. public List&lt;String&gt; addOperators(String num, int target) { List&lt;String&gt; result = new ArrayList&lt;String&gt;(); dfsAddToResult(num, 0, target, 0, &#34;&#34;, result); return result; } private void dfsAddToResult(String num, int start, int target, int curSum, String curStr, List&lt;String&gt; result) { if (start == num.length()) { if (curSum == target) result.add(curStr); return; } for ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="282-expresseion_add_operators"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/282-expresseion_add_operators.html"/>
+        <meta property="og:description" content="LeetCode Problem Link This problem asks us to find all possible ways to insert binary operators +, -, * into the string such that the result is target. Please note that not inserting anything is one way as well. Let&#39;s solve an easier problem first, say the binary operators are only &#39;+&#39; and &#39;-&#39;. public List&lt;String&gt; addOperators(String num, int target) { List&lt;String&gt; result = new ArrayList&lt;String&gt;(); dfsAddToResult(num, 0, target, 0, &#34;&#34;, result); return result; } private void dfsAddToResult(String num, int start, int target, int curSum, String curStr, List&lt;String&gt; result) { if (start == num.length()) { if (curSum == target) result.add(curStr); return; } for ..."/>
+        <meta property="article:published_time" content="2016-02-21" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="DFS" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/282-expresseion_add_operators.html"
+                       rel="bookmark"
+                       title="Permalink to 282-expresseion_add_operators">
+                        282-expresseion_add_operators
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-21T22:06:00-08:00"> Feb 21 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/expression-add-operators/">LeetCode Problem Link</a></p>
+<p>This problem asks us to find all possible ways to insert binary operators +, -, * into the string such that
+the result is <tt class="docutils literal">target</tt>.</p>
+<p>Please note that not inserting anything is one way as well.</p>
+<p>Let's solve an easier problem first, say the binary operators are only '+' and '-'.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">addOperators</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                   <span class="mi">0</span><span class="o">,</span>
+                   <span class="s">&quot;&quot;</span><span class="o">,</span>
+                   <span class="n">result</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsAddToResult</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">,</span>
+                            <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span>
+                            <span class="n">String</span> <span class="n">curStr</span><span class="o">,</span>
+                            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">curStr</span><span class="o">);</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">end</span><span class="o">=</span><span class="n">start</span><span class="o">;</span> <span class="n">end</span><span class="o">&lt;</span><span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">end</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">aStr</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">aStr</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">num</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">start</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">aStr</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">curStr</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// put a &#39;+&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="sc">&#39;+&#39;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+
+            <span class="c1">// put a &#39;-&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">-</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>Now putting a '*' would not be as straightforward. What do we set <tt class="docutils literal">curSum</tt> to if the current number is <tt class="docutils literal">a</tt>?</p>
+<pre class="literal-block">
+curSum = curSum * a
+</pre>
+<p>wouldn't be correct. We need to the previous number and subtract that from curSum before we add <tt class="docutils literal">prevNum*a</tt></p>
+<pre class="literal-block">
+curSum = curSum - prevNum + (prevNum * a)
+</pre>
+<p>Now we also need to think about what <tt class="docutils literal">prevNum</tt> should be set to when we are adding a '*'.</p>
+<pre class="literal-block">
+// put a '*'
+dfsAddToResult(num, end+1, target,
+               curSum-prevNum + prevNum*a,
+               curStr + &quot;*&quot; + a,
+               prevNum*a,
+               result);
+</pre>
+<p>Here is what I got so far</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">addOperators</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                   <span class="mi">0</span><span class="o">,</span>
+                   <span class="s">&quot;&quot;</span><span class="o">,</span>
+                   <span class="mi">0</span><span class="o">,</span>
+                   <span class="n">result</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="cm">/* prevNum is needed when trying to add a &#39;*&#39; because the new sum won&#39;t be</span>
+<span class="cm"> *</span>
+<span class="cm"> * curSum * a</span>
+<span class="cm"> *</span>
+<span class="cm"> * Instead we need to know the prevNum and set curSum to</span>
+<span class="cm"> *</span>
+<span class="cm"> * curSum - prevNum + prevNum * a</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsAddToResult</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">,</span>
+                            <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span>
+                            <span class="n">String</span> <span class="n">curStr</span><span class="o">,</span>
+                            <span class="kt">int</span> <span class="n">prevNum</span><span class="o">,</span>
+                            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">curStr</span><span class="o">);</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">end</span><span class="o">=</span><span class="n">start</span><span class="o">;</span> <span class="n">end</span><span class="o">&lt;</span><span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">end</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">aStr</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">aStr</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">num</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">start</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">aStr</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">curStr</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// put a &#39;+&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="sc">&#39;+&#39;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+
+            <span class="c1">// put a &#39;-&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">-</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="o">-</span><span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+
+            <span class="c1">// put a &#39;*&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span><span class="o">-</span><span class="n">prevNum</span> <span class="o">+</span> <span class="n">prevNum</span><span class="o">*</span><span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="s">&quot;*&quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">prevNum</span><span class="o">*</span><span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="c1">// for end</span>
+<span class="o">}</span>
+</pre></div>
+<pre class="literal-block">
+Runtime Error Message:
+Line 42: java.lang.NumberFormatException: For input string: &quot;3456237490&quot;
+Last executed input:
+&quot;3456237490&quot;
+9191
+</pre>
+<p>This is the error message I got, I see 3.4 billion number which is larger than what an int can store.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">addOperators</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                   <span class="mi">0</span><span class="o">,</span>
+                   <span class="s">&quot;&quot;</span><span class="o">,</span>
+                   <span class="mi">0</span><span class="o">,</span>
+                   <span class="n">result</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="cm">/* prevNum is needed when trying to add a &#39;*&#39; because the new sum won&#39;t be</span>
+<span class="cm"> *</span>
+<span class="cm"> * curSum * a</span>
+<span class="cm"> *</span>
+<span class="cm"> * Instead we need to know the prevNum and set curSum to</span>
+<span class="cm"> *</span>
+<span class="cm"> * curSum - prevNum + prevNum * a</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsAddToResult</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">,</span>
+                            <span class="kt">long</span> <span class="n">curSum</span><span class="o">,</span>
+                            <span class="n">String</span> <span class="n">curStr</span><span class="o">,</span>
+                            <span class="kt">long</span> <span class="n">prevNum</span><span class="o">,</span>
+                            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">curStr</span><span class="o">);</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">end</span><span class="o">=</span><span class="n">start</span><span class="o">;</span> <span class="n">end</span><span class="o">&lt;</span><span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">end</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">aStr</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">aStr</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">num</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">start</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+
+        <span class="kt">long</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">aStr</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">curStr</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// put a &#39;+&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="sc">&#39;+&#39;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+
+            <span class="c1">// put a &#39;-&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span> <span class="o">-</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="o">-</span><span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+
+            <span class="c1">// put a &#39;*&#39;</span>
+            <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                           <span class="n">curSum</span><span class="o">-</span><span class="n">prevNum</span> <span class="o">+</span> <span class="n">prevNum</span><span class="o">*</span><span class="n">a</span><span class="o">,</span>
+                           <span class="n">curStr</span> <span class="o">+</span> <span class="s">&quot;*&quot;</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span>
+                           <span class="n">prevNum</span><span class="o">*</span><span class="n">a</span><span class="o">,</span>
+                           <span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="c1">// for end</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

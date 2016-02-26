@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>309-best_time_to_buy_and_sell_stock - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/309-best_time_to_buy_and_sell_stock_with_cooldown.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Best Time To Buy/Sell" />
+        <meta name="description" content="LeetCode Problem Link We can make as many trades as needed, but each buy cannot be immediately after a sell. int array buy is the profit with one outstanding stock. int array sell is the profit with no oustanding stock. buy[i] is the amount of cash with one outstanding stock position, it is purchased either at day i or any day before day i. sell[i] is the amount of chash with no oustanding stock position, the last sold occurred on day i or any day before day i. buy[i] = Math.max(buy[i-1], sell[i-2] - prices[i ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="309-best_time_to_buy_and_sell_stock"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/309-best_time_to_buy_and_sell_stock_with_cooldown.html"/>
+        <meta property="og:description" content="LeetCode Problem Link We can make as many trades as needed, but each buy cannot be immediately after a sell. int array buy is the profit with one outstanding stock. int array sell is the profit with no oustanding stock. buy[i] is the amount of cash with one outstanding stock position, it is purchased either at day i or any day before day i. sell[i] is the amount of chash with no oustanding stock position, the last sold occurred on day i or any day before day i. buy[i] = Math.max(buy[i-1], sell[i-2] - prices[i ..."/>
+        <meta property="article:published_time" content="2016-02-25" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Best Time To Buy/Sell" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/309-best_time_to_buy_and_sell_stock_with_cooldown.html"
+                       rel="bookmark"
+                       title="Permalink to 309-best_time_to_buy_and_sell_stock">
+                        309-best_time_to_buy_and_sell_stock
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-25T09:53:00-08:00"> Feb 25 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">LeetCode Problem Link</a></p>
+<p>We can make as many trades as needed, but each buy cannot be immediately after a sell.</p>
+<p>int array <tt class="docutils literal">buy</tt> is the profit with one outstanding stock.
+int array <tt class="docutils literal">sell</tt> is the profit with no oustanding stock.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal">buy[i]</tt> is the amount of cash with one outstanding stock position, it is purchased either at day <tt class="docutils literal">i</tt></dt>
+<dd>or any day before day <tt class="docutils literal">i</tt>.</dd>
+<dt><tt class="docutils literal">sell[i]</tt> is the amount of chash with no oustanding stock position, the last sold occurred on day <tt class="docutils literal">i</tt> or</dt>
+<dd>any day before day <tt class="docutils literal">i</tt>.</dd>
+</dl>
+<pre class="literal-block">
+buy[i] = Math.max(buy[i-1], sell[i-2] - prices[i])
+sell[i] = Math.max(sell[i-1], buy[i-1] + prices[i])
+
+return sell[n-1]
+it wouldn't make sense to return a value from ``buy`` because why would we want a outstanding stock position?
+</pre>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">buy</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">sell</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+
+    <span class="c1">// buy[i] = Math.max(buy[i-1], sell[i-2] - prices[i])</span>
+    <span class="c1">// sell[i] = Math.max(sell[i-1], buy[i-1] + prices[i])</span>
+
+
+    <span class="n">buy</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="n">sell</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="n">sell</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sell</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">buy</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+    <span class="n">buy</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">buy</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">buy</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">buy</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span> <span class="n">sell</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="n">sell</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sell</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span> <span class="n">buy</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="o">}</span>
+
+    <span class="c1">//System.out.println(Arrays.toString(buy));</span>
+    <span class="c1">//System.out.println(Arrays.toString(sell));</span>
+
+    <span class="k">return</span> <span class="n">sell</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+<span class="o">}</span>
+</pre></div>
+<p>In 188-best_time_to_buy_and_sell_stock_iv, we used a very similar approach.</p>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
