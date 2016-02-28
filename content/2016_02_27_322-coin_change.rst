@@ -1,0 +1,189 @@
+322-coin_change
+###############
+
+:date: 2016-2-27 16:13
+:tags: Knapsack Problem
+:category: LeetCode
+:slug: 322-coin_change
+
+`LeetCode Problem Link <https://leetcode.com/problems/coin-change/>`_
+
+Compute the lowest number of coins needed to make up the amount specified.
+
+May assume that we have an infinite number of coins for each type of coins.
+
+Can we use a greedy algorithm since using the biggest denomination possible
+as many time as you can will lead you to the least number of coins.
+
+.. code-block:: java
+
+    public int coinChange(int[] coins, int amount) {
+        int numCoins = 0;
+        int sum = 0;
+
+        Arrays.sort(coins);
+
+        for (int i=coins.length-1; i>=0; i--) {
+            while (sum + coins[i] <= amount) {
+                sum += coins[i];
+                numCoins++;
+            }
+
+            if (sum == amount)
+                break;
+        }
+
+        if (sum != amount)
+            return -1;
+
+        return numCoins;
+    }
+
+::
+
+    44 / 180 test cases passed.
+    Status: Wrong Answer
+    Submitted: 0 minutes ago
+    Input:
+    [186,419,83,408]
+    6249
+    Output:
+    -1
+    Expected:
+    20
+
+No, this won't work because after using as many of the biggest denomination as possible, you may be
+left with a value that's smaller than any of the smaller denominations which will lead you to think
+that there is no answer.
+
+So this becomes a *combination sum* problem. Ie we follow the same idea but uses backtracking, then
+the first answer found should be the one using the least amount of number
+
+Well, I tried this and the first number of coins found this way is also not the right answer.
+
+That means we must exhaust all possible ways and keep track the smallest number of coins used.
+
+.. code-block:: java
+
+    public int coinChange(int[] coins, int amount) {
+
+        Arrays.sort(coins);
+
+        //System.out.println(Arrays.toString(coins));
+
+        int[] min = {Integer.MAX_VALUE};
+
+        findFirstCombinationSum(coins, coins.length-1,
+                                0, 0, amount, min);
+
+        return min[0];
+    }
+
+    private void findFirstCombinationSum(int[] coins, int coin,
+                                        int curSum, int curCoins, int target,
+                                        int[] min) {
+
+        if (coin < 0) {
+            //System.out.println("curSum=" + curSum);
+            if (curSum == target) {
+                if (curCoins < min[0])
+                    min[0] = curCoins;
+            }
+            return;
+        }
+
+
+        int diff = target - curSum;
+        int mult = diff / coins[coin];
+
+        // so you have (mult + 1) choices
+
+        for (int k=mult; k>=0; k--) {
+
+            int toAdd = coins[coin] * k;
+
+            findFirstCombinationSum(coins, coin-1,
+                                    curSum + toAdd,
+                                    curCoins + k, target, min);
+        }
+    }
+
+::
+
+    Submission Result: Time Limit Exceeded More Details
+
+    Last executed input:
+    [346,29,395,188,155,109]
+    9401
+
+Alright. I know at least point, OJ is looking for a DP solution. At least I've got the correct answer to
+check with.
+
+``dp[i][j]`` is the minimum number of coins needed to make up to the amount ``j`` using the first ``i`` coin
+ denominations.
+
+i=1 the first coin denomination coins[0]
+i=2 the first coin denomination coins[1]
+
+and so on. By the way, this is some variation of the knapsack problem.
+
+.. code-block:: java
+
+    public int coinChange(int[] coins, int amount) {
+        int[][] dp = new int[coins.length + 1][amount+1];
+
+        Arrays.sort(coins);
+        System.out.println(Arrays.toString(coins));
+
+        // first column
+        for (int i=0; i<dp.length; i++) {
+            dp[i][0] = 0;
+        }
+
+        // first row
+        for (int j=1; j<=amount; j++) {
+            dp[0][j] = Integer.MAX_VALUE;
+        }
+
+        // access the coin denomination with coins[i-1]
+        //
+        //
+        for (int i=1; i<dp.length; i++) {
+            for (int j=1; j<=amount; j++) {
+                int minCoins = Integer.MAX_VALUE;
+
+                for (int k = j/coins[i-1]; k >= 0; k--) {
+
+
+                    int amountAfterK = j - (k*coins[i-1]);
+
+
+                    /*System.out.println("k=" + k + " amountAfterK=" + amountAfterK + " " +
+                                       dp[i-1][amountAfterK]);*/
+
+                    int numCoins = k + dp[i-1][amountAfterK];
+
+                    // overflow
+                    if (numCoins < 0)
+                        numCoins = Integer.MAX_VALUE;
+
+                    minCoins = Math.min(minCoins, numCoins);
+                }
+
+                //System.out.println(" min=" + minCoins);
+
+                if (minCoins == Integer.MAX_VALUE)
+                    dp[i][j] = dp[i-1][j];
+                else
+                    dp[i][j] = minCoins;
+            }
+        }
+
+        //System.out.println(Arrays.deepToString(dp));
+
+        if (dp[coins.length][amount] == Integer.MAX_VALUE)
+            return -1;
+        else
+            return dp[coins.length][amount];
+    }
+
