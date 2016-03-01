@@ -2,7 +2,7 @@
 ####################
 
 :date: 2016-2-18 21:37
-:tags: Graph, Undirected Graphs, BFS, DFS
+:tags: Graph, Undirected Graphs, BFS, DFS, Check If Graph A Valid Binary Tree
 :category: LeetCode
 :slug: 261-graph_valid_tree
 
@@ -136,3 +136,25 @@ We could also do this problem using DFS.
 
         return false;
     }
+
+Note: You might be wondering why for a binary tree, we should use a undirected graph. After all,
+the parent should act like the source of the edge, and the child should act like the destination of
+the edge. And we've done several problems detecting a cycle in a directed graph using DFS or BFS in
+topological sort.
+
+Here I am going to show a directed graph that has a cycle in a undirected graph and cannot be
+a valid binary tree.
+
+::
+
+    (A,B) (B,C) (D,E)
+
+              A
+             / \
+             B  C
+            /   |
+           D-----
+
+
+If you draw this graph out as a directed graph, you won't be able to detect a cycle on it because C
+is the only sink node.
