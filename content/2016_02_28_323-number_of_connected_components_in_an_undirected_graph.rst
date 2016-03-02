@@ -2,7 +2,7 @@
 #########################################################
 
 :date: 2016-2-28 0:38
-:tags: Undirected Graph
+:tags: Undirected Graph, Union Find
 :category: LeetCode
 :slug: 323-number_of_connected_components_in_an_undirected_graph
 
