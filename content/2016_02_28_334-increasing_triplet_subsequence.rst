@@ -1,7 +1,7 @@
 334-increasing_triplet_subsequence
 ##################################
 
-:date: 2016-2-28 22:59
+:date: 2016-2-28 21:33
 :tags:
 :category: LeetCode
 :slug: 334-increasing_triplet_subsequence

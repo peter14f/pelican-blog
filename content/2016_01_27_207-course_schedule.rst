@@ -2,7 +2,7 @@
 ###################
 
 :date: 2016-1-27 11:42
-:tags: Directed Graph, Detecting Cycles in Directed Graphs, BFS, DFS
+:tags: Directed Graph, Detecting Cycles in Directed Graph, BFS, DFS
 :category: LeetCode
 :slug: 207-course_schedule
 

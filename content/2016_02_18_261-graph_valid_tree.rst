@@ -2,7 +2,7 @@
 ####################
 
 :date: 2016-2-18 21:37
-:tags: Graph, Undirected Graphs, BFS, DFS, Check If Graph A Valid Binary Tree
+:tags: Graph, Undirected Graph, BFS, DFS, Check If Graph A Valid Binary Tree
 :category: LeetCode
 :slug: 261-graph_valid_tree
 

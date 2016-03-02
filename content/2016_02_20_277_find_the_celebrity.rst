@@ -2,7 +2,7 @@
 ######################
 
 :date: 2016-2-20 23:09
-:tags: Graph, Directed Graphs
+:tags: Graph, Directed Graph
 :category: LeetCode
 :slug: 277_find_the_celebrity
 
