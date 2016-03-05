@@ -129,3 +129,60 @@ The recursive solution turns out to be way cleaner.
 
         return bsts;
     }
+
+Revisited the problem on 03/04/2016. Still doing the iterative approach, it turns out the mapping for cloning
+the right subtree is not all that complicated. Since the right subBST must contain bigger values that the current
+``root`` value, we just need to add ``root`` to all the node values when cloning.
+
+.. code-block:: java
+
+    public List<TreeNode> generateTrees(int n) {
+
+        if (n==0) {
+            return new ArrayList<TreeNode>();
+        }
+
+        List<List<TreeNode>> trees = new ArrayList<List<TreeNode>>();
+
+        trees.add(new ArrayList<TreeNode>());
+        trees.get(0).add(null);
+
+        // i is the number of nodes in the tree
+        for (int i=0; i<=n; i++) {
+            trees.add(new ArrayList<TreeNode>());
+
+            for (int root=1; root <= i; root++) {
+                int leftSize = root -1;
+                int rightSize = i - root;
+
+                List<TreeNode> leftTrees = trees.get(leftSize);
+                List<TreeNode> rightTrees = trees.get(rightSize);
+
+                for (TreeNode l : leftTrees) {
+                    for (TreeNode r : rightTrees) {
+                        TreeNode rootNode = new TreeNode(root);
+
+                        rootNode.left = l;
+                        rootNode.right = cloneTree(r, root);
+
+                        trees.get(i).add(rootNode);
+                    }
+                }
+            } // try all root values from 1 up to i
+        } // for i
+
+        return trees.get(n);
+    }
+
+    private TreeNode cloneTree(TreeNode root, int toAdd) {
+        if (root==null)
+            return null;
+
+        TreeNode newRoot = new TreeNode(root.val + toAdd);
+
+        newRoot.left = cloneTree(root.left, toAdd);
+        newRoot.right = cloneTree(root.right, toAdd);
+
+        return newRoot;
+    }
+

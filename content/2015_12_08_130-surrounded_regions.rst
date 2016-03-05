@@ -2,7 +2,7 @@
 ######################
 
 :date: 2015-12-8 13:02
-:tags: BFS, Blob Analysis, Connected Components
+:tags: BFS, Blob Analysis, Connected Components, Graph, Undirected Graph
 :category: LeetCode
 :slug: 130-surrounded_regions
 
