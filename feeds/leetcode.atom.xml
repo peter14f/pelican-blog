@@ -242,7 +242,7 @@ existing leaf nodes until you obtain an empty tree.&lt;/p&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="Preorder Traversals"></category></entry><entry><title>329-longest_increasing_path_in_a_matrix</title><link href="http://peter14f.github.io/pelican-blog/329-longest_increasing_path_in_a_matrix.html" rel="alternate"></link><updated>2016-02-28T14:54:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/329-longest_increasing_path_in_a_matrix.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+</summary><category term="Preorder Traversal"></category></entry><entry><title>329-longest_increasing_path_in_a_matrix</title><link href="http://peter14f.github.io/pelican-blog/329-longest_increasing_path_in_a_matrix.html" rel="alternate"></link><updated>2016-02-28T14:54:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/329-longest_increasing_path_in_a_matrix.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;My first thought is to use DFS.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;longestIncreasingPath&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[][]&lt;/span&gt; &lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
 
@@ -1496,7 +1496,7 @@ That way, we are guaranteed that the upper nodes are added into the list first.&
 &lt;p&gt;One the the observation I made when doing BFS on a graph is that we've got to make sure that we don't
 end up going back to a node that we've been to. With BFS on a binary tree, we don't actually need to worry
 about this because the nodes in a binary tree do not have a reference to the parent node.&lt;/p&gt;
-</summary><category term="Binary Trees"></category><category term="Binary Tree Traversals"></category></entry><entry><title>313-super_ugly_number</title><link href="http://peter14f.github.io/pelican-blog/313-super_ugly_number.html" rel="alternate"></link><updated>2016-02-25T23:32:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-25:pelican-blog/313-super_ugly_number.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/super-ugly-number/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+</summary><category term="Binary Trees"></category><category term="Binary Tree Traversal"></category></entry><entry><title>313-super_ugly_number</title><link href="http://peter14f.github.io/pelican-blog/313-super_ugly_number.html" rel="alternate"></link><updated>2016-02-25T23:32:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-25:pelican-blog/313-super_ugly_number.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/super-ugly-number/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;May be attempted to build &lt;tt class="docutils literal"&gt;k&lt;/tt&gt; lists, one for each prime number. But that is actually not necessary.&lt;/p&gt;
 &lt;p&gt;It's better store all the ugly numbers in the list start with &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; and keep track of the index for
 each prime number.&lt;/p&gt;
@@ -12126,7 +12126,105 @@ both ends of the list are properly null-terminated.&lt;/p&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="Binary Trees"></category><category term="Binary Tree Traversals"></category><category term="Postorder Traversal"></category></entry><entry><title>144-binary_tree_preorder_traversal</title><link href="http://peter14f.github.io/pelican-blog/144-binary_tree_preorder_traversal.html" rel="alternate"></link><updated>2015-12-14T19:48:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-12-14:pelican-blog/144-binary_tree_preorder_traversal.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/binary-tree-preorder-traversal/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Revisited the stack approach on 03/05/2016. Remembering to use &lt;tt class="docutils literal"&gt;prev&lt;/tt&gt; for the postorder traversal is one thing.
+Another thing to remember is that a leaf node's left child and right child will be &lt;tt class="docutils literal"&gt;null&lt;/tt&gt;, so make sure to check
+the &lt;tt class="docutils literal"&gt;prev&lt;/tt&gt; is not &lt;tt class="docutils literal"&gt;null&lt;/tt&gt;. Simply checking that&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+prev == top.right
+&lt;/pre&gt;
+&lt;p&gt;will not be enough.&lt;/p&gt;
+&lt;p&gt;The Morris traversal for postorder traversal is also the weird one. We need a dummy node and attach the
+root of the tree we want to traverse to the left child of the dummy node.&lt;/p&gt;
+&lt;p&gt;We also need to write a reverse function to reverse a linked list.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+     cur                                                                                         cur
+       D                   D                    D            D                       D            D
+      / |                 / |                  / |         / |                     / |           /
+     2  |            cur 2  |                 2  |    cur 2  |                    2  |          2
+    / \ |               /|\ |                /| \|       / \ |                   / \ |         / \
+   1   3               1--  3           cur 1--  3      1    3                  1    3  cur   1   3
+
+3's right child is D  1's right child is 2            1's right child is null              3's right child is null
+                                                add reverse to list from 1 to 1      add reverse to list from 2 to 3
+&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;postorderTraversal&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;();&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;dummy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;TreeNode&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;dummy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dummy&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+            &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;preorderPred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+            &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;preorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;preorderPred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;preorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;preorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;preorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;addInReverseOrder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;preorderPred&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+                &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;addInReverseOrder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// reverse list&lt;/span&gt;
+    &lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// restore list&lt;/span&gt;
+    &lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;origNext&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+        &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+        &lt;span class="n"&gt;prev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;origNext&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="Binary Trees"></category><category term="Binary Tree Traversal"></category><category term="Postorder Traversal"></category></entry><entry><title>144-binary_tree_preorder_traversal</title><link href="http://peter14f.github.io/pelican-blog/144-binary_tree_preorder_traversal.html" rel="alternate"></link><updated>2015-12-14T19:48:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-12-14:pelican-blog/144-binary_tree_preorder_traversal.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/binary-tree-preorder-traversal/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here is the solution using a Stack. It is O(n) space complexity. In the worst case, the binary tree is a linked list.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;preorderTraversal&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;();&lt;/span&gt;
@@ -12151,6 +12249,15 @@ both ends of the list are properly null-terminated.&lt;/p&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Here is the solution using Morris Traversal. It takes O(1) space.&lt;/p&gt;
+&lt;p&gt;Again, remembering the picture is much easier than remembering the code.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+        cur                                     cur
+        2                   2                    2                     2
+       /| \                /| \                 / \                   / \
+      1-- 3          cur  1--  3               1   3                 1   3 cur
+     output 2            output 1                                    output 3
+1's right child is 2                     1's right child is null
+&lt;/pre&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;preorderTraversal&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;();&lt;/span&gt;
 
@@ -12189,7 +12296,7 @@ both ends of the list are properly null-terminated.&lt;/p&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that Morris Traversal is possible with both preorder and inoreder traversals.&lt;/p&gt;
-</summary><category term="Binary Trees"></category><category term="Binary Tree Traversals"></category><category term="Preorder Traversal"></category><category term="Morris Traversal"></category></entry><entry><title>143-reorder_list</title><link href="http://peter14f.github.io/pelican-blog/143-reorder_list.html" rel="alternate"></link><updated>2015-12-13T15:56:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-12-13:pelican-blog/143-reorder_list.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/reorder-list/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+</summary><category term="Binary Trees"></category><category term="Binary Tree Traversal"></category><category term="Preorder Traversal"></category><category term="Morris Traversal"></category></entry><entry><title>143-reorder_list</title><link href="http://peter14f.github.io/pelican-blog/143-reorder_list.html" rel="alternate"></link><updated>2015-12-13T15:56:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-12-13:pelican-blog/143-reorder_list.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/reorder-list/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The O(n&lt;sup&gt;2&lt;/sup&gt;) time solution would be too slow for OJ's large test case.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;reorderList&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ListNode&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
@@ -15234,32 +15341,78 @@ different right subBSTs that can be formed.&lt;/p&gt;
 </summary><category term="Binary Search Trees"></category><category term="Dynamic Programming"></category></entry><entry><title>094-binary_tree_inorder_traversal</title><link href="http://peter14f.github.io/pelican-blog/094-binary_tree_inorder_traversal.html" rel="alternate"></link><updated>2015-11-18T18:06:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-18:pelican-blog/094-binary_tree_inorder_traversal.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/binary-tree-inorder-traversal/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I solved this problem using a stack and a while loop.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;inorderTraversal&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
     &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;();&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
     &lt;span class="n"&gt;Stack&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;stk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Stack&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;();&lt;/span&gt;
 
-    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;push&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 
-    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isEmpty&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-            &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isEmpty&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
 
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-            &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;pop&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-            &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-            &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-
-        &lt;span class="o"&gt;}&lt;/span&gt;
-        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
             &lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;push&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
             &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;pop&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+            &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;top&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+            &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
         &lt;span class="o"&gt;}&lt;/span&gt;
     &lt;span class="o"&gt;}&lt;/span&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="Binary Trees"></category><category term="Tree Traversal"></category><category term="Inorder Traversal"></category></entry><entry><title>093-restore_ip_addresses</title><link href="http://peter14f.github.io/pelican-blog/093-restore_ip_addresses.html" rel="alternate"></link><updated>2015-11-17T22:11:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-17:pelican-blog/093-restore_ip_addresses.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/restore-ip-addresses/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There is also the morris traversal which is O(1) space.&lt;/p&gt;
+&lt;p&gt;Here is the basic idea, if &lt;tt class="docutils literal"&gt;cur&lt;/tt&gt; has a left child, the inorder predecessor's right child either needs
+to be set to &lt;tt class="docutils literal"&gt;cur&lt;/tt&gt; or restored back to &lt;tt class="docutils literal"&gt;null&lt;/tt&gt;&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+  cur                                     cur
+  2                   2                    2                     2
+ / \                 /| \                 / \                   / \
+1   3          cur  1--  3               1   3                 1   3 cur
+                   output 1              output 2                output 3
+             1's right child is 2   1's right child is null
+&lt;/pre&gt;
+&lt;p&gt;I find it very difficult to remember the implementation. Remembering the picture is probably way easier.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;inorderTraversal&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;ArrayList&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;();&lt;/span&gt;
+
+    &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;TreeNode&lt;/span&gt; &lt;span class="n"&gt;inorderPred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+            &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;inorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;){&lt;/span&gt;
+                &lt;span class="n"&gt;inorderPred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;inorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;inorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;left&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;inorderPred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+                &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+                &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;add&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+            &lt;span class="n"&gt;cur&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;right&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="Binary Trees"></category><category term="Binary Tree Traversal"></category><category term="Inorder Traversal"></category></entry><entry><title>093-restore_ip_addresses</title><link href="http://peter14f.github.io/pelican-blog/093-restore_ip_addresses.html" rel="alternate"></link><updated>2015-11-17T22:11:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2015-11-17:pelican-blog/093-restore_ip_addresses.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/restore-ip-addresses/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The approach is very similar to the NP problems (051-n_queens, 037-sudoku_solver). We have a current list where we store the current ip address that
 has been built. At each new index, we could have three different code paths:&lt;/p&gt;
 &lt;blockquote&gt;
