@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>332-reconstruct_itinerary - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html">
+
+        <meta name="author" content="Peter Hsieh" />
+        <meta name="keywords" content="Graph,Directed Graph" />
+        <meta name="description" content="LeetCode Problem Link Let&#39;s say currently you have n total choices as your next destination. What we need to make sure is that when trying out ith solution, the recursive function sees all other n-1 choices. Also x total tickets should result in an answer of size x+1. public List&lt;String&gt; findItinerary(String[][] tickets) { int n = tickets.length; List&lt;String&gt; ans = new ArrayList&lt;String&gt;(); Map&lt;String, List&lt;String&gt;&gt; graph = new HashMap&lt;String, List&lt;String&gt;&gt;(); for (int i=0; i&lt;n; i++) { String from = tickets[i][0]; String to = tickets[i][1]; if (!graph.containsKey(from)) graph.put(from ..." />
+
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="332-reconstruct_itinerary"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html"/>
+        <meta property="og:description" content="LeetCode Problem Link Let&#39;s say currently you have n total choices as your next destination. What we need to make sure is that when trying out ith solution, the recursive function sees all other n-1 choices. Also x total tickets should result in an answer of size x+1. public List&lt;String&gt; findItinerary(String[][] tickets) { int n = tickets.length; List&lt;String&gt; ans = new ArrayList&lt;String&gt;(); Map&lt;String, List&lt;String&gt;&gt; graph = new HashMap&lt;String, List&lt;String&gt;&gt;(); for (int i=0; i&lt;n; i++) { String from = tickets[i][0]; String to = tickets[i][1]; if (!graph.containsKey(from)) graph.put(from ..."/>
+        <meta property="article:published_time" content="2016-02-28" />
+            <meta property="article:section" content="LeetCode" />
+            <meta property="article:tag" content="Graph" />
+            <meta property="article:tag" content="Directed Graph" />
+            <meta property="article:author" content="Peter Hsieh" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes LeetCode ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+                <h2>
+                    <a href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html"
+                       rel="bookmark"
+                       title="Permalink to 332-reconstruct_itinerary">
+                        332-reconstruct_itinerary
+                    </a>
+                </h2>
+            <div class="entry-content">
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T21:30:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                <div class="full-article">
+                <p><a class="reference external" href="https://leetcode.com/problems/reconstruct-itinerary/">LeetCode Problem Link</a></p>
+<p>Let's say currently you have <tt class="docutils literal">n</tt> total choices as your next destination.</p>
+<p>What we need to make sure is that when trying out <tt class="docutils literal">ith</tt> solution, the recursive function
+sees all other <tt class="docutils literal"><span class="pre">n-1</span></tt> choices.</p>
+<p>Also <tt class="docutils literal">x</tt> total tickets should result in an answer of size <tt class="docutils literal">x+1</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findItinerary</span><span class="o">(</span><span class="n">String</span><span class="o">[][]</span> <span class="n">tickets</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">from</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">to</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">graph</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">from</span><span class="o">))</span>
+            <span class="n">graph</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">from</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;());</span>
+
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">from</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">to</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">neighbors</span><span class="o">:</span> <span class="n">graph</span><span class="o">.</span><span class="na">values</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">neighbors</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">graph</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="s">&quot;JFK&quot;</span><span class="o">))</span>
+        <span class="n">findItinerary</span><span class="o">(</span><span class="n">graph</span><span class="o">,</span> <span class="n">ans</span><span class="o">,</span> <span class="s">&quot;JFK&quot;</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">findItinerary</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">graph</span><span class="o">,</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span><span class="o">,</span> <span class="n">String</span> <span class="n">cur</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">ans</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">graph</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">cur</span><span class="o">))</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">origSize</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cur</span><span class="o">).</span><span class="na">size</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">origSize</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">next</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cur</span><span class="o">).</span><span class="na">remove</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">tmp</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="kt">boolean</span> <span class="n">removed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cur</span><span class="o">).</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+                <span class="n">removed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">// the recursive call will not see the ith choice</span>
+            <span class="kt">boolean</span> <span class="n">done</span> <span class="o">=</span> <span class="n">findItinerary</span><span class="o">(</span><span class="n">graph</span><span class="o">,</span> <span class="n">ans</span><span class="o">,</span> <span class="n">next</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">done</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">removed</span><span class="o">)</span>
+                <span class="n">graph</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">cur</span><span class="o">,</span> <span class="n">tmp</span><span class="o">);</span>
+
+            <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cur</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">next</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// hit a dead end, backtrack</span>
+    <span class="n">ans</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">ans</span><span class="o">.</span><span class="na">size</span><span class="o">()-</span><span class="mi">1</span><span class="o">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                </div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

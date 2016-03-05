@@ -57,6 +57,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -70,6 +73,68 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/102-binary_tree_level_order_traversal.html">102-binary_tree_level_order_traversal</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-24T22:11:00-08:00"> Nov 24 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/level-order-traversal.html">Level Order Traversal</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-level-order-traversal/">LeetCode Problem Link</a></p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">levelOrder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">curLevel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+
+    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">while</span> <span class="o">(!</span><span class="n">nodes</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cnt</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">TreeNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+            <span class="n">curLevel</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">curLevel</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">levels</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">curLevel</span><span class="o">));</span>
+            <span class="n">curLevel</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="n">cnt</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">levels</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/102-binary_tree_level_order_traversal.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/101-symmetric_tree.html">101-symmetric_tree</a></h2>
                     <div>

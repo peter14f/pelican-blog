@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Directed Graphs - Peter's Coding Notes</title>
+    <title>Detecting Cycles in Directed Graph - Peter's Coding Notes</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="Peter Hsieh" />
-    <meta name="keywords" content="Directed Graphs" />
+    <meta name="keywords" content="Detecting Cycles in Directed Graph" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -57,6 +57,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -71,11 +74,11 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">277_find_the_celebrity</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/207-course_schedule.html">207-course_schedule</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-20T23:09:00-08:00"> Feb 20 2016</time>
+        <time datetime="2016-01-27T11:42:00-08:00"> Jan 27 2016</time>
     </span>
 
 
@@ -83,34 +86,23 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graphs.html">Directed Graphs</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/detecting-cycles-in-directed-graph.html">Detecting Cycles in Directed Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/find-the-celebrity/">LeetCode Problem Link</a></p>
-<p>Original thought was to use a 2D matrix to save the result of knows(i, j).</p>
-<p>Didn't realize that I was essentially building the adjacency matrix.</p>
-<p>This take O(n <sup>2</sup>) time and O(n <sup>2</sup>) space and does pass OJ.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findCelebrity</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="c1">// 0 = haven&#39;t asked</span>
-    <span class="c1">// 1 = knows</span>
-    <span class="c1">// 2 = don&#39;t know</span>
-    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rowKnowsCol</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="c1">// do people know i?</span>
-
-        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="o">)</span>
-                <span class="k">continue</span><span class="o">;</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-                <span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">knows ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/course-schedule/">LeetCode Problem Link</a></p>
+<p>For the DFS approach all we need to remember is that each vertex can be in 3 different states. The initial value <tt class="docutils literal">0</tt>
+means the vertex has not been looked at yet. Value <tt class="docutils literal">1</tt>, searching, means that we are in the process of going through
+all paths from this vertex. Value <tt class="docutils literal">2</tt>, visited, means that we've verified that all paths from this vertex do not
+result in a cycle.</p>
+<p><tt class="docutils literal">hasCycle</tt> should only be called on a vertex when it's in state <tt class="docutils literal">0</tt>.</p>
+<p>In the recursive call  <tt class="docutils literal">hasCycle</tt>, if we see a neighbor who's in ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/207-course_schedule.html">more ...</a>
                 </div>
             </article>
             <hr/>

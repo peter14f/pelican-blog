@@ -12,20 +12,21 @@
 <link rel="canonical" href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">
 
         <meta name="author" content="Peter Hsieh" />
-        <meta name="keywords" content="Graph,Undirected Graphs,BFS,DFS" />
-        <meta name="description" content="LeetCode Problem Link Build the graph first. Here is how I&#39;m doing the check. I am building the graph such that the edge connecting two nodes are bi-directional. Start BFS from node 0, make sure that 1) no cycle is found 2) at the end of the search, all nodes are reached What would happen when you do BFS and there is a cycle? A particular node will be put on the queue twice! So be sure to check the visited status as soon as a node is taken out from the queue. If both conditions are met, then ..." />
+        <meta name="keywords" content="Graph,Undirected Graph,BFS,DFS,Check If Graph A Valid Binary Tree" />
+        <meta name="description" content="LeetCode Problem Link Given ``n`` nodes labeled from ``0`` to ``n - 1`` and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree. For example: Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true. Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false. Hint: Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree? According to the definition of tree ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="261-graph_valid_tree"/>
         <meta property="og:url" content="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html"/>
-        <meta property="og:description" content="LeetCode Problem Link Build the graph first. Here is how I&#39;m doing the check. I am building the graph such that the edge connecting two nodes are bi-directional. Start BFS from node 0, make sure that 1) no cycle is found 2) at the end of the search, all nodes are reached What would happen when you do BFS and there is a cycle? A particular node will be put on the queue twice! So be sure to check the visited status as soon as a node is taken out from the queue. If both conditions are met, then ..."/>
+        <meta property="og:description" content="LeetCode Problem Link Given ``n`` nodes labeled from ``0`` to ``n - 1`` and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree. For example: Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true. Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false. Hint: Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree? According to the definition of tree ..."/>
         <meta property="article:published_time" content="2016-02-18" />
             <meta property="article:section" content="LeetCode" />
             <meta property="article:tag" content="Graph" />
-            <meta property="article:tag" content="Undirected Graphs" />
+            <meta property="article:tag" content="Undirected Graph" />
             <meta property="article:tag" content="BFS" />
             <meta property="article:tag" content="DFS" />
+            <meta property="article:tag" content="Check If Graph A Valid Binary Tree" />
             <meta property="article:author" content="Peter Hsieh" />
 
 
@@ -67,6 +68,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -102,14 +106,43 @@ Peter's Coding Notes            </a>
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graphs.html">Undirected Graphs</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/check-if-graph-a-valid-binary-tree.html">Check If Graph A Valid Binary Tree</a>
     
 </footer><!-- /.post-info -->                <div class="full-article">
                 <p><a class="reference external" href="https://leetcode.com/problems/graph-valid-tree/">LeetCode Problem Link</a></p>
+<pre class="literal-block">
+Given ``n`` nodes labeled from ``0`` to ``n - 1`` and a list of
+undirected edges (each edge is a pair of nodes), write a function to
+check whether these edges make up a valid tree.
+
+For example:
+
+Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
+
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+
+Hint:
+
+Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree?
+
+According to the definition of tree on Wikipedia:
+“a tree is an undirected graph in which any two vertices are connected by exactly one path.
+In other words, any connected graph without simple cycles is a tree.”
+
+Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
+</pre>
+<p>Please note that this problem is checking for any tree, not just binary trees. So the parent node
+may have any number of children, not simply just 2.</p>
+<p>We must check two things. First, a cycle does not exist in the undirected graph.
+We've written similar clone in 133-clone_graph.</p>
+<p>Second, start with any node in the graph, you should be able to reach all other nodes. If a node is
+not reachable, that would imply that the tree has two roots.</p>
 <p>Build the graph first. Here is how I'm doing the check.
 I am building the graph such that the edge connecting two nodes are bi-directional.</p>
 <p>Start BFS from node 0, make sure that
@@ -230,6 +263,165 @@ twice! So be sure to check the visited status as soon as a node is taken out fro
     <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
+<p>Note: You might be wondering why for a binary tree, we should use a undirected graph. After all,
+the parent should act like the source of the edge, and the child should act like the destination of
+the edge. And we've done several problems detecting a cycle in a directed graph using DFS or BFS in
+topological sort.</p>
+<p>Here I am going to show a directed graph that has a cycle in a undirected graph and cannot be
+a valid binary tree.</p>
+<pre class="literal-block">
+(A,B) (B,D) (A,C), (D,C)
+
+          A
+         / \
+         B  C
+        /   |
+       D-----
+</pre>
+<p>If you draw this graph out as a directed graph, you won't be able to detect a cycle on it because C
+is the only sink node.</p>
+<p>Revisit (03/02/2016)</p>
+<p>Here is the code I got using BFS this time. I like how I simplified the data structure I'm using for the graph.
+But I got so concerned with not going back to the previous node, I ended storing (cur, prev) in  a HashMap. There
+is actually no need for that. We can rely on <tt class="docutils literal">visited</tt>. Just do not go back to node already <strong>visited</strong>. That's
+try again.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">validTree</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">edges</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// empty tree or the root by itself</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// 2+ nodes and no edges</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;());</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// a -- b</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">a</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">b</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="n">cycleFound</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">edges</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]);</span>
+
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">cameFrom</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="k">while</span> <span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">visited</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">cur</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">cycleFound</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">neighbors</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">neighbor</span> <span class="o">:</span> <span class="n">neighbors</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// do not go back to the node that you just came from</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">cameFrom</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">cur</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cameFrom</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cur</span><span class="o">)</span> <span class="o">==</span> <span class="n">neighbor</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// was just at this neighbor, that&#39;s how we got to cur</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">neighbor</span><span class="o">);</span>
+            <span class="n">cameFrom</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">cur</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">visited</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">cycleFound</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">visited</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="n">n</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Finally, here what I'd say is the perfect BFS solution for this problem.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">validTree</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">edges</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;());</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">edges</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// no edges</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">a</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">b</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="n">cycle</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="c1">// could start anywhere</span>
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">edges</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]);</span>
+
+    <span class="k">while</span> <span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">visited</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">cur</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">cycle</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">neighbors</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">neighbors</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// neighbor already in visited set</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">visited</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">neighbor</span><span class="o">))</span>
+                <span class="k">continue</span><span class="o">;</span>
+
+            <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">neighbor</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">visited</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">cycle</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="c1">// all nodes reachable?</span>
+    <span class="k">return</span> <span class="n">visited</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="n">n</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>I would like to point out that the graph given in 133-clone_graph is actually not truly undirected because
+it does not contain both edges <tt class="docutils literal">(a, b)</tt> and <tt class="docutils literal">(b, a)</tt> when two nodes a and b are connected.</p>
+<p>A good exercise to do next would be the dijkstra's algorithm. Dijkstra should work for weighted directed and
+undirected graphs to find out the shortest distance to all other nodes from a src node. I've noticed that all
+the graph problems on LeetCode are unweighted graphs.</p>
 
                 </div>
             </div>

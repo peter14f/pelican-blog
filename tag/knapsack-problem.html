@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Undirected Graphs - Peter's Coding Notes</title>
+    <title>Knapsack Problem - Peter's Coding Notes</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="Peter Hsieh" />
-    <meta name="keywords" content="Undirected Graphs" />
+    <meta name="keywords" content="Knapsack Problem" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -57,6 +57,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -71,11 +74,11 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">261-graph_valid_tree</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/322-coin_change.html">322-coin_change</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-18T21:37:00-08:00"> Feb 18 2016</time>
+        <time datetime="2016-02-27T16:13:00-08:00"> Feb 27 2016</time>
     </span>
 
 
@@ -83,25 +86,33 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graphs.html">Undirected Graphs</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/graph-valid-tree/">LeetCode Problem Link</a></p>
-<p>Build the graph first. Here is how I'm doing the check.
-I am building the graph such that the edge connecting two nodes are bi-directional.</p>
-<p>Start BFS from node 0, make sure that
-1) no cycle is found
-2) at the end of the search, all nodes are reached</p>
-<p>What would happen when you do BFS and there is a cycle? A particular node will be put on the queue
-twice! So be sure to check the visited status as soon as a node is taken out from the queue.</p>
-<p>If both conditions are met, then ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/coin-change/">LeetCode Problem Link</a></p>
+<p>Compute the lowest number of coins needed to make up the amount specified.</p>
+<p>May assume that we have an infinite number of coins for each type of coins.</p>
+<p>Can we use a greedy algorithm since using the biggest denomination possible
+as many time as you can will lead you to the least number of coins.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">coinChange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">numCoins</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">coins</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">numCoins</span><span class="o">++;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">amount</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">!=</span> <span class="n">amount</span><span class="o">)</span>
+        <span class="k">return ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/322-coin_change.html">more ...</a>
                 </div>
             </article>
             <hr/>

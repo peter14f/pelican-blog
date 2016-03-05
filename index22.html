@@ -56,6 +56,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -70,11 +73,11 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">133-clone_graph</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/147-insertion_sort_list.html">147-insertion_sort_list</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-09T20:57:00-08:00"> Dec 09 2015</time>
+        <time datetime="2015-12-22T13:16:00-08:00"> Dec 22 2015</time>
     </span>
 
 
@@ -82,43 +85,42 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/insertion-sort.html">Insertion Sort</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/clone-graph/">LeetCode Problem Link</a></p>
-<p>Use recursion and DFS to deep copy the graph. <tt class="docutils literal">mapping</tt> is a mapping from the UndirectedGraphNode in the original
-graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
-terminate.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">UndirectedGraphNode</span> <span class="nf">cloneGraph</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/insertion-sort-list/">LeetCode Problem Link</a></p>
+<p>Insertion sort should take O(n) time only if the list is already sorted.</p>
+<p>I find the easiest to implement this is maintain the head and tail pointers of the currently sorted list.</p>
+<p>Inserting the node at the head or tail is easy and should only take constant time.
+Use a helper method to do the implementation for inserting somewhere in the middle.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">insertionSortList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;();</span>
-    <span class="n">dfsCopy</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">mapping</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsCopy</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
-        <span class="k">return</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="n">UndirectedGraphNode</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UndirectedGraphNode</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">label</span><span class="o">);</span>
-    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">newNode</span><span class="o">);</span>
+    <span class="n">ListNode</span> <span class="n">sortedHead</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">sortedTail</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
 
-    <span class="k">for</span> <span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">neighbors</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">dfsCopy</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">mapping ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">more ...</a>
+    <span class="n">ListNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+    <span class="n">sortedTail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">origNext</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">sortedHead ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/147-insertion_sort_list.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">132-palindrome_partitioning_ii</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">146-lru_cache</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-09T13:11:00-08:00"> Dec 09 2015</time>
+        <time datetime="2015-12-16T19:28:00-08:00"> Dec 16 2015</time>
     </span>
 
 
@@ -126,30 +128,42 @@ terminate.</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/lru.html">LRU</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning-ii/">LeetCode Problem Link</a></p>
-<p>First, build the 2D boolean array as we did in the previous problem, 131-palindrome_partitioning.</p>
-<p>Let <tt class="docutils literal">n</tt> be the length of the input string. Allocate a boolean array of size <tt class="docutils literal">n</tt> and call it <tt class="docutils literal">minCuts</tt>.</p>
-<p><tt class="docutils literal">minCuts[i]</tt> is the minimum number of ways to cut the substring starting at index <tt class="docutils literal">i</tt></p>
-<p>We will fill in the elements of this array from right to left and finally return <tt class="docutils literal">minCuts[0]</tt> as the answer
-since we are looking for the minimum number of cuts needed to partition the input string <tt class="docutils literal">s</tt> into palindromes.</p>
-<p>We will first initialize all elements to ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lru-cache/">LeetCode Problem Link</a></p>
+<p>LRU itself can be implemented with a doubly linked list. For constant time <tt class="docutils literal">get()</tt> and <tt class="docutils literal">set()</tt> operation,
+we must use a hashtable. The data being accessed is moved to the head. The head is the most recently accessed data.
+The tail is the last recently accessed data. When evicting an old data, remove the data at the tail node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LRUCache</span> <span class="o">{</span>
+    <span class="kd">class</span> <span class="nc">ListNode</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">next</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">prev</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">ListNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacity</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">head</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">tail</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">ListNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">131-palindrome_partitioning</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/binary_tree_traversals.html">binary_tree_traversals</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-08T19:05:00-08:00"> Dec 08 2015</time>
+        <time datetime="2015-12-15T17:05:00-08:00"> Dec 15 2015</time>
     </span>
 
 
@@ -157,162 +171,52 @@ since we are looking for the minimum number of cuts needed to partition the inpu
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning/">LeetCode Problem Link</a></p>
-<p><tt class="docutils literal">isPalindrome</tt> is a 2D boolean array. <tt class="docutils literal"><span class="pre">isPalindrome[i][j]</span></tt> tells us if the substring s[i..j] is a palindrome.
-Notice that we will only be filling in the upper right half of the 2D array. Once this is built, we can do a
-dfs and obtain all the parlindrone partitions.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">partition</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">partitions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">partitions</span><span class="o">;</span>
-
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">isPalindrome</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">isPalindrome</span><span class="o">[</span><span class="n">row ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-08T13:02:00-08:00"> Dec 08 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/connected-components.html">Connected Components</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
-<p>Use BFS, start from all four edges, more 'O's that are connected to all four edges to 'P'.</p>
-<p>Go through the board, the remining 'O's are not connected to the edges, so they must be set to 'X'. Reset 'P's to 'O'.</p>
-<p>Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack.</p>
-<p>There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to
-remember.</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">129-sum_root_to_leaf_numbers</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-06T16:11:00-08:00"> Dec 06 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-tree-traversals.html">Binary Tree Traversals</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sum-root-to-leaf-numbers/">LeetCode Problem Link</a></p>
-<p>The nodes in the binary tree have integer values from 0 to 9.</p>
-<div class="highlight"><pre><span class="c1">// values are integers from 0 to 9 only</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+                <div class="summary article-summary"><p>Here I will list the iterative ways to do binary tree traversals. Inorder and preorder traversals are more
+striaghtforward whereas postorder traversal is a little more tricky.</p>
+<p>Preorder traversal -</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">preorder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
 
-    <span class="kt">int</span> <span class="n">curNum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">totalSum</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
+    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
 
-    <span class="n">sumNumbers</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">curNum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">TreeNode</span> <span class="n">top</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
 
-    <span class="k">return</span> <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">sumNumbers</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">curSum</span> <span class="o">=</span> <span class="n">curSum</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">totalSum</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+=</span> <span class="n">curSum</span><span class="o">;</span>
-        <span class="k">return</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">top</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="c1">// else cur remains null</span>
+        <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">sumNumbers</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">curSum</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">nodes</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
-<p>Each node is visited once so the time complexity is ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/129-sum_root_to_leaf_numbers.html">more ...</a>
+<p>Inorder traversal -</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">inorder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/binary_tree_traversals.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">128-longest_consecutive_sequence</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/145-binary_tree_postorder_traversal.html">145-binary_tree_postorder_traversal</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-05T23:04:00-08:00"> Dec 05 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-consecutive-sequence/">LeetCode Problem Link</a></p>
-<p>This problem can be done using one HashSet of integers. We first insert all the numbers in the array into
-the Hashset. Then as we go through each number in the int array, we use the HashSet to quickly look up if
-the adjacent numbers are also in the input array. If so, we remove the number from the HashSet so that
-we don't attempt to find the sequence for that number again.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestConsecutive</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/128-longest_consecutive_sequence.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/126-word_ladder_ii.html">126-word_ladder_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-05T16:39:00-08:00"> Dec 05 2015</time>
+        <time datetime="2015-12-14T20:57:00-08:00"> Dec 14 2015</time>
     </span>
 
 
@@ -320,31 +224,59 @@ we don't attempt to find the sequence for that number again.</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/find-all-shortest-paths.html">Find All Shortest Paths</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-tree-traversals.html">Binary Tree Traversals</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/two-way-bfs.html">Two-Way BFS</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/postorder-traversal.html">Postorder Traversal</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-ladder-ii/">LeetCode Problem Link</a></p>
-<p>We must first perform BFS find out the length of the shortest path. While doing this, we should
-save the choices at each level. When we have found the length of the shortest path and the
-choices at each level, we can then perform DFS to find all shortest paths. What info do we need
-when we perform the DFS? We must know the neighbors of each word at each level. Therefore, it is important
-that we build the neighbors as part of the BFS. I used a HashMap&lt;String, HashSet&gt; for this. The key is string ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/126-word_ladder_ii.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-postorder-traversal/">LeetCode Problem Link</a></p>
+<p>This is the hardest iterative traversal using a stack.</p>
+<p>The check <tt class="docutils literal"><span class="pre">top.right!=null</span> &amp;&amp; prev == top.left</tt> won't work because <tt class="docutils literal">top</tt> node may not have a left child.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">postorderTraversal</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="n">TreeNode</span> <span class="n">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">TreeNode</span> <span class="n">top</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">top</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">prev</span> <span class="o">!=</span> <span class="n">top</span><span class="o">.</span><span class="na">right</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">else</span>
+            <span class="o">{</span>
+                <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">top</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+                <span class="n">prev</span> <span class="o">=</span> <span class="n">top</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">nodes</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/145-binary_tree_postorder_traversal.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/127-word_ladder.html">127-word_ladder</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/144-binary_tree_preorder_traversal.html">144-binary_tree_preorder_traversal</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-04T12:18:00-08:00"> Dec 04 2015</time>
+        <time datetime="2015-12-14T19:48:00-08:00"> Dec 14 2015</time>
     </span>
 
 
@@ -352,20 +284,183 @@ that we build the neighbors as part of the BFS. I used a HashMap&lt;String, Hash
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/breadth-first-search.html">Breadth First Search</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-tree-traversals.html">Binary Tree Traversals</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/preorder-traversal.html">Preorder Traversal</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/morris-traversal.html">Morris Traversal</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-ladder/">LeetCode Problem Link</a></p>
-<p>This is the classic BFS problem. Words that are 1-character different from the current character and in the
-dictionary are considered the current character's neighbors. We need to prevent the same word being added onto
-the queue twice so a HashSet is needed. Lastly, we must keep track of the number of words on the queue for the current
-level and the next level.</p>
-<div class="highlight"><pre><span class="c1">// we want the shortest transformation, so we need to do a BFS</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">ladderLength</span><span class="o">(</span><span class="n">String</span> <span class="n">beginWord</span><span class="o">,</span> <span class="n">String</span> <span class="n">endWord</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">wordList</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
-    <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">beginWord</span><span class="o">);</span>
-    <span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/127-word_ladder.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-preorder-traversal/">LeetCode Problem Link</a></p>
+<p>Here is the solution using a Stack. It is O(n) space complexity. In the worst case, the binary tree is a linked list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">preorderTraversal</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">nodes</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Here is the solution using Morris Traversal. It takes O(1) space.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">preorderTraversal</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="n">TreeNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/144-binary_tree_preorder_traversal.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/143-reorder_list.html">143-reorder_list</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T15:56:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reorder-list/">LeetCode Problem Link</a></p>
+<p>The O(n<sup>2</sup>) time solution would be too slow for OJ's large test case.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">reorderList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">oldNext</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ListNode</span> <span class="n">prevN</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
+            <span class="n">ListNode</span> <span class="n">curN</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">prevN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
+                <span class="n">curN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">// curN is the current tail</span>
+            <span class="n">prevN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
+            <span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+<p>The next idea is to use a Stack so the top element is always the current tail. The time complexity becomes O(n).
+But this ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/143-reorder_list.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">142-linked_list_cycle_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T15:38:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle-ii/">LeetCode Problem Link</a></p>
+<p>The implementation for this problem is not difficult. Once <tt class="docutils literal">fast</tt> catches up with <tt class="docutils literal">slow</tt>, at location <tt class="docutils literal">x</tt>.
+We set <tt class="docutils literal">cur</tt> to the head of the list and then try to advance both <tt class="docutils literal">x</tt> and <tt class="docutils literal">cur</tt> at the same rate.
+The location where <tt class="docutils literal">x</tt> meets with <tt class="docutils literal">cur</tt> is the start of the cycle.</p>
+<p>We can show why this is the case with some modular arithmetic. Let's say it takes <tt class="docutils literal">x</tt> steps for <tt class="docutils literal">slow</tt> to
+reach the start of the cycle at which point <tt class="docutils literal">fast</tt> has take <tt class="docutils literal">2x</tt> steps in total and has taken <tt class="docutils literal">x</tt> steps
+since it ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">141-linked_list_cycle</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T14:53:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle/">LeetCode Problem Link</a></p>
+<p>Use two pointers, <tt class="docutils literal">fast</tt> and <tt class="docutils literal">slow</tt> both start at the head of the list. Make <tt class="docutils literal">fast</tt> take two steps
+and <tt class="docutils literal">slow</tt> take one step in each iteration. If there's a cycle in the linked list. The <tt class="docutils literal">fast</tt> pointer
+will eventually catch up with the <tt class="docutils literal">slow</tt> pointer.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">slow</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span> <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">fastAdvancedTwice</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="o">)</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">fastAdvancedTwice</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -449,6 +544,10 @@ level and the next level.</p>
                             href="http://peter14f.github.io/pelican-blog/index37.html">37</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index38.html">38</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index39.html">39</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index40.html">40</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index23.html">&raquo;</a></li>
         </ul>

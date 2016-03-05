@@ -57,6 +57,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -70,6 +73,141 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">dijkstra_algorithm</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-02T17:49:00-08:00"> Mar 02 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/weighted-graph.html">Weighted Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>In most psuedocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are put
+put in the Q.</p>
+<p>The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
+provide an API where you can update an item's priority. So you must remove that element and then re-insert it
+again.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">VertexComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Vertex</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">distance</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">distance</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Vertex</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">label</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Vertex</span> <span class="o">(</span><span class="kt">int</span> <span class="n">label</span><span class="o">,</span> <span class="kt">int</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">;</span>
+        <span class="k">this ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html">332-reconstruct_itinerary</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T21:30:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reconstruct-itinerary/">LeetCode Problem Link</a></p>
+<p>Let's say currently you have <tt class="docutils literal">n</tt> total choices as your next destination.</p>
+<p>What we need to make sure is that when trying out <tt class="docutils literal">ith</tt> solution, the recursive function
+sees all other <tt class="docutils literal"><span class="pre">n-1</span></tt> choices.</p>
+<p>Also <tt class="docutils literal">x</tt> total tickets should result in an answer of size <tt class="docutils literal">x+1</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findItinerary</span><span class="o">(</span><span class="n">String</span><span class="o">[][]</span> <span class="n">tickets</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">from</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">to</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">graph</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">from</span><span class="o">))</span>
+            <span class="n">graph</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">from ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">277_find_the_celebrity</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-20T23:09:00-08:00"> Feb 20 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/find-the-celebrity/">LeetCode Problem Link</a></p>
+<p>Original thought was to use a 2D matrix to save the result of knows(i, j).</p>
+<p>Didn't realize that I was essentially building the adjacency matrix.</p>
+<p>This take O(n <sup>2</sup>) time and O(n <sup>2</sup>) space and does pass OJ.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findCelebrity</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// 0 = haven&#39;t asked</span>
+    <span class="c1">// 1 = knows</span>
+    <span class="c1">// 2 = don&#39;t know</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rowKnowsCol</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// do people know i?</span>
+
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="o">)</span>
+                <span class="k">continue</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">knows ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/269-alien_dictionary.html">269-alien_dictionary</a></h2>
                     <div>
@@ -157,7 +295,7 @@ nodes.</p>
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/detecting-cycles-in-directed-graphs.html">Detecting Cycles in Directed Graphs</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/detecting-cycles-in-directed-graph.html">Detecting Cycles in Directed Graph</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
         /

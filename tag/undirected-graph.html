@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Undirected Graph - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="Peter Hsieh" />
+    <meta name="keywords" content="Undirected Graph" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Peter's Coding Notes"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog"/>
+        <meta property="og:description" content="Peter's Coding Notes"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">dijkstra_algorithm</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-02T17:49:00-08:00"> Mar 02 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/weighted-graph.html">Weighted Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>In most psuedocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are put
+put in the Q.</p>
+<p>The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
+provide an API where you can update an item's priority. So you must remove that element and then re-insert it
+again.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">VertexComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Vertex</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">distance</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">distance</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Vertex</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">label</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Vertex</span> <span class="o">(</span><span class="kt">int</span> <span class="n">label</span><span class="o">,</span> <span class="kt">int</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">;</span>
+        <span class="k">this ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/323-number_of_connected_components_in_an_undirected_graph.html">323-number_of_connected_components_in_an_undirected_graph</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T00:38:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/union-find.html">Union Find</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/">LeetCode Problem Link</a></p>
+<p>Given <tt class="docutils literal">n</tt> nodes labeled from <tt class="docutils literal">0</tt> to <tt class="docutils literal"><span class="pre">n-1</span></tt> and a list of undirected edges.</p>
+<p>Find the number of connected components in this undirected graph.</p>
+<p>This problem would more of what I typically imagine a blob analysis problem would be if we were
+given dots in a 2D grid.</p>
+<p>But this is clearly a union-find problem. My question is, is it even necessary for me to build the
+graph in a List&lt;Set&lt;Integer&gt;&gt; data structure?</p>
+<p>My guess is not! Simply traversing all the edges in the graph is good enough.</p>
+<p>This is as typical as an union-find ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/323-number_of_connected_components_in_an_undirected_graph.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">261-graph_valid_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T21:37:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/check-if-graph-a-valid-binary-tree.html">Check If Graph A Valid Binary Tree</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/graph-valid-tree/">LeetCode Problem Link</a></p>
+<pre class="literal-block">
+Given ``n`` nodes labeled from ``0`` to ``n - 1`` and a list of
+undirected edges (each edge is a pair of nodes), write a function to
+check whether these edges make up a valid tree.
+
+For example:
+
+Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
+
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+
+Hint:
+
+Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree?
+
+According to the definition of tree ...</pre>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">133-clone_graph</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-09T20:57:00-08:00"> Dec 09 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/clone-graph/">LeetCode Problem Link</a></p>
+<p>Use recursion and DFS to deep copy the graph. <tt class="docutils literal">mapping</tt> is a mapping from the UndirectedGraphNode in the original
+graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
+terminate.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">UndirectedGraphNode</span> <span class="nf">cloneGraph</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;();</span>
+    <span class="n">dfsCopy</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">mapping</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsCopy</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">UndirectedGraphNode</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UndirectedGraphNode</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">label</span><span class="o">);</span>
+    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">newNode</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">neighbors</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">dfsCopy</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">mapping ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-08T13:02:00-08:00"> Dec 08 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/connected-components.html">Connected Components</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
+<p>Use BFS, start from all four edges, more 'O's that are connected to all four edges to 'P'.</p>
+<p>Go through the board, the remining 'O's are not connected to the edges, so they must be set to 'X'. Reset 'P's to 'O'.</p>
+<p>Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack.</p>
+<p>There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to
+remember.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

@@ -56,6 +56,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -70,11 +73,11 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/270-closest_binary_search_tree_value.html">270-closest_binary_search_tree_value</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">285-inorder_successor_in_bst</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-19T23:13:00-08:00"> Feb 19 2016</time>
+        <time datetime="2016-02-22T07:08:00-08:00"> Feb 22 2016</time>
     </span>
 
 
@@ -83,46 +86,33 @@ Peter's Coding Notes            </a>
 
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/closest-value-in-bst.html">Closest Value In BST</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/closest-binary-search-tree-value/">LeetCode Problem Link</a></p>
-<p>Record the closest element traversed so far and the minimum difference.</p>
-<p>The iterative approach definitely makes more sense here.</p>
-<p>Just because the diff is greater than the min diff, it does not mean you should stop there. Continue with the BST
-search.</p>
-<div class="highlight"><pre><span class="c1">// tree is non-empty</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">closestValue</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">double</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/inorder-successor-in-bst/">LeetCode Problem Link</a></p>
+<p>Seems like for the test cases on OJ, we can assume that <tt class="docutils literal">p</tt> is in the BST.</p>
+<p>If that's the case, then we can use the approach to find the successors as in 272-closest_binary_search_tree_values_ii.</p>
+<p>We use a stack to store nodes that are larger than p. And the top of the stack contains the closest value
+that's larger. That will be successor node if <tt class="docutils literal">p</tt> is indeed in the BST.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">inorderSuccessor</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
-    <span class="kt">double</span> <span class="n">minDiff</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">-</span> <span class="n">target</span><span class="o">);</span>
-    <span class="kt">int</span> <span class="n">curVal</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
 
-    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">double</span> <span class="n">myDiff</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">-</span> <span class="n">target</span><span class="o">);</span>
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">val</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">myDiff</span> <span class="o">&lt;</span> <span class="n">minDiff</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">minDiff</span> <span class="o">=</span> <span class="n">myDiff</span><span class="o">;</span>
-            <span class="n">curVal</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
-        <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// too big</span>
-            <span class="n">cur ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/270-closest_binary_search_tree_value.html">more ...</a>
+    <span class="k">return</span> <span class="n">stk ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/269-alien_dictionary.html">269-alien_dictionary</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/284-peeking_iterator.html">284-peeking_iterator</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-19T14:09:00-08:00"> Feb 19 2016</time>
+        <time datetime="2016-02-22T01:35:00-08:00"> Feb 22 2016</time>
     </span>
 
 
@@ -130,128 +120,139 @@ search.</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/topological-sorting.html">Topological Sorting</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/iterators.html">Iterators</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/alien-dictionary/">LeetCode Problem Link</a></p>
-<p>First, we have to understand that the input array is sorted, not the word itself. Just like in English a sorted word
-list could be [&quot;air&quot;, &quot;baseball&quot;, &quot;cat&quot;]. But &quot;air&quot; is not a sorted string. &quot;baseball&quot; is not a sorted string.
-&quot;cat&quot; is not a sorted string.</p>
-<p>I've seen some solutions online assuming that each word is sorted. They are solving a different problem. In the
-given example, the sorted input array is</p>
-<pre class="literal-block">
-[
- &quot;wrt&quot;,
- &quot;wrf&quot;,
- &quot;er&quot;,
- &quot;ett&quot;,
- &quot;rftt&quot;
-]
-</pre>
-<p>We should build the graph &quot;w-&gt;e-&gt;r-&gt;t-&gt;f&quot;.</p>
-<p>Once the graph is built, we just need ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/269-alien_dictionary.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/peeking-iterator/">LeetCode Problem Link</a></p>
+<p>I just use a field to cache what was returned by the next() call.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PeekingIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">iterator</span><span class="o">;</span>
+    <span class="n">Integer</span> <span class="n">val</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">PeekingIterator</span><span class="o">(</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">iterator</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// initialize any member here.</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">iterator</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="k">else</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Returns the next element in the iteration without advancing the iterator.</span>
+    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">peek</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">val</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// hasNext() and next() should behave the same as in the Iterator interface.</span>
+    <span class="c1">// Override them if needed.</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">toReturn</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="k">else</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="k">return ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/284-peeking_iterator.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/268-missing_number.html">268-missing_number</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/283-move_zeroes.html">283-move_zeroes</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-19T13:40:00-08:00"> Feb 19 2016</time>
+        <time datetime="2016-02-22T00:59:00-08:00"> Feb 22 2016</time>
     </span>
 
 
 
 
 
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/two-pointers.html">Two Pointers</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/remove-elements-in-arrays.html">Remove Elements In Arrays</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/missing-number/">LeetCode Problem Link</a></p>
-<p>This problem is trivial if you can use a hashtable. But we're asked to do this in O(n) time and O(1) space.</p>
-<p>We can find the sum of integers from 0 to n.</p>
-<p>sum = (n+1)*(n+0)/2</p>
-<p>The actual sum over the array must be smaller or the same.</p>
-<p>The difference is the missing number.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">missingNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">expectedSum</span> <span class="o">=</span> <span class="o">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">)*</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">actualSum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/expression-add-operators/">LeetCode Problem Link</a></p>
+<p>We're told to move zero entries to the end of the array while maintaining the relative order of the other non-zero
+elements. Do this in-place. Don't make a copy of the array.</p>
+<p>So we cannot just swap with the tail element. We must percolate the zero element to the right one element at a time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveZeroes</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">actualSum</span> <span class="o">+=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-    <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
 
-    <span class="kt">int</span> <span class="n">difference</span> <span class="o">=</span> <span class="n">expectedSum</span> <span class="o">-</span> <span class="n">actualSum</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">r</span><span class="o">];</span>
+                    <span class="n">nums</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                    <span class="n">nums ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/283-move_zeroes.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/282-expresseion_add_operators.html">282-expresseion_add_operators</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-21T22:06:00-08:00"> Feb 21 2016</time>
+    </span>
 
-    <span class="k">return</span> <span class="n">difference</span><span class="o">;</span>
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/expression-add-operators/">LeetCode Problem Link</a></p>
+<p>This problem asks us to find all possible ways to insert binary operators +, -, * into the string such that
+the result is <tt class="docutils literal">target</tt>.</p>
+<p>Please note that not inserting anything is one way as well.</p>
+<p>Let's solve an easier problem first, say the binary operators are only '+' and '-'.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">addOperators</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">dfsAddToResult</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">target</span><span class="o">,</span>
+                   <span class="mi">0</span><span class="o">,</span>
+                   <span class="s">&quot;&quot;</span><span class="o">,</span>
+                   <span class="n">result</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></div>
-<p>I saw ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/268-missing_number.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/267-palindrome_permutation_ii.html">267-palindrome_permutation_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-19T10:44:00-08:00"> Feb 19 2016</time>
-    </span>
 
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsAddToResult</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">,</span>
+                            <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span>
+                            <span class="n">String</span> <span class="n">curStr</span><span class="o">,</span>
+                            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
 
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindrome-permutation.html">Palindrome Permutation</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/permutations.html">Permutations</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-permutation-ii/">LeetCode Problem Link</a></p>
-<p>The problem is not so hard if you remember the precise implementation in 047-permutations_ii.</p>
-<p>Also note that the strings in the returned list must all be palindromes.</p>
-<div class="highlight"><pre><span class="c1">// return all palindromic permutations</span>
-<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">generatePalindromes</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">choices</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;();</span>
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">odd</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
-
-    <span class="k">if</span> <span class="o">(!</span><span class="n">canPalindromePermute</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">choices</span><span class="o">,</span> <span class="n">odd</span><span class="o">))</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">curStr</span><span class="o">);</span>
+        <span class="k">return</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="c1">//System.out.println(&quot;choices: &quot;);</span>
-    <span class="c1">//System.out.println(choices);</span>
-
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">permutations</span> <span class="o">=</span> <span class="n">getUniquePermutations</span><span class="o">(</span><span class="n">choices</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">:</span> <span class="n">permutations</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">choices</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">==</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">String</span> <span class="n">p</span> <span class="o">=</span> <span class="n">str</span> <span class="o">+</span> <span class="n">sb</span><span class="o">.</span><span class="na">reverse ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/267-palindrome_permutation_ii.html">more ...</a>
+    <span class="k">for ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/282-expresseion_add_operators.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/266-palindrome_permutation.html">266-palindrome_permutation</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/281-zigzag_iterator.html">281-zigzag_iterator</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-19T10:29:00-08:00"> Feb 19 2016</time>
+        <time datetime="2016-02-21T16:39:00-08:00"> Feb 21 2016</time>
     </span>
 
 
@@ -259,35 +260,50 @@ given example, the sorted input array is</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindrome-permutation.html">Palindrome Permutation</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/iterators.html">Iterators</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-permutation/">LeetCode Problem Link</a></p>
-<p>Palindromes with even lengths - each character appears an even number of times.</p>
-<p>Palindromes with odd lengths - all characters appears an even number of time.
-One character appears an odd number of time.</p>
-<p>So we must count the number of times each character appears. Use a HashMap&lt;Character, Integer&gt;.</p>
-<p>I simply remove the character from the HashMap when the count reaches two.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPermutePalindrome</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">frequency</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/zigzag-iterator/">LeetCode Problem Link</a></p>
+<p>My implementation uses two pointers <tt class="docutils literal">i</tt>, and <tt class="docutils literal">j</tt> that points to the next number to be spit out in <tt class="docutils literal">l1</tt> and
+<tt class="docutils literal">l2</tt> respectively. We also need a boolean field <tt class="docutils literal">oneNext</tt> that keeps track of which list to use next.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ZigzagIterator</span> <span class="o">{</span>
 
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">l1</span><span class="o">,</span> <span class="n">l2</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">oneNext</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">;</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">frequency</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">c</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">frequency</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">frequency</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">c ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/266-palindrome_permutation.html">more ...</a>
+    <span class="kd">public</span> <span class="nf">ZigzagIterator</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">v1</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">v2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">;</span>
+        <span class="n">l2</span> <span class="o">=</span> <span class="n">v2</span><span class="o">;</span>
+        <span class="n">oneNext</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">toReturn</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">l1</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">l2</span><span class="o">.</span><span class="na">size</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">oneNext</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">toReturn</span> <span class="o">=</span> <span class="n">l1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                <span class="n">i</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="n">toReturn</span> <span class="o">=</span> <span class="n">l2</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="n">oneNext</span> <span class="o">=</span> <span class="o">!</span><span class="n">oneNext ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/281-zigzag_iterator.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/265-paint_house_ii.html">265-paint_house_ii</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/280-wiggle_sort.html">280-wiggle_sort</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-19T09:15:00-08:00"> Feb 19 2016</time>
+        <time datetime="2016-02-21T15:34:00-08:00"> Feb 21 2016</time>
     </span>
 
 
@@ -295,43 +311,97 @@ One character appears an odd number of time.</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/paint-house.html">Paint House</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/paint-house-ii/">LeetCode Problem Link</a></p>
-<p>The colors are not just Red, Green, and Blue anymore. This problem is a generalization of 256-paint_house.
-The number colors is <tt class="docutils literal">k</tt>.</p>
-<p>Given that we've done 256-paint_house. Getting the O(nk <sup>2</sup>) time solution is pretty easy.</p>
-<p>It actually passes OJ as well.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minCostII</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">costs</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">costs</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/wiggle-sort/">LeetCode Problem Link</a></p>
+<p>The straightforward solution takes O(n <sup>2</sup>) time.</p>
+<p>Just continue replacing the current element with either the largest or the smallest element in the
+remaining array.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">wiggleSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// find small</span>
+            <span class="n">replaceLWithSmallest</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// find big</span>
+            <span class="n">replaceLWithBiggest</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">replaceLWithSmallest</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">minIndex</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">l</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">min</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">min</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">minIndex</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+    <span class="n">nums</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">=</span> <span class="n">min</span><span class="o">;</span>
+    <span class="n">nums</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/280-wiggle_sort.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/279-perfect_squares.html">279-perfect_squares</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-21T01:10:00-08:00"> Feb 21 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/perfect-squares/">LeetCode Problem Link</a></p>
+<p>Find the least number of <strong>perfect square numbers</strong> that sum to <tt class="docutils literal">n</tt></p>
+<p>If there is an int <tt class="docutils literal">i</tt> such that <tt class="docutils literal">i * i = n</tt> then the answer is <tt class="docutils literal">1</tt>.</p>
+<p>DFS solution gives us TLE. Basically, I am looking for all combination sums of perfect squares that
+that sums up to <tt class="docutils literal">n</tt> and look for the shortest combination.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numSquares</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">)</span>
         <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">costs</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">sqrt</span><span class="o">*</span><span class="n">sqrt</span> <span class="o">==</span> <span class="n">n</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
 
-    <span class="cm">/*  minCostWithColor[i][j] is the</span>
-<span class="cm">     *    minimum total cost up to house i with the ith painted in color j</span>
-<span class="cm">     *</span>
-<span class="cm">     */</span>
-    <span class="kt">int</span><span class="o">[][]</span> <span class="n">minCostWithColor</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">k</span><span class="o">];</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">lists</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
 
+    <span class="n">findCombinationSum</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(),</span> <span class="n">n</span><span class="o">,</span> <span class="n">lists</span><span class="o">);</span>
 
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/265-paint_house_ii.html">more ...</a>
+    <span class="c1">//System.out.println ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/279-perfect_squares.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/264-ugly_number_ii.html">264-ugly_number_ii</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/278-first_bad_version.html">278-first_bad_version</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-19T08:57:00-08:00"> Feb 19 2016</time>
+        <time datetime="2016-02-20T23:43:00-08:00"> Feb 20 2016</time>
     </span>
 
 
@@ -339,78 +409,40 @@ The number colors is <tt class="docutils literal">k</tt>.</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/ugly-number.html">Ugly Number</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/ugly-number-ii/">LeetCode Problem Link</a></p>
-<p>Use the current ugly number to expand the numbers for 3 lists: L1, L2, L3.</p>
-<p>Use three pointers <tt class="docutils literal">i</tt>, <tt class="docutils literal">j</tt>, <tt class="docutils literal">k</tt>. The next ugly number is min(L1[i], L2[j], L3[k]).</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">nthUglyNumber</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/first-bad-version/">LeetCode Problem Link</a></p>
+<p>There are <tt class="docutils literal">n</tt> versions labeled from <tt class="docutils literal">1</tt> to <tt class="docutils literal">n</tt>.</p>
+<p>O(n) solution would be to try call isBadVersion() for 0, 1, 2, ... .</p>
+<p>The O(logn) solution uses binary search.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">firstBadVersion</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
 
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">l1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">l2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">l3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="kt">int</span> <span class="n">minFound</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
 
-    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="o">(</span><span class="n">h</span><span class="o">-</span><span class="n">l</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
 
-    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="kt">boolean</span> <span class="n">bad</span> <span class="o">=</span> <span class="n">isBadVersion</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
 
-    <span class="k">while</span> <span class="o">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">expandLists</span><span class="o">(</span><span class="n">l1</span><span class="o">,</span> <span class="n">l2</span><span class="o">,</span> <span class="n">l3</span><span class="o">,</span> <span class="n">num</span><span class="o">);</span>
-
-        <span class="n">num</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">l1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">l2</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">),</span> <span class="n">l3</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">k</span><span class="o">)));</span>
-        <span class="n">index</span><span class="o">++;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="n">l1 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/264-ugly_number_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/263-ugly_number.html">263-ugly_number</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-19T00:57:00-08:00"> Feb 19 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/prime-factorization.html">Prime Factorization</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/ugly-number.html">Ugly Number</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/ugly-number/">LeetCode Problem Link</a></p>
-<p>We want to know if prime factors other than 2, 3, and 5 exist for <tt class="docutils literal">num</tt>.</p>
-<p>We can use while loops to keep dividing num by 2, 3, and 5 if it's divisible.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isUgly</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">((</span><span class="n">num</span> <span class="o">%</span> <span class="mi">2</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">bad</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">minFound</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">minFound</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
+            <span class="c1">// could have a lower bad version</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// could have a higher bad version</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="k">while</span> <span class="o">((</span><span class="n">num</span> <span class="o">%</span> <span class="mi">3</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">((</span><span class="n">num</span> <span class="o">%</span> <span class="mi">5</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="mi">5</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">minFound</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
 
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/263-ugly_number.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/278-first_bad_version.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -494,6 +526,10 @@ The number colors is <tt class="docutils literal">k</tt>.</p>
                             href="http://peter14f.github.io/pelican-blog/index37.html">37</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index38.html">38</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index39.html">39</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index40.html">40</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index8.html">&raquo;</a></li>
         </ul>

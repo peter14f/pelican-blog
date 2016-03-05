@@ -67,6 +67,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -222,6 +225,59 @@ the value <tt class="docutils literal">2</tt> instead of the value <tt class="do
     <span class="o">}</span>
 
     <span class="k">return</span> <span class="n">bsts</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Revisited the problem on 03/04/2016. Still doing the iterative approach, it turns out the mapping for cloning
+the right subtree is not all that complicated. Since the right subBST must contain bigger values that the current
+<tt class="docutils literal">root</tt> value, we just need to add <tt class="docutils literal">root</tt> to all the node values when cloning.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="nf">generateTrees</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+    <span class="o">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;&gt;</span> <span class="n">trees</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;&gt;();</span>
+
+    <span class="n">trees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;());</span>
+    <span class="n">trees</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+    <span class="c1">// i is the number of nodes in the tree</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">trees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;());</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">root</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">root</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="o">;</span> <span class="n">root</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">leftSize</span> <span class="o">=</span> <span class="n">root</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">rightSize</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">root</span><span class="o">;</span>
+
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">leftTrees</span> <span class="o">=</span> <span class="n">trees</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">leftSize</span><span class="o">);</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">rightTrees</span> <span class="o">=</span> <span class="n">trees</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">rightSize</span><span class="o">);</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="n">TreeNode</span> <span class="n">l</span> <span class="o">:</span> <span class="n">leftTrees</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">for</span> <span class="o">(</span><span class="n">TreeNode</span> <span class="n">r</span> <span class="o">:</span> <span class="n">rightTrees</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">TreeNode</span> <span class="n">rootNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+
+                    <span class="n">rootNode</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
+                    <span class="n">rootNode</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">cloneTree</span><span class="o">(</span><span class="n">r</span><span class="o">,</span> <span class="n">root</span><span class="o">);</span>
+
+                    <span class="n">trees</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">rootNode</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="c1">// try all root values from 1 up to i</span>
+    <span class="o">}</span> <span class="c1">// for i</span>
+
+    <span class="k">return</span> <span class="n">trees</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="n">TreeNode</span> <span class="nf">cloneTree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">toAdd</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">TreeNode</span> <span class="n">newRoot</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">+</span> <span class="n">toAdd</span><span class="o">);</span>
+
+    <span class="n">newRoot</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">cloneTree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">toAdd</span><span class="o">);</span>
+    <span class="n">newRoot</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">cloneTree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">toAdd</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">newRoot</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
 

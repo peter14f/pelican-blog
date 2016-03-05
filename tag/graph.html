@@ -57,6 +57,9 @@ Peter's Coding Notes            </a>
                         <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
                         </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -70,6 +73,97 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">dijkstra_algorithm</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-02T17:49:00-08:00"> Mar 02 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/weighted-graph.html">Weighted Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>In most psuedocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are put
+put in the Q.</p>
+<p>The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
+provide an API where you can update an item's priority. So you must remove that element and then re-insert it
+again.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">VertexComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Vertex</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">distance</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">distance</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Vertex</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">label</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Vertex</span> <span class="o">(</span><span class="kt">int</span> <span class="n">label</span><span class="o">,</span> <span class="kt">int</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">;</span>
+        <span class="k">this ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html">332-reconstruct_itinerary</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T21:30:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reconstruct-itinerary/">LeetCode Problem Link</a></p>
+<p>Let's say currently you have <tt class="docutils literal">n</tt> total choices as your next destination.</p>
+<p>What we need to make sure is that when trying out <tt class="docutils literal">ith</tt> solution, the recursive function
+sees all other <tt class="docutils literal"><span class="pre">n-1</span></tt> choices.</p>
+<p>Also <tt class="docutils literal">x</tt> total tickets should result in an answer of size <tt class="docutils literal">x+1</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findItinerary</span><span class="o">(</span><span class="n">String</span><span class="o">[][]</span> <span class="n">tickets</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">from</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">to</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">graph</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">from</span><span class="o">))</span>
+            <span class="n">graph</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">from ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">277_find_the_celebrity</a></h2>
                     <div>
@@ -85,7 +179,7 @@ Peter's Coding Notes            </a>
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graphs.html">Directed Graphs</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/find-the-celebrity/">LeetCode Problem Link</a></p>
@@ -129,23 +223,122 @@ Peter's Coding Notes            </a>
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graphs.html">Undirected Graphs</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/check-if-graph-a-valid-binary-tree.html">Check If Graph A Valid Binary Tree</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/graph-valid-tree/">LeetCode Problem Link</a></p>
-<p>Build the graph first. Here is how I'm doing the check.
-I am building the graph such that the edge connecting two nodes are bi-directional.</p>
-<p>Start BFS from node 0, make sure that
-1) no cycle is found
-2) at the end of the search, all nodes are reached</p>
-<p>What would happen when you do BFS and there is a cycle? A particular node will be put on the queue
-twice! So be sure to check the visited status as soon as a node is taken out from the queue.</p>
-<p>If both conditions are met, then ...</p>
+<pre class="literal-block">
+Given ``n`` nodes labeled from ``0`` to ``n - 1`` and a list of
+undirected edges (each edge is a pair of nodes), write a function to
+check whether these edges make up a valid tree.
+
+For example:
+
+Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
+
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+
+Hint:
+
+Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree?
+
+According to the definition of tree ...</pre>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">133-clone_graph</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-09T20:57:00-08:00"> Dec 09 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/clone-graph/">LeetCode Problem Link</a></p>
+<p>Use recursion and DFS to deep copy the graph. <tt class="docutils literal">mapping</tt> is a mapping from the UndirectedGraphNode in the original
+graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
+terminate.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">UndirectedGraphNode</span> <span class="nf">cloneGraph</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;();</span>
+    <span class="n">dfsCopy</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">mapping</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsCopy</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">UndirectedGraphNode</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UndirectedGraphNode</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">label</span><span class="o">);</span>
+    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">newNode</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">neighbors</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">dfsCopy</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">mapping ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-08T13:02:00-08:00"> Dec 08 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/connected-components.html">Connected Components</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/surrounded-regions/">LeetCode Problem Link</a></p>
+<p>Use BFS, start from all four edges, more 'O's that are connected to all four edges to 'P'.</p>
+<p>Go through the board, the remining 'O's are not connected to the edges, so they must be set to 'X'. Reset 'P's to 'O'.</p>
+<p>Note that DFS is not a good idea because we will end up having too many recursive calls on the call stack.</p>
+<p>There is also the iterative approach using a kernel, but the details of the implementation are quite difficult to
+remember.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">more ...</a>
                 </div>
             </article>
             <hr/>
