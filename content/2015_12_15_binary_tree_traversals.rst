@@ -2,7 +2,7 @@ binary_tree_traversals
 ######################
 
 :date: 2015-12-15 17:05
-:tags: Binary Tree Traversals, Binary Trees
+:tags: Binary Tree Traversal, Binary Trees
 :category:
 :slug: binary_tree_traversals
 

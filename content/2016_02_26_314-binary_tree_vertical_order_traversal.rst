@@ -2,7 +2,7 @@
 ########################################
 
 :date: 2016-2-26 9:15
-:tags: Binary Trees, Binary Tree Traversals
+:tags: Binary Trees, Binary Tree Traversal
 :category: LeetCode
 :slug: 314-binary_tree_vertical_order_traversal
 

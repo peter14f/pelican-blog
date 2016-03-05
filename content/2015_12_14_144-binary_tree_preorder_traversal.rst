@@ -2,7 +2,7 @@
 ##################################
 
 :date: 2015-12-14 19:48
-:tags: Binary Trees, Binary Tree Traversals, Preorder Traversal, Morris Traversal
+:tags: Binary Trees, Binary Tree Traversal, Preorder Traversal, Morris Traversal
 :category: LeetCode
 :slug: 144-binary_tree_preorder_traversal
 
@@ -35,6 +35,19 @@ Here is the solution using a Stack. It is O(n) space complexity. In the worst ca
     }
 
 Here is the solution using Morris Traversal. It takes O(1) space.
+
+Again, remembering the picture is much easier than remembering the code.
+
+::
+
+
+         cur                                     cur
+         2                   2                    2                     2
+        /| \                /| \                 / \                   / \
+       1-- 3          cur  1--  3               1   3                 1   3 cur
+      output 2            output 1                                    output 3
+ 1's right child is 2                     1's right child is null
+
 
 .. code-block:: java
 

@@ -2,7 +2,7 @@
 ##################################################
 
 :date: 2016-2-28 21:29
-:tags: Preorder Traversals
+:tags: Preorder Traversal
 :category: LeetCode
 :slug: 331-verify_preorder_serialization_of_a_binary_tree
 
