@@ -13,27 +13,32 @@ I solved this problem using a stack and a while loop.
 .. code-block:: java
 
     public List<Integer> inorderTraversal(TreeNode root) {
+
         List<Integer> ans = new ArrayList<Integer>();
+
+        if (root==null)
+            return ans;
+
         Stack<TreeNode> stk = new Stack<TreeNode>();
 
-        TreeNode cur = root;
+        stk.push(root);
+        TreeNode cur = root.left;
 
-        while (true) {
-            if (cur==null && stk.isEmpty()) {
-                break;
-            }
+        while (cur != null || !stk.isEmpty()) {
 
-            if (cur==null) {
-                cur = stk.pop();
-                ans.add(cur.val);
-                cur = cur.right;
-
-            }
-            else {
+            if (cur != null) {
                 stk.push(cur);
                 cur = cur.left;
+            }
+            else {
+                TreeNode top = stk.pop();
+                ans.add(top.val);
+                cur = top.right;
             }
         }
 
         return ans;
     }
+
+There is also the morris traversal which is O(1) space.
+
