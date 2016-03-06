@@ -2,7 +2,7 @@
 #######################################
 
 :date: 2016-2-28 14:54
-:tags:
+:tags: DFS, Graph, Undirected Graph
 :category: LeetCode
 :slug: 329-longest_increasing_path_in_a_matrix
 

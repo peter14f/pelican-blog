@@ -2,7 +2,7 @@
 #######################################
 
 :date: 2016-2-26 10:08
-:tags: Merge Sort
+:tags: Merge Sort, Divide And Conquer
 :category: LeetCode
 :slug: 315-count_of_smaller_numbers_after_self
 

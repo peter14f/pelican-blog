@@ -5,7 +5,6 @@
 :tags: Range Sum
 :category: LeetCode
 :slug: 325-maximum_size_subarray_sum_equals_k
-:status: draft
 
 `LeetCode Problem Link <https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/>`_
 
