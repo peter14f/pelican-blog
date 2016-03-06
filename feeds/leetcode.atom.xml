@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2016-02-28T21:33:00-08:00</updated><entry><title>334-increasing_triplet_subsequence</title><link href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html" rel="alternate"></link><updated>2016-02-28T21:33:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/334-increasing_triplet_subsequence.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/increasing-triplet-subsequence/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/leetcode.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2016-03-05T22:46:00-08:00</updated><entry><title>330-patching_array</title><link href="http://peter14f.github.io/pelican-blog/330-patching_array.html" rel="alternate"></link><updated>2016-03-05T22:46:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-03-05:pelican-blog/330-patching_array.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/patching-array/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;tt class="docutils literal"&gt;[0, miss)&lt;/tt&gt; be the range of integers that's currently covered. Then &lt;tt class="docutils literal"&gt;miss&lt;/tt&gt; should be
+initialized to &lt;tt class="docutils literal"&gt;1&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;If the next number in the input array &lt;tt class="docutils literal"&gt;nums[i]&lt;/tt&gt; is &lt;tt class="docutils literal"&gt;&amp;lt;= miss&lt;/tt&gt;, then no patch is needed, and we
+can increase &lt;tt class="docutils literal"&gt;miss&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;miss + nums[i]&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Else, we must cover &lt;tt class="docutils literal"&gt;miss&lt;/tt&gt; by adding &lt;tt class="docutils literal"&gt;1 patch&lt;/tt&gt;. We should be greedy and choose &lt;tt class="docutils literal"&gt;miss&lt;/tt&gt; as the
+added number and that will expand the range covered to &lt;tt class="docutils literal"&gt;[0, miss+miss)&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;minPatches&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// integers in range [0, miss) is covered&lt;/span&gt;
+    &lt;span class="kt"&gt;long&lt;/span&gt; &lt;span class="n"&gt;miss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;numPatches&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;miss&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;]&amp;lt;=&lt;/span&gt;&lt;span class="n"&gt;miss&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;miss&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+            &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;miss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;miss&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;miss&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="n"&gt;numPatches&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;numPatches&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that &lt;tt class="docutils literal"&gt;miss&lt;/tt&gt; is of type &lt;strong&gt;long&lt;/strong&gt; to avoid overflow.&lt;/p&gt;
+</summary><category term="Greedy"></category></entry><entry><title>334-increasing_triplet_subsequence</title><link href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html" rel="alternate"></link><updated>2016-02-28T21:33:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/334-increasing_triplet_subsequence.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/increasing-triplet-subsequence/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Trivial solution is to use 3 nested for loops. But the time complexity is O(n &lt;sup&gt;3&lt;/sup&gt;).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;increasingTriplet&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
@@ -371,7 +401,7 @@ existing leaf nodes until you obtain an empty tree.&lt;/p&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary></entry><entry><title>328-odd_even_linked_list</title><link href="http://peter14f.github.io/pelican-blog/328-odd_even_linked_list.html" rel="alternate"></link><updated>2016-02-28T11:11:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/328-odd_even_linked_list.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/odd-even-linked-list/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+</summary><category term="DFS"></category><category term="Graph"></category><category term="Undirected Graph"></category></entry><entry><title>328-odd_even_linked_list</title><link href="http://peter14f.github.io/pelican-blog/328-odd_even_linked_list.html" rel="alternate"></link><updated>2016-02-28T11:11:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/328-odd_even_linked_list.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/odd-even-linked-list/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I think what we can do is to keep removing the even nodes. And for each node we remove, add it
 to the tail of the Even Node list.&lt;/p&gt;
 &lt;p&gt;And then at the end, attach the Even Node list at the end of the Odd Node list.&lt;/p&gt;
@@ -399,7 +429,133 @@ to the tail of the Even Node list.&lt;/p&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This is the trivial O(n &lt;sup&gt;2&lt;/sup&gt;) time solution that does not check for overflow&lt;/p&gt;
-</summary><category term="Segment Tree"></category></entry><entry><title>326-power_of_three</title><link href="http://peter14f.github.io/pelican-blog/326-power_of_three.html" rel="alternate"></link><updated>2016-02-28T08:30:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/326-power_of_three.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/power-of-three/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here is the divide and conquer count in the merge step or merge sort.&lt;/p&gt;
+&lt;p&gt;It takes O(nlogn) time.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Entry&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;long&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cnt&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;toString&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Long&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;(&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toString&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;cnt&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;countRangeSum&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;]);&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;mergeSort&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;cnt&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;cnt&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;mergeSort&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+
+    &lt;span class="n"&gt;mergeSort&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;mergeSort&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;middle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;)/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;mergeSort&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;middle&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;mergeSort&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;middle&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+
+    &lt;span class="c1"&gt;//first half is sorted and second half is sorted too&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// for each left, see how many right in the 2nd half satisfy&lt;/span&gt;
+    &lt;span class="c1"&gt;// lower &amp;lt;= prefixSum[right]-prefixSum[left] &amp;lt;= upper&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;middle&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;middle&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// note that i and j only increments&lt;/span&gt;
+    &lt;span class="c1"&gt;// so the nested loop takes only O(n) time&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="n"&gt;middle&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+
+        &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+
+    &lt;span class="n"&gt;merge&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;middle&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;merge&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;aBegin&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;aEnd&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;bEnd&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Entry&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;aBegin&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;aEnd&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;aBegin&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="n"&gt;aEnd&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="n"&gt;bEnd&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="na"&gt;val&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+            &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+            &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+            &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+            &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;aEnd&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+        &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;bEnd&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+        &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+        &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;++;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;aBegin&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="n"&gt;bEnd&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;prefixSum&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary><category term="Merge Sort"></category><category term="Divide And Conquer"></category></entry><entry><title>326-power_of_three</title><link href="http://peter14f.github.io/pelican-blog/326-power_of_three.html" rel="alternate"></link><updated>2016-02-28T08:30:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/326-power_of_three.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/power-of-three/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Power of 3&lt;/p&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;3 &lt;sup&gt;0&lt;/sup&gt; = 1&lt;/div&gt;
@@ -1383,7 +1539,7 @@ recursive merge sort is usually implemented before you attempt to look at the so
     &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</summary><category term="Merge Sort"></category></entry><entry><title>314-binary_tree_vertical_order_traversal</title><link href="http://peter14f.github.io/pelican-blog/314-binary_tree_vertical_order_traversal.html" rel="alternate"></link><updated>2016-02-26T09:15:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-26:pelican-blog/314-binary_tree_vertical_order_traversal.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/binary-tree-vertical-order-traversal/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
+</summary><category term="Merge Sort"></category><category term="Divide And Conquer"></category></entry><entry><title>314-binary_tree_vertical_order_traversal</title><link href="http://peter14f.github.io/pelican-blog/314-binary_tree_vertical_order_traversal.html" rel="alternate"></link><updated>2016-02-26T09:15:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-26:pelican-blog/314-binary_tree_vertical_order_traversal.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://leetcode.com/problems/binary-tree-vertical-order-traversal/"&gt;LeetCode Problem Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;If we think of the root as in a horizontal position of &lt;tt class="docutils literal"&gt;0&lt;/tt&gt;. It's left child would be in position &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-1&lt;/span&gt;&lt;/tt&gt;, and
 it's right child would be in position &lt;tt class="docutils literal"&gt;1&lt;/tt&gt;. We could get the position of children given the position of the
 current node.&lt;/p&gt;

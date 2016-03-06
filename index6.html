@@ -73,6 +73,34 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/296-best_meeting_point.html">296-best_meeting_point</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T00:53:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/2d-grid.html">2D Grid</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/shorting-distance-from-points.html">Shorting Distance From Points</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-meeting-point/">LeetCode Problem Link</a></p>
+<p>Let's first consider the 1 dimensional case. Say we have 3 points at 1, 2, and 4.</p>
+<p>In the beginning, I thought the choice would be <tt class="docutils literal">min + (min + max) / 2</tt>. But this turns out to be wrong.</p>
+<p>If we choose <tt class="docutils literal">3.5</tt> to be the meeting point, 1 has to go 2.5, 2 has to go 0.5 and 4 has to go 1.5.</p>
+<p>Notice that path for 1 and path for 2 will overlap. To get the minimum distance traveled, we must avoid
+overlaps. And picking the middle starting point in the sorted ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/296-best_meeting_point.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/295-find_median_from_data_stream.html">295-find_median_from_data_stream</a></h2>
                     <div>
 <footer class="post-info">
@@ -353,51 +381,6 @@ a duplicated element.</p>
 
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/287-find_the_duplicate_number.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/286-walls_and_gates.html">286-walls_and_gates</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-22T10:05:00-08:00"> Feb 22 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/walls-and-gates/">LeetCode Problem Link</a></p>
-<p>Should we use BFS or DFS or memoization?</p>
-<p>We can arrive at cell[i][j] from 4 different cells: up, down, left, and right.</p>
-<p>I am going to go with the BFS solution here.</p>
-<p>Scan the 2d grid and initiate a BFS if <tt class="docutils literal">0</tt> is found.</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">row</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">col</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dist</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">row</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">col</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">distance</span> <span class="o">=</span> <span class="n">dist</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">wallsAndGates</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">rooms</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">rooms</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">rooms</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">for ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/286-walls_and_gates.html">more ...</a>
                 </div>
             </article>
             <hr/>

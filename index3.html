@@ -73,6 +73,43 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/320-generalized_abbreviation.html">320-generalized_abbreviation</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-27T13:30:00-08:00"> Feb 27 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/generalized-abbreviation/">LeetCode Problem Link</a></p>
+<p>The list of generalized abbreviations for the word <tt class="docutils literal">word</tt> is</p>
+<pre class="literal-block">
+[&quot;word&quot;, &quot;1ord&quot;, &quot;w1rd&quot;, &quot;wo1d&quot;, &quot;wor1&quot;, &quot;2rd&quot;, &quot;w2d&quot;, &quot;wo2&quot;, &quot;1o1d&quot;, &quot;1or1&quot;, &quot;w1r1&quot;, &quot;1o2&quot;, &quot;2r1&quot;, &quot;3d&quot;, &quot;w3&quot;, &quot;4&quot;]
+</pre>
+<p>So just by looking at the example, I am assuming an integer simply means the number of characters it represents.</p>
+<p>And it sure looks like you cannot have two integers next to each other. Notice that we have <tt class="docutils literal">1o1d</tt> but not <tt class="docutils literal">11rd</tt>.</p>
+<p>I think we can use recursion and DFS.</p>
+<p>My first attempt</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">generateAbbreviations</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">(</span><span class="n">word</span><span class="o">);</span>
+
+    <span class="n">findAllAbbreviations ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/320-generalized_abbreviation.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/319-bulb_switcher.html">319-bulb_switcher</a></h2>
                     <div>
 <footer class="post-info">
@@ -217,6 +254,8 @@ the merged result is stored by into <tt class="docutils literal">nums ...</tt></
 
 <span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/divide-and-conquer.html">Divide And Conquer</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/">LeetCode Problem Link</a></p>
@@ -309,37 +348,6 @@ the index for both prime numbers are advanced in that case.</p>
     <span class="c1">// all indices initialized to zero</span>
     <span class="kt">int</span><span class="o">[]</span> <span class="n">index</span> <span class="o">=</span> <span class="k">new ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/313-super_ugly_number.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/312-burst_balloons.html">312-burst_balloons</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-25T15:07:00-08:00"> Feb 25 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/burst-balloons/">LeetCode Problem Link</a></p>
-<p>pad a <tt class="docutils literal">1</tt> in the front and back of <tt class="docutils literal">nums</tt>.</p>
-<pre class="literal-block">
-int[] numbers = new int[n+2];
-</pre>
-<p>Now dp[left][right] is defined as the maximum coins when we burst all balloons
-between <tt class="docutils literal">left</tt> and <tt class="docutils literal">right</tt> (but not including balloons at <tt class="docutils literal">left</tt> and <tt class="docutils literal">right</tt>).</p>
-<p>For example, if the input array is [3, 1, 5, 8], then
-<tt class="docutils literal">numbers = [1, 3, 1, 5, 8, 1]</tt>
-and we want to return  <tt class="docutils literal"><span class="pre">dp[0][5]</span></tt>.</p>
-<p>dp[0][2] = numbers[0]*numbers[1]*numbers[2]
-dp[1][3] = numbers[1]*numbers[2]*numbers[3]
-dp[2][4] = numbers[2]*numbers[3]*numbers[4 ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/312-burst_balloons.html">more ...</a>
                 </div>
             </article>
             <hr/>

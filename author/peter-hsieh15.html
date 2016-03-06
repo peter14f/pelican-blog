@@ -73,6 +73,51 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/222-count_complete_tree_nodes.html">222-count_complete_tree_nodes</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-04T22:24:00-08:00"> Feb 04 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/complete-binary-trees.html">Complete Binary Trees</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/count-complete-tree-nodes/">LeetCode Problem Link</a></p>
+<p>How would I count the number of nodes for any binary tree?</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">countNodes</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">sum</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
+
+    <span class="n">countNodes</span><span class="o">(</span><span class="n">sum</span><span class="o">,</span> <span class="n">root</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">sum</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">countNodes</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">sum</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">countNodes</span><span class="o">(</span><span class="n">sum</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+    <span class="n">sum</span><span class="o">[</span><span class="mi">0</span><span class="o">]++;</span>
+    <span class="n">countNodes</span><span class="o">(</span><span class="n">sum</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+<p>This solution will get TLE on OJ. So we must use some properties of a complete binary tree.</p>
+<p>Notice that if you pick any node in the complete binary tree as the root of the subtree, that subtree is itself
+a complete binary tree. So ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/222-count_complete_tree_nodes.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/221-maximal_square.html">221-maximal_square</a></h2>
                     <div>
 <footer class="post-info">
@@ -334,53 +379,6 @@ In this implementation, we always pick the element at <tt class="docutils litera
 
     <span class="c1">// left is the final position where the pivot element should be ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/215-kth_largest_element_in_an_array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/214-shortest_palindrome.html">214-shortest_palindrome</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-31T18:18:00-08:00"> Jan 31 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/shortest-palindrome/">LeetCode Problem Link</a></p>
-<p>Remember <tt class="docutils literal">i</tt>, <tt class="docutils literal">j</tt>, and <tt class="docutils literal">end</tt> and StringBuffer's <tt class="docutils literal">reverse()</tt> method.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">shortestPalindrome</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">chs</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">chs</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">end</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">chs</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">chs</span><span class="o">[</span><span class="n">j</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">i</span><span class="o">++;</span>
-            <span class="n">j</span><span class="o">--;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">end</span><span class="o">--;</span>
-            <span class="n">j</span><span class="o">=</span><span class="n">end</span><span class="o">;</span>
-            <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="o">));</span>
-    <span class="n">sb</span><span class="o">.</span><span class="na">reverse</span><span class="o">();</span>
-    <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="n">s</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>The best case runtime complexity is obviously O(n). The worst case runtime complexity is O(n<sup>2</sup>).</p>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/214-shortest_palindrome.html">more ...</a>
                 </div>
             </article>
             <hr/>

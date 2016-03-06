@@ -76,6 +76,45 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/111-minimum_depth_of_binary_tree.html">111-minimum_depth_of_binary_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-27T18:04:00-08:00"> Nov 27 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/tree-node-depth.html">Tree Node Depth</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/minimum-depth-of-binary-tree/">LeetCode Problem Link</a></p>
+<p>Use recursion. A leaf node (node whose left child and right child are both null) has a depth of 1.</p>
+<p>If a node only has a left child, then going to its right child would not lead to a leaf node.
+If a node only has a right child, then going to its left child would not lead to a leaf node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minDepth</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// I&#39;m a leaf node</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">leftChildDepth</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">rightChildDepth</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/111-minimum_depth_of_binary_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/110-balanced_binary_tree.html">110-balanced_binary_tree</a></h2>
                     <div>
 <footer class="post-info">
@@ -411,54 +450,6 @@ the left belong in the left subtree and the numbers to the right belong in the r
 </pre></div>
 
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/104-maximum_depth_of_binary_tree.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/103-binary_tree_zigzag_level_order_traversal.html">103-binary_tree_zigzag_level_order_traversal</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-24T23:18:00-08:00"> Nov 24 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/level-order-traversal.html">Level Order Traversal</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">LeetCode Problem Link</a></p>
-<p>This is very similar to the previous problem 102-binary_tree_level_order_traversal. We just need to
-alternate the direction in which we go through the nodes in the current level each time we finish
-with the current level.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">zigzagLevelOrder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">levels</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">curLevel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">boolean</span> <span class="n">back</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
-        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">(!</span><span class="n">nodes</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cnt</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">TreeNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-
-            <span class="k">if</span> <span class="o">(!</span><span class="n">back</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">curLevel</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/103-binary_tree_zigzag_level_order_traversal.html">more ...</a>
                 </div>
             </article>
             <hr/>

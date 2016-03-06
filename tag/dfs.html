@@ -74,6 +74,63 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/329-longest_increasing_path_in_a_matrix.html">329-longest_increasing_path_in_a_matrix</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T14:54:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix/">LeetCode Problem Link</a></p>
+<p>My first thought is to use DFS.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestIncreasingPath</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">dfs</span><span class="o">(</span><span class="n">matrix</span><span class="o">,</span> <span class="n">row</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">,</span> <span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prevRow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prevCol</span><span class="o">,</span>
+                 <span class="kt">int</span> <span class="n">curLen</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="kt">boolean</span> <span class="n">deadEnd</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="c1">// up</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">prevRow</span> <span class="o">!=</span> <span class="n">row</span><span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">prevCol</span> <span class="o">!=</span> <span class="n">col</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+            <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">col ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/329-longest_increasing_path_in_a_matrix.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/320-generalized_abbreviation.html">320-generalized_abbreviation</a></h2>
                     <div>
 <footer class="post-info">
@@ -397,40 +454,6 @@ Each node is visited once, so the time complexity should be O(n)</p>
         <span class="o">}</span>
         <span class="n">paths</span><span class="o">.</span><span class="na">add ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/257-binary_tree_paths.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/216-combination_sum_iii.html">216-combination_sum_iii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-01T15:25:00-08:00"> Feb 01 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/np.html">NP</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/combination-sum-iii/">LeetCode Problem Link</a></p>
-<p>When we see a new number, we have two choices, choose to include it in the list or choose not
-to include it in the list. Since <tt class="docutils literal">choices</tt> was built by ourselves, we make sure it's sorted.
-This makes it easier to break out from the recursion as early as possible. When the <tt class="docutils literal">curSum</tt>
-already exceeds <tt class="docutils literal">target</tt>, we know there is no point looking further down in the <tt class="docutils literal">choices</tt>
-list since future choices will only be even larger.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">combinationSum3</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
-
-    <span class="k">if ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/216-combination_sum_iii.html">more ...</a>
                 </div>
             </article>
             <hr/>
