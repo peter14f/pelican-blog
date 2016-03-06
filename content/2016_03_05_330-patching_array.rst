@@ -1,7 +1,7 @@
 330-patching_array
 ##################
 
-:date: 2016-3-5 22:46
+:date: 2016-2-28 14:55
 :tags: Greedy
 :category: LeetCode
 :slug: 330-patching_array
