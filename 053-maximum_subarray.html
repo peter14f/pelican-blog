@@ -12,17 +12,17 @@
 <link rel="canonical" href="http://peter14f.github.io/pelican-blog/053-maximum_subarray.html">
 
         <meta name="author" content="Peter Hsieh" />
-        <meta name="keywords" content="Contiguous Subarray" />
-        <meta name="description" content="LeetCode Problem Link The obvious straightforward solution takes O(n) time. But we can do better than that. The only time we want to start counting from the current number is when the accumulated sum so far is negative and the current number bigger than the accumulated sum. public int maxSubArray(int[] nums) { int sum = nums[0]; int maxSum = sum; for (int i=1; i&lt;nums.length; i++) { if (sum &lt; 0 &amp;&amp; nums[i] &gt; sum) sum = nums[i]; else sum += nums[i]; if (sum &gt; maxSum) maxSum = sum; } return maxSum; }" />
+        <meta name="keywords" content="Subarray" />
+        <meta name="description" content="LeetCode Problem Link The obvious straightforward solution takes O(n 2) time. But we can do better than that. The only time we want to start counting from the current number is when the accumulated sum so far is negative and the current number bigger than the accumulated sum. public int maxSubArray(int[] nums) { int sum = nums[0]; int maxSum = sum; for (int i=1; i&lt;nums.length; i++) { if (sum &lt; 0 &amp;&amp; nums[i] &gt; sum) sum = nums[i]; else sum += nums[i]; if (sum &gt; maxSum) maxSum = sum; } return maxSum; } Another way to think of the problem is whenever you encounter ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="053-maximum_subarray"/>
         <meta property="og:url" content="http://peter14f.github.io/pelican-blog/053-maximum_subarray.html"/>
-        <meta property="og:description" content="LeetCode Problem Link The obvious straightforward solution takes O(n) time. But we can do better than that. The only time we want to start counting from the current number is when the accumulated sum so far is negative and the current number bigger than the accumulated sum. public int maxSubArray(int[] nums) { int sum = nums[0]; int maxSum = sum; for (int i=1; i&lt;nums.length; i++) { if (sum &lt; 0 &amp;&amp; nums[i] &gt; sum) sum = nums[i]; else sum += nums[i]; if (sum &gt; maxSum) maxSum = sum; } return maxSum; }"/>
+        <meta property="og:description" content="LeetCode Problem Link The obvious straightforward solution takes O(n 2) time. But we can do better than that. The only time we want to start counting from the current number is when the accumulated sum so far is negative and the current number bigger than the accumulated sum. public int maxSubArray(int[] nums) { int sum = nums[0]; int maxSum = sum; for (int i=1; i&lt;nums.length; i++) { if (sum &lt; 0 &amp;&amp; nums[i] &gt; sum) sum = nums[i]; else sum += nums[i]; if (sum &gt; maxSum) maxSum = sum; } return maxSum; } Another way to think of the problem is whenever you encounter ..."/>
         <meta property="article:published_time" content="2015-10-24" />
             <meta property="article:section" content="LeetCode" />
-            <meta property="article:tag" content="Contiguous Subarray" />
+            <meta property="article:tag" content="Subarray" />
             <meta property="article:author" content="Peter Hsieh" />
 
 
@@ -100,11 +100,11 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/contiguous-subarray.html">Contiguous Subarray</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/subarray.html">Subarray</a>
     
 </footer><!-- /.post-info -->                <div class="full-article">
                 <p><a class="reference external" href="https://leetcode.com/problems/maximum-subarray/">LeetCode Problem Link</a></p>
-<p>The obvious straightforward solution takes O(n) time. But we can do better than that.</p>
+<p>The obvious straightforward solution takes O(n <sup>2</sup>) time. But we can do better than that.</p>
 <p>The only time we want to start counting from the current number is when the accumulated sum so far is negative and
 the current number bigger than the accumulated sum.</p>
 <div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
@@ -123,6 +123,27 @@ the current number bigger than the accumulated sum.</p>
     <span class="o">}</span>
 
     <span class="k">return</span> <span class="n">maxSum</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Another way to think of the problem is whenever you encounter a new number, you have a choice to make.
+You either add the new number to the current running sum, or you begin a new running sum starting with this
+new number. If adding the new number to the current running sum yields a greater sum than starting a new running
+at the new number, then we should choose to add the new number to the current running sum.</p>
+<p>On the other hand, if starting a new running sum yields a greater sum than adding the new number to the
+current running sum, then we should choose to start a new running sum at this new number.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">sum</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">sum</span><span class="o">);</span>
+        <span class="n">max</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sum</span><span class="o">,</span> <span class="n">max</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">max</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
 
