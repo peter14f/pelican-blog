@@ -2,7 +2,7 @@
 ##########################
 
 :date: 2016-2-16 10:58
-:tags: Sliding Windows
+:tags: Sliding Windows, Heap
 :category: LeetCode
 :slug: 239-sliding_window_maximum
 
@@ -105,4 +105,19 @@ The dequeue does not always contain ``k`` elements. We only store the useful ind
     }
 
 Each element's index is inserted and then removed at most once. So this algorithm takes O(n + n) = O(n) time.
+
+
+We only store the index of **previous numbers bigger than the new number** in the dequeue. But we also get rid of
+bigger numbers already that's too old to be in the current window.
+
+::
+
+    DEUQUEU only stores the index of older numbers that are > new number
+
+    front <--------------   --------------> back
+    the smaller the index   the bigger the index
+
+
+    The front of the DEQUEUE always contains the max element in the window
+
 

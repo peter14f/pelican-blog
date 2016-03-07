@@ -48,3 +48,14 @@ We sort the array ``nums`` first, so that we can check for duplicates more easil
             }
         }
     }
+
+
+
+::
+
+    (i-1 >= 0)
+      checks if there is a previous number
+    (nums[i] == num[i-1])
+      check is the current number to try is the same as the previous number tried
+    (!tried[i-1])
+      actually shows that nums[i-1] was already tried in this call
