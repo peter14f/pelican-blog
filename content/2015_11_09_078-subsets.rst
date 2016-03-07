@@ -40,3 +40,38 @@ or not to include the new number (in which case, the subset remains the same)
 
         return subsets;
     }
+
+We could also use an approach similar to DFS since for each new number we see, we either choose to
+include the number of NOT to include the number.
+
+.. code-block:: java
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<List<Integer>>();
+
+        Arrays.sort(nums);
+
+        getUniqueSubsets(nums, 0, new ArrayList<Integer>(), subsets);
+
+        return subsets;
+    }
+
+    private void getUniqueSubsets(int[] nums, int i,
+            List<Integer> curList,
+            List<List<Integer>> subsets) {
+
+        if (i == nums.length) {
+            subsets.add(new ArrayList<Integer>(curList));
+            return;
+        }
+
+        // choose NOT to include nums[i]
+        getUniqueSubsets(nums, i+1, curList, subsets);
+
+        // choose to include nums[i]
+        curList.add(nums[i]);
+        getUniqueSubsets(nums, i+1, curList, subsets);
+        curList.remove(curList.size()-1);
+    }
+
+
