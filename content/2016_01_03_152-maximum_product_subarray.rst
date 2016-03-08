@@ -2,11 +2,34 @@
 ############################
 
 :date: 2016-1-3 12:30
-:tags: Contiguous Subarray, Memoization
+:tags: Subarray, Memoization
 :category: LeetCode
 :slug: 152-maximum_product_subarray
 
 `LeetCode Problem Link <https://leetcode.com/problems/maximum-product-subarray/>`_
+
+The straightforward solution takes O(n :superscript:`2`) time, but will get you TLE on large
+test case.
+
+.. code-block:: java
+
+    public int maxProduct(int[] nums) {
+
+        int n = nums.length;
+        int max = nums[0];
+
+        for (int i=0; i<n; i++) {
+            int product = nums[i];
+            max = Math.max(max, product);
+
+            for (int j=i+1; j<n; j++) {
+                product = product * nums[j];
+                max = Math.max(max, product);
+            }
+        }
+
+        return max;
+    }
 
 We will use two arrays of size ``n`` called ``minProduct`` and ``maxProduct``.
 

@@ -13,7 +13,7 @@ Record the closest element traversed so far and the minimum difference.
 The iterative approach definitely makes more sense here.
 
 Just because the diff is greater than the min diff, it does not mean you should stop there. Continue with the BST
-search.
+search until you hit the leaf node.
 
 .. code-block:: java
 
@@ -46,4 +46,39 @@ search.
         }
 
         return curVal;
+    }
+
+Here's the recursive approach. Either way I think the whole point is that the time complexity should
+be O(h) instead of O(n). ``h`` is the height of the binary tree and ``n`` is the total number of nodes in
+the BST.
+
+.. code-block:: java
+
+    public int closestValue(TreeNode root, double target) {
+        int[] closestValue = {root.val};
+        findClosestValue(root, target, closestValue);
+        return closestValue[0];
+    }
+
+    private void findClosestValue(TreeNode node, double target, int[] closestVal) {
+
+        if (node==null)
+            return;
+
+        double oldDiff = Math.abs(closestVal[0] - target);
+        double newDiff = Math.abs(node.val - target);
+
+        if (newDiff < oldDiff) {
+            closestVal[0] = node.val;
+        }
+
+        if (newDiff==0)
+            return;
+
+        if (target > node.val) {
+            findClosestValue(node.right, target, closestVal);
+        }
+        else {
+            findClosestValue(node.left, target, closestVal);
+        }
     }
