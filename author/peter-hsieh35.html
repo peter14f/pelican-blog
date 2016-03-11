@@ -237,16 +237,36 @@ the right way.</p>
 
 
 
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bucket-sort.html">Bucket Sort</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/first-missing-positive/">LeetCode Problem Link</a></p>
-<p>The input array <tt class="docutils literal">nums</tt> is of size <tt class="docutils literal">n</tt> and could have integers &lt; 1.</p>
-<p>In the first pass, we try to place the number (<tt class="docutils literal">nums[i]</tt>) in the correct bin if the number
-is &gt;= 1 and &lt;= n. The correct bin is at index <tt class="docutils literal">nums[i] - 1</tt>.</p>
-<p>1 should be stored at index 1, 2 should be stored at index 1, ... etc.</p>
-<dl class="docutils">
-<dt>We continue swapping the number at index <tt class="docutils literal">i</tt> with the number at the desired index until either index <tt class="docutils literal">i</tt> now stores</dt>
-<dd>the number <tt class="docutils literal">i+1</tt> or the number at index <tt class="docutils literal">i</tt> cannot be placed in the desired ...</dd></dl>
+<p>Finding the smallest positive number seen so far would not work.
+I gave that as an answer during a phone interview.</p>
+<p>I said sorting next. But failed to deal with duplicates.</p>
+<p>This here handles duplicates find.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">firstMissingPositive</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">smallest</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="k">continue</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">smallest</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">smallest</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">smallest</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Asked the runtime complexity. This is clearly O(nlogn).</p>
+<p>Here's the O(n) space and O(1) time solution using a hash table.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">firstMissingPositive</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/041-first_missing_positive.html">more ...</a>
                 </div>
             </article>
