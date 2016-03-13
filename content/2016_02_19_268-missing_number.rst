@@ -2,7 +2,7 @@
 ##################
 
 :date: 2016-2-19 13:40
-:tags:
+:tags: Bucket Sort
 :category: LeetCode
 :slug: 268-missing_number
 
@@ -44,13 +44,13 @@ after swapping, make sure you decrement i because you need to check the number j
     public int missingNumber(int[] nums) {
 
         for (int i=0; i<nums.length; i++) {
-            if (nums[i] == nums.length) {
-                nums[i] = -1;
-                i--;
-            }
-            else if (nums[i] != i && nums[i] >= 0) {
-                swap(nums, nums[i], i);
-                i--;
+            int index = nums[i];
+
+            if (index != i) {
+                if (index < nums.length) {
+                    swap(nums, index, i);
+                    i--;
+                }
             }
         }
 
@@ -64,7 +64,7 @@ after swapping, make sure you decrement i because you need to check the number j
     }
 
     private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
+        int tmp = nums[i];
         nums[i] = nums[j];
-        nums[j] = temp;
+        nums[j] = tmp;
     }

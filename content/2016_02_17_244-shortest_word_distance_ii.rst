@@ -13,6 +13,9 @@ Stores the indices for each word in a HashMap<String, List<Integer>>.
 Since each list is sorted, we can get the minimum distance in O(a+b) instead of O(ab) where ``a`` and ``b`` are
 the list lengths respectively.
 
+If the indices in each list are not sorted. Given two lists of indices, we will have to exhaust all possible
+pairs ``(a_x, b_x)`` using two nested for loops which will take O(ab) time.
+
 .. code-block:: java
 
     public class WordDistance {
