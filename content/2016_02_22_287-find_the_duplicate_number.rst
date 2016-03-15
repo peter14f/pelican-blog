@@ -53,6 +53,9 @@ If the index we are trying to move to already contains the same number, then the
         nums[j] = tmp;
     }
 
+
+The bucket sort approach is straightforward. I wouldn't recommend using the binary search approach.
+
 .. code-block:: java
 
     public int findDuplicate(int[] nums) {
