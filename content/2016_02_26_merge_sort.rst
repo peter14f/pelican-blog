@@ -2,14 +2,14 @@ merge_sort
 ##########
 
 :date: 2016-2-26 15:00
-:tags: Merge Sort
+:tags: Merge Sort, Sorting
 :category:
 :slug: merge_sort
 
 `Merge Sort Java Implementation Discussion Link
 <http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/7-Sort/merge-sort4.html>`_
 
-While solving 315-count_of_smaller_number_after_self, I realized I was very familiar the usual way of implementing
+While solving 315-count_of_smaller_number_after_self, I realized I was very unfamiliar the usual way of implementing
 merge sort in Java. So I am going to show 3 different versions here and the last one is the *usual* way to
 do it in Java.
 
