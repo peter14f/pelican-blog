@@ -74,6 +74,42 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/124-binary_tree_maximum_path_sum.html">124-binary_tree_maximum_path_sum</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-01T21:02:00-08:00"> Dec 01 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">LeetCode Problem Link</a></p>
+<p>For this problem, a path must contain at least one node in the binary tree unless the</p>
+<p>I want to do DFS, but we are missing the parent link. One way we could solve this problem is build a HashMap to find
+the parent of a node and then perform DFS from each and every node. But this takes exponential time and will not pass
+the large test case on OJ.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxPathSum</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">,</span> <span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">parents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/124-binary_tree_maximum_path_sum.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/114-flatten_binary_tree_to_linked_list.html">114-flatten_binary_tree_to_linked_list</a></h2>
                     <div>
 <footer class="post-info">
@@ -434,51 +470,6 @@ the numbers to the left belong in the left subtree and the numbers to the right 
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/105-construct_binary_tree_from_preorder_and_inorder_traversal.html">105-construct_binary_tree_from_preorder_and_inorder_traversal</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-25T21:58:00-08:00"> Nov 25 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">LeetCode Problem Link</a></p>
-<p>Use recursion. <tt class="docutils literal">preorder[pLow]</tt> is always the root. Try to find that value in <tt class="docutils literal">inorder</tt>. Once found, the numbers to
-the left belong in the left subtree and the numbers to the right belong in the right subtree.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">buildTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">inorder</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">postorder</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">inorder</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">postorder</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
-
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">inorder</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">return</span> <span class="n">buildTree</span><span class="o">(</span><span class="n">inorder</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">postorder</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="n">TreeNode</span> <span class="nf">buildTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">inorder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">iLow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">iHigh</span><span class="o">,</span>
-                           <span class="kt">int</span><span class="o">[]</span> <span class="n">postorder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pLow</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pHigh</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">TreeNode</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">(</span><span class="n">postorder</span><span class="o">[</span><span class="n">pHigh</span><span class="o">]);</span>
-
-    <span class="kt">int</span> <span class="n">rootIndex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-    <span class="k">for ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/105-construct_binary_tree_from_preorder_and_inorder_traversal.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/tag/recursion2.html">&laquo;</a>
@@ -493,6 +484,8 @@ the left belong in the left subtree and the numbers to the right belong in the r
                             href="http://peter14f.github.io/pelican-blog/tag/recursion4.html">4</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/tag/recursion5.html">5</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/tag/recursion6.html">6</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/tag/recursion4.html">&raquo;</a></li>
         </ul>

@@ -74,6 +74,44 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/quick_sort.html">quick_sort</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-15T21:13:00-07:00"> Mar 15 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/quick-sort.html">Quick Sort</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>Note that in this implementation we always pick the last element as the pivot.
+The implementation is simpler and the runtime would be the same for the same input array.</p>
+<p>Unlike in quick select (215-kth_largest_element_in_an_array), we don't actually care about the rank for the pivot.
+We just need to make sure that after the while loop, the pivot element is placed at the its sorted position.</p>
+<p>Note the two recursive calls after the pivot element is properly placed.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">quickSort</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">quickSort ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/quick_sort.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/320-generalized_abbreviation.html">320-generalized_abbreviation</a></h2>
                     <div>
 <footer class="post-info">
@@ -406,48 +444,6 @@ Each node is visited once, so the time complexity should be O(n)</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">254-factor_combinations</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-18T10:52:00-08:00"> Feb 18 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/factor-combinations/">LeetCode Problem Link</a></p>
-<p>I am using recursion to solve this problem. To avoid excessive number of recursive calls, we've got to
-make sure that we only make a recursive call for a valid factor.</p>
-<p><tt class="docutils literal">factorAhead</tt> is the previous factor found. The problem wants each list of factors to be in non-decreasing
-order.</p>
-<div class="highlight"><pre><span class="c1">// do not return 1 and n</span>
-<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">getFactors</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">lists</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">lists</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">firstFactorToTry</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="o">%</span><span class="n">firstFactorToTry</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">firstFactorToTry</span><span class="o">++;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span>
-        <span class="n">findListsOfFactors</span><span class="o">(</span>
-                <span class="n">n</span><span class="o">,</span> <span class="n">firstFactorToTry</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(),</span>
-                <span class="mi">0</span><span class="o">,</span> <span class="n">lists ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -461,6 +457,8 @@ order.</p>
                             href="http://peter14f.github.io/pelican-blog/tag/recursion4.html">4</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/tag/recursion5.html">5</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/tag/recursion6.html">6</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/tag/recursion2.html">&raquo;</a></li>
         </ul>

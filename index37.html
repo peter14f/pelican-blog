@@ -73,6 +73,41 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/033-search_in_rotated_sorted_array.html">033-search_in_rotated_sorted_array</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-27T10:45:00-07:00"> Sep 27 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/rotated-sorted-array.html">Rotated Sorted Array</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-in-rotated-sorted-array/">LeetCode Problem Link</a></p>
+<p>The best way is to list all rotated versions of a sorted array and then think about all cases.</p>
+<div class="line-block">
+<div class="line">[1, 2, 3, 4, 5, 6, 7]</div>
+<div class="line">[2, 3, 4, 5, 6, 7, 1]</div>
+<div class="line">[3, 4, 5, 6, 7, 1, 2]</div>
+<div class="line">[4, 5, 6, 7, 1, 2, 3]</div>
+<div class="line">[5, 6, 7, 1, 2, 3, 4]</div>
+<div class="line">[6, 7, 1, 2, 3, 4, 5]</div>
+<div class="line">[7, 1, 2, 3, 4, 5, 6]</div>
+<div class="line"><br /></div>
+<div class="line">nums[l] to nums[m] can be sorted like in case 1 ~ case 4.</div>
+<div class="line">otherwise nums[m] to nums[h] must be sorted like in case 5 ~ case 7 ...</div></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/033-search_in_rotated_sorted_array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/032-longest_valid_parentheses.html">032-longest_valid_parentheses</a></h2>
                     <div>
 <footer class="post-info">
@@ -358,48 +393,6 @@ the length of the string we're trying to find (needle).</p>
 </pre></div>
 
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/026-remove_duplicates_from_sorted_array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/025-reverse_nodes_in_k_group.html">025-reverse_nodes_in_k_group</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T20:27:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-reversal.html">Linked List Reversal</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-nodes-in-k-group/">LeetCode Problem Link</a></p>
-<p>A good review before doing this problem is 206-reverse_linked_list.</p>
-<p>One way to do this problem is maintain a <tt class="docutils literal">tail</tt> pointer who is always <tt class="docutils literal"><span class="pre">k-1</span></tt> nodes behind <tt class="docutils literal">cur</tt>.</p>
-<p>A better way is to simply count as <tt class="docutils literal">cur</tt> moves forward.</p>
-<p>One gatta is check for the case where <tt class="docutils literal">k &gt; n</tt> where <tt class="docutils literal">n</tt> is the length of the linked list.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">reverseKGroup</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">newHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">sublistHead</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">newSublistHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">prevSublistTail</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">i</span><span class="o">++;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-            <span class="n">newSublistHead</span> <span class="o">=</span> <span class="n">reverseSublist</span><span class="o">(</span><span class="n">sublistHead</span><span class="o">,</span> <span class="n">cur ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/025-reverse_nodes_in_k_group.html">more ...</a>
                 </div>
             </article>
             <hr/>

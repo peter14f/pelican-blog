@@ -73,6 +73,34 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/218-the_skyline_problem.html">218-the_skyline_problem</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-01T15:50:00-08:00"> Feb 01 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/checking-inteverval-overlaps.html">Checking Inteverval Overlaps</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/the-skyline-problem/">LeetCode Problem Link</a></p>
+<p>If we're seeing an increase in height, the head of the rectangle should be stored in <tt class="docutils literal">skyline</tt>.
+If we're seeing a decrease in height, the tail of the rectangle should be stored in <tt class="docutils literal">skyline</tt>.</p>
+<p>Let <tt class="docutils literal">n</tt> be the number of total buildings.</p>
+<p><em>Dumb Solution # 1</em></p>
+<p>The straightforward solution stores all the heights at each x coordinate. This requires two nested for loops.
+Assume that <tt class="docutils literal">m</tt> is the average width of the <tt class="docutils literal">n</tt> buildings. This would take O(nm) time. Not only is this
+not time efficient. This also requires a lot of memory. In the ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/218-the_skyline_problem.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/217-contains_duplicate.html">217-contains_duplicate</a></h2>
                     <div>
 <footer class="post-info">
@@ -368,68 +396,6 @@ spot in the array at the tail. Then we remove edges coming from the node and upd
 nodes.</p>
 <p>If the total number of nodes retrieved from the queue does not ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/210-course_scheduel_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/208-implement_trie.html">208-implement_trie</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-27T11:43:00-08:00"> Jan 27 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/trie.html">Trie</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/prefix-tree.html">Prefix Tree</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/implement-trie-prefix-tree/">LeetCode Problem Link</a></p>
-<p>I use the the null character value '0' to mark the end of a word.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TrieNode</span> <span class="o">{</span>
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">TrieNode</span><span class="o">&gt;</span> <span class="n">children</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">TrieNode</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">children</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">TrieNode</span><span class="o">&gt;();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasChild</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">children</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertChild</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">hasChild</span><span class="o">(</span><span class="n">c</span><span class="o">))</span>
-            <span class="k">return</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">children</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="n">TrieNode</span> <span class="n">newChild</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrieNode</span><span class="o">();</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">children</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">newChild</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">TrieNode</span> <span class="nf">getChild</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">children</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Trie</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">TrieNode</span> <span class="n">root</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Trie</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrieNode</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Inserts a word into the trie.</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/208-implement_trie.html">more ...</a>
                 </div>
             </article>
             <hr/>
