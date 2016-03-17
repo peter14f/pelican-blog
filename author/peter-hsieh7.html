@@ -73,6 +73,48 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/292-nim_game.html">292-nim_game</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-22T20:42:00-08:00"> Feb 22 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-pattern-ii/">LeetCode Problem Link</a></p>
+<p>The person removing the last stone wins.</p>
+<p>At each round, a person removes 1, 2, or 3 stones. You will take the first turn.</p>
+<p>I am thinking to use memoization.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canWinNim</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">canWinWithIStones</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+
+    <span class="n">canWinWithIStones</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="n">canWinWithIStones</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="n">canWinWithIStones</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">4</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="c1">// with (i-1) stones left, (i-2) stones left, (i-3) stones left</span>
+        <span class="c1">// will play B win?</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">canWinWithIStones</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">canWinWithIStones</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">canWinWithIStones</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">3</span><span class="o">])</span> <span class="o">{</span>
+            <span class="c1">// I take 1, or 2 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/292-nim_game.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/291-word_pattern_ii.html">291-word_pattern_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -367,44 +409,6 @@ that's larger. That will be successor node if <tt class="docutils literal">p</tt
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/283-move_zeroes.html">283-move_zeroes</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-22T00:59:00-08:00"> Feb 22 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/two-pointers.html">Two Pointers</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/remove-elements-in-arrays.html">Remove Elements In Arrays</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/expression-add-operators/">LeetCode Problem Link</a></p>
-<p>We're told to move zero entries to the end of the array while maintaining the relative order of the other non-zero
-elements. Do this in-place. Don't make a copy of the array.</p>
-<p>So we cannot just swap with the tail element. We must percolate the zero element to the right one element at a time.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveZeroes</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
-            <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-
-            <span class="k">while</span> <span class="o">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">r</span><span class="o">];</span>
-                    <span class="n">nums</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-                    <span class="n">nums ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/283-move_zeroes.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh6.html">&laquo;</a>
@@ -489,6 +493,8 @@ elements. Do this in-place. Don't make a copy of the array.</p>
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh39.html">39</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh40.html">40</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh41.html">41</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh8.html">&raquo;</a></li>
         </ul>

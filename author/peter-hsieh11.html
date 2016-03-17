@@ -73,6 +73,51 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/258-add_digits.html">258-add_digits</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T19:19:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/add-digits/">LeetCode Problem Link</a></p>
+<p>Here is my solution using two nested while loop.</p>
+<div class="highlight"><pre><span class="c1">// the test cases did not throw a negative input</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">addDigits</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">num</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">10</span><span class="o">;</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="o">;</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="n">sum</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">num</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>The follow-up question want us to do it not using recursion or loop.</p>
+<p>Hint #2 asks us what the possible results are.</p>
+<p>Well, the result must be an integer from 1 to 9.</p>
+<p>Let's see if we can get a pattern.</p>
+<p>1 - 1
+2 - 2
+3 - 3
+4 - 4
+5 - 5 ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/258-add_digits.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/257-binary_tree_paths.html">257-binary_tree_paths</a></h2>
                     <div>
 <footer class="post-info">
@@ -354,59 +399,6 @@ all the meetings. Note that if two meetings start at the same time, it is also i
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/250-count_univalue_subtrees.html">250-count_univalue_subtrees</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-17T23:22:00-08:00"> Feb 17 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/univalue-trees.html">Univalue Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/count-univalue-subtrees/">LeetCode Problem Link</a></p>
-<p>Use recursion and an int array so that I can increment count and preserve the changes across recursive calls.</p>
-<div class="highlight"><pre><span class="c1">// empty tree is not considered a unival tree</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">countUnivalSubtrees</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">cnt</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
-
-    <span class="n">isUnivalSubtree</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">cnt</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">cnt</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isUnivalSubtree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">cnt</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">//System.out.println(root.val + &quot; &quot; + root);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">//System.out.println(&quot;leaf&quot;);</span>
-        <span class="n">cnt</span><span class="o">[</span><span class="mi">0</span><span class="o">]++;</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">isUnivalSubtree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">cnt</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">cnt</span><span class="o">[</span><span class="mi">0</span><span class="o">]++;</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">else ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/250-count_univalue_subtrees.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh10.html">&laquo;</a>
@@ -491,6 +483,8 @@ all the meetings. Note that if two meetings start at the same time, it is also i
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh39.html">39</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh40.html">40</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh41.html">41</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh12.html">&raquo;</a></li>
         </ul>

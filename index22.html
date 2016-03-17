@@ -73,6 +73,42 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/153-find_minimum_in_rotated_sorted_array.html">153-find_minimum_in_rotated_sorted_array</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-04T12:57:00-08:00"> Jan 04 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/rotated-sorted-array.html">Rotated Sorted Array</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-product-subarray/">LeetCode Problem Link</a></p>
+<p>Reminds me of 33-search_in_rotated_sorted_array. It helps to write all versions of a rotated sorted array out.</p>
+<p>When the input array is sorted, return the element at the lowest index.
+If <tt class="docutils literal">l == h</tt>, then return the only element.
+If <tt class="docutils literal">h == l + 1</tt>, then return the smaller element.
+In other cases, we know that the array is rotated in some way,
+we can find the middle index <tt class="docutils literal">m</tt> and throw away the sorted part of the array.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+      <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+
+      <span class="k">while</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">if</span> <span class="o">(</span><span class="n">h</span><span class="o">==</span><span class="n">l</span><span class="o">)</span>
+              <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="n">l ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/153-find_minimum_in_rotated_sorted_array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/152-maximum_product_subarray.html">152-maximum_product_subarray</a></h2>
                     <div>
 <footer class="post-info">
@@ -357,59 +393,6 @@ The tail is the last recently accessed data. When evicting an old data, remove t
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/binary_tree_traversals.html">binary_tree_traversals</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-15T17:05:00-08:00"> Dec 15 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-tree-traversal.html">Binary Tree Traversal</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>Here I will list the iterative ways to do binary tree traversals. Inorder and preorder traversals are more
-striaghtforward whereas postorder traversal is a little more tricky.</p>
-<p>Preorder traversal -</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">preorder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
-    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">nodes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
-            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">cur</span><span class="o">);</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">TreeNode</span> <span class="n">top</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">top</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">cur</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
-            <span class="o">}</span>
-            <span class="c1">// else cur remains null</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">nodes</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>Inorder traversal -</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">inorder</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/binary_tree_traversals.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/index21.html">&laquo;</a>
@@ -494,6 +477,8 @@ striaghtforward whereas postorder traversal is a little more tricky.</p>
                             href="http://peter14f.github.io/pelican-blog/index39.html">39</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index40.html">40</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index41.html">41</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index23.html">&raquo;</a></li>
         </ul>

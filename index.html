@@ -73,6 +73,39 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/338-counting_bits.html">338-counting_bits</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-17T10:49:00-07:00"> Mar 17 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/counting-bits/">LeetCode Problem Link</a></p>
+<p>Read the first two hints and was able to solve this problem.</p>
+<pre class="literal-block">
+int[] bitCount = new int[num+1]
+</pre>
+<p><tt class="docutils literal">bitCount</tt> is the output array.</p>
+<p>Fill in <tt class="docutils literal">bitCount[0]</tt> and <tt class="docutils literal">bitCount[1]</tt> first.</p>
+<p>let the <tt class="docutils literal">msb</tt> be 2 first. How many numbers have the 2nd bit set?
+Two numbers - 2 and 3.</p>
+<p>Then we right shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 4. How many numbers have the 3rd bit set?
+Four numbers - 4, 5, 6, 7.</p>
+<p>Then we right shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 8. How many numbers have the 4th bit set?
+Eight numbers - 8, 9, 10, 11, 12 ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/338-counting_bits.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/quick_sort.html">quick_sort</a></h2>
                     <div>
 <footer class="post-info">
@@ -368,60 +401,6 @@ again.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/333-largest_bst_subtree.html">333-largest_bst_subtree</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T21:31:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/largest-bst-subtree/">LeetCode Problem Link</a></p>
-<p>Given a binary tree, return the size of the largest BST subtree you can find.</p>
-<div class="highlight"><pre><span class="c1">// size of the current tree</span>
-<span class="c1">// range of the nodes in current tree</span>
-<span class="kd">class</span> <span class="nc">Result</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">lower</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">upper</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Result</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">size</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
-        <span class="n">lower</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
-        <span class="n">upper</span> <span class="o">=</span> <span class="n">u</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="s">&quot;size=&quot;</span> <span class="o">+</span> <span class="n">size</span> <span class="o">+</span> <span class="s">&quot; low=&quot;</span> <span class="o">+</span> <span class="n">lower</span> <span class="o">+</span> <span class="s">&quot; high=&quot;</span> <span class="o">+</span> <span class="n">upper</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">largestBSTSubtree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
-    <span class="n">traverse</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">maxSize</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">maxSize</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="c1">// return a Result of -1 means subtree whose root is cur cannot be a BST</span>
-<span class="c1">//</span>
-<span class="c1">//</span>
-<span class="kd">private</span> <span class="n">Result</span> <span class="nf">traverse</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">cur</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">cur ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/333-largest_bst_subtree.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -505,6 +484,8 @@ again.</p>
                             href="http://peter14f.github.io/pelican-blog/index39.html">39</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index40.html">40</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index41.html">41</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index2.html">&raquo;</a></li>
         </ul>
