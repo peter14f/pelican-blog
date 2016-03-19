@@ -21,10 +21,10 @@ Fill in ``bitCount[0]`` and ``bitCount[1]`` first.
 let the ``msb`` be 2 first. How many numbers have the 2nd bit set?
 Two numbers - 2 and 3.
 
-Then we right shift ``msb``, ``msb`` is now 4. How many numbers have the 3rd bit set?
+Then we left shift ``msb``, ``msb`` is now 4. How many numbers have the 3rd bit set?
 Four numbers - 4, 5, 6, 7.
 
-Then we right shift ``msb``, ``msb`` is now 8. How many numbers have the 4th bit set?
+Then we left shift ``msb``, ``msb`` is now 8. How many numbers have the 4th bit set?
 Eight numbers - 8, 9, 10, 11, 12, 13, 14, 15
 
 Note that the number of numbers have bit ``msb`` set is precisely ``msb``.
