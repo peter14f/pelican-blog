@@ -74,6 +74,56 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">133-clone_graph</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-09T20:57:00-08:00"> Dec 09 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/clone-graph/">LeetCode Problem Link</a></p>
+<p>Use recursion and DFS to deep copy the graph. <tt class="docutils literal">mapping</tt> is a mapping from the UndirectedGraphNode in the original
+graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
+terminate.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">UndirectedGraphNode</span> <span class="nf">cloneGraph</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;();</span>
+    <span class="n">dfsCopy</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">mapping</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsCopy</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">UndirectedGraphNode</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UndirectedGraphNode</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">label</span><span class="o">);</span>
+    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">newNode</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">neighbors</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">dfsCopy</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">mapping ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/130-surrounded_regions.html">130-surrounded_regions</a></h2>
                     <div>
 <footer class="post-info">

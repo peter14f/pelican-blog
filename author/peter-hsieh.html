@@ -73,6 +73,52 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">a04-shortest_distance_undirected_unweighted</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-19T14:33:00-07:00"> Mar 19 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><pre class="literal-block">
+Given a graph and two nodes src and dest, find the shortest distance and the shortest path from
+src to dest
+</pre>
+<div class="highlight"><pre><span class="c1">// this is a undirected and unweighted graph</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">shortestPathUnweighted</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">edges</span><span class="o">,</span> <span class="kt">int</span> <span class="n">src</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;());</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// a - b</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">a</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">b</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/338-counting_bits.html">338-counting_bits</a></h2>
                     <div>
 <footer class="post-info">
@@ -97,9 +143,9 @@ int[] bitCount = new int[num+1]
 <p>Fill in <tt class="docutils literal">bitCount[0]</tt> and <tt class="docutils literal">bitCount[1]</tt> first.</p>
 <p>let the <tt class="docutils literal">msb</tt> be 2 first. How many numbers have the 2nd bit set?
 Two numbers - 2 and 3.</p>
-<p>Then we right shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 4. How many numbers have the 3rd bit set?
+<p>Then we left shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 4. How many numbers have the 3rd bit set?
 Four numbers - 4, 5, 6, 7.</p>
-<p>Then we right shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 8. How many numbers have the 4th bit set?
+<p>Then we left shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 8. How many numbers have the 4th bit set?
 Eight numbers - 8, 9, 10, 11, 12 ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/338-counting_bits.html">more ...</a>
                 </div>
@@ -356,48 +402,6 @@ again.</p>
         <span class="k">this</span><span class="o">.</span><span class="na">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">;</span>
         <span class="k">this ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html">334-increasing_triplet_subsequence</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T21:33:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/increasing-triplet-subsequence/">LeetCode Problem Link</a></p>
-<p>Trivial solution is to use 3 nested for loops. But the time complexity is O(n <sup>3</sup>).</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">increasingTriplet</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
-                <span class="k">continue</span><span class="o">;</span>
-
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">])</span>
-                    <span class="k">continue</span><span class="o">;</span>
-
-                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
-                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>Maintain <tt class="docutils literal">smallestSeen</tt> and <tt class="docutils literal">secondSmallestSeen</tt> s you traverse the array.</p>
-<p>We had to do similar comparisons back in 265-paint_house_ii.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">increasingTriplet</span><span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html">more ...</a>
                 </div>
             </article>
             <hr/>

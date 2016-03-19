@@ -73,6 +73,52 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/202-happy_number.html">202-happy_number</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-25T18:03:00-08:00"> Jan 25 2016</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/happy-number/">LeetCode Problem Link</a></p>
+<p>I use a HashSet&lt;Integer&gt; to keep track of numbers that we've already seen to terminate the loop.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isHappy</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">seen</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">seen</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">n</span><span class="o">))</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">seen</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span><span class="o">;</span>
+            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(!</span><span class="n">list</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">num</span><span class="o">*</span><span class="n">num</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/202-happy_number.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/201-bitwise_and_of_numbers_range.html">201-bitwise_and_of_numbers_range</a></h2>
                     <div>
 <footer class="post-info">
@@ -364,49 +410,6 @@ current number with 0xF gives us the least significant 4 bits.</p>
     <span class="n">table</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
     <span class="n">table</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="mi">12 ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/190-reverse_bits.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/189-rotate_array.html">189-rotate_array</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-22T17:40:00-08:00"> Jan 22 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/rotate-array/">LeetCode Problem Link</a></p>
-<p>The O(n) space solution is quite straightforward.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">newNums</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">from</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="o">;</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">from</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
-            <span class="n">from</span> <span class="o">+=</span> <span class="n">n</span><span class="o">;</span>
-
-        <span class="n">newNums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">from</span><span class="o">];</span>
-    <span class="o">}</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">newNums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-<p>How can we solve this problem in-place?</p>
-<p>The problem is tagged as related to 186-reverse_words_in_a_string_ii. This kind of gives away
-the trick. We can reverse the whole array first, and then rotate two different parts of the
-array.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">rotate</span><span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/189-rotate_array.html">more ...</a>
                 </div>
             </article>
             <hr/>

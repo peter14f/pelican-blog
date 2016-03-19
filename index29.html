@@ -73,6 +73,36 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/099-recover_binary_search_tree.html">099-recover_binary_search_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-22T21:15:00-08:00"> Nov 22 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/morris-traversal.html">Morris Traversal</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/recover-binary-search-tree/">LeetCode Problem Link</a></p>
+<p>This problem brings up a problem that has been overlooked by me. That is the space complexity of a recursive
+function. The space complexity of a recursive call is the number of calls on the stack. So for
+inorder tree traversal, the space complexity is O(log n).</p>
+<p>I am going to present the O(n) space solution first. The idea is to keep track of the previous node in
+the inorder traversal. If <tt class="docutils literal">prev</tt> is bigger than <tt class="docutils literal">cur</tt>, then we know there is problem. We insert both <tt class="docutils literal">cur</tt> and
+<tt class="docutils literal">prev</tt> into a list.</p>
+<p>When the traversal ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/099-recover_binary_search_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/098-validate_binary_search_tree.html">098-validate_binary_search_tree</a></h2>
                     <div>
 <footer class="post-info">
@@ -356,67 +386,6 @@ has been built. At each new index, we could have three different code paths:</p>
 <span class="cm"> */</span>
 <span class="kd">private</span> <span class="n">ListNode</span> <span class="nf">reverseBetween</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">from</span><span class="o">,</span> <span class="kt">int ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/092-reverse_linked_list_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/091-decode_ways.html">091-decode_ways</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-17T12:43:00-08:00"> Nov 17 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/count-ways.html">Count Ways</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/decode-ways/">LeetCode Problem Link</a></p>
-<p>I will show the recursive solution first, which cannot pass the long test cases.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numDecodings</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">sArr</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-
-    <span class="n">numDecodings</span><span class="o">(</span><span class="n">sArr</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">numDecodings</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span><span class="o">)</span> <span class="o">{</span>
-
-
-    <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">sArr</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">number</span> <span class="o">&lt;=</span><span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ans</span><span class="o">[</span><span class="mi">0</span><span class="o">]++;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">numDecodings</span><span class="o">(</span><span class="n">sArr</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">ans</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="o">{</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">number</span> <span class="o">=</span> <span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">);</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">number</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">number</span> <span class="o">+</span> <span class="o">(</span><span class="n">sArr</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">);</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">number ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/091-decode_ways.html">more ...</a>
                 </div>
             </article>
             <hr/>

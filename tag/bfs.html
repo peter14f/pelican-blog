@@ -74,6 +74,52 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">a04-shortest_distance_undirected_unweighted</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-19T14:33:00-07:00"> Mar 19 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><pre class="literal-block">
+Given a graph and two nodes src and dest, find the shortest distance and the shortest path from
+src to dest
+</pre>
+<div class="highlight"><pre><span class="c1">// this is a undirected and unweighted graph</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">shortestPathUnweighted</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">edges</span><span class="o">,</span> <span class="kt">int</span> <span class="n">src</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;());</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// a - b</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">a</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">b</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/302-smallest_rectangle_enclosing_black_pixels.html">302-smallest_rectangle_enclosing_black_pixels</a></h2>
                     <div>
 <footer class="post-info">
@@ -345,56 +391,6 @@ I therefore much prefer the BFS approach shown below.</p>
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/200-number_of_islands.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">133-clone_graph</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-09T20:57:00-08:00"> Dec 09 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/clone-graph/">LeetCode Problem Link</a></p>
-<p>Use recursion and DFS to deep copy the graph. <tt class="docutils literal">mapping</tt> is a mapping from the UndirectedGraphNode in the original
-graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
-terminate.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">UndirectedGraphNode</span> <span class="nf">cloneGraph</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;();</span>
-    <span class="n">dfsCopy</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">mapping</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsCopy</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">UndirectedGraphNode</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UndirectedGraphNode</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">label</span><span class="o">);</span>
-    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">newNode</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">neighbors</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">dfsCopy</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">mapping ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">more ...</a>
                 </div>
             </article>
             <hr/>
