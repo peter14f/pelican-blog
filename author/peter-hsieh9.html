@@ -73,6 +73,50 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">277_find_the_celebrity</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-20T23:09:00-08:00"> Feb 20 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/find-the-celebrity/">LeetCode Problem Link</a></p>
+<p>Original thought was to use a 2D matrix to save the result of knows(i, j).</p>
+<p>Didn't realize that I was essentially building the adjacency matrix.</p>
+<p>This take O(n <sup>2</sup>) time and O(n <sup>2</sup>) space and does pass OJ.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findCelebrity</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// 0 = haven&#39;t asked</span>
+    <span class="c1">// 1 = knows</span>
+    <span class="c1">// 2 = don&#39;t know</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rowKnowsCol</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// do people know i?</span>
+
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="o">)</span>
+                <span class="k">continue</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">knows ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/276-paint_fence.html">276-paint_fence</a></h2>
                     <div>
 <footer class="post-info">
@@ -386,45 +430,6 @@ search until you hit the leaf node.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/269-alien_dictionary.html">269-alien_dictionary</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-19T14:09:00-08:00"> Feb 19 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/topological-sorting.html">Topological Sorting</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/alien-dictionary/">LeetCode Problem Link</a></p>
-<p>First, we have to understand that the input array is sorted, not the word itself. Just like in English a sorted word
-list could be [&quot;air&quot;, &quot;baseball&quot;, &quot;cat&quot;]. But &quot;air&quot; is not a sorted string. &quot;baseball&quot; is not a sorted string.
-&quot;cat&quot; is not a sorted string.</p>
-<p>I've seen some solutions online assuming that each word is sorted. They are solving a different problem. In the
-given example, the sorted input array is</p>
-<pre class="literal-block">
-[
- &quot;wrt&quot;,
- &quot;wrf&quot;,
- &quot;er&quot;,
- &quot;ett&quot;,
- &quot;rftt&quot;
-]
-</pre>
-<p>We should build the graph &quot;w-&gt;e-&gt;r-&gt;t-&gt;f&quot;.</p>
-<p>Once the graph is built, we just need ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/269-alien_dictionary.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh8.html">&laquo;</a>
@@ -521,7 +526,7 @@ given example, the sorted input array is</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+         <div class="col-xs-10">&copy; 2018 Peter Hsieh
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

@@ -73,6 +73,49 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/303-range_sum_query.html">303-range_sum_query</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T20:34:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/range-sum.html">Range Sum</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/range-sum-query-immutable/">LeetCode Problem Link</a></p>
+<p>There are many calls to <tt class="docutils literal">sumRange()</tt>, so if we can store the result then <tt class="docutils literal">sumRange()</tt> can become O(1) time.</p>
+<p>We could use a 2d int array called <tt class="docutils literal">sum</tt> where <tt class="docutils literal"><span class="pre">sum[i][j]</span></tt> is the sum from index <tt class="docutils literal">i</tt> all the way to
+index <tt class="docutils literal">j</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumArray</span> <span class="o">{</span>
+
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">sum</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">NumArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+        <span class="n">sum</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="c1">// sum over a single value</span>
+            <span class="n">sum</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">row</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">row</span><span class="o">];</span>
+        <span class="o">}</span>
+
+        <span class="c1">// d is the distance from diagonal</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">d</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">d</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/303-range_sum_query.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/302-smallest_rectangle_enclosing_black_pixels.html">302-smallest_rectangle_enclosing_black_pixels</a></h2>
                     <div>
 <footer class="post-info">
@@ -338,50 +381,6 @@ overlaps. And picking the middle starting point in the sorted ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/295-find_median_from_data_stream.html">295-find_median_from_data_stream</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-23T00:06:00-08:00"> Feb 23 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/median.html">Median</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/priority-queues.html">Priority Queues</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/flip-game-ii/">LeetCode Problem Link</a></p>
-<p>If we could maintain two heaps, a max heap and a min heap, such that their size differs by one at most. Then finding
-the median would be doable.</p>
-<p>We must be aware that at the end of each add, while(maxHeap.peek() &gt; minHeap.peek()), we swap the extreme elements.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MedianFinder</span> <span class="o">{</span>
-
-    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">minHeap</span><span class="o">;</span>
-    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">maxHeap</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">MedianFinder</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">minHeap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-        <span class="n">maxHeap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Adds a number into the data structure.</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addNum</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">maxHeap</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="n">minHeap</span><span class="o">.</span><span class="na">size</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">maxHeap</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="c1">// size off by 1, insert ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/295-find_median_from_data_stream.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh5.html">&laquo;</a>
@@ -478,7 +477,7 @@ the median would be doable.</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+         <div class="col-xs-10">&copy; 2018 Peter Hsieh
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

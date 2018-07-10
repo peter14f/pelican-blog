@@ -73,6 +73,50 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/295-find_median_from_data_stream.html">295-find_median_from_data_stream</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T00:06:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/median.html">Median</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/priority-queues.html">Priority Queues</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/flip-game-ii/">LeetCode Problem Link</a></p>
+<p>If we could maintain two heaps, a max heap and a min heap, such that their size differs by one at most. Then finding
+the median would be doable.</p>
+<p>We must be aware that at the end of each add, while(maxHeap.peek() &gt; minHeap.peek()), we swap the extreme elements.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MedianFinder</span> <span class="o">{</span>
+
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">minHeap</span><span class="o">;</span>
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">maxHeap</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MedianFinder</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">minHeap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+        <span class="n">maxHeap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Adds a number into the data structure.</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addNum</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">maxHeap</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="n">minHeap</span><span class="o">.</span><span class="na">size</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">maxHeap</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// size off by 1, insert ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/295-find_median_from_data_stream.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/294-flip_game_ii.html">294-flip_game_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -350,41 +394,6 @@ a duplicated element.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">285-inorder_successor_in_bst</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-22T07:08:00-08:00"> Feb 22 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/inorder-successor-in-bst/">LeetCode Problem Link</a></p>
-<p>Seems like for the test cases on OJ, we can assume that <tt class="docutils literal">p</tt> is in the BST.</p>
-<p>If that's the case, then we can use the approach to find the successors as in 272-closest_binary_search_tree_values_ii.</p>
-<p>We use a stack to store nodes that are larger than p. And the top of the stack contains the closest value
-that's larger. That will be successor node if <tt class="docutils literal">p</tt> is indeed in the BST.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">inorderSuccessor</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
-
-    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">val</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">return</span> <span class="n">stk ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/index6.html">&laquo;</a>
@@ -481,7 +490,7 @@ that's larger. That will be successor node if <tt class="docutils literal">p</tt
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+         <div class="col-xs-10">&copy; 2018 Peter Hsieh
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

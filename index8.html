@@ -73,6 +73,41 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">285-inorder_successor_in_bst</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-22T07:08:00-08:00"> Feb 22 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/inorder-successor-in-bst/">LeetCode Problem Link</a></p>
+<p>Seems like for the test cases on OJ, we can assume that <tt class="docutils literal">p</tt> is in the BST.</p>
+<p>If that's the case, then we can use the approach to find the successors as in 272-closest_binary_search_tree_values_ii.</p>
+<p>We use a stack to store nodes that are larger than p. And the top of the stack contains the closest value
+that's larger. That will be successor node if <tt class="docutils literal">p</tt> is indeed in the BST.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">inorderSuccessor</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+
+    <span class="n">findSuccessors</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">val</span><span class="o">,</span> <span class="n">stk</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">stk ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/284-peeking_iterator.html">284-peeking_iterator</a></h2>
                     <div>
 <footer class="post-info">
@@ -411,50 +446,6 @@ that sums up to <tt class="docutils literal">n</tt> and look for the shortest co
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">277_find_the_celebrity</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-20T23:09:00-08:00"> Feb 20 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/find-the-celebrity/">LeetCode Problem Link</a></p>
-<p>Original thought was to use a 2D matrix to save the result of knows(i, j).</p>
-<p>Didn't realize that I was essentially building the adjacency matrix.</p>
-<p>This take O(n <sup>2</sup>) time and O(n <sup>2</sup>) space and does pass OJ.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findCelebrity</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="c1">// 0 = haven&#39;t asked</span>
-    <span class="c1">// 1 = knows</span>
-    <span class="c1">// 2 = don&#39;t know</span>
-    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rowKnowsCol</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="c1">// do people know i?</span>
-
-        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="o">)</span>
-                <span class="k">continue</span><span class="o">;</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-                <span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">knows ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/index7.html">&laquo;</a>
@@ -551,7 +542,7 @@ that sums up to <tt class="docutils literal">n</tt> and look for the shortest co
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+         <div class="col-xs-10">&copy; 2018 Peter Hsieh
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

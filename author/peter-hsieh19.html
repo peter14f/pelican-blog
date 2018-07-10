@@ -73,6 +73,47 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/190-reverse_bits.html">190-reverse_bits</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-22T18:41:00-08:00"> Jan 22 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-bits/">LeetCode Problem Link</a></p>
+<p>We could do it bit by bit. ANDing the current number with 1 gives us the least significant bit.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">reverseBits</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">|</span> <span class="o">(</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="mi">31</span><span class="o">-</span><span class="n">i</span><span class="o">));</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">num</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>To shorten the number of iterations of the loop, we could do 4 bits at a time. ANDing the
+current number with 0xF gives us the least significant 4 bits.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">reverseBitsOptimized</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">16</span><span class="o">];</span>
+    <span class="n">table</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+    <span class="n">table</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+    <span class="n">table</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="mi">12 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/190-reverse_bits.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/189-rotate_array.html">189-rotate_array</a></h2>
                     <div>
 <footer class="post-info">
@@ -366,35 +407,6 @@ The only field the Iterator needs is a Stack.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/172-factorial_trailing_zeroes.html">172-factorial_trailing_zeroes</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-17T15:53:00-08:00"> Jan 17 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/factorial-trailing-zeroes/">LeetCode Problem Link</a></p>
-<p>Use prime factorization. 2 x 5 = 10 so we can count how many factors of 5 are in <tt class="docutils literal">n!</tt>.
-How many 5s are there in the prime factorization of <tt class="docutils literal">20!</tt> ?
-45 / 5 = 9 -&gt; There are 4 5s in the prime factorization of 20!.
-So there are 4 trailing zeros in 20!.</p>
-<p>Since the there will be way more 2s in the prime factorization of any factorial, counting
-the number of 5s will be enough.</p>
-<p>How many trailing zeroes are there in <tt class="docutils literal">25!</tt> ?</p>
-<p>25 / 5 = 5
-25 / 25 = 1</p>
-<p>So not only do we need to count the ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/172-factorial_trailing_zeroes.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh18.html">&laquo;</a>
@@ -491,7 +503,7 @@ the number of 5s will be enough.</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2016 Peter Hsieh
+         <div class="col-xs-10">&copy; 2018 Peter Hsieh
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
