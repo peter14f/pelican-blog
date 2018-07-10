@@ -76,6 +76,40 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/330-patching_array.html">330-patching_array</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T14:55:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/patching-array/">LeetCode Problem Link</a></p>
+<p>Let <tt class="docutils literal">[0, miss)</tt> be the range of integers that's currently covered. Then <tt class="docutils literal">miss</tt> should be
+initialized to <tt class="docutils literal">1</tt>.</p>
+<p>If the next number in the input array <tt class="docutils literal">nums[i]</tt> is <tt class="docutils literal">&lt;= miss</tt>, then no patch is needed, and we
+can increase <tt class="docutils literal">miss</tt> to <tt class="docutils literal">miss + nums[i]</tt>.</p>
+<p>Else, we must cover <tt class="docutils literal">miss</tt> by adding <tt class="docutils literal">1 patch</tt>. We should be greedy and choose <tt class="docutils literal">miss</tt> as the
+added number and that will expand the range covered to <tt class="docutils literal">[0, miss+miss)</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minPatches</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// integers in range [0, miss) is covered</span>
+    <span class="kt">long</span> <span class="n">miss</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/330-patching_array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/329-longest_increasing_path_in_a_matrix.html">329-longest_increasing_path_in_a_matrix</a></h2>
                     <div>
 <footer class="post-info">
@@ -370,49 +404,6 @@ graph in a List&lt;Set&lt;Integer&gt;&gt; data structure?</p>
 <p>My guess is not! Simply traversing all the edges in the graph is good enough.</p>
 <p>This is as typical as an union-find ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/323-number_of_connected_components_in_an_undirected_graph.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/322-coin_change.html">322-coin_change</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-27T16:13:00-08:00"> Feb 27 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/coin-change/">LeetCode Problem Link</a></p>
-<p>Compute the lowest number of coins needed to make up the amount specified.</p>
-<p>May assume that we have an infinite number of coins for each type of coins.</p>
-<p>Can we use a greedy algorithm since using the biggest denomination possible
-as many time as you can will lead you to the least number of coins.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">coinChange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">numCoins</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">coins</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">sum</span> <span class="o">+=</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-            <span class="n">numCoins</span><span class="o">++;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">amount</span><span class="o">)</span>
-            <span class="k">break</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">!=</span> <span class="n">amount</span><span class="o">)</span>
-        <span class="k">return ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/322-coin_change.html">more ...</a>
                 </div>
             </article>
             <hr/>

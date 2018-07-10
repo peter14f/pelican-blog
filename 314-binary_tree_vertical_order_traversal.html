@@ -216,9 +216,62 @@ That way, we are guaranteed that the upper nodes are added into the list first.<
     <span class="k">return</span> <span class="n">allLists</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
-<p>One the the observation I made when doing BFS on a graph is that we've got to make sure that we don't
+<p>One of the observation I made when doing BFS on a graph is that we've got to make sure that we don't
 end up going back to a node that we've been to. With BFS on a binary tree, we don't actually need to worry
-about this because the nodes in a binary tree do not have a reference to the parent node.</p>
+about this because the nodes in a binary tree do not have a reference back to the parent node.</p>
+<p>This last approach is the same as the previous one, just with a custom MyNode class. The other improvement I made was
+to avoid sorting the columns by tracking the <tt class="docutils literal">minCol</tt> and <tt class="docutils literal">maxCol</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">verticalOrder2</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span>  <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">MyNode</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">MyNode</span><span class="o">&gt;();</span>
+    <span class="kt">int</span> <span class="n">minCol</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">maxCol</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="k">new</span> <span class="n">MyNode</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+
+    <span class="c1">// bfs</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">MyNode</span> <span class="n">n</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">col</span> <span class="o">&lt;</span> <span class="n">minCol</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">minCol</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">col</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">col</span> <span class="o">&gt;</span> <span class="n">maxCol</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">maxCol</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="na">col</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">map</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">col</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">col</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;());</span>
+        <span class="o">}</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">col</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="k">new</span> <span class="n">MyNode</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">n</span><span class="o">.</span><span class="na">col</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="k">new</span> <span class="n">MyNode</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">n</span><span class="o">.</span><span class="na">col</span><span class="o">+</span><span class="mi">1</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">minCol</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span> <span class="n">maxCol</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">static</span> <span class="kd">class</span> <span class="nc">MyNode</span> <span class="o">{</span>
+    <span class="n">TreeNode</span> <span class="n">node</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">col</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">MyNode</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">col</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
 
                 </div>
             </div>

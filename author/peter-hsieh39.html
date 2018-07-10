@@ -73,6 +73,77 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/021-merge_two_sorted_lists.html">021-merge_two_sorted_lists</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-09-07T20:23:00-07:00"> Sep 07 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/merge-two-sorted-lists/">LeetCode Problem Link</a></p>
+<p>Merging two sorted linked lists.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">mergeTwoLists</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">l1</span><span class="o">,</span> <span class="n">ListNode</span> <span class="n">l2</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">l1</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">l2</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">l2</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">l1</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">cur1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">cur2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">tail</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">cur1</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
+        <span class="n">cur1</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
+        <span class="n">cur2</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur1</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
+            <span class="n">tail</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
+            <span class="n">cur1</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
+            <span class="n">tail</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
+            <span class="n">cur2</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+        <span class="n">tail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/021-merge_two_sorted_lists.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/020-valid_parentheses.html">020-valid_parentheses</a></h2>
                     <div>
 <footer class="post-info">
@@ -414,58 +485,6 @@ The last letter is <tt class="docutils literal">M</tt>.</p>
 
 <span class="kd">private</span> <span class="kt">int</span> <span class="nf">nextCanBeSubtracted ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/013-roman_to_integer.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/012-integer_to_roman.html">012-integer_to_roman</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-07T20:14:00-07:00"> Sep 07 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/roman-numerals.html">Roman Numerals</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/integer-to-roman/">LeetCode Problem Link</a></p>
-<p>Do problem <tt class="docutils literal"><span class="pre">013-roman_to_integer</span></tt> before this problem.</p>
-<p>One thing the remember is that digits larger than five (but not nine) should
-be have the Roman Numeral for 5 inserted first.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">intToRoman</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">divisor</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">;</span>
-    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">4</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-
-        <span class="kt">int</span> <span class="n">digit</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">divisor</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">digit</span><span class="o">==</span><span class="mi">4</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">appendForFour</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span><span class="o">==</span><span class="mi">9</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">appendForNine</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">appendForFive</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
-            <span class="n">append</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">,</span> <span class="n">digit</span><span class="o">-</span><span class="mi">5</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">appendForOne</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">digit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
-            <span class="n">append</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">divisor</span><span class="o">,</span> <span class="n">digit</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">-</span> <span class="n">digit</span><span class="o">*</span><span class="n">divisor</span><span class="o">;</span>
-        <span class="n">divisor ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/012-integer_to_roman.html">more ...</a>
                 </div>
             </article>
             <hr/>

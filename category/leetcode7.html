@@ -76,6 +76,51 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/286-walls_and_gates.html">286-walls_and_gates</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-22T10:05:00-08:00"> Feb 22 2016</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/walls-and-gates/">LeetCode Problem Link</a></p>
+<p>Should we use BFS or DFS or memoization?</p>
+<p>We can arrive at cell[i][j] from 4 different cells: up, down, left, and right.</p>
+<p>I am going to go with the BFS solution here.</p>
+<p>Scan the 2d grid and initiate a BFS if <tt class="docutils literal">0</tt> is found.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">row</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">col</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dist</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">row</span> <span class="o">=</span> <span class="n">row</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">col</span> <span class="o">=</span> <span class="n">col</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">distance</span> <span class="o">=</span> <span class="n">dist</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">wallsAndGates</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">rooms</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">rooms</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">rooms</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/286-walls_and_gates.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/285-inorder_successor_in_bst.html">285-inorder_successor_in_bst</a></h2>
                     <div>
 <footer class="post-info">
@@ -396,56 +441,6 @@ that sums up to <tt class="docutils literal">n</tt> and look for the shortest co
 
     <span class="c1">//System.out.println ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/279-perfect_squares.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/278-first_bad_version.html">278-first_bad_version</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-20T23:43:00-08:00"> Feb 20 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/first-bad-version/">LeetCode Problem Link</a></p>
-<p>There are <tt class="docutils literal">n</tt> versions labeled from <tt class="docutils literal">1</tt> to <tt class="docutils literal">n</tt>.</p>
-<p>O(n) solution would be to try call isBadVersion() for 0, 1, 2, ... .</p>
-<p>The O(logn) solution uses binary search.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">firstBadVersion</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">minFound</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="o">(</span><span class="n">h</span><span class="o">-</span><span class="n">l</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
-
-        <span class="kt">boolean</span> <span class="n">bad</span> <span class="o">=</span> <span class="n">isBadVersion</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">bad</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">minFound</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">minFound</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
-            <span class="c1">// could have a lower bad version</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="c1">// could have a higher bad version</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">minFound</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/278-first_bad_version.html">more ...</a>
                 </div>
             </article>
             <hr/>
