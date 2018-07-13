@@ -73,63 +73,88 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/number_of_squares.html">number_of_squares</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/top_k_elements_bottom_k_elements.html">top_k_elements_bottom_k_elements</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-28T11:36:00-08:00"> Feb 28 2016</time>
+        <time datetime="2016-03-08T17:01:00-08:00"> Mar 08 2016</time>
     </span>
 
 
 
 
 
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/heap.html">Heap</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>How many squares can you find in a <tt class="docutils literal">m</tt> x <tt class="docutils literal">n</tt> 2d grid.</p>
+                <div class="summary article-summary"><p>Given <tt class="docutils literal">n</tt> values, find the largest <tt class="docutils literal">k</tt> elements.</p>
+<p>Use a <strong>min heap</strong> if you are looking for the <strong>largest</strong> k elements.</p>
+<p>When the size of the min heap is less than <tt class="docutils literal">k</tt>, simply insert the current element <tt class="docutils literal">x</tt> into the min heap.</p>
+<p>When the size of the min heap reaches <tt class="docutils literal">k</tt>, we want to maintain the min heap's size at <tt class="docutils literal">k</tt>.</p>
+<p>If the current element <tt class="docutils literal">x</tt> is larger than minHeap.getMin(), do <tt class="docutils literal">minHeap.removeMin()</tt> and then <tt class="docutils literal">minHeap.insert(x)</tt>.</p>
+<p>The space complexity is this case if <tt class="docutils literal">O(k)</tt> and the time complexity is <tt class="docutils literal">O(nlogk)</tt>.</p>
+<p>Use a <strong>max heap ...</strong></p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/top_k_elements_bottom_k_elements.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a02-design_a_deck_of_cards.html">a02-design_a_deck_of_cards</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-03T12:39:00-08:00"> Mar 03 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/ood.html">OOD</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>Typical design would need a Deck class and a Card class.</p>
+<p>What methods does the Deck class need?</p>
+<p>int numCardsLeft() - return how many cards are left to be dealt</p>
+<p>void shuffle(int n) - swap the locations of n pairs of card</p>
+<p>Card deal() - returns the next card</p>
 <pre class="literal-block">
-public int numSquares(int m, int n) {
-    //
+public enum Suit {
+    CLUB,
+    DIAMOND,
+    HEART,
+    SPADE
+}
+
+public enum Rank {
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    TEN,
+    JACK,
+    QUEEN,
+    KING,
+    ACE
 }
 </pre>
-<p>So let's first determine the size of the largest square we can find in the grid.</p>
-<p>It must be <tt class="docutils literal">min</tt> x <tt class="docutils literal">min</tt> where <tt class="docutils literal">min = Math.min(m, n)</tt>.</p>
-<p>The smallest square we can find in the grid is <tt class="docutils literal">1</tt> x <tt class="docutils literal">1</tt>.</p>
-<p>We can then work our way from [0][0] to [m-1][n-1] to look for squares of size <tt class="docutils literal">1</tt> x <tt class="docutils literal">1</tt>, ..., <tt class="docutils literal">min</tt> x <tt class="docutils literal">min</tt></p>
 
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/number_of_squares.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a02-design_a_deck_of_cards.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/328-odd_even_linked_list.html">328-odd_even_linked_list</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">dijkstra_algorithm</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-28T11:11:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/odd-even-linked-list/">LeetCode Problem Link</a></p>
-<p>I think what we can do is to keep removing the even nodes. And for each node we remove, add it
-to the tail of the Even Node list.</p>
-<p>And then at the end, attach the Even Node list at the end of the Odd Node list.</p>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/328-odd_even_linked_list.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/327-count_of_range_sum.html">327-count_of_range_sum</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T09:46:00-08:00"> Feb 28 2016</time>
+        <time datetime="2016-03-02T17:49:00-08:00"> Mar 02 2016</time>
     </span>
 
 
@@ -137,217 +162,91 @@ to the tail of the Even Node list.</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/divide-and-conquer.html">Divide And Conquer</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-product-subarray/">LeetCode Problem Link</a></p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">countRangeSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lower</span><span class="o">,</span> <span class="kt">int</span> <span class="n">upper</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">curSum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">&gt;=</span> <span class="n">lower</span> <span class="o">&amp;&amp;</span> <span class="n">curSum</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="o">)</span>
-            <span class="n">count</span><span class="o">++;</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">curSum</span> <span class="o">+=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">&gt;=</span> <span class="n">lower</span> <span class="o">&amp;&amp;</span> <span class="n">curSum</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="o">)</span>
-                <span class="n">count</span><span class="o">++;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>This is the trivial O(n <sup>2</sup>) time solution that does not check for overflow</p>
-<p>Here is the divide and conquer count in the merge step or merge sort.</p>
-<p>It takes O(nlogn) time.</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Entry</span> <span class="o">{</span>
-    <span class="kt">long</span> <span class="n">val</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">cnt</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Entry</span><span class="o">(</span><span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/327-count_of_range_sum.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/326-power_of_three.html">326-power_of_three</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T08:30:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/power.html">Power</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/power-of-three/">LeetCode Problem Link</a></p>
-<p>Power of 3</p>
-<div class="line-block">
-<div class="line">3 <sup>0</sup> = 1</div>
-<div class="line">3 <sup>1</sup> = 3</div>
-<div class="line">3 <sup>2</sup> = 9</div>
-<div class="line">3 <sup>3</sup> = 27</div>
-<div class="line">3 <sup>4</sup> = 81</div>
-<div class="line">3 <sup>5</sup> = 243</div>
-</div>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPowerOfThree</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>And then the followup asks if we could do this without using a loop or recursion.</p>
-<p>Well, let's write out the math</p>
-<pre class="literal-block">
-3 ^ x = n
-log10(x) / log10 (3) = n
-</pre>
-<p>This is probably from my high school precalc class</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPowerOfThree</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">log10</span><span class="o">(</span><span class="n">n ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/326-power_of_three.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/325-maximum_size_subarray_sum_equals_k.html">325-maximum_size_subarray_sum_equals_k</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T07:32:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/range-sum.html">Range Sum</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/">LeetCode Problem Link</a></p>
-<p>The straightforward solution is to use two nested for loops to find the sums of all subarrays.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArrayLen</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">maxSize</span><span class="o">)</span>
-            <span class="n">maxSize</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">maxSize</span> <span class="o">=</span> <span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
-            <span class="o">}</span>
-
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">maxSize</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>The followup wants us to do this in O(n) time.</p>
-<p>After looking at the solution online, I just realized that any problem ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/325-maximum_size_subarray_sum_equals_k.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/324-wiggle_sort_ii.html">324-wiggle_sort_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T01:12:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/wiggle-sort.html">Wiggle Sort</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/wiggle-sort-ii/">LeetCode Problem Link</a></p>
-<p>Given nums = [1, 5, 1, 1, 6, 4], one possible answer is [1, 4, 1, 5, 1, 6].
-Given nums = [1, 3, 2, 2, 3, 1], one possible answer is [2, 3, 1, 3, 1, 2].</p>
-<p>Reorder <tt class="docutils literal">nums</tt> in-place such that</p>
-<pre class="literal-block">
-nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]
-</pre>
-<p>Wait, how is this different from 280-wiggle_sort?</p>
-<p>Adjacent elements cannot be equal! The O(n) time solution to wiggle_sort_i will no longer work here.</p>
-<p>Using sorting, this does not work either. Since if the middle elements in the sorted array are
-duplicates.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">wiggleSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/324-wiggle_sort_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/323-number_of_connected_components_in_an_undirected_graph.html">323-number_of_connected_components_in_an_undirected_graph</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T00:38:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/weighted-graph.html">Weighted Graph</a>
+        /
 	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/union-find.html">Union Find</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/">LeetCode Problem Link</a></p>
-<p>Given <tt class="docutils literal">n</tt> nodes labeled from <tt class="docutils literal">0</tt> to <tt class="docutils literal"><span class="pre">n-1</span></tt> and a list of undirected edges.</p>
-<p>Find the number of connected components in this undirected graph.</p>
-<p>This problem would more of what I typically imagine a blob analysis problem would be if we were
-given dots in a 2D grid.</p>
-<p>But this is clearly a union-find problem. My question is, is it even necessary for me to build the
-graph in a List&lt;Set&lt;Integer&gt;&gt; data structure?</p>
-<p>My guess is not! Simply traversing all the edges in the graph is good enough.</p>
-<p>This is as typical as an union-find ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/323-number_of_connected_components_in_an_undirected_graph.html">more ...</a>
+                <div class="summary article-summary"><p>In most psuedocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are put
+put in the Q.</p>
+<p>The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
+provide an API where you can update an item's priority. So you must remove that element and then re-insert it
+again.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">VertexComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Vertex</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">distance</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">distance</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Vertex</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">label</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Vertex</span> <span class="o">(</span><span class="kt">int</span> <span class="n">label</span><span class="o">,</span> <span class="kt">int</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">;</span>
+        <span class="k">this ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/322-coin_change.html">322-coin_change</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html">334-increasing_triplet_subsequence</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-27T16:13:00-08:00"> Feb 27 2016</time>
+        <time datetime="2016-02-28T21:33:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/increasing-triplet-subsequence/">LeetCode Problem Link</a></p>
+<p>Trivial solution is to use 3 nested for loops. But the time complexity is O(n <sup>3</sup>).</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">increasingTriplet</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
+                <span class="k">continue</span><span class="o">;</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">])</span>
+                    <span class="k">continue</span><span class="o">;</span>
+
+                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
+                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>Maintain <tt class="docutils literal">smallestSeen</tt> and <tt class="docutils literal">secondSmallestSeen</tt> s you traverse the array.</p>
+<p>We had to do similar comparisons back in 265-paint_house_ii.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">increasingTriplet</span><span class="o">(</span><span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/333-largest_bst_subtree.html">333-largest_bst_subtree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T21:31:00-08:00"> Feb 28 2016</time>
     </span>
 
 
@@ -355,33 +254,167 @@ graph in a List&lt;Set&lt;Integer&gt;&gt; data structure?</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/coin-change/">LeetCode Problem Link</a></p>
-<p>Compute the lowest number of coins needed to make up the amount specified.</p>
-<p>May assume that we have an infinite number of coins for each type of coins.</p>
-<p>Can we use a greedy algorithm since using the biggest denomination possible
-as many time as you can will lead you to the least number of coins.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">coinChange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">numCoins</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/largest-bst-subtree/">LeetCode Problem Link</a></p>
+<p>Given a binary tree, return the size of the largest BST subtree you can find.</p>
+<div class="highlight"><pre><span class="c1">// size of the current tree</span>
+<span class="c1">// range of the nodes in current tree</span>
+<span class="kd">class</span> <span class="nc">Result</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">lower</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">upper</span><span class="o">;</span>
 
-    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">coins</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">sum</span> <span class="o">+=</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-            <span class="n">numCoins</span><span class="o">++;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">amount</span><span class="o">)</span>
-            <span class="k">break</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">Result</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
+        <span class="n">upper</span> <span class="o">=</span> <span class="n">u</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">!=</span> <span class="n">amount</span><span class="o">)</span>
-        <span class="k">return ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/322-coin_change.html">more ...</a>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&quot;size=&quot;</span> <span class="o">+</span> <span class="n">size</span> <span class="o">+</span> <span class="s">&quot; low=&quot;</span> <span class="o">+</span> <span class="n">lower</span> <span class="o">+</span> <span class="s">&quot; high=&quot;</span> <span class="o">+</span> <span class="n">upper</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">largestBSTSubtree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
+    <span class="n">traverse</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">maxSize</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">maxSize</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+<span class="o">}</span>
+
+<span class="c1">// return a Result of -1 means subtree whose root is cur cannot be a BST</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="kd">private</span> <span class="n">Result</span> <span class="nf">traverse</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">cur</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">cur ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/333-largest_bst_subtree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html">332-reconstruct_itinerary</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T21:30:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reconstruct-itinerary/">LeetCode Problem Link</a></p>
+<p>Let's say currently you have <tt class="docutils literal">n</tt> total choices as your next destination.</p>
+<p>What we need to make sure is that when trying out <tt class="docutils literal">ith</tt> solution, the recursive function
+sees all other <tt class="docutils literal"><span class="pre">n-1</span></tt> choices.</p>
+<p>Also <tt class="docutils literal">x</tt> total tickets should result in an answer of size <tt class="docutils literal">x+1</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findItinerary</span><span class="o">(</span><span class="n">String</span><span class="o">[][]</span> <span class="n">tickets</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">from</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">to</span> <span class="o">=</span> <span class="n">tickets</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">graph</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">from</span><span class="o">))</span>
+            <span class="n">graph</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">from ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/332-reconstruct_itinerary.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/331-verify_preorder_serialization_of_a_binary_tree.html">331-verify_preorder_serialization_of_a_binary_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T21:29:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/preorder-traversal.html">Preorder Traversal</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/">LeetCode Problem Link</a></p>
+<p>The first method relies on the observation that in a preorder sequence, a leaf node always results in
+<tt class="docutils literal">x, #, #</tt>. For any given binary tree, you should always be able to continue removing the
+existing leaf nodes until you obtain an empty tree.</p>
+<p>So what we can do is keep replace <tt class="docutils literal">x, #, #</tt> with <tt class="docutils literal">#</tt> and see if we end up with <tt class="docutils literal">#</tt>.</p>
+<p>An example</p>
+<pre class="literal-block">
+    a
+   / \
+  b   c
+
+
+[a, b, #, #, c, #, #]
+[a, #, c, #, #]
+[a, #, #]
+[#]
+</pre>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isValidSerialization</span><span class="o">(</span><span class="n">String</span> <span class="n">preorder</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//  1234</span>
+    <span class="c1">//&quot;x,#,#&quot;</span>
+
+
+    <span class="kt">boolean</span> <span class="n">foundLeaf</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//System.out.println(preorder);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">preorder</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="c1">//System.out.println ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/331-verify_preorder_serialization_of_a_binary_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/330-patching_array.html">330-patching_array</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-28T14:55:00-08:00"> Feb 28 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/patching-array/">LeetCode Problem Link</a></p>
+<p>Let <tt class="docutils literal">[0, miss)</tt> be the range of integers that's currently covered. Then <tt class="docutils literal">miss</tt> should be
+initialized to <tt class="docutils literal">1</tt>.</p>
+<p>If the next number in the input array <tt class="docutils literal">nums[i]</tt> is <tt class="docutils literal">&lt;= miss</tt>, then no patch is needed, and we
+can increase <tt class="docutils literal">miss</tt> to <tt class="docutils literal">miss + nums[i]</tt>.</p>
+<p>Else, we must cover <tt class="docutils literal">miss</tt> by adding <tt class="docutils literal">1 patch</tt>. We should be greedy and choose <tt class="docutils literal">miss</tt> as the
+added number and that will expand the range covered to <tt class="docutils literal">[0, miss+miss)</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minPatches</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// integers in range [0, miss) is covered</span>
+    <span class="kt">long</span> <span class="n">miss</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/330-patching_array.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -471,6 +504,8 @@ as many time as you can will lead you to the least number of coins.</p>
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh40.html">40</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh41.html">41</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh42.html">42</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh4.html">&raquo;</a></li>
         </ul>

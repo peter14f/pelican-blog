@@ -13,13 +13,13 @@
 
         <meta name="author" content="Peter Hsieh" />
         <meta name="keywords" content="Max Rectangle Area,Histogram" />
-        <meta name="description" content="LeetCode Problem Link Using the height at a particular index to calculate the area, we must find the first bar to the right that&#39;s smaller and the first bar to the left that&#39;s smaller. We will use a stack. public int largestRectangleArea(int[] height) { if (height==null || height.length == 0) return 0; int maxArea = 0; // stack stores the index Stack&lt;Integer&gt; stk = new Stack&lt;Integer&gt;(); int i = 0; while (i &lt; height.length || !stk.isEmpty()) { if (stk.isEmpty()) { stk.push(i); i++; continue; } if (i==height.length || height[i] &lt; height[stk.peek()]) { int poppedIndex = stk.pop(); int peepIndex = -1 ..." />
+        <meta name="description" content="LeetCode Problem Link Using the height at a particular index to calculate the area, we must find the first bar to the right that&#39;s smaller and the first bar to the left that&#39;s smaller. We will use a stack. Note that once popped off the height that&#39;s going to be used to calculate the area, the peek index actually gives us information of the left boundary. If the stack is empty, the left boundary is then actually 0, which means no histograms &gt;= height on the left actually exist. public int largestRectangleArea(int[] height) { if (height==null || height ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="084-largest_rectangle_in_histogram"/>
         <meta property="og:url" content="http://peter14f.github.io/pelican-blog/084-largest_rectangle_in_histogram.html"/>
-        <meta property="og:description" content="LeetCode Problem Link Using the height at a particular index to calculate the area, we must find the first bar to the right that&#39;s smaller and the first bar to the left that&#39;s smaller. We will use a stack. public int largestRectangleArea(int[] height) { if (height==null || height.length == 0) return 0; int maxArea = 0; // stack stores the index Stack&lt;Integer&gt; stk = new Stack&lt;Integer&gt;(); int i = 0; while (i &lt; height.length || !stk.isEmpty()) { if (stk.isEmpty()) { stk.push(i); i++; continue; } if (i==height.length || height[i] &lt; height[stk.peek()]) { int poppedIndex = stk.pop(); int peepIndex = -1 ..."/>
+        <meta property="og:description" content="LeetCode Problem Link Using the height at a particular index to calculate the area, we must find the first bar to the right that&#39;s smaller and the first bar to the left that&#39;s smaller. We will use a stack. Note that once popped off the height that&#39;s going to be used to calculate the area, the peek index actually gives us information of the left boundary. If the stack is empty, the left boundary is then actually 0, which means no histograms &gt;= height on the left actually exist. public int largestRectangleArea(int[] height) { if (height==null || height ..."/>
         <meta property="article:published_time" content="2015-11-12" />
             <meta property="article:section" content="LeetCode" />
             <meta property="article:tag" content="Max Rectangle Area" />
@@ -109,6 +109,9 @@ Peter's Coding Notes            </a>
                 <p><a class="reference external" href="https://leetcode.com/problems/largest-rectangle-in-histogram/">LeetCode Problem Link</a></p>
 <p>Using the height at a particular index to calculate the area, we must find the first bar to the right that's smaller
 and the first bar to the left that's smaller. We will use a stack.</p>
+<p>Note that once popped off the height that's going to be used to calculate the area, the peek index
+actually gives us information of the left boundary. If the stack is empty, the left boundary is then
+actually 0, which means no histograms &gt;= height on the left actually exist.</p>
 <div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">largestRectangleArea</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="k">if</span> <span class="o">(</span><span class="n">height</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">height</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>

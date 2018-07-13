@@ -94,28 +94,12 @@ Peter's Coding Notes            </a>
                 <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/largest-rectangle-in-histogram/">LeetCode Problem Link</a></p>
 <p>Using the height at a particular index to calculate the area, we must find the first bar to the right that's smaller
 and the first bar to the left that's smaller. We will use a stack.</p>
+<p>Note that once popped off the height that's going to be used to calculate the area, the peek index
+actually gives us information of the left boundary. If the stack is empty, the left boundary is then
+actually 0, which means no histograms &gt;= height on the left actually exist.</p>
 <div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">largestRectangleArea</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">height</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">height</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">height</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">maxArea</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="c1">// stack stores the index</span>
-    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
-
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">height</span><span class="o">.</span><span class="na">length</span> <span class="o">||</span> <span class="o">!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="n">i</span><span class="o">++;</span>
-            <span class="k">continue</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="n">height</span><span class="o">.</span><span class="na">length</span> <span class="o">||</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">height</span><span class="o">[</span><span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">()])</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">poppedIndex</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-            <span class="kt">int</span> <span class="n">peepIndex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1 ...</span></pre></div>
+    <span class="k">if</span> <span class="o">(</span><span class="n">height</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">height ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/084-largest_rectangle_in_histogram.html">more ...</a>
                 </div>
             </article>
