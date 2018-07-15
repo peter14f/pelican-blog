@@ -73,6 +73,54 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/734-sentence_similarity.html">734-sentence_similarity</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-07-10T09:01:00-07:00"> Jul 10 2018</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sentence-similarity/">LeetCode Problem Link</a></p>
+<p>Use a Map&lt;String, Set&lt;String&gt;&gt; <tt class="docutils literal">similar</tt> to look up similar words.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">areSentencesSimilar</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">words1</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">words2</span><span class="o">,</span> <span class="n">String</span><span class="o">[][]</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">words2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">similar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">pairs</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">pair</span> <span class="o">:</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w1</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w1</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
+            <span class="o">}</span>
+            <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w1</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w2</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w2</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w2</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
+            <span class="o">}</span>
+            <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w2</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w1</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">words1</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">words2</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">w1</span><span class="o">.</span><span class="na">equals ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/734-sentence_similarity.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/737-sentence_similarity_ii.html">737-sentence_similarity_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -379,48 +427,6 @@ Example # 2
 In the second example, the max profit is 7 as well, which involves robbing 1 house at level 1 and 1 house at level 2.</p>
 <p>We should figure out ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/337-house_robber_iii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a03-sort_squares_in_place.html">a03-sort_squares_in_place</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-03-14T10:43:00-07:00"> Mar 14 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/two-pointers.html">Two Pointers</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><pre class="literal-block">
-Given a sorted int array. We want to know the squares of the array in sorted order.
-Do this in-place.
-</pre>
-<p>We will use two pointers <tt class="docutils literal">left</tt> and <tt class="docutils literal">right</tt> for this problem.</p>
-<p>Say the input array <tt class="docutils literal">nums</tt> is of size <tt class="docutils literal">n</tt>.</p>
-<p><tt class="docutils literal">left</tt> is initialized at <tt class="docutils literal">0</tt>.
-<tt class="docutils literal">right</tt> is initialized at <tt class="docutils literal"><span class="pre">n-1</span></tt>.</p>
-<p>The key observation is that the next largest square must always be
-generated by doing <tt class="docutils literal">nums[left] * nums[left]</tt> or
-<tt class="docutils literal">nums[right] * nums[right]</tt></p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">sortSquaresInPlace</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">right ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a03-sort_squares_in_place.html">more ...</a>
                 </div>
             </article>
             <hr/>

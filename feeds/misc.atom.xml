@@ -251,11 +251,28 @@ public enum Rank {
     ACE
 }
 &lt;/pre&gt;
-</summary><category term="OOD"></category></entry><entry><title>dijkstra_algorithm</title><link href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html" rel="alternate"></link><updated>2016-03-02T17:49:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-03-02:pelican-blog/dijkstra_algorithm.html</id><summary type="html">&lt;p&gt;In most psuedocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are put
+</summary><category term="OOD"></category></entry><entry><title>dijkstra_algorithm</title><link href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html" rel="alternate"></link><updated>2016-03-02T17:49:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-03-02:pelican-blog/dijkstra_algorithm.html</id><summary type="html">&lt;p&gt;In most pseudocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are
 put in the Q.&lt;/p&gt;
 &lt;p&gt;The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
 provide an API where you can update an item's priority. So you must remove that element and then re-insert it
-again.&lt;/p&gt;
+again. Note that PQ.remove() will that O(n) time. If you want it to take only O(logn) time you will have to
+implement a Hashheap yourself.&lt;/p&gt;
+&lt;p&gt;Summary:
+1. Store the shortest distance from src to each and every vertex in Vertex[] &lt;tt class="docutils literal"&gt;distance&lt;/tt&gt;. &lt;tt class="docutils literal"&gt;distance[src] = 0&lt;/tt&gt;
+2. Store that one element in &lt;tt class="docutils literal"&gt;distance&lt;/tt&gt; into a priority queue &lt;tt class="docutils literal"&gt;pq&lt;/tt&gt;.
+3. We're now in the while loop, poll from the &lt;tt class="docutils literal"&gt;pq&lt;/tt&gt; and store that as &lt;tt class="docutils literal"&gt;cur&lt;/tt&gt;. Explore all
+neighbors of &lt;tt class="docutils literal"&gt;cur&lt;/tt&gt;. If the distance to &lt;tt class="docutils literal"&gt;neighbor&lt;/tt&gt; is smaller than what we know so far,
+then update &lt;tt class="docutils literal"&gt;distance[neighbor]&lt;/tt&gt; and also update that element's cost in &lt;tt class="docutils literal"&gt;pq&lt;/tt&gt;.
+4. Polling &lt;tt class="docutils literal"&gt;dstNode&lt;/tt&gt; from &lt;tt class="docutils literal"&gt;pq&lt;/tt&gt; means we've figured out the shortest distance from &lt;tt class="docutils literal"&gt;srcNode&lt;/tt&gt;
+to &lt;tt class="docutils literal"&gt;dstNode&lt;/tt&gt;. Can break out from the loop if we only want to figure out the
+shortest distance to &lt;tt class="docutils literal"&gt;srcNode&lt;/tt&gt;.
+5. &lt;tt class="docutils literal"&gt;visited&lt;/tt&gt; stores the vertices that we've figured out the shortest from &lt;tt class="docutils literal"&gt;srcNode&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Key differences between BFS and Dijkstra:
+1. For BFS, the &lt;tt class="docutils literal"&gt;visited&lt;/tt&gt; map is really to prevent going backwards
+For Dijkstra, a node being in the set means the shortest distance from src to that node has been found.
+For Dijkstra, naturally we don't have to worry about going backward because the distance going backward cannot
+possibly be smaller that what has been found to be the shortest distance to node.
+2. BFS uses a Queue. Dijkstra uses a Priority Queue (minHeap) or even better a Hashheap.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;VertexComparator&lt;/span&gt; &lt;span class="kd"&gt;implements&lt;/span&gt; &lt;span class="n"&gt;Comparator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Vertex&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
 
     &lt;span class="nd"&gt;@Override&lt;/span&gt;
@@ -379,7 +396,7 @@ again.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Or a better way to do start with only one node - the source node - in the PriorityQueue. You only put nodes into the
 priority queue when you have found a valid smaller distance.&lt;/p&gt;
-</summary><category term="Dijkstra"></category><category term="Greedy"></category><category term="Graph"></category><category term="Weighted Graph"></category><category term="Undirected Graph"></category><category term="Directed Graph"></category></entry><entry><title>merge_sort</title><link href="http://peter14f.github.io/pelican-blog/merge_sort.html" rel="alternate"></link><updated>2016-02-26T15:00:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-26:pelican-blog/merge_sort.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/7-Sort/merge-sort4.html"&gt;Merge Sort Java Implementation Discussion Link&lt;/a&gt;&lt;/p&gt;
+</summary><category term="Dijkstra"></category><category term="Greedy"></category><category term="Graph"></category><category term="Weighted Graph"></category><category term="Undirected Graph"></category><category term="Directed Graph"></category><category term="Hashheap"></category></entry><entry><title>merge_sort</title><link href="http://peter14f.github.io/pelican-blog/merge_sort.html" rel="alternate"></link><updated>2016-02-26T15:00:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-26:pelican-blog/merge_sort.html</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/7-Sort/merge-sort4.html"&gt;Merge Sort Java Implementation Discussion Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;While solving 315-count_of_smaller_number_after_self, I realized I was very unfamiliar the usual way of implementing
 merge sort in Java. So I am going to show 3 different versions here and the last one is the &lt;em&gt;usual&lt;/em&gt; way to
 do it in Java.&lt;/p&gt;

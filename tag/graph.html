@@ -115,6 +115,50 @@ wall.</p>
             </article>
             <hr/>
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/505-the_maze_ii.html">505-the_maze_iii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-07-13T09:02:00-07:00"> Jul 13 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph-problem-with-a-spin.html">Graph Problem With A Spin</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/the-maze-ii/">LeetCode Problem Link</a></p>
+<p>A good practice for implementing Dijkstra's algorithm.</p>
+<div class="highlight"><pre><span class="c1">// in this problem, we are not trying to figure out the path</span>
+<span class="c1">// we are only interested in knowing the shortest distance from</span>
+<span class="c1">// start to destination... This should yell Dijkstra for you.</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">shortestDistance</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">maze</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">destination</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="c1">// distant from start to all cells</span>
+    <span class="c1">// not found in map -&gt; distance is infinity</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">dist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="c1">// shortest distance from start has been figured out</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">done</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">CellAndDist</span><span class="o">&gt;</span> <span class="n">pq ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/505-the_maze_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/489-robot_room_cleaner.html">489-robot_room_cleaner</a></h2>
                     <div>
 <footer class="post-info">
@@ -226,28 +270,18 @@ where it came from. Assume the original cell is (0,0).</p>
 	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/hashheap.html">Hashheap</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>In most psuedocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are put
+                <div class="summary article-summary"><p>In most pseudocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are
 put in the Q.</p>
 <p>The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
 provide an API where you can update an item's priority. So you must remove that element and then re-insert it
-again.</p>
-<div class="highlight"><pre><span class="kd">class</span> <span class="nc">VertexComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Vertex</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">distance</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">distance</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">Vertex</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">label</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Vertex</span> <span class="o">(</span><span class="kt">int</span> <span class="n">label</span><span class="o">,</span> <span class="kt">int</span> <span class="n">distance</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">;</span>
-        <span class="k">this ...</span></pre></div>
+again. Note that PQ.remove() will that O(n) time. If you want it to take only O(logn) time you will have to
+implement a Hashheap yourself.</p>
+<p>Summary:
+1. Store the shortest distance from src ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
                 </div>
             </article>
@@ -391,51 +425,6 @@ sees all other <tt class="docutils literal"><span class="pre">n-1</span></tt> ch
             <span class="k">if</span> <span class="o">(</span><span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
                 <span class="n">rowKnowsCol</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">knows ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/277_find_the_celebrity.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">261-graph_valid_tree</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-18T21:37:00-08:00"> Feb 18 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/check-if-graph-a-valid-binary-tree.html">Check If Graph A Valid Binary Tree</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/graph-valid-tree/">LeetCode Problem Link</a></p>
-<pre class="literal-block">
-Given ``n`` nodes labeled from ``0`` to ``n - 1`` and a list of
-undirected edges (each edge is a pair of nodes), write a function to
-check whether these edges make up a valid tree.
-
-For example:
-
-Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
-
-Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
-
-Hint:
-
-Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree?
-
-According to the definition of tree ...</pre>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">more ...</a>
                 </div>
             </article>
             <hr/>

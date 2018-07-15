@@ -76,6 +76,46 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/101-symmetric_tree.html">101-symmetric_tree</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-11-24T19:54:00-08:00"> Nov 24 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/symmetric-tree/">LeetCode Problem Link</a></p>
+<p>Let me first show the recursive solution.</p>
+<p>The method <tt class="docutils literal">isSymmetric()</tt> takes two arguments, the <tt class="docutils literal">left</tt> child and the <tt class="docutils literal">right</tt> child from the parent.
+We must recursively check that the outer nodes (left child of <tt class="docutils literal">left</tt> and right child of <tt class="docutils literal">right</tt>) and the
+innter nodes (right child of <tt class="docutils literal">left</tt> and left child of <tt class="docutils literal">child</tt>) contain the same values.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSymmetric</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">isSymmetric</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isSymmetric</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">a</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">((</span><span class="n">a</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">a</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="kc">null</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">return ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/101-symmetric_tree.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/100-same_tree.html">100-same_tree</a></h2>
                     <div>
 <footer class="post-info">
@@ -347,38 +387,6 @@ different right ...</p>
 <p>There is also the morris traversal which is O(1) space.</p>
 <p>Here is the basic idea, if <tt class="docutils literal">cur</tt> has a left child, the inorder predecessor's right child ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/094-binary_tree_inorder_traversal.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/093-restore_ip_addresses.html">093-restore_ip_addresses</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-11-17T22:11:00-08:00"> Nov 17 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/restore-ip-addresses/">LeetCode Problem Link</a></p>
-<p>The approach is very similar to the NP problems (051-n_queens, 037-sudoku_solver). We have a current list where we store the current ip address that
-has been built. At each new index, we could have three different code paths:</p>
-<blockquote>
-<ol class="arabic simple">
-<li>put a '.' right after the current index (forms a one-digit number)</li>
-<li>put a '.' right after the next index (forms a two-digit number)</li>
-<li>put a '.' right after the next next index (forms a three-digit number)</li>
-</ol>
-</blockquote>
-<p>However, we also need to check how many characters are left after the dot. The number of characters cannot be more than
-<tt class="docutils literal"><span class="pre">3*(4</span> - group ...</tt></p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/093-restore_ip_addresses.html">more ...</a>
                 </div>
             </article>
             <hr/>

@@ -12,14 +12,14 @@
 <link rel="canonical" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">
 
         <meta name="author" content="Peter Hsieh" />
-        <meta name="keywords" content="Dijkstra,Greedy,Graph,Weighted Graph,Undirected Graph,Directed Graph" />
-        <meta name="description" content="In most psuedocode you will find for Dijkstra, they will say initialize the Q such that all nodes are put put in the Q. The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not provide an API where you can update an item&#39;s priority. So you must remove that element and then re-insert it again. class VertexComparator implements Comparator&lt;Vertex&gt; { @Override public int compare(Vertex o1, Vertex o2) { return o1.distance - o2.distance; } } class Vertex { int label; int distance; public Vertex (int label, int distance) { this.label = label; this ..." />
+        <meta name="keywords" content="Dijkstra,Greedy,Graph,Weighted Graph,Undirected Graph,Directed Graph,Hashheap" />
+        <meta name="description" content="In most pseudocode you will find for Dijkstra, they will say initialize the Q such that all nodes are put in the Q. The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not provide an API where you can update an item&#39;s priority. So you must remove that element and then re-insert it again. Note that PQ.remove() will that O(n) time. If you want it to take only O(logn) time you will have to implement a Hashheap yourself. Summary: 1. Store the shortest distance from src ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="dijkstra_algorithm"/>
         <meta property="og:url" content="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html"/>
-        <meta property="og:description" content="In most psuedocode you will find for Dijkstra, they will say initialize the Q such that all nodes are put put in the Q. The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not provide an API where you can update an item&#39;s priority. So you must remove that element and then re-insert it again. class VertexComparator implements Comparator&lt;Vertex&gt; { @Override public int compare(Vertex o1, Vertex o2) { return o1.distance - o2.distance; } } class Vertex { int label; int distance; public Vertex (int label, int distance) { this.label = label; this ..."/>
+        <meta property="og:description" content="In most pseudocode you will find for Dijkstra, they will say initialize the Q such that all nodes are put in the Q. The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not provide an API where you can update an item&#39;s priority. So you must remove that element and then re-insert it again. Note that PQ.remove() will that O(n) time. If you want it to take only O(logn) time you will have to implement a Hashheap yourself. Summary: 1. Store the shortest distance from src ..."/>
         <meta property="article:published_time" content="2016-03-02" />
             <meta property="article:section" content="misc" />
             <meta property="article:tag" content="Dijkstra" />
@@ -28,6 +28,7 @@
             <meta property="article:tag" content="Weighted Graph" />
             <meta property="article:tag" content="Undirected Graph" />
             <meta property="article:tag" content="Directed Graph" />
+            <meta property="article:tag" content="Hashheap" />
             <meta property="article:author" content="Peter Hsieh" />
 
 
@@ -116,13 +117,32 @@ Peter's Coding Notes            </a>
 	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/hashheap.html">Hashheap</a>
     
 </footer><!-- /.post-info -->                <div class="full-article">
-                <p>In most psuedocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are put
+                <p>In most pseudocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are
 put in the Q.</p>
 <p>The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
 provide an API where you can update an item's priority. So you must remove that element and then re-insert it
-again.</p>
+again. Note that PQ.remove() will that O(n) time. If you want it to take only O(logn) time you will have to
+implement a Hashheap yourself.</p>
+<p>Summary:
+1. Store the shortest distance from src to each and every vertex in Vertex[] <tt class="docutils literal">distance</tt>. <tt class="docutils literal">distance[src] = 0</tt>
+2. Store that one element in <tt class="docutils literal">distance</tt> into a priority queue <tt class="docutils literal">pq</tt>.
+3. We're now in the while loop, poll from the <tt class="docutils literal">pq</tt> and store that as <tt class="docutils literal">cur</tt>. Explore all
+neighbors of <tt class="docutils literal">cur</tt>. If the distance to <tt class="docutils literal">neighbor</tt> is smaller than what we know so far,
+then update <tt class="docutils literal">distance[neighbor]</tt> and also update that element's cost in <tt class="docutils literal">pq</tt>.
+4. Polling <tt class="docutils literal">dstNode</tt> from <tt class="docutils literal">pq</tt> means we've figured out the shortest distance from <tt class="docutils literal">srcNode</tt>
+to <tt class="docutils literal">dstNode</tt>. Can break out from the loop if we only want to figure out the
+shortest distance to <tt class="docutils literal">srcNode</tt>.
+5. <tt class="docutils literal">visited</tt> stores the vertices that we've figured out the shortest from <tt class="docutils literal">srcNode</tt>.</p>
+<p>Key differences between BFS and Dijkstra:
+1. For BFS, the <tt class="docutils literal">visited</tt> map is really to prevent going backwards
+For Dijkstra, a node being in the set means the shortest distance from src to that node has been found.
+For Dijkstra, naturally we don't have to worry about going backward because the distance going backward cannot
+possibly be smaller that what has been found to be the shortest distance to node.
+2. BFS uses a Queue. Dijkstra uses a Priority Queue (minHeap) or even better a Hashheap.</p>
 <div class="highlight"><pre><span class="kd">class</span> <span class="nc">VertexComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
 
     <span class="nd">@Override</span>
