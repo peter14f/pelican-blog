@@ -73,6 +73,140 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/302-smallest_rectangle_enclosing_black_pixels.html">302-smallest_rectangle_enclosing_black_pixels</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T18:21:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/blob-analysis.html">Blob Analysis</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/">LeetCode Problem Link</a></p>
+<p><tt class="docutils literal">0</tt> as white pixel and <tt class="docutils literal">1</tt> as black pixel.</p>
+<p><tt class="docutils literal">x</tt> specifies the row and <tt class="docutils literal">y</tt> specifies the col. I find this kind of weird.</p>
+<p>This problem is essentially asking you to do a blob analysis and find out the blob's minX, minY, maxX, and maxY.</p>
+<p>The smallest rectangle enclosing the black blob is simply <tt class="docutils literal">(maxX - minX + 1) * (maxY - minY + 1)</tt>.</p>
+<p>4-connected components are considered neighbors in this problem, not 8.</p>
+<p>BFS would work.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">row</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">col</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Cell</span><span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">row</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">col ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/302-smallest_rectangle_enclosing_black_pixels.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/301-remove_invalid_parentheses.html">301-remove_invalid_parentheses</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T15:43:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/remove-invalid-parentheses/">LeetCode Problem Link</a></p>
+<ol class="arabic simple">
+<li>Remove the <strong>minimum number</strong> of parentheses such that the result is valid.</li>
+<li>Find the valid results when you remove <strong>minimum number</strong> of parentheses.</li>
+</ol>
+<p>For step 1, I think using BFS, it's possible find the <strong>minimum number</strong> <tt class="docutils literal">x</tt>.</p>
+<p>Once <tt class="docutils literal">x</tt> is found, continue with BFS and stop addting strings if the number of characters removed has exceeded
+<tt class="docutils literal">x</tt>.</p>
+<p>This should help us find all valid strings with <tt class="docutils literal">x</tt> characters removed. The API expects us return a List&lt;String&gt;
+so we have to be careful not to add duplicated strings there. What I did was to use a ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/301-remove_invalid_parentheses.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/300-longest_increasing_subsequence.html">300-longest_increasing_subsequence</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T12:47:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/subsequence.html">Subsequence</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-increasing-subsequence/">LeetCode Problem Link</a></p>
+<p>Input array is not sorted. We need to return the length of the longest subsequence.</p>
+<p>Got to remember that the definition of a subsequence is the remaining numbers in the array when some elements of
+the array is taken out.</p>
+<p>At the beginning, I thought the straightforward solution is to start looking for a increasing subsequence from each
+element. But this won't actually be O(n <sup>2</sup>) time. Since ith element could either be in the subsequence
+or not be in the subsequence. This is exponential time. One way would be to generate all possible subsequence ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/300-longest_increasing_subsequence.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/299-bulls_and_cows.html">299-bulls_and_cows</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-23T10:14:00-08:00"> Feb 23 2016</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/bulls-and-cows/">LeetCode Problem Link</a></p>
+<p># of bulls = right number at the right location</p>
+<p>We can do this problem in two passes.</p>
+<p>In the first pass, if the secret and guess characters don't match. We increment the count for that guess character
+in int[] guesses. else increment <tt class="docutils literal">bulls</tt>.</p>
+<p>In the second pass, if the secret and guess characters don't match. We check if the count for that secret character
+is greater than 0. If so, increment <tt class="docutils literal">cows</tt> and decrement that cnt in <tt class="docutils literal">guesses</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">getHint</span><span class="o">(</span><span class="n">String</span> <span class="n">secret</span><span class="o">,</span> <span class="n">String</span> <span class="n">guess</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">secret</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="s">&quot;0A0B&quot;</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">bulls ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/299-bulls_and_cows.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/298-binary_tree_longest_consecutive_sequence.html">298-binary_tree_longest_consecutive_sequence</a></h2>
                     <div>
 <footer class="post-info">
@@ -248,163 +382,6 @@ the median would be doable.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/294-flip_game_ii.html">294-flip_game_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-22T22:28:00-08:00"> Feb 22 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/flip-game.html">Flip Game</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/flip-game-ii/">LeetCode Problem Link</a></p>
-<p>The game ends when a person can no longer make a move and therefore the other person will be the winner.</p>
-<p>Write a function to determine if the starting player can guarantee a win given a starting string <tt class="docutils literal">s</tt>.</p>
-<p>If the current consecutive number of '+'s is &gt;=2 and after the flip, the number of consecutive number of '+'s
-becomes &lt; 2, then you're guaranteed to win.</p>
-<p>My origin idea is use two queues to simulate at each round the strings that player 1 and player 2 have to
-deal with.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canWin</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Queue ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/294-flip_game_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/292-nim_game.html">292-nim_game</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-22T20:42:00-08:00"> Feb 22 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-pattern-ii/">LeetCode Problem Link</a></p>
-<p>The person removing the last stone wins.</p>
-<p>At each round, a person removes 1, 2, or 3 stones. You will take the first turn.</p>
-<p>I am thinking to use memoization.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canWinNim</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-
-    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">canWinWithIStones</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-
-    <span class="n">canWinWithIStones</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="n">canWinWithIStones</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="n">canWinWithIStones</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">4</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-
-        <span class="c1">// with (i-1) stones left, (i-2) stones left, (i-3) stones left</span>
-        <span class="c1">// will play B win?</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">canWinWithIStones</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">canWinWithIStones</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">canWinWithIStones</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">3</span><span class="o">])</span> <span class="o">{</span>
-            <span class="c1">// I take 1, or 2 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/292-nim_game.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/291-word_pattern_ii.html">291-word_pattern_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-22T18:42:00-08:00"> Feb 22 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-pattern-ii/">LeetCode Problem Link</a></p>
-<p>The only solution that I can think of is to use recursion and DFS.</p>
-<p>But string matching problems are often solved by dynamic programming?</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">wordPatternMatch</span><span class="o">(</span><span class="n">String</span> <span class="n">pattern</span><span class="o">,</span> <span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">return</span> <span class="n">match</span><span class="o">(</span><span class="n">pattern</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">str</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span>
-            <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;(),</span>
-            <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Character</span><span class="o">&gt;());</span>
-
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">match</span><span class="o">(</span><span class="n">String</span> <span class="n">pattern</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span>
-                      <span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="kt">int</span> <span class="n">j</span><span class="o">,</span>
-                      <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">map1</span><span class="o">,</span>
-                      <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Character</span><span class="o">&gt;</span> <span class="n">map2</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">pattern</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">else</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">map1</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">c</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">map1</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">z</span><span class="o">&lt;</span><span class="n">s ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/291-word_pattern_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/290-word_pattern.html">290-word_pattern</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-22T18:17:00-08:00"> Feb 22 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/hash-tables.html">Hash Tables</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-pattern/">LeetCode Problem Link</a></p>
-<p>There are two mappings Character-&gt;String, String-&gt;Character.</p>
-<p>For both mappings, we cannot have two different inputs that lead to the same output.</p>
-<p>The last thing to check is the number of chars in <tt class="docutils literal">pattern</tt> must be the same as the number words in <tt class="docutils literal">str</tt>.</p>
-<div class="highlight"><pre><span class="c1">// str contains lowercase letters separated by a single space</span>
-<span class="c1">// pattern contains only lowercase letters</span>
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">wordPattern</span><span class="o">(</span><span class="n">String</span> <span class="n">pattern</span><span class="o">,</span> <span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Character</span><span class="o">&gt;</span> <span class="n">reverseMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Character</span><span class="o">&gt;();</span>
-    <span class="n">String</span><span class="o">[]</span> <span class="n">strs</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">);</span>
-
-    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">pattern</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">pattern ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/290-word_pattern.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh7.html">&laquo;</a>
@@ -493,6 +470,8 @@ deal with.</p>
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh41.html">41</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh42.html">42</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh43.html">43</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh9.html">&raquo;</a></li>
         </ul>

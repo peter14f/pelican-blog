@@ -73,6 +73,151 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/318-maximum_product_of_word_lengths.html">318-maximum_product_of_word_lengths</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T22:01:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bookkeeping.html">Bookkeeping</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-product-of-word-lengths/">LeetCode Problem Link</a></p>
+<p>Well, if we can lookup whether two strings have any character in common in O(1) time, we could
+solve this problem in O(n <sup>2</sup>) time where <tt class="docutils literal">n</tt> is the input array size.</p>
+<p>What about a bitmap? An integer has 32 bits and each string contains only 'a' to 'z' so that's enough.</p>
+<p>So we need to allocate an int array of size <tt class="docutils literal">n</tt> called <tt class="docutils literal">bitMaps</tt>.</p>
+<p>To find out if <tt class="docutils literal">words[i]</tt> and <tt class="docutils literal">words[j]</tt> have any characters in common, we simply check if
+(bitMaps[i] &amp; bitMaps[j]) &gt; 0.</p>
+<p>Building the <tt class="docutils literal">bitMaps</tt> will take O ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/318-maximum_product_of_word_lengths.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/316-remove_duplicate_letters.html">316-remove_duplicate_letters</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T15:22:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/strings.html">Strings</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/remove-duplicate-letters/">LeetCode Problem Link</a></p>
+<p>In the first pass, get the frequency count of each character in the input string <tt class="docutils literal">s</tt>.</p>
+<p>That we can know how many times each duplicated character shall be deleted.</p>
+<p>I'm thinking of using recursion and DFS to find all versions of the deleted string and then sort
+the list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">removeDuplicateLetters</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">remain</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">toDelete</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">remain</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">c</span><span class="o">))</span>
+            <span class="n">remain</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="k">else</span>
+            <span class="n">remain ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/316-remove_duplicate_letters.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/merge_sort.html">merge_sort</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T15:00:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/7-Sort/merge-sort4.html">Merge Sort Java Implementation Discussion Link</a></p>
+<p>While solving 315-count_of_smaller_number_after_self, I realized I was very unfamiliar the usual way of implementing
+merge sort in Java. So I am going to show 3 different versions here and the last one is the <em>usual</em> way to
+do it in Java.</p>
+<p>Version 1 (Most naive and easiest to remember)</p>
+<p>Each time you split the input array in halves, you allocate two arrays.
+This is the most straightforward way since the <tt class="docutils literal">merge()</tt> method takes
+3 different arrays. We're trying to merge array <tt class="docutils literal">left</tt> with array <tt class="docutils literal">right</tt>,
+the merged result is stored by into <tt class="docutils literal">nums ...</tt></p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/merge_sort.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/315-count_of_smaller_numbers_after_self.html">315-count_of_smaller_numbers_after_self</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T10:08:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/divide-and-conquer.html">Divide And Conquer</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/">LeetCode Problem Link</a></p>
+<p>The straightforward solution take O(n :superscript:<cite>2</cite>) time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">countSmaller</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
+                <span class="n">cnt</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cnt</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>You guessed it! This will get you TLE on large test case.</p>
+<pre class="literal-block">
+Submission Result: Time Limit Exceeded More Details
+
+Last executed input:
+[5183,2271,3067,539,8939,2999,9264,737,3974,5846,-210,9278,5800,2675,6608,1133,-1,6018,9672,5179,9842 ...</pre>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/315-count_of_smaller_numbers_after_self.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/314-binary_tree_vertical_order_traversal.html">314-binary_tree_vertical_order_traversal</a></h2>
                     <div>
 <footer class="post-info">
@@ -214,141 +359,6 @@ dp[2][4] = numbers[2]*numbers[3]*numbers[4 ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/310-minimum_height_trees.html">310-minimum_height_trees</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-25T11:57:00-08:00"> Feb 25 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/minimum-height-trees/">LeetCode Problem Link</a></p>
-<p><tt class="docutils literal">n</tt> nodes labeled from <tt class="docutils literal">0</tt> to <tt class="docutils literal"><span class="pre">n-1</span></tt>.</p>
-<p>We need to build an undirected graph. Nodes with only one edge are leaf nodes. Nodes with more than one
-edge are internal nodes. The root of the minumum height tree cannot possibly be a leaf node.</p>
-<p>I go through each internal nodes and try to get the height of the tree using that node as the root.</p>
-<p>But I got TLE for large TC.</p>
-<p>What we can do it keep removing leaf nodes from the current graph until it's got &lt; 2 nodes left.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">findMinHeightTrees</span><span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/310-minimum_height_trees.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/309-best_time_to_buy_and_sell_stock_with_cooldown.html">309-best_time_to_buy_and_sell_stock</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-25T09:53:00-08:00"> Feb 25 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">LeetCode Problem Link</a></p>
-<p>We can make as many trades as needed, but each buy cannot be immediately after a sell.</p>
-<p>int array <tt class="docutils literal">buy</tt> is the profit with one outstanding stock.
-int array <tt class="docutils literal">sell</tt> is the profit with no oustanding stock.</p>
-<dl class="docutils">
-<dt><tt class="docutils literal">buy[i]</tt> is the amount of cash with one outstanding stock position, it is purchased either at day <tt class="docutils literal">i</tt></dt>
-<dd>or any day before day <tt class="docutils literal">i</tt>.</dd>
-<dt><tt class="docutils literal">sell[i]</tt> is the amount of chash with no oustanding stock position, the last sold occurred on day <tt class="docutils literal">i</tt> or</dt>
-<dd>any day before day <tt class="docutils literal">i</tt>.</dd>
-</dl>
-<pre class="literal-block">
-buy[i] = Math.max(buy[i-1], sell[i-2] - prices[i ...</pre>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/309-best_time_to_buy_and_sell_stock_with_cooldown.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/308-range_sum_query_2d_mutable.html">308-range_sum_query_2d_mutable</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-25T09:13:00-08:00"> Feb 25 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/query-sum.html">Query Sum</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/segment-tree.html">Segment Tree</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/range-sum-query-2d-mutable/">LeetCode Problem Link</a></p>
-<p><tt class="docutils literal">m</tt> rows and <tt class="docutils literal">n</tt> columns.</p>
-<p>Use 2d array <tt class="docutils literal">rowSums</tt> to store the prefix sums for each row.</p>
-<p>When update occurs, a row in <tt class="docutils literal">rowSums</tt> has to be updated. O(n) time.</p>
-<p>When query occurs, sum over at most <tt class="docutils literal">m</tt> rows. O(m) time.</p>
-<div class="highlight"><pre><span class="kd">private</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">rowSums</span><span class="o">;</span>
-<span class="kd">private</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="nf">NumMatrix</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">)</span> <span class="o">{</span>
-     <span class="k">this</span><span class="o">.</span><span class="na">matrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">;</span>
-
-     <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-     <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-         <span class="k">return</span><span class="o">;</span>
-
-     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
-
-     <span class="n">rowSums</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++){</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++){</span>
-            <span class="k">if</span><span class="o">(</span><span class="n">col</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-                <span class="n">rowSums</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/308-range_sum_query_2d_mutable.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/307-range_sum_query_mutable.html">307-range_sum_query_mutable</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-24T17:05:00-08:00"> Feb 24 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/range-sum.html">Range Sum</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/segment-tree.html">Segment Tree</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/full-binary-trees.html">Full Binary Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/range-sum-query-mutable/">LeetCode Problem Link</a></p>
-<p>Use a segment tree since the number of gets and updates are the same.</p>
-<p>A segment tree is a <em>full</em> binary tree -&gt; a binary tree where all nodes have either 0 or 2 children.</p>
-<p>Something you might want to memorize regarding a full binary tree is that a full binary tree with <tt class="docutils literal">n</tt> leaf nodes
-has <tt class="docutils literal"><span class="pre">n-1</span></tt> internal nodes. Therefore, the total number of nodes will be <tt class="docutils literal"><span class="pre">2n-1</span></tt>.</p>
-<p>We are not using the <tt class="docutils literal">0</tt> index and starting root node and index <tt class="docutils literal">1</tt>. So our array needs to be of size <tt class="docutils literal">2n</tt>.</p>
-<p>But in practice <tt class="docutils literal">2n</tt> is not ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/307-range_sum_query_mutable.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh5.html">&laquo;</a>
@@ -437,6 +447,8 @@ has <tt class="docutils literal"><span class="pre">n-1</span></tt> internal node
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh41.html">41</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh42.html">42</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh43.html">43</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh7.html">&raquo;</a></li>
         </ul>
