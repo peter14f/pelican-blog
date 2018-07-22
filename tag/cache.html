@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Cache - Peter's Coding Notes</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="Peter Hsieh" />
+    <meta name="keywords" content="Cache" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Peter's Coding Notes" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Peter's Coding Notes"/>
+        <meta property="og:url" content="http://peter14f.github.io/pelican-blog"/>
+        <meta property="og:description" content="Peter's Coding Notes"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://peter14f.github.io/pelican-blog/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://peter14f.github.io/pelican-blog/theme/css/style.css" type="text/css"/>
+
+        <link href="http://peter14f.github.io/pelican-blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Peter's Coding Notes ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://peter14f.github.io/pelican-blog/" class="navbar-brand">
+Peter's Coding Notes            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/more-questions.html">More questions</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="http://peter14f.github.io/pelican-blog/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/460-lfu_cache.html">460-lfu_cache</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-07-20T19:28:00-07:00"> Jul 20 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/lfu.html">LFU</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/cache.html">Cache</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lfu-cache/">LeetCode Problem Link</a></p>
+<p>The <tt class="docutils literal">Map&lt;Integer, DDList&gt; countMap</tt> tracks the list of nodes with the same frequency (usage count).
+It's good to clarify from the interviewer what the behavior should be when <tt class="docutils literal">minCnt</tt> is bigger than 1.
+For LeetCode's solution, it does not feel truly LFU because we're asked to remove the last recently used
+item from the <tt class="docutils literal">minCnt</tt> list and insert the element with a count of 1.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LFUCache</span> <span class="o">{</span>
+
+<span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">cnt</span><span class="o">;</span>
+    <span class="n">Node</span> <span class="n">prev</span><span class="o">,</span> <span class="n">next</span><span class="o">;</span>
+
+    <span class="n">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/460-lfu_cache.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">146-lru_cache</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-16T19:28:00-08:00"> Dec 16 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/lru.html">LRU</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/cache.html">Cache</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lru-cache/">LeetCode Problem Link</a></p>
+<p>LRU itself can be implemented with a doubly linked list. For constant time <tt class="docutils literal">get()</tt> and <tt class="docutils literal">set()</tt> operation,
+we must use a hashtable. The data being accessed is moved to the head. The head is the most recently accessed data.
+The tail is the last recently accessed data. When evicting an old data, remove the data at the tail node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LRUCache</span> <span class="o">{</span>
+    <span class="kd">class</span> <span class="nc">ListNode</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">next</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">prev</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">ListNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacity</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">head</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">tail</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">ListNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Peter Hsieh
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://peter14f.github.io/pelican-blog/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://peter14f.github.io/pelican-blog/theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

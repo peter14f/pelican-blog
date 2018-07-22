@@ -76,6 +76,91 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/270-closest_binary_search_tree_value.html">270-closest_binary_search_tree_value</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-19T23:13:00-08:00"> Feb 19 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/closest-value-in-bst.html">Closest Value In BST</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/closest-binary-search-tree-value/">LeetCode Problem Link</a></p>
+<p>Record the closest element traversed so far and the minimum difference.</p>
+<p>The iterative approach definitely makes more sense here.</p>
+<p>Just because the diff is greater than the min diff, it does not mean you should stop there. Continue with the BST
+search until you hit the leaf node.</p>
+<div class="highlight"><pre><span class="c1">// tree is non-empty</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">closestValue</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">double</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">TreeNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">minDiff</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">-</span> <span class="n">target</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">curVal</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">myDiff</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">-</span> <span class="n">target</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">myDiff</span> <span class="o">&lt;</span> <span class="n">minDiff</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">minDiff</span> <span class="o">=</span> <span class="n">myDiff</span><span class="o">;</span>
+            <span class="n">curVal</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="k">if ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/270-closest_binary_search_tree_value.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/269-alien_dictionary.html">269-alien_dictionary</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-19T14:09:00-08:00"> Feb 19 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/topological-sorting.html">Topological Sorting</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/alien-dictionary/">LeetCode Problem Link</a></p>
+<p>First, we have to understand that the input array is sorted, not the word itself. Just like in English a sorted word
+list could be [&quot;air&quot;, &quot;baseball&quot;, &quot;cat&quot;]. But &quot;air&quot; is not a sorted string. &quot;baseball&quot; is not a sorted string.
+&quot;cat&quot; is not a sorted string.</p>
+<p>I've seen some solutions online assuming that each word is sorted. They are solving a different problem. In the
+given example, the sorted input array is</p>
+<pre class="literal-block">
+[
+ &quot;wrt&quot;,
+ &quot;wrf&quot;,
+ &quot;er&quot;,
+ &quot;ett&quot;,
+ &quot;rftt&quot;
+]
+</pre>
+<p>We should build the graph &quot;w-&gt;e-&gt;r-&gt;t-&gt;f&quot;.</p>
+<p>Once the graph is built, we just need ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/269-alien_dictionary.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/268-missing_number.html">268-missing_number</a></h2>
                     <div>
 <footer class="post-info">
@@ -337,82 +422,6 @@ The number colors is <tt class="docutils literal">k</tt>.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">261-graph_valid_tree</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-18T21:37:00-08:00"> Feb 18 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/check-if-graph-a-valid-binary-tree.html">Check If Graph A Valid Binary Tree</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/graph-valid-tree/">LeetCode Problem Link</a></p>
-<pre class="literal-block">
-Given ``n`` nodes labeled from ``0`` to ``n - 1`` and a list of
-undirected edges (each edge is a pair of nodes), write a function to
-check whether these edges make up a valid tree.
-
-For example:
-
-Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
-
-Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
-
-Hint:
-
-Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree?
-
-According to the definition of tree ...</pre>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/261-graph_valid_tree.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/260-single_number_iii.html">260-single_number_iii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-18T20:43:00-08:00"> Feb 18 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/single-number.html">Single Number</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/add-digits/">LeetCode Problem Link</a></p>
-<p>If we use a HashMap&lt;Integer, Integer&gt; to keep track the occurrence of each element, we can do this problem in
-one pass. But we're asked to solve this using O(1) space.</p>
-<p>If we just XOR all the elements in the array, we will get <tt class="docutils literal">a ^ b</tt>. How can we extract <tt class="docutils literal">a</tt> and <tt class="docutils literal">b</tt> from
-<tt class="docutils literal">a ^ b</tt>?</p>
-<p><tt class="docutils literal">x = a ^ b</tt></p>
-<p>Well, we know that <tt class="docutils literal">a</tt> and <tt class="docutils literal">b</tt> are two numbers, so some bit in <tt class="docutils literal">x</tt> must be set.</p>
-<p>Let find that bit, call it bit <tt class="docutils literal">k</tt>.</p>
-<p>And then we can put the numbers in the ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/260-single_number_iii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/category/leetcode10.html">&laquo;</a>
@@ -499,6 +508,8 @@ one pass. But we're asked to solve this using O(1) space.</p>
                             href="http://peter14f.github.io/pelican-blog/category/leetcode40.html">40</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode41.html">41</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode42.html">42</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode12.html">&raquo;</a></li>
         </ul>

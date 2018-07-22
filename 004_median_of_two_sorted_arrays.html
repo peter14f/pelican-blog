@@ -12,7 +12,7 @@
 <link rel="canonical" href="http://peter14f.github.io/pelican-blog/004_median_of_two_sorted_arrays.html">
 
         <meta name="author" content="Peter Hsieh" />
-        <meta name="keywords" content="Sorted Arrays,Merge Sort,Binary Search" />
+        <meta name="keywords" content="Sorted Arrays,Merge Sort,Binary Search,Recursion,Find Kth" />
         <meta name="description" content="LeetCode Problem Link Let&#39;s forget about the time constraint here. How would you approach the problem? We can use a similar approach when we&#39;re doing a merge sort. Use two pointers i and j. (i+j) is the number of times the pointers have been incremented. And min(nums1[i], num2[j]) is the (i+j+1)th element. i=0, j=0 1st element is min(nums[i], nums[j]) public double findMedianSortedArrays(int[] nums1, int[] nums2) { int m = nums1.length; int n = nums2.length; if ((m + n) % 2 == 0) { // even number of total elements int k ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -25,6 +25,8 @@
             <meta property="article:tag" content="Sorted Arrays" />
             <meta property="article:tag" content="Merge Sort" />
             <meta property="article:tag" content="Binary Search" />
+            <meta property="article:tag" content="Recursion" />
+            <meta property="article:tag" content="Find Kth" />
             <meta property="article:author" content="Peter Hsieh" />
 
 
@@ -107,6 +109,10 @@ Peter's Coding Notes            </a>
 	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/find-kth.html">Find Kth</a>
     
 </footer><!-- /.post-info -->                <div class="full-article">
                 <p><a class="reference external" href="https://leetcode.com/problems/median-of-two-sorted-arrays/">LeetCode Problem Link</a></p>
@@ -220,6 +226,141 @@ else {
     }
 }
 </pre>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">double</span> <span class="nf">findMedianSortedArrays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">(</span><span class="n">l</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">k</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+
+        <span class="kt">double</span> <span class="n">kth</span> <span class="o">=</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">k</span><span class="o">);</span>
+        <span class="kt">double</span> <span class="n">kPlusOneTh</span> <span class="o">=</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">kth</span> <span class="o">+</span> <span class="n">kPlusOneTh</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// k must be &gt;= 1</span>
+<span class="c1">// k = 1 -&gt; 1st element</span>
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">findKthElementFrom</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">,</span> <span class="kt">int</span> <span class="n">aStart</span><span class="o">,</span> <span class="kt">int</span> <span class="n">aSize</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">B</span><span class="o">,</span> <span class="kt">int</span> <span class="n">bStart</span><span class="o">,</span> <span class="kt">int</span> <span class="n">bSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">aSize</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">bSize</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">aStart</span><span class="o">],</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span><span class="o">]);</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">aSize</span> <span class="o">&lt;=</span> <span class="n">bSize</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">aSize</span><span class="o">;</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">a</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">b</span><span class="o">++;</span>
+            <span class="n">a</span><span class="o">--;</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">bSize</span><span class="o">;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">a</span><span class="o">++;</span>
+            <span class="n">b</span><span class="o">--;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="o">])</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="o">])</span> <span class="o">{</span>
+        <span class="c1">// k - a</span>
+        <span class="k">return</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span><span class="o">,</span> <span class="n">aSize</span> <span class="o">-</span> <span class="n">a</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">bStart</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">k</span> <span class="o">-</span> <span class="n">a</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// k - b</span>
+        <span class="k">return</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">A</span><span class="o">,</span> <span class="n">aStart</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">bStart</span> <span class="o">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">bSize</span><span class="o">-</span><span class="n">b</span><span class="o">,</span> <span class="n">k</span> <span class="o">-</span> <span class="n">b</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="n">We</span> <span class="n">can</span> <span class="n">also</span> <span class="k">do</span> <span class="n">the</span> <span class="n">binary</span> <span class="n">search</span> <span class="n">without</span> <span class="n">using</span> <span class="n">recursion</span>
+
+<span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="o">::</span> <span class="n">java</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">findMedianSortedArrays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">(</span><span class="n">l</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">k</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+
+        <span class="kt">double</span> <span class="n">kth</span> <span class="o">=</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">k</span><span class="o">);</span>
+        <span class="kt">double</span> <span class="n">kPlusOneTh</span> <span class="o">=</span> <span class="n">findKthElementFrom</span><span class="o">(</span><span class="n">nums1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">nums2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="o">(</span><span class="n">kth</span> <span class="o">+</span> <span class="n">kPlusOneTh</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// k must be &gt;= 1</span>
+<span class="c1">// k = 1 -&gt; 1st element</span>
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">findKthElementFrom</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">,</span> <span class="kt">int</span> <span class="n">aStart</span><span class="o">,</span> <span class="kt">int</span> <span class="n">aSize</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">B</span><span class="o">,</span> <span class="kt">int</span> <span class="n">bStart</span><span class="o">,</span> <span class="kt">int</span> <span class="n">bSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">do</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">aSize</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">bSize</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">aStart</span><span class="o">],</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span><span class="o">]);</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">aSize</span> <span class="o">&lt;=</span> <span class="n">bSize</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">aSize</span><span class="o">;</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">a</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">b</span><span class="o">++;</span>
+                <span class="n">a</span><span class="o">--;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">bSize</span><span class="o">;</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">a</span><span class="o">++;</span>
+                <span class="n">b</span><span class="o">--;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">aStart</span> <span class="o">=</span> <span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span><span class="o">;</span>
+            <span class="n">aSize</span> <span class="o">=</span> <span class="n">aSize</span> <span class="o">-</span> <span class="n">a</span><span class="o">;</span>
+            <span class="n">bSize</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">a</span><span class="o">;</span> <span class="c1">// update k</span>
+            <span class="c1">// bStart stays</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">B</span><span class="o">[</span><span class="n">bStart</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">bStart</span> <span class="o">=</span> <span class="n">bStart</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+            <span class="n">bSize</span> <span class="o">=</span> <span class="n">bSize</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span>
+            <span class="n">aSize</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span> <span class="c1">// update k</span>
+            <span class="c1">// aStart stays</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">A</span><span class="o">[</span><span class="n">aStart</span> <span class="o">+</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
 
                 </div>
             </div>
