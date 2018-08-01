@@ -76,105 +76,6 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/326-power_of_three.html">326-power_of_three</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T08:30:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/power.html">Power</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/power-of-three/">LeetCode Problem Link</a></p>
-<p>Power of 3</p>
-<div class="line-block">
-<div class="line">3 <sup>0</sup> = 1</div>
-<div class="line">3 <sup>1</sup> = 3</div>
-<div class="line">3 <sup>2</sup> = 9</div>
-<div class="line">3 <sup>3</sup> = 27</div>
-<div class="line">3 <sup>4</sup> = 81</div>
-<div class="line">3 <sup>5</sup> = 243</div>
-</div>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPowerOfThree</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">3</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>And then the followup asks if we could do this without using a loop or recursion.</p>
-<p>Well, let's write out the math</p>
-<pre class="literal-block">
-3 ^ x = n
-log10(x) / log10 (3) = n
-</pre>
-<p>This is probably from my high school precalc class</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPowerOfThree</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">log10</span><span class="o">(</span><span class="n">n ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/326-power_of_three.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/325-maximum_size_subarray_sum_equals_k.html">325-maximum_size_subarray_sum_equals_k</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T07:32:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/range-sum.html">Range Sum</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/">LeetCode Problem Link</a></p>
-<p>The straightforward solution is to use two nested for loops to find the sums of all subarrays.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArrayLen</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">maxSize</span><span class="o">)</span>
-            <span class="n">maxSize</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">maxSize</span> <span class="o">=</span> <span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
-            <span class="o">}</span>
-
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">maxSize</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>The followup wants us to do this in O(n) time.</p>
-<p>After looking at the solution online, I just realized that any problem ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/325-maximum_size_subarray_sum_equals_k.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/324-wiggle_sort_ii.html">324-wiggle_sort_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -379,6 +280,92 @@ solve this problem in O(n <sup>2</sup>) time where <tt class="docutils literal">
 (bitMaps[i] &amp; bitMaps[j]) &gt; 0.</p>
 <p>Building the <tt class="docutils literal">bitMaps</tt> will take O ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/318-maximum_product_of_word_lengths.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/316-remove_duplicate_letters.html">316-remove_duplicate_letters</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T15:22:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/strings.html">Strings</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/remove-duplicate-letters/">LeetCode Problem Link</a></p>
+<p>In the first pass, get the frequency count of each character in the input string <tt class="docutils literal">s</tt>.</p>
+<p>That we can know how many times each duplicated character shall be deleted.</p>
+<p>I'm thinking of using recursion and DFS to find all versions of the deleted string and then sort
+the list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">removeDuplicateLetters</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">remain</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">toDelete</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">remain</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">c</span><span class="o">))</span>
+            <span class="n">remain</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="k">else</span>
+            <span class="n">remain ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/316-remove_duplicate_letters.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/315-count_of_smaller_numbers_after_self.html">315-count_of_smaller_numbers_after_self</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T10:08:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/divide-and-conquer.html">Divide And Conquer</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/">LeetCode Problem Link</a></p>
+<p>The straightforward solution take O(n :superscript:<cite>2</cite>) time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">countSmaller</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
+                <span class="n">cnt</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cnt</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>You guessed it! This will get you TLE on large test case.</p>
+<pre class="literal-block">
+Submission Result: Time Limit Exceeded More Details
+
+Last executed input:
+[5183,2271,3067,539,8939,2999,9264,737,3974,5846,-210,9278,5800,2675,6608,1133,-1,6018,9672,5179,9842 ...</pre>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/315-count_of_smaller_numbers_after_self.html">more ...</a>
                 </div>
             </article>
             <hr/>

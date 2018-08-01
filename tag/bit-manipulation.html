@@ -74,11 +74,95 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">477-total_hamming_distance</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T21:50:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/total-hamming-distance/">LeetCode Problem Link</a></p>
+<p>Imagine each number is just zero or one, the total hamming distance is just (number of ones)*(number of zeros)</p>
+<p>Do that for each bit and sum up the result at each bit.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalHammingDistance</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">totalDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">numOnes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">numZeros</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">((</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">numOnes</span><span class="o">++;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">numZeros</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">totalDistance</span> <span class="o">+=</span> <span class="o">(</span><span class="n">numOnes</span> <span class="o">*</span> <span class="n">numZeros</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">totalDistance</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">461-hamming_distance</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T20:50:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/xor.html">XOR</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/hamming-distance/">LeetCode Problem Link</a></p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hammingDistance</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">hammingDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">z</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">hammingDistance</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">hammingDistance</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/341-flatten_nested_list_iteratore.html">341-flatten_nested_list_iterator</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2018-07-13T06:02:00-07:00"> Jul 13 2018</time>
+        <time datetime="2018-03-17T15:49:00-07:00"> Mar 17 2018</time>
     </span>
 
 
@@ -125,90 +209,6 @@ Peter's Coding Notes            </a>
     <span class="kd">interface</span> <span class="nc">NestedInteger</span> <span class="o">{</span>
         <span class="c1">// @return true ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/341-flatten_nested_list_iteratore.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">461-hamming_distance</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-13T06:02:00-07:00"> Jul 13 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/xor.html">XOR</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/hamming-distance/">LeetCode Problem Link</a></p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hammingDistance</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">hammingDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">((</span><span class="n">z</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">hammingDistance</span><span class="o">++;</span>
-        <span class="o">}</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">hammingDistance</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">477-total_hamming_distance</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-13T06:02:00-07:00"> Jul 13 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/total-hamming-distance/">LeetCode Problem Link</a></p>
-<p>Imagine each number is just zero or one, the total hamming distance is just (number of ones)*(number of zeros)</p>
-<p>Do that for each bit and sum up the result at each bit.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalHammingDistance</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">totalDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">numOnes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">numZeros</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">((</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">numOnes</span><span class="o">++;</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">numZeros</span><span class="o">++;</span>
-            <span class="o">}</span>
-            <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="n">totalDistance</span> <span class="o">+=</span> <span class="o">(</span><span class="n">numOnes</span> <span class="o">*</span> <span class="n">numZeros</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">totalDistance</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">more ...</a>
                 </div>
             </article>
             <hr/>

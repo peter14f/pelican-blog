@@ -73,11 +73,11 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/175-combine_two_tables.html">175-combine_two_tables</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/868-transpose_matrix.html">868-transpose_matrix</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2018-07-20T19:28:00-07:00"> Jul 20 2018</time>
+        <time datetime="2018-03-21T10:45:00-07:00"> Mar 21 2018</time>
     </span>
 
 
@@ -85,78 +85,42 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/sql.html">sql</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/left-join.html">left join</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/right-join.html">right join</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/2d-matrix.html">2D Matrix</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/combine-two-tables/">LeetCode Problem Link</a></p>
-<p>Table - Person
-PersonId
-FirstName
-LastName
-PersonId is the primary key column for this table.</p>
-<p>Table - Address
-AddressId
-PersonId
-City
-State
-AddressId is the primary key column for this table.</p>
-<p>Write a SQL query for a report that provides the following information for each person in the Person table,
-regardless if there is an address for each of those people:</p>
-<p>FirstName, LastName, City, State</p>
-<div class="highlight"><pre><span class="k">select</span> <span class="n">FirstName</span><span class="p">,</span> <span class="n">LastName</span><span class="p">,</span> <span class="n">City</span><span class="p">,</span> <span class="k">State</span> <span class="k">from</span>
-<span class="n">Person</span> <span class="k">left</span> <span class="k">join</span> <span class="n">Address</span> <span class="k">on</span>
-<span class="n">Person</span><span class="p">.</span><span class="n">PersonId</span> <span class="o">=</span> <span class="n">Address</span><span class="p">.</span><span class="n">PersonId</span><span class="p">;</span>
-</pre></div>
-<p>Or you can use right join instead</p>
-<div class="highlight"><pre><span class="k">select</span> <span class="n">FirstName</span><span class="p">,</span> <span class="n">LastName</span><span class="p">,</span> <span class="n">City</span><span class="p">,</span> <span class="k">State</span> <span class="k">from</span>
-<span class="n">Address</span> <span class="k">right</span> <span class="k">join</span> <span class="n">Person</span> <span class="k">on</span>
-<span class="n">Person ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/175-combine_two_tables.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/176-combine_two_tables.html">176-combine_two_tables</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-20T19:28:00-07:00"> Jul 20 2018</time>
-    </span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/transpose-matrix/">LeetCode Problem Link</a></p>
+<p>We cannot do this in place because the input matrix could be rectangular instead of square.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[][]</span> <span class="nf">transpose</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">A</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
 
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
+    <span class="o">}</span>
 
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
 
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">B</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">m</span><span class="o">];</span>
 
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">B</span><span class="o">[</span><span class="n">j</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/sql.html">sql</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/as-keyword.html">as keyword</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/where-clause.html">where clause</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/second-highest-salary/">LeetCode Problem Link</a></p>
-<p>Table - Employee
-Id
-Salary</p>
-<p>Write a SQL query to show the second highest salary.</p>
-<div class="highlight"><pre><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span> <span class="k">from</span> <span class="n">Employee</span> <span class="k">where</span> <span class="n">Salary</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span> <span class="k">from</span> <span class="n">Employee</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">B</span><span class="o">;</span>
+<span class="o">}</span>
 </pre></div>
 
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/176-combine_two_tables.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/868-transpose_matrix.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/460-lfu_cache.html">460-lfu_cache</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/758-bold_words_in_string.html">758-bold_words_in_string</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2018-07-20T19:28:00-07:00"> Jul 20 2018</time>
+        <time datetime="2018-03-20T04:45:00-07:00"> Mar 20 2018</time>
     </span>
 
 
@@ -164,62 +128,39 @@ Salary</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/lfu.html">LFU</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/cache.html">Cache</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bitmaps.html">Bitmaps</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lfu-cache/">LeetCode Problem Link</a></p>
-<p>The <tt class="docutils literal">Map&lt;Integer, DDList&gt; countMap</tt> tracks the list of nodes with the same frequency (usage count).
-It's good to clarify from the interviewer what the behavior should be when <tt class="docutils literal">minCnt</tt> is bigger than 1.
-For LeetCode's solution, it does not feel truly LFU because we're asked to remove the last recently used
-item from the <tt class="docutils literal">minCnt</tt> list and insert the element with a count of 1.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LFUCache</span> <span class="o">{</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/bold-words-in-string/">LeetCode Problem Link</a></p>
+<p>Use a boolean[] <tt class="docutils literal">isBold</tt> as a bitmap to track if each character should be bold.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">boldWords</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">words</span><span class="o">,</span> <span class="n">String</span> <span class="n">S</span><span class="o">)</span> <span class="o">{</span>
 
-<span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">cnt</span><span class="o">;</span>
-    <span class="n">Node</span> <span class="n">prev</span><span class="o">,</span> <span class="n">next</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">isBold</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+    <span class="kt">char</span><span class="o">[]</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
 
-    <span class="n">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
-        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/460-lfu_cache.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/681-next_closest_time.html">681-next_closest_time</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-20T19:28:00-07:00"> Jul 20 2018</time>
-    </span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">word</span> <span class="o">:</span> <span class="n">words</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">w</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
 
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">matchWordFromCh</span><span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">ch</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">l</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                    <span class="n">isBold</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
+    <span class="kt">boolean</span> <span class="n">started</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
 
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/next-closest-time/">LeetCode Problem Link</a></p>
-<p>Start from the back of the input, at index i, find the smallest choice that's larger than <tt class="docutils literal">input[i]</tt>, if
-such choice exists, then for all indices j &gt; i, place the min. Check if the output is valid time.</p>
-<div class="highlight"><pre><span class="c1">// may assume the given input string is always valid</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">nextClosestTime</span><span class="o">(</span><span class="n">String</span> <span class="n">time</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>
-
-    <span class="n">input</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-    <span class="n">input</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-    <span class="n">input</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-    <span class="n">input</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">2 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/681-next_closest_time.html">more ...</a>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isBold</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">started</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;&lt;b&gt;&quot;</span><span class="o">);</span>
+            <span class="n">started</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/758-bold_words_in_string.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -228,7 +169,7 @@ such choice exists, then for all indices j &gt; i, place the min. Check if the o
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2018-07-20T19:28:00-07:00"> Jul 20 2018</time>
+        <time datetime="2018-03-20T04:25:00-07:00"> Mar 20 2018</time>
     </span>
 
 
@@ -266,11 +207,162 @@ such choice exists, then for all indices j &gt; i, place the min. Check if the o
             </article>
             <hr/>
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/739-daily_temperatures.html">739-daily_temperatures</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-20T04:05:00-07:00"> Mar 20 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/stacks.html">Stacks</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/daily-temperatures/">LeetCode Problem Link</a></p>
+<p>The trivial solution would take O(n<sup>2</sup>) time. This problem reminds me of 84-largest_rectangle.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">dailyTemperatures2</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">temperatures</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span> <span class="c1">// stores the index</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">temperatures</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">||</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">temperatures</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">stk</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="n">i</span><span class="o">++;</span>
+            <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span> <span class="o">||</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">stk</span><span class="o">.</span><span class="na">peek</span><span class="o">()])</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">stk</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">temperatures</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">ans</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">ans</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">index</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">stk</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="n">i</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/739-daily_temperatures.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/737-sentence_similarity_ii.html">737-sentence_similarity_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-20T03:59:00-07:00"> Mar 20 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/union-find.html">Union Find</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sentence-similarity-ii/">LeetCode Problem Link</a></p>
+<p>Transitivity makes this into a graph problem. Can solve this using either DFS or BFS.</p>
+<p>Also can be solved using Union Find.</p>
+<div class="highlight"><pre><span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">words2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// bfs and prevent visiting the same word more than once</span>
+    <span class="c1">// values are the neighbors</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">similar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">pair</span> <span class="o">:</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w1</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w1</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
+        <span class="o">}</span>
+        <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w1</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w2</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w2</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w2</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
+        <span class="o">}</span>
+        <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w2</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">words1</span><span class="o">.</span><span class="na">length ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/737-sentence_similarity_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/734-sentence_similarity.html">734-sentence_similarity</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-20T03:51:00-07:00"> Mar 20 2018</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sentence-similarity/">LeetCode Problem Link</a></p>
+<p>Use a Map&lt;String, Set&lt;String&gt;&gt; <tt class="docutils literal">similar</tt> to look up similar words.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">areSentencesSimilar</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">words1</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">words2</span><span class="o">,</span> <span class="n">String</span><span class="o">[][]</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">words2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">similar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">pairs</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">pair</span> <span class="o">:</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w1</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w1</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
+            <span class="o">}</span>
+            <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w1</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w2</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w2</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w2</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
+            <span class="o">}</span>
+            <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w2</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w1</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">words1</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">words2</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">w1</span><span class="o">.</span><span class="na">equals ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/734-sentence_similarity.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/714-best_time_to_buy_and_sell_stock_with_transaction_fee.html">714-best_time_to_buy_and_sell_stock_with_transaction_fee</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2018-07-15T15:19:00-07:00"> Jul 15 2018</time>
+        <time datetime="2018-03-20T03:01:00-07:00"> Mar 20 2018</time>
     </span>
 
 
@@ -308,87 +400,33 @@ such choice exists, then for all indices j &gt; i, place the min. Check if the o
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/490-the_maze.html">490-the_maze</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/681-next_closest_time.html">681-next_closest_time</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2018-07-13T09:02:00-07:00"> Jul 13 2018</time>
+        <time datetime="2018-03-19T15:01:00-07:00"> Mar 19 2018</time>
     </span>
 
 
 
 
 
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph-problem-with-a-spin.html">Graph Problem With A Spin</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/the-maze/">LeetCode Problem Link</a></p>
-<p>Another graph search problem with a spin. In this case, each cell still has at most 4 neighbors but
-a neighbor is not necessary the cell 1 distance away because you can only stop only when you hit a
-wall.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasPath</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">maze</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">destination</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/next-closest-time/">LeetCode Problem Link</a></p>
+<p>Start from the back of the input, at index i, find the smallest choice that's larger than <tt class="docutils literal">input[i]</tt>, if
+such choice exists, then for all indices j &gt; i, place the min. Check if the output is valid time.</p>
+<div class="highlight"><pre><span class="c1">// may assume the given input string is always valid</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">nextClosestTime</span><span class="o">(</span><span class="n">String</span> <span class="n">time</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>
 
-    <span class="k">return</span> <span class="n">dfsCanReachDest</span><span class="o">(</span>
-            <span class="n">maze</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">start</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">start</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">destination</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">destination</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">visited</span><span class="o">);</span>
-<span class="o">}</span>
+    <span class="n">input</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
+    <span class="n">input</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
+    <span class="n">input</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
+    <span class="n">input</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
 
-<span class="c1">// note that this method is only called once for each cell located at (x,y ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/490-the_maze.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/505-the_maze_ii.html">505-the_maze_iii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-13T09:02:00-07:00"> Jul 13 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph-problem-with-a-spin.html">Graph Problem With A Spin</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/the-maze-ii/">LeetCode Problem Link</a></p>
-<p>A good practice for implementing Dijkstra's algorithm.</p>
-<div class="highlight"><pre><span class="c1">// in this problem, we are not trying to figure out the path</span>
-<span class="c1">// we are only interested in knowing the shortest distance from</span>
-<span class="c1">// start to destination... This should yell Dijkstra for you.</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">shortestDistance</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">maze</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">destination</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="c1">// distant from start to all cells</span>
-    <span class="c1">// not found in map -&gt; distance is infinity</span>
-    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">dist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-
-    <span class="c1">// shortest distance from start has been figured out</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">done</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
-
-    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">CellAndDist</span><span class="o">&gt;</span> <span class="n">pq ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/505-the_maze_ii.html">more ...</a>
+    <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">2 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/681-next_closest_time.html">more ...</a>
                 </div>
             </article>
             <hr/>
