@@ -73,6 +73,186 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/341-flatten_nested_list_iteratore.html">341-flatten_nested_list_iterator</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-07-13T06:02:00-07:00"> Jul 13 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/flatten-nested-list-iterator/">LeetCode Problem Link</a></p>
+<p>The easiest way is recursively flatten the nested list at constructor time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NestedIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">l</span><span class="o">;</span>
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">itr</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">NestedIterator</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">NestedInteger</span><span class="o">&gt;</span> <span class="n">nestedList</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">l</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">recursivelyFlatten</span><span class="o">(</span><span class="n">nestedList</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">l</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">itr</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">l</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">recursivelyFlatten</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">NestedInteger</span><span class="o">&gt;</span> <span class="n">nestedList</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nestedList</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">nestedList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">isInteger</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">l</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nestedList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">getInteger</span><span class="o">());</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">recursivelyFlatten</span><span class="o">(</span><span class="n">nestedList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">getList</span><span class="o">(),</span> <span class="n">l</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">itr</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">itr</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">interface</span> <span class="nc">NestedInteger</span> <span class="o">{</span>
+        <span class="c1">// @return true ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/341-flatten_nested_list_iteratore.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">461-hamming_distance</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-07-13T06:02:00-07:00"> Jul 13 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/xor.html">XOR</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/hamming-distance/">LeetCode Problem Link</a></p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hammingDistance</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">hammingDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">z</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">hammingDistance</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">hammingDistance</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">477-total_hamming_distance</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-07-13T06:02:00-07:00"> Jul 13 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/total-hamming-distance/">LeetCode Problem Link</a></p>
+<p>Imagine each number is just zero or one, the total hamming distance is just (number of ones)*(number of zeros)</p>
+<p>Do that for each bit and sum up the result at each bit.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalHammingDistance</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">totalDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">numOnes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">numZeros</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">((</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">numOnes</span><span class="o">++;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">numZeros</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">totalDistance</span> <span class="o">+=</span> <span class="o">(</span><span class="n">numOnes</span> <span class="o">*</span> <span class="n">numZeros</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">totalDistance</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/487-max_consecutive_ones_ii.html">487-max_consecutive_ones_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-07-13T06:02:00-07:00"> Jul 13 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/max-consecutive-ones-ii/">LeetCode Problem Link</a></p>
+<p>Two variables. One counts the number consecutive ones before encountering the latest zero. The
+other counts the number of consecutive ones after encountering the latest zero.</p>
+<div class="highlight"><pre><span class="c1">//  1  0  1  1  0  1  1  1  1</span>
+<span class="c1">//</span>
+<span class="c1">//  1  2  3  4  3  4  5  6  7</span>
+<span class="c1">//  1  0  1  2  0  1  2  3  4</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaxConsecutiveOnes</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">beforeLatestZero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// consecutive ones counted before encountering</span>
+                              <span class="c1">// the latest zero</span>
+    <span class="kt">int</span> <span class="n">afterLatestZero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// consecutive ones counted after encountering</span>
+                              <span class="c1">// the latest zero</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">afterLatestZero</span> <span class="o">=</span> <span class="n">beforeLatestZero</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">beforeLatestZero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">beforeLatestZero ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/487-max_consecutive_ones_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/868-transpose_matrix.html">868-transpose_matrix</a></h2>
                     <div>
 <footer class="post-info">
@@ -239,179 +419,6 @@ this takes O(n^2) time. And then for each substring check if it's palindromic.</
 </pre></div>
 
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/647-palindromic_substrings.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/336-palindrome_pairs.html">336-palindrome_pairs</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-10T09:01:00-07:00"> Jul 10 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-pairs/">LeetCode Problem Link</a></p>
-<p>The brute force approach is not going to pass the OJ. So we must see what patterns we can find
-when two words concatenated becomes a palindrome.</p>
-<p>First thing we do is to build a Map&lt;String, Integer&gt; which allows us to look up the index of a reversed
-word.</p>
-<ol class="arabic simple">
-<li>word[i] has a prefix that's a palindrome</li>
-<li>word[i] has a postfix that's a palindrome</li>
-<li>entire word is a palindrome</li>
-<li>entire word is not a palindrome</li>
-<li>empty string</li>
-</ol>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">palindromePairs</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">words</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">words</span><span class="o">.</span><span class="na">length ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/336-palindrome_pairs.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/489-robot_room_cleaner.html">489-robot_room_cleaner</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-10T09:01:00-07:00"> Jul 10 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph-problem-with-a-spin.html">Graph Problem With A Spin</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/robot-room-cleaner/">LeetCode Problem Link</a></p>
-<p>This problem is hard because in normal recursive dfs traversal, you don't have to manually get back
-to the node that you just came from. For this bad robot, we actually have to get it back to cell
-where it came from. Assume the original cell is (0,0).</p>
-<div class="highlight"><pre><span class="cm">/**</span>
-<span class="cm"> * // This is the robot&#39;s control interface.</span>
-<span class="cm"> * // You should not implement it, or speculate about its implementation</span>
-<span class="cm"> * interface Robot {</span>
-<span class="cm"> *     // Returns true if the cell in front is open and robot moves into the cell.</span>
-<span class="cm"> *     // Returns false if the cell in front is blocked and robot stays in ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/489-robot_room_cleaner.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/734-sentence_similarity.html">734-sentence_similarity</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-10T09:01:00-07:00"> Jul 10 2018</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sentence-similarity/">LeetCode Problem Link</a></p>
-<p>Use a Map&lt;String, Set&lt;String&gt;&gt; <tt class="docutils literal">similar</tt> to look up similar words.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">areSentencesSimilar</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">words1</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">words2</span><span class="o">,</span> <span class="n">String</span><span class="o">[][]</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">words2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">similar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">pairs</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">pair</span> <span class="o">:</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-            <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
-
-            <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w1</span><span class="o">))</span> <span class="o">{</span>
-                <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w1</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
-            <span class="o">}</span>
-            <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w1</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w2</span><span class="o">);</span>
-
-            <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w2</span><span class="o">))</span> <span class="o">{</span>
-                <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w2</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
-            <span class="o">}</span>
-            <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w2</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w1</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">words1</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-        <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">words2</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">w1</span><span class="o">.</span><span class="na">equals ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/734-sentence_similarity.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/737-sentence_similarity_ii.html">737-sentence_similarity_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-07-10T09:01:00-07:00"> Jul 10 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/union-find.html">Union Find</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sentence-similarity-ii/">LeetCode Problem Link</a></p>
-<p>Transitivity makes this into a graph problem. Can solve this using either DFS or BFS.</p>
-<p>Also can be solved using Union Find.</p>
-<div class="highlight"><pre><span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">words1</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">words2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// bfs and prevent visiting the same word more than once</span>
-    <span class="c1">// values are the neighbors</span>
-    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">similar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">pair</span> <span class="o">:</span> <span class="n">pairs</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-        <span class="n">String</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">pair</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w1</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w1</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
-        <span class="o">}</span>
-        <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w1</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w2</span><span class="o">);</span>
-
-        <span class="k">if</span> <span class="o">(!</span><span class="n">similar</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">w2</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">similar</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">w2</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;());</span>
-        <span class="o">}</span>
-        <span class="n">similar</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">w2</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="n">w1</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">words1</span><span class="o">.</span><span class="na">length ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/737-sentence_similarity_ii.html">more ...</a>
                 </div>
             </article>
             <hr/>
