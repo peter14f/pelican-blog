@@ -158,6 +158,56 @@ Peter's Coding Notes            </a>
             </article>
             <hr/>
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/494-target_sum.html">494-target_sum</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T22:55:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/0-1-knapsack-problem.html">0-1 Knapsack Problem</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/target-sum/">LeetCode Problem Link</a></p>
+<p>The recursive solution is not hard to come up, but it takes exponential time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findTargetSumWays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">S</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 2 ^ n total possible choices</span>
+    <span class="k">return</span> <span class="n">numWaysSumToTarget</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">S</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">numWaysSumToTarget</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">numWaysSumToTarget</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">curSum</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">target</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">numWaysSumToTarget</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">curSum</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">target</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>There is also a DP solution. You calculate the <tt class="docutils literal">sum</tt> is basically the largest possible result and <tt class="docutils literal"><span class="pre">-sum ...</span></tt></p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/494-target_sum.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/487-max_consecutive_ones_ii.html">487-max_consecutive_ones_ii</a></h2>
                     <div>
 <footer class="post-info">
@@ -199,11 +249,11 @@ other counts the number of consecutive ones after encountering the latest zero.<
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/300-longest_increasing_subsequence.html">300-longest_increasing_subsequence</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/486-predict_the_winner.html">486-predict_the_winner</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-23T12:47:00-08:00"> Feb 23 2016</time>
+        <time datetime="2018-03-17T22:48:00-07:00"> Mar 17 2018</time>
     </span>
 
 
@@ -211,30 +261,39 @@ other counts the number of consecutive ones after encountering the latest zero.<
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/subsequence.html">Subsequence</a>
-        /
 	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-increasing-subsequence/">LeetCode Problem Link</a></p>
-<p>Input array is not sorted. We need to return the length of the longest subsequence.</p>
-<p>Got to remember that the definition of a subsequence is the remaining numbers in the array when some elements of
-the array is taken out.</p>
-<p>At the beginning, I thought the straightforward solution is to start looking for a increasing subsequence from each
-element. But this won't actually be O(n <sup>2</sup>) time. Since ith element could either be in the subsequence
-or not be in the subsequence. This is exponential time. One way would be to generate all possible subsequence ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/300-longest_increasing_subsequence.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/predict-the-winner/">LeetCode Problem Link</a></p>
+<p>This problem asks us to write a method that returns if it's possible for player1 to win
+the game even in the case that player2 does its very best.</p>
+<p>The key observation is that once player1 makes a move, player2 will make a move that
+maximizes its score (which minimizes player1's score).</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">PredictTheWinner</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">playerOneScore</span> <span class="o">=</span> <span class="n">getScore</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">playerTwoScore</span> <span class="o">=</span> <span class="n">total</span> <span class="o">-</span> <span class="n">playerOneScore</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">playerOneScore</span> <span class="o">&gt;</span> <span class="n">playerTwoScore</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">getScore</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// one element ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/486-predict_the_winner.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/279-perfect_squares.html">279-perfect_squares</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">416-partial_equal_subset_sum</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2016-02-21T01:10:00-08:00"> Feb 21 2016</time>
+        <time datetime="2018-03-17T19:11:00-07:00"> Mar 17 2018</time>
     </span>
 
 
@@ -242,126 +301,127 @@ or not be in the subsequence. This is exponential time. One way would be to gene
 
 
 <span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/0-1-knapsack-problem.html">0-1 Knapsack Problem</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/partition-equal-subset-sum/">LeetCode Problem Link</a></p>
+<p>Recursive (DFS) solution. 1D array can also be thought of as a graph. Each element only has one successor,
+the element to the right. The last element has no successor. This approach takes O(2^n) time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">totalSum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">totalSum</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">totalSum</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">currentSetASum</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">setBSum</span> <span class="o">=</span> <span class="n">totalSum</span> <span class="o">-</span> <span class="n">currentSetASum</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">setBSum</span> <span class="o">==</span> <span class="n">currentSetASum</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// include nums[i] in set A</span>
+    <span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/375-guess_number_higher_or_lower_ii.html">375-guess_number_higher_or_lower_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T17:50:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/minimax.html">Minimax</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/guess-number-higher-or-lower-ii/">LeetCode Problem Link</a></p>
+<p>Let <tt class="docutils literal"><span class="pre">minAmount[i][j]</span></tt> be the minimum amount of money to guarantee a win for the input
+ranging from i to j. Start filling the 2D array from the main diagonal where the input
+is of size 1.</p>
+<p>For input ranging from i to j, you can pick k (i&lt;=k&lt;=j) such that k is your first guess.</p>
+<p>With <tt class="docutils literal">k</tt> being the first guess, we can break the current problem into two subproblems.</p>
+<p><tt class="docutils literal"><span class="pre">minAmount[i][k-1]</span></tt> and <tt class="docutils literal"><span class="pre">minAmount[k+1][j]</span></tt>.</p>
+<p>The worst case scenario is the one with a larger remaining cost.</p>
+<p>maxRemainingCost = MAX{minCost ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/375-guess_number_higher_or_lower_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/322-coin_change.html">322-coin_change</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-27T16:13:00-08:00"> Feb 27 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/unbounded-knapsack-problem.html">Unbounded Knapsack Problem</a>
+        /
 	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/perfect-squares/">LeetCode Problem Link</a></p>
-<p>Find the least number of <strong>perfect square numbers</strong> that sum to <tt class="docutils literal">n</tt></p>
-<p>If there is an int <tt class="docutils literal">i</tt> such that <tt class="docutils literal">i * i = n</tt> then the answer is <tt class="docutils literal">1</tt>.</p>
-<p>DFS solution gives us TLE. Basically, I am looking for all combination sums of perfect squares that
-that sums up to <tt class="docutils literal">n</tt> and look for the shortest combination.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numSquares</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/coin-change/">LeetCode Problem Link</a></p>
+<p>Compute the lowest number of coins needed to make up the amount specified.</p>
+<p>May assume that we have an infinite number of coins for each type of coins.</p>
+<p>Can we use a greedy algorithm since using the biggest denomination possible
+as many time as you can will lead you to the least number of coins.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">coinChange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">numCoins</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="kt">int</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">coins</span><span class="o">);</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">sqrt</span><span class="o">*</span><span class="n">sqrt</span> <span class="o">==</span> <span class="n">n</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">numCoins</span><span class="o">++;</span>
+        <span class="o">}</span>
 
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">lists</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">amount</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    <span class="n">findCombinationSum</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(),</span> <span class="n">n</span><span class="o">,</span> <span class="n">lists</span><span class="o">);</span>
-
-    <span class="c1">//System.out.println ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/279-perfect_squares.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/256-paint_house.html">256-paint_house</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-18T15:47:00-08:00"> Feb 18 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/paint-house.html">Paint House</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/paint-house/">LeetCode Problem Link</a></p>
-<p>Greedy algorithm won't work in this case. The cost at the ith house for each color has got to depend on two
-of the costs at the (i-1)th house.</p>
-<p><tt class="docutils literal">minCostR[i]</tt> is the minimum cost up to the ith house if ith house is painted Red
-<tt class="docutils literal">minCostG[i]</tt> is the minimum cost up to the ith house if ith house is painted Green
-<tt class="docutils literal">minCostB[i]</tt> is the minimum cost up to the ith house if ith house is painted Blue</p>
-<p><tt class="docutils literal">minCostR[0]</tt> is initialized to <tt class="docutils literal"><span class="pre">costs[0][0]</span></tt>
-<tt class="docutils literal">minCostG[0]</tt> is initialized to <tt class="docutils literal"><span class="pre">cost[0 ...</span></tt></p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/256-paint_house.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/188-best_time_to_buy_and_sell_stock_iv.html">188-best_time_to_buy_and_sell_stock_iv</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-01-22T15:19:00-08:00"> Jan 22 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/">LeetCode Problem Link</a></p>
-<p>Before we make any trade, our cash position is <tt class="docutils literal">0</tt>.
-Buying a stock at price <tt class="docutils literal">p</tt> reduces our cash position to <tt class="docutils literal"><span class="pre">-p</span></tt>.
-Selling a stock at price <tt class="docutils literal">z</tt> increases our cash position to <tt class="docutils literal"><span class="pre">(-p</span> + z)</tt>.
-And the final cash position we're left with is the profit we make.</p>
-<p><tt class="docutils literal"><span class="pre">allPositionClosed[i][j]</span></tt> is the maximum cash position we have at j-th day with at most
-<tt class="docutils literal">i</tt> trades and considering prices 0, ..., j. All we have is cash.</p>
-<p>When we encounter a new price at j-th day, we can choose to sell the stock at j-th day or ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/188-best_time_to_buy_and_sell_stock_iv.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">132-palindrome_partitioning_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-09T13:11:00-08:00"> Dec 09 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning-ii/">LeetCode Problem Link</a></p>
-<p>First, build the 2D boolean array as we did in the previous problem, 131-palindrome_partitioning.</p>
-<p>Let <tt class="docutils literal">n</tt> be the length of the input string. Allocate a boolean array of size <tt class="docutils literal">n</tt> and call it <tt class="docutils literal">minCuts</tt>.</p>
-<p><tt class="docutils literal">minCuts[i]</tt> is the minimum number of ways to cut the substring starting at index <tt class="docutils literal">i</tt></p>
-<p>We will fill in the elements of this array from right to left and finally return <tt class="docutils literal">minCuts[0]</tt> as the answer
-since we are looking for the minimum number of cuts needed to partition the input string <tt class="docutils literal">s</tt> into palindromes.</p>
-<p>We will first initialize all elements to ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">more ...</a>
+    <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">!=</span> <span class="n">amount</span><span class="o">)</span>
+        <span class="k">return ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/322-coin_change.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -374,6 +434,8 @@ since we are looking for the minimum number of cuts needed to partition the inpu
                             href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming2.html">2</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming3.html">3</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming4.html">4</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming2.html">&raquo;</a></li>
         </ul>

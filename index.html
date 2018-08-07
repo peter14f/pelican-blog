@@ -116,6 +116,53 @@ Peter's Coding Notes            </a>
             </article>
             <hr/>
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/818-race_car.html">818-race_car</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-20T07:45:00-07:00"> Mar 20 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/race-car/">LeetCode Problem Link</a></p>
+<p>The problem asks us to find the minimum number of commands. This should yell BFS.
+But this solution does not pass the OJ.</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>Last executed input: 5478
+Status: Time Limit Exceeded</dd>
+</dl>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">racecar</span><span class="o">(</span><span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+
+    <span class="n">State</span> <span class="n">init</span> <span class="o">=</span> <span class="k">new</span> <span class="n">State</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">init</span><span class="o">);</span>
+    <span class="n">visited</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">init</span><span class="o">);</span>
+
+    <span class="kt">int</span> <span class="n">numCommands</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">State</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="c1">//System.out.println(cur);</span>
+
+            <span class="c1">// neighbor 1: A</span>
+            <span class="kt">int</span> <span class="n">newPosition</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">position</span> <span class="o">+</span> <span class="n">cur</span><span class="o">.</span><span class="na">speed</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">newSpeed</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">speed</span> <span class="o">*</span> <span class="mi">2 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/818-race_car.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/758-bold_words_in_string.html">758-bold_words_in_string</a></h2>
                     <div>
 <footer class="post-info">
@@ -399,37 +446,6 @@ Peter's Coding Notes            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/681-next_closest_time.html">681-next_closest_time</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-19T15:01:00-07:00"> Mar 19 2018</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/next-closest-time/">LeetCode Problem Link</a></p>
-<p>Start from the back of the input, at index i, find the smallest choice that's larger than <tt class="docutils literal">input[i]</tt>, if
-such choice exists, then for all indices j &gt; i, place the min. Check if the output is valid time.</p>
-<div class="highlight"><pre><span class="c1">// may assume the given input string is always valid</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">nextClosestTime</span><span class="o">(</span><span class="n">String</span> <span class="n">time</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>
-
-    <span class="n">input</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-    <span class="n">input</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-    <span class="n">input</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-    <span class="n">input</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">input</span><span class="o">[</span><span class="mi">2 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/681-next_closest_time.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -519,6 +535,10 @@ such choice exists, then for all indices j &gt; i, place the min. Check if the o
                             href="http://peter14f.github.io/pelican-blog/index42.html">42</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index43.html">43</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index44.html">44</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index45.html">45</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index2.html">&raquo;</a></li>
         </ul>

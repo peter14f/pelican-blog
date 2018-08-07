@@ -76,11 +76,11 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/143-reorder_list.html">143-reorder_list</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/153-find_minimum_in_rotated_sorted_array.html">153-find_minimum_in_rotated_sorted_array</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-13T15:56:00-08:00"> Dec 13 2015</time>
+        <time datetime="2016-01-04T12:57:00-08:00"> Jan 04 2016</time>
     </span>
 
 
@@ -88,52 +88,81 @@ Peter's Coding Notes            </a>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/rotated-sorted-array.html">Rotated Sorted Array</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reorder-list/">LeetCode Problem Link</a></p>
-<p>The O(n<sup>2</sup>) time solution would be too slow for OJ's large test case.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">reorderList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span><span class="o">;</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-product-subarray/">LeetCode Problem Link</a></p>
+<p>Reminds me of 33-search_in_rotated_sorted_array. It helps to write all versions of a rotated sorted array out.</p>
+<p>When the input array is sorted, return the element at the lowest index.
+If <tt class="docutils literal">l == h</tt>, then return the only element.
+If <tt class="docutils literal">h == l + 1</tt>, then return the smaller element.
+In other cases, we know that the array is rotated in some way,
+we can find the middle index <tt class="docutils literal">m</tt> and throw away the sorted part of the array.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+      <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
 
-    <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+      <span class="k">while</span> <span class="o">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">if</span> <span class="o">(</span><span class="n">h</span><span class="o">==</span><span class="n">l</span><span class="o">)</span>
+              <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="n">l ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/153-find_minimum_in_rotated_sorted_array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/152-maximum_product_subarray.html">152-maximum_product_subarray</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-03T12:30:00-08:00"> Jan 03 2016</time>
+    </span>
 
-    <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ListNode</span> <span class="n">oldNext</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">oldNext</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">oldNext</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ListNode</span> <span class="n">prevN</span> <span class="o">=</span> <span class="n">cur</span><span class="o">;</span>
-            <span class="n">ListNode</span> <span class="n">curN</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
 
-            <span class="k">while</span> <span class="o">(</span><span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">prevN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
-                <span class="n">curN</span> <span class="o">=</span> <span class="n">curN</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-            <span class="o">}</span>
 
-            <span class="c1">// curN is the current tail</span>
-            <span class="n">prevN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-            <span class="n">cur</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">curN</span><span class="o">;</span>
-            <span class="n">curN</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/subarray.html">Subarray</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-product-subarray/">LeetCode Problem Link</a></p>
+<p>The straightforward solution takes O(n <sup>2</sup>) time, but will get you TLE on large
+test case.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProduct</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">max</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">max</span><span class="o">,</span> <span class="n">product</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">product</span> <span class="o">=</span> <span class="n">product</span> <span class="o">*</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+            <span class="n">max</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">max</span><span class="o">,</span> <span class="n">product</span><span class="o">);</span>
         <span class="o">}</span>
-
-        <span class="n">cur</span> <span class="o">=</span> <span class="n">oldNext</span><span class="o">;</span>
     <span class="o">}</span>
 
+    <span class="k">return</span> <span class="n">max</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></div>
-<p>The next idea is to use a Stack so the top element is always the current tail. The time complexity becomes O(n).
-But this ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/143-reorder_list.html">more ...</a>
+<p>We will use two arrays of size <tt class="docutils literal">n</tt> called <tt class="docutils literal">minProduct</tt> and <tt class="docutils literal">maxProduct</tt>.</p>
+<p><tt class="docutils literal">minProduct[i]</tt> is the smallest product some contiguous elements from element <tt class="docutils literal">0</tt> to element <tt class="docutils literal">i</tt> can form with
+the ith ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/152-maximum_product_subarray.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">142-linked_list_cycle_ii</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/151-reverse_words_in_a_string.html">151-reverse_words_in_a_string</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-13T15:38:00-08:00"> Dec 13 2015</time>
+        <time datetime="2015-12-31T22:57:00-08:00"> Dec 31 2015</time>
     </span>
 
 
@@ -141,111 +170,120 @@ But this ...</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/c.html">C</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/in-place-string-manipulation.html">in-place string manipulation</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle-ii/">LeetCode Problem Link</a></p>
-<p>The implementation for this problem is not difficult. Once <tt class="docutils literal">fast</tt> catches up with <tt class="docutils literal">slow</tt>, at location <tt class="docutils literal">x</tt>.
-We set <tt class="docutils literal">cur</tt> to the head of the list and then try to advance both <tt class="docutils literal">x</tt> and <tt class="docutils literal">cur</tt> at the same rate.
-The location where <tt class="docutils literal">x</tt> meets with <tt class="docutils literal">cur</tt> is the start of the cycle.</p>
-<p>We can show why this is the case with some modular arithmetic. Let's say it takes <tt class="docutils literal">x</tt> steps for <tt class="docutils literal">slow</tt> to
-reach the start of the cycle at which point <tt class="docutils literal">fast</tt> has take <tt class="docutils literal">2x</tt> steps in total and has taken <tt class="docutils literal">x</tt> steps
-since it ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-words-in-a-string/">LeetCode Problem Link</a></p>
+<p>This problem is only interesting if it's done in-place in C. In Java strings are immutable so we cannot do this
+in-place.</p>
+<p>Reversing a string in-place is very easy. Simply use two pointers <tt class="docutils literal">front</tt> and <tt class="docutils literal">back</tt> and then swap the
+characters stored at the two pointers and then decrement <tt class="docutils literal">back</tt> and increment <tt class="docutils literal">front</tt> until <tt class="docutils literal">back</tt> is
+smaller than <tt class="docutils literal">front</tt>.</p>
+<p>First modify the string such that the leading spaces and the trailing spaces are gone.</p>
+<p>The way to do this problem is to first reverse the string and then reverse each word.</p>
+<p>The last operation that needs ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/151-reverse_words_in_a_string.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">141-linked_list_cycle</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/150-evaluate_reverse_polish_notation.html">150-evaluate_reverse_polish_notation</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-13T14:53:00-08:00"> Dec 13 2015</time>
+        <time datetime="2015-12-28T20:15:00-08:00"> Dec 28 2015</time>
     </span>
 
 
 
 
 
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle/">LeetCode Problem Link</a></p>
-<p>Use two pointers, <tt class="docutils literal">fast</tt> and <tt class="docutils literal">slow</tt> both start at the head of the list. Make <tt class="docutils literal">fast</tt> take two steps
-and <tt class="docutils literal">slow</tt> take one step in each iteration. If there's a cycle in the linked list. The <tt class="docutils literal">fast</tt> pointer
-will eventually catch up with the <tt class="docutils literal">slow</tt> pointer.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/evaluate-reverse-polish-notation/">LeetCode Problem Link</a></p>
+<p>The pattern is clear. When you see an operator, the first popped element is the second operand and the
+second popped element is the first operand. Once the operation is performed, the result needs to be pushed
+back onto the stack. When you see a non operator, simply push the integer on the stack.</p>
+<div class="highlight"><pre><span class="kd">private</span> <span class="kt">int</span> <span class="nf">isOperator</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="kt">char</span> <span class="n">op</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">()[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">operator</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="k">while</span> <span class="o">(</span><span class="n">slow</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">boolean</span> <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-
-        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-            <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">fastAdvancedTwice</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="o">)</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(!</span><span class="n">fastAdvancedTwice</span><span class="o">)</span>
+    <span class="k">switch</span><span class="o">(</span><span class="n">op</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="sc">&#39;+&#39;</span><span class="o">:</span>
+            <span class="n">operator</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
             <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="sc">&#39;-&#39;</span><span class="o">:</span>
+            <span class="n">operator</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="sc">&#39;*&#39;</span><span class="o">:</span>
+            <span class="n">operator</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="sc">&#39;/&#39;</span><span class="o">:</span>
+            <span class="n">operator</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="n">operator</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">operator</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></div>
 
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">more ...</a>
+<span class="kd">public ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/150-evaluate_reverse_polish_notation.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/140-word_break_ii.html">140-word_break_ii</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/149-max_points_on_a_line.html">149-max_points_on_a_line</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-13T00:20:00-08:00"> Dec 13 2015</time>
+        <time datetime="2015-12-28T19:19:00-08:00"> Dec 28 2015</time>
     </span>
 
 
 
 
 
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-break-ii/">LeetCode Problem Link</a></p>
-<p>This problem is very similar to 132-palindrome_partitioning. After the 2D boolean array <tt class="docutils literal">inDict</tt> is filled in.
-We just need to perform dfs on it to find all the partitions. This alone will be too slow when running
-the big test case though. So like in the previous problem we must fill in the 1D boolean array <tt class="docutils literal">canBreak</tt> as
-well. And we only need to perform the dfs if <tt class="docutils literal">canBreak[0]</tt> is true. Otherwise, we know that there is simply
-no way to partition the input string <tt class="docutils literal">s</tt> into words that are in the dictionary.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/140-word_break_ii.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/max-points-on-a-line/">LeetCode Problem Link</a></p>
+<p>The outer loop choose each point as the base point. For each base point, we will keep track how many
+duplicated points there are and the number of the slopes that could be formed with other points in the list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxPoints</span><span class="o">(</span><span class="n">Point</span><span class="o">[]</span> <span class="n">points</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span><span class="o">(</span><span class="n">points</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">||</span><span class="n">points</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">n</span><span class="o">;</span>
+
+    <span class="c1">// the final max value, at least 2</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+        <span class="n">Point</span> <span class="n">base</span> <span class="o">=</span> <span class="n">points</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">dupCnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/149-max_points_on_a_line.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/139-word_break.html">139-word_break</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/148-sort_list.html">148-sort_list</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2015-12-12T17:06:00-08:00"> Dec 12 2015</time>
+        <time datetime="2015-12-22T13:22:00-08:00"> Dec 22 2015</time>
     </span>
 
 
@@ -253,145 +291,110 @@ no way to partition the input string <tt class="docutils literal">s</tt> into wo
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-break/">LeetCode Problem Link</a></p>
-<p>131-palindrome_partitioning is actually a harder problem of this. Here we just need to check if each partition
-is in the dictionary. I use a 2D boolean <tt class="docutils literal">dict</tt>. <tt class="docutils literal"><span class="pre">dict[i][j]</span></tt> is true if the substring s(i, j) is in the
-dictionary. We need to the fill in the 2D array first. And then I create a 1D boolean array <tt class="docutils literal">canBreak</tt>.</p>
-<p><tt class="docutils literal">canBrea[i]</tt> is true if the substring s(i, n-1) can be partitioned into groups where all group words are
-in the dictionary. This array will be filled from right to left. And finally <tt class="docutils literal">canBreak[0 ...</tt></p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/139-word_break.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">138-copy_list_with_random_pointer</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-12T12:35:00-08:00"> Dec 12 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
 	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/copy-list-with-random-pointer/">LeetCode Problem Link</a></p>
-<p>For each node in the original list append a duplicated node.</p>
-<p>Copy the random pointer as well.</p>
-<p>This is the first pass.</p>
-<p>In the second pass, we correct the random pointers for every other node on the list. Advance the random pointers by
-one node. Notice how these random pointer point to the duplicated nodes now.</p>
-<p>In the third pass, we separate the original nodes from the duplicated nodes.</p>
-<p>Then we can simply return the head of the duplicated list.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">RandomListNode</span> <span class="nf">copyRandomList</span><span class="o">(</span><span class="n">RandomListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sort-list/">LeetCode Problem Link</a></p>
+<p>If we do merge sort using recursion, the size of the call stack can is O(log n) in the worst case. So
+this will actually not be constant space.</p>
+<p>First I will show the recursive solution. By the time the <tt class="docutils literal">fast</tt> pointer reaches null, the <tt class="docutils literal">slow</tt> pointer
+is at the middle. <tt class="docutils literal">prev</tt> is the previous node of <tt class="docutils literal">slow</tt>. If we set the next pointer of <tt class="docutils literal">prev</tt> to null, then
+we have successfully divided the linked list into halves. <tt class="docutils literal">head</tt> is the first part of the list. <tt class="docutils literal">slow</tt> is the
+second part of the list.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/148-sort_list.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/147-insertion_sort_list.html">147-insertion_sort_list</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-22T13:16:00-08:00"> Dec 22 2015</time>
+    </span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/insertion-sort.html">Insertion Sort</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/insertion-sort-list/">LeetCode Problem Link</a></p>
+<p>Insertion sort should take O(n) time only if the list is already sorted.</p>
+<p>I find the easiest to implement this is maintain the head and tail pointers of the currently sorted list.</p>
+<p>Inserting the node at the head or tail is easy and should only take constant time.
+Use a helper method to do the implementation for inserting somewhere in the middle.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">insertionSortList</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="n">RandomListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">RandomListNode</span> <span class="n">newListHead</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">while ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">137-single_number_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-11T21:01:00-08:00"> Dec 11 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/single-number.html">Single Number</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/single-number-ii/">LeetCode Problem Link</a></p>
-<p>We can use an int array to store the 32 bits.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-   <span class="kt">int</span><span class="o">[]</span> <span class="n">bits</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">32</span><span class="o">];</span>
-   <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-       <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
-           <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">+=</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">;</span>
-           <span class="k">if</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span>
-               <span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-       <span class="o">}</span>
-   <span class="o">}</span>
-
-   <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">shift</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">shift</span><span class="o">++)</span> <span class="o">{</span>
-       <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="o">(</span><span class="n">bits</span><span class="o">[</span><span class="n">shift</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span><span class="o">);</span>
-   <span class="o">}</span>
-
-   <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>This solution uses extra memory though. The following the solution that uses 3 int variables.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">twos</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">threes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/137-single_number_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/136-single_number.html">136-single_number</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-11T19:52:00-08:00"> Dec 11 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/xor.html">XOR</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/single-number.html">Single Number</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/single-number/">LeetCode Problem Link</a></p>
-<p>a XOR a = 0</p>
-<div class="highlight"><pre><span class="cm">/* asked to do a O(n) time solution that does not use extra space</span>
-<span class="cm"> * every element appears twice except for one</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">singleNumber</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">single</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">single</span> <span class="o">=</span> <span class="n">single</span> <span class="o">^</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
     <span class="o">}</span>
 
-    <span class="k">return</span> <span class="n">single</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
+    <span class="n">ListNode</span> <span class="n">sortedHead</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">sortedTail</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
 
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/136-single_number.html">more ...</a>
+    <span class="n">ListNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+    <span class="n">sortedTail</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">origNext</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">sortedHead ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/147-insertion_sort_list.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">146-lru_cache</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-16T19:28:00-08:00"> Dec 16 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/lru.html">LRU</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/cache.html">Cache</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lru-cache/">LeetCode Problem Link</a></p>
+<p>LRU itself can be implemented with a doubly linked list. For constant time <tt class="docutils literal">get()</tt> and <tt class="docutils literal">set()</tt> operation,
+we must use a hashtable. The data being accessed is moved to the head. The head is the most recently accessed data.
+The tail is the last recently accessed data. When evicting an old data, remove the data at the tail node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LRUCache</span> <span class="o">{</span>
+    <span class="kd">class</span> <span class="nc">ListNode</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">next</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">prev</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">ListNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacity</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">head</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">ListNode</span> <span class="n">tail</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">ListNode ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/146-lru_cache.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -483,6 +486,8 @@ one node. Notice how these random pointer point to the duplicated nodes now.</p>
                             href="http://peter14f.github.io/pelican-blog/category/leetcode41.html">41</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode42.html">42</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode43.html">43</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode26.html">&raquo;</a></li>
         </ul>
