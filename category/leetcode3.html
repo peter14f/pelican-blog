@@ -53,6 +53,9 @@ Peter's Coding Notes            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
+                        </li>
                         <li class="active">
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
@@ -75,6 +78,139 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/494-target_sum.html">494-target_sum</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T22:55:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/0-1-knapsack-problem.html">0-1 Knapsack Problem</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/target-sum/">LeetCode Problem Link</a></p>
+<p>The recursive solution is not hard to come up, but it takes exponential time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findTargetSumWays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">S</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 2 ^ n total possible choices</span>
+    <span class="k">return</span> <span class="n">numWaysSumToTarget</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">S</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">numWaysSumToTarget</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">curSum</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">curSum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">numWaysSumToTarget</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">curSum</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">target</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">numWaysSumToTarget</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">curSum</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">target</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>There is also a DP solution. You calculate the <tt class="docutils literal">sum</tt> is basically the largest possible result and <tt class="docutils literal"><span class="pre">-sum ...</span></tt></p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/494-target_sum.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/493-reverse_pairs.html">493-reverse_pairs</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T22:54:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/divide-and-conquer.html">Divide And Conquer</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit.html">BIT</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/self-balancing-bst.html">Self-Balancing BST</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-pairs/">LeetCode Problem Link</a></p>
+<p>This problem asks us to find the number of distinct (i, j) pairs such that
+- i &lt; j
+- nums[i] &gt; 2*nums[j]</p>
+<p>The straightforward solution takes O(n^2) time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">reversePairs</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">long</span> <span class="n">numI</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="kt">long</span> <span class="n">numJ</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">numI</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">numJ</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">ans</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>When you do merge sort, the left array elements always come before the right array elements
+(in the original array).
+So if left[i] &gt; 2 ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/493-reverse_pairs.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/489-robot_room_cleaner.html">489-robot_room_cleaner</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T22:51:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph-problem-with-a-spin.html">Graph Problem With A Spin</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/robot-room-cleaner/">LeetCode Problem Link</a></p>
+<p>This problem is hard because in normal recursive dfs traversal, you don't have to manually get back
+to the node that you just came from. For this bad robot, we actually have to get it back to cell
+where it came from. Assume the original cell is (0,0).</p>
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * // This is the robot&#39;s control interface.</span>
+<span class="cm"> * // You should not implement it, or speculate about its implementation</span>
+<span class="cm"> * interface Robot {</span>
+<span class="cm"> *     // Returns true if the cell in front is open and robot moves into the cell.</span>
+<span class="cm"> *     // Returns false if the cell in front is blocked and robot stays in ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/489-robot_room_cleaner.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/490-the_maze.html">490-the_maze</a></h2>
                     <div>
@@ -248,11 +384,11 @@ maximizes its score (which minimizes player1's score).</p>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">461-hamming_distance</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/464-can_i_win.html">464-can_i_win</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
-        <time datetime="2018-03-17T20:50:00-07:00"> Mar 17 2018</time>
+        <time datetime="2018-03-17T20:53:00-07:00"> Mar 17 2018</time>
     </span>
 
 
@@ -260,166 +396,27 @@ maximizes its score (which minimizes player1's score).</p>
 
 
 <span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/xor.html">XOR</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/hamming-distance/">LeetCode Problem Link</a></p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">hammingDistance</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">hammingDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">((</span><span class="n">z</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">hammingDistance</span><span class="o">++;</span>
-        <span class="o">}</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">hammingDistance</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/461-hamming_distance.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/460-lfu_cache.html">460-lfu_cache</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-17T20:49:00-07:00"> Mar 17 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/lfu.html">LFU</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/doubly-linked-lists.html">Doubly Linked Lists</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/cache.html">Cache</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/lfu-cache/">LeetCode Problem Link</a></p>
-<p>The <tt class="docutils literal">Map&lt;Integer, DDList&gt; countMap</tt> tracks the list of nodes with the same frequency (usage count).
-It's good to clarify from the interviewer what the behavior should be when <tt class="docutils literal">minCnt</tt> is bigger than 1.
-For LeetCode's solution, it does not feel truly LFU because we're asked to remove the last recently used
-item from the <tt class="docutils literal">minCnt</tt> list and insert the element with a count of 1.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LFUCache</span> <span class="o">{</span>
-
-<span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">key</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">cnt</span><span class="o">;</span>
-    <span class="n">Node</span> <span class="n">prev</span><span class="o">,</span> <span class="n">next</span><span class="o">;</span>
-
-    <span class="n">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
-        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/460-lfu_cache.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/421-maximum_xor_of_two_numbers_in_an_array.html">421-maximum_xor_of_two_numbers_in_an_array</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-17T19:40:00-07:00"> Mar 17 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/hashtable.html">Hashtable</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/trie.html">Trie</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/">LeetCode Problem Link</a></p>
-<p>The problem states that all numbers in the input array is non negative.
-We start guessing from the most significant bit of the max XORed result.</p>
-<p>Also we continue inserting the prefixes of each number into a <tt class="docutils literal">HashSet&lt;Integer&gt;</tt>.</p>
-<p>Basically this allows us to know if the max xored result has the bit set or not.</p>
-<p>This takes O(32n) time and O(n) space.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaximumXOR</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">maxXor</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">int</span> <span class="n">maskUpToNow</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">31</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">curGuessedMax</span> <span class="o">=</span> <span class="n">maxXor</span> <span class="o">|</span> <span class="n">mask</span><span class="o">;</span>
-
-        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
-        <span class="n">maskUpToNow ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/421-maximum_xor_of_two_numbers_in_an_array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">416-partial_equal_subset_sum</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-17T19:11:00-07:00"> Mar 17 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
-        /
 	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
         /
-	<a href="http://peter14f.github.io/pelican-blog/tag/0-1-knapsack-problem.html">0-1 Knapsack Problem</a>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/minimax.html">Minimax</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/partition-equal-subset-sum/">LeetCode Problem Link</a></p>
-<p>Recursive (DFS) solution. 1D array can also be thought of as a graph. Each element only has one successor,
-the element to the right. The last element has no successor. This approach takes O(2^n) time.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">totalSum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">totalSum</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">totalSum</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span>
-        <span class="kt">int</span> <span class="n">i</span><span class="o">,</span>
-        <span class="kt">int</span> <span class="n">currentSetASum</span><span class="o">,</span>
-        <span class="kt">int</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">setBSum</span> <span class="o">=</span> <span class="n">totalSum</span> <span class="o">-</span> <span class="n">currentSetASum</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">setBSum</span> <span class="o">==</span> <span class="n">currentSetASum</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="c1">// include nums[i] in set A</span>
-    <span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">more ...</a>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/can-i-win/">LeetCode Problem Link</a></p>
+<p>Unlike the other Minimax problems (486-predict_the_winner and 375-guess_number_higher_or_lower_ii),
+we cannot specify a range for the input and work out shortening that range because in this
+problem, the player is free to pick from any number that is still available.</p>
+<p>The problem description says that <tt class="docutils literal">n</tt> will not be bigger than 20. This means that
+we could use a bit to represent what numbers are still left.</p>
+<p>Here is the purely recursive solution with no memoization.
+Once you make a pick, you want to know if the other player can win with whatever is left.
+If the the ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/464-can_i_win.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -513,6 +510,8 @@ the element to the right. The last element has no successor. This approach takes
                             href="http://peter14f.github.io/pelican-blog/category/leetcode42.html">42</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode43.html">43</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode44.html">44</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode4.html">&raquo;</a></li>
         </ul>

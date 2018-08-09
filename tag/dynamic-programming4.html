@@ -52,6 +52,9 @@ Peter's Coding Notes            </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
+                        </li>
+                        <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
                         <li >
@@ -73,6 +76,60 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/063-unique_paths_ii.html">063-unique_paths_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-10-28T18:14:00-07:00"> Oct 28 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/2d-grid-move-right-move-down.html">2D Grid Move Right Move Down</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/count-ways.html">Count Ways</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/unique-paths-ii/">LeetCode Problem Link</a></p>
+<p>The solution is very much like the one to the previous problem. There is however no way to get a cell that is an
+obstacle.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">uniquePathsWithObstacles</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">obstacleGrid</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">obstacleGrid</span><span class="o">==</span><span class="kc">null</span> <span class="o">|</span> <span class="n">obstacleGrid</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">obstacleGrid</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">obstacleGrid</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">obstacleGrid</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span>
+                <span class="n">obstacleGrid</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// first row</span>
+    <span class="kt">boolean</span> <span class="n">obstacleSeen</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">obstacleGrid</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span>
+        <span class="n">obstacleSeen</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/063-unique_paths_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/062-unique_paths.html">062-unique_paths</a></h2>
                     <div>

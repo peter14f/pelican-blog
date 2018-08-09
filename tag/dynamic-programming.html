@@ -52,6 +52,9 @@ Peter's Coding Notes            </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
+                        </li>
+                        <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
                         <li >
@@ -293,6 +296,43 @@ maximizes its score (which minimizes player1's score).</p>
             </article>
             <hr/>
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/464-can_i_win.html">464-can_i_win</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T20:53:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/minimax.html">Minimax</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/can-i-win/">LeetCode Problem Link</a></p>
+<p>Unlike the other Minimax problems (486-predict_the_winner and 375-guess_number_higher_or_lower_ii),
+we cannot specify a range for the input and work out shortening that range because in this
+problem, the player is free to pick from any number that is still available.</p>
+<p>The problem description says that <tt class="docutils literal">n</tt> will not be bigger than 20. This means that
+we could use a bit to represent what numbers are still left.</p>
+<p>Here is the purely recursive solution with no memoization.
+Once you make a pick, you want to know if the other player can win with whatever is left.
+If the the ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/464-can_i_win.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">416-partial_equal_subset_sum</a></h2>
                     <div>
 <footer class="post-info">
@@ -377,55 +417,6 @@ is of size 1.</p>
 <p>The worst case scenario is the one with a larger remaining cost.</p>
 <p>maxRemainingCost = MAX{minCost ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/375-guess_number_higher_or_lower_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/322-coin_change.html">322-coin_change</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-27T16:13:00-08:00"> Feb 27 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/unbounded-knapsack-problem.html">Unbounded Knapsack Problem</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/coin-change/">LeetCode Problem Link</a></p>
-<p>Compute the lowest number of coins needed to make up the amount specified.</p>
-<p>May assume that we have an infinite number of coins for each type of coins.</p>
-<p>Can we use a greedy algorithm since using the biggest denomination possible
-as many time as you can will lead you to the least number of coins.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">coinChange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">numCoins</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">coins</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">sum</span> <span class="o">+=</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-            <span class="n">numCoins</span><span class="o">++;</span>
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">amount</span><span class="o">)</span>
-            <span class="k">break</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">!=</span> <span class="n">amount</span><span class="o">)</span>
-        <span class="k">return ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/322-coin_change.html">more ...</a>
                 </div>
             </article>
             <hr/>

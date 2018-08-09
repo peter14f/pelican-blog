@@ -12,7 +12,7 @@
 <link rel="canonical" href="http://peter14f.github.io/pelican-blog/315-count_of_smaller_numbers_after_self.html">
 
         <meta name="author" content="Peter Hsieh" />
-        <meta name="keywords" content="Merge Sort,Divide And Conquer" />
+        <meta name="keywords" content="Merge Sort,Divide And Conquer,BIT,Self-Balancing BST,Segment Tree" />
         <meta name="description" content="LeetCode Problem Link The straightforward solution take O(n :superscript:2) time. public List&lt;Integer&gt; countSmaller(int[] nums) { List&lt;Integer&gt; ans = new ArrayList&lt;Integer&gt;(); int n = nums.length; for (int i=0; i&lt;n; i++) { int cnt = 0; for (int j=i+1; j&lt;n; j++) { if (nums[j] &lt; nums[i]) cnt++; } ans.add(cnt); } return ans; } You guessed it! This will get you TLE on large test case. Submission Result: Time Limit Exceeded More Details Last executed input: [5183,2271,3067,539,8939,2999,9264,737,3974,5846,-210,9278,5800,2675,6608,1133,-1,6018,9672,5179,9842 ..." />
 
         <meta property="og:site_name" content="Peter's Coding Notes" />
@@ -24,6 +24,9 @@
             <meta property="article:section" content="LeetCode" />
             <meta property="article:tag" content="Merge Sort" />
             <meta property="article:tag" content="Divide And Conquer" />
+            <meta property="article:tag" content="BIT" />
+            <meta property="article:tag" content="Self-Balancing BST" />
+            <meta property="article:tag" content="Segment Tree" />
             <meta property="article:author" content="Peter Hsieh" />
 
 
@@ -59,6 +62,9 @@ Peter's Coding Notes            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
+                        </li>
                         <li class="active">
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
@@ -104,6 +110,12 @@ Peter's Coding Notes            </a>
 	<a href="http://peter14f.github.io/pelican-blog/tag/merge-sort.html">Merge Sort</a>
         /
 	<a href="http://peter14f.github.io/pelican-blog/tag/divide-and-conquer.html">Divide And Conquer</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bit.html">BIT</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/self-balancing-bst.html">Self-Balancing BST</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/segment-tree.html">Segment Tree</a>
     
 </footer><!-- /.post-info -->                <div class="full-article">
                 <p><a class="reference external" href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/">LeetCode Problem Link</a></p>
@@ -238,6 +250,77 @@ recursive merge sort is usually implemented before you attempt to look at the so
 
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">z</span><span class="o">=</span><span class="n">leftBegin</span><span class="o">;</span> <span class="n">z</span><span class="o">&lt;=</span><span class="n">rightEnd</span><span class="o">;</span> <span class="n">z</span><span class="o">++)</span> <span class="o">{</span>
         <span class="n">arr</span><span class="o">[</span><span class="n">z</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">[</span><span class="n">z</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+<p>Here is the Fenwick Tree based solution. You have to sort the array and the build
+a lookup for the index in the sorted array.</p>
+<p>Traverse the number from the back, for each number, check the prefix sum smaller than
+its index, increment that index in the fenwick tree.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">countSmaller</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">sorted</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">sorted</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+    <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">sorted</span><span class="o">);</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sortedIndexLookup</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">sorted</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">sorted</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">sortedIndexLookup</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">num</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">sortedIndexLookup</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="n">FenwickTree</span> <span class="n">tree</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FenwickTree</span><span class="o">(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">sortedIndexLookup</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ans</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">tree</span><span class="o">.</span><span class="na">prefixSum</span><span class="o">(</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="n">tree</span><span class="o">.</span><span class="na">increment</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">static</span> <span class="kd">class</span> <span class="nc">FenwickTree</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">tree</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">FenwickTree</span><span class="o">(</span><span class="kt">int</span> <span class="n">numItems</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">tree</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">numItems</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="c1">// i is zero-based</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&amp;</span> <span class="o">(-</span><span class="n">j</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">tree</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">tree</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">tree</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="n">y</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&amp;</span> <span class="o">(-</span><span class="n">j</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// i is zero-based</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">prefixSum</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">tree</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+
+        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&amp;</span> <span class="o">(-</span><span class="n">j</span><span class="o">);</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="k">this</span><span class="o">.</span><span class="na">tree</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">y</span><span class="o">];</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">y</span><span class="o">;</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&amp;</span> <span class="o">(-</span><span class="n">j</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>

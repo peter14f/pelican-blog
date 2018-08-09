@@ -52,6 +52,9 @@ Peter's Coding Notes            </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
+                        </li>
+                        <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
                         <li >
@@ -311,6 +314,61 @@ wall.</p>
             </article>
             <hr/>
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/403-fog_jump.html">403-fog_jump</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T18:57:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/frog-jump/">LeetCode Problem Link</a></p>
+<p>The following recursive DFS solution got TLE.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[][]</span> <span class="nf">reconstructQueue2</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">people</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">people</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][];</span>
+
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">MyComparator</span><span class="o">());</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">entry</span> <span class="o">:</span> <span class="n">people</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">entry</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">LinkedList</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">ll</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">person</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+        <span class="n">ll</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">person</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">itr</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">itr</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">ans</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">itr</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        <span class="n">i</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+<p>If you draw the recursive calls out, you will see that there are overlapping calls. We
+could avoid re-computation by using a cache.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canCross</span><span class="o">(</span><span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/403-fog_jump.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/329-longest_increasing_path_in_a_matrix.html">329-longest_increasing_path_in_a_matrix</a></h2>
                     <div>
 <footer class="post-info">
@@ -404,55 +462,6 @@ wall.</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/298-binary_tree_longest_consecutive_sequence.html">298-binary_tree_longest_consecutive_sequence</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-23T08:26:00-08:00"> Feb 23 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/binary-tree-longest-consecutive-sequence/">LeetCode Problem Link</a></p>
-<p>This is a binary tree, not necessarily a binary search tree.</p>
-<p>My idea is to use DFS and recursion.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestConsecutive</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">findLongestConsecutive</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">int</span> <span class="nf">findLongestConsecutive</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">curLength</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prevNum</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">curLength</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">curLength</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">left</span> <span class="o">=</span> <span class="n">findLongestConsecutive</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
-        <span class="n">right</span> <span class="o">=</span> <span class="n">findLongestConsecutive</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="k">else</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">prevNum</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">left</span> <span class="o">=</span> <span class="n">findLongestConsecutive</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">curLength</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
-            <span class="n">right</span> <span class="o">=</span> <span class="n">findLongestConsecutive</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">curLength</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="c1">// in this case curLength might be longer than ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/298-binary_tree_longest_consecutive_sequence.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -464,6 +473,8 @@ wall.</p>
                             href="http://peter14f.github.io/pelican-blog/tag/dfs3.html">3</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/tag/dfs4.html">4</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/tag/dfs5.html">5</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/tag/dfs2.html">&raquo;</a></li>
         </ul>

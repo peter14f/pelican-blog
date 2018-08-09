@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/data-structures.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2016-02-28T11:36:00-08:00</updated><entry><title>fenwick_tree</title><link href="http://peter14f.github.io/pelican-blog/fenwick_tree.html" rel="alternate"></link><updated>2016-02-28T11:36:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/fenwick_tree.html</id><summary type="html">&lt;p&gt;Fenwick tree can be easily implemented using an array and is one-based.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+16 -10000 [ 1,15]          |
+15 - 1111 [15,15] |        |
+14 - 1110 [13,14]   |      |
+13 - 1101 [13,13] | |      |
+12 - 1100 [ 9,12]     |    |
+11 - 1011 [11,11] |   |    |
+10 - 1010 [ 9,10]   | |    |
+ 9 - 1001 [ 9, 9] | | |    |
+ 8 - 1000 [ 1, 8]       |  |
+ 7 - 0111 [ 7, 7] |     |  |
+ 6 - 0110 [ 5, 6]   |   |  |
+ 5 - 0101 [ 5, 5] | |   |  |
+ 4 - 0100 [ 1, 4]     | |  |
+ 3 - 0011 [ 3, 3] |   | |  |
+ 2 - 0010 [ 1, 2]   | | |  |
+ 1 - 0001 [ 1, 1] | | | |  |
+&lt;/pre&gt;
+&lt;p&gt;The value of the LSB of the index number tells us how many elements is being covered.&lt;/p&gt;
+&lt;p&gt;prefixSum(5) = sum(0, 5) = fenwickSum(6) = tree[6] + tree[4]&lt;/p&gt;
+&lt;p&gt;In Java, how do you quick get value when only the LSB of x is set?&lt;/p&gt;
+&lt;p&gt;x &amp;amp; (-x) would do it&lt;/p&gt;
+</summary><category term="BIT"></category><category term="Fenwick Tree"></category></entry><entry><title>segment_tree</title><link href="http://peter14f.github.io/pelican-blog/segment_tree.html" rel="alternate"></link><updated>2016-02-28T11:36:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/segment_tree.html</id><summary type="html">&lt;p&gt;Segment tree is useful when you need to perform some range operations repeatedly.&lt;/p&gt;
+&lt;p&gt;For example, given an array of integers &lt;tt class="docutils literal"&gt;nums&lt;/tt&gt;, find out the sum in the range &lt;tt class="docutils literal"&gt;[i,j]&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;A segment tree is a full binary tree. Each node either has 0 or 2 children.
+Each node in the segment tree represents a value in some range.
+For our specific problem, it would represent a sum of all the values in that range.
+The range of leaf nodes are single-valued range (i.e., [i])
+So for an input array &lt;tt class="docutils literal"&gt;nums&lt;/tt&gt; of size &lt;tt class="docutils literal"&gt;n&lt;/tt&gt;, our segment tree will have exactly &lt;tt class="docutils literal"&gt;n&lt;/tt&gt; leaf nodes.&lt;/p&gt;
+&lt;p&gt;Given this information, we could actually find out how many total nodes will be in our segment tree.&lt;/p&gt;
+&lt;p&gt;Some other sample problems:&lt;/p&gt;
+&lt;p&gt;Given an array of integers &lt;tt class="docutils literal"&gt;nums&lt;/tt&gt;, find out the min in the range &lt;tt class="docutils literal"&gt;[i,j]&lt;/tt&gt;.
+Given an array of integers &lt;tt class="docutils literal"&gt;nums&lt;/tt&gt;, find out the max in the range &lt;tt class="docutils literal"&gt;[i,j]&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;When you are doing either update of range query, remember that there are 3 cases
+- no overlap (stop looking further)
+- complete overlap (stop looking further)
+- partial overlap (need to recurse into the children nodes)&lt;/p&gt;
+&lt;p&gt;building the tree takes O(n) time
+update() takes O(logn) time
+query() takes O(n) time&lt;/p&gt;
+</summary><category term="Segment Tree"></category></entry></feed>
