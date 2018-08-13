@@ -79,6 +79,63 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">416-partial_equal_subset_sum</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T19:11:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/0-1-knapsack-problem.html">0-1 Knapsack Problem</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/partition-equal-subset-sum/">LeetCode Problem Link</a></p>
+<p>Recursive (DFS) solution. 1D array can also be thought of as a graph. Each element only has one successor,
+the element to the right. The last element has no successor. This approach takes O(2^n) time.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">totalSum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">totalSum</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">totalSum</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">currentSetASum</span><span class="o">,</span>
+        <span class="kt">int</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">setBSum</span> <span class="o">=</span> <span class="n">totalSum</span> <span class="o">-</span> <span class="n">currentSetASum</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">setBSum</span> <span class="o">==</span> <span class="n">currentSetASum</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// include nums[i] in set A</span>
+    <span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/406-queue_reconstruction.html">406-queue_reconstruction</a></h2>
                     <div>
 <footer class="post-info">
@@ -352,7 +409,7 @@ is of size 1.</p>
             </article>
             <hr/>
             <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/347-top_k_frequent_elements.html">347-top_k_frequent_elements</a></h2>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/346-moving_average_from_data_stream.html">346-moving_average_from_data_stream</a></h2>
                     <div>
 <footer class="post-info">
     <span class="published label label-default">
@@ -365,77 +422,33 @@ is of size 1.</p>
 
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/top-k-frequent-elements/">LeetCode Problem Link</a></p>
-<p>The O(nlogn) time solution is simple to implement with a max heap.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">topKFrequent</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">hist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(!</span><span class="n">hist</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">num</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">hist</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">hist</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">hist</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">num</span><span class="o">));</span>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/moving-average-from-data-stream/">LeetCode Problem Link</a></p>
+<p>Can be easily implemented using Queue.</p>
+<div class="highlight"><pre><span class="kd">class</span> <span class="nc">MovingAverage</span> <span class="o">{</span>
+
+    <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ll</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">sum</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">maxSize</span><span class="o">;</span>
+
+    <span class="cm">/** Initialize your data structure here. */</span>
+    <span class="kd">public</span> <span class="nf">MovingAverage</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">ll</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">maxSize</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">next</span><span class="o">(</span><span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">ll</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="k">this</span><span class="o">.</span><span class="na">maxSize</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">sum</span> <span class="o">-=</span> <span class="k">this</span><span class="o">.</span><span class="na">ll</span><span class="o">.</span><span class="na">removeFirst</span><span class="o">();</span>
         <span class="o">}</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">ll</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">val</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sum</span> <span class="o">+=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="k">return</span> <span class="o">((</span><span class="kt">double</span><span class="o">)</span><span class="k">this</span><span class="o">.</span><span class="na">sum</span><span class="o">)</span> <span class="o">/</span> <span class="k">this</span><span class="o">.</span><span class="na">ll</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
     <span class="o">}</span>
-
-    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;(</span><span class="n">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">key</span> <span class="o">:</span> <span class="n">hist</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
-        <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="k">new</span> <span class="n">Entry</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">hist</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">)));</span>
-    <span class="o">}</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">().</span><span class="na">num</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
 <span class="o">}</span>
+</pre></div>
 
-<span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span> <span class="kd">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;{</span>
-    <span class="kt">int</span> <span class="n">num</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">freq</span><span class="o">;</span>
-
-    <span class="kd">public ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/347-top_k_frequent_elements.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">a04-shortest_distance_undirected_unweighted</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-03-19T14:33:00-07:00"> Mar 19 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><pre class="literal-block">
-Given a graph and two nodes src and dest, find the shortest distance and the shortest path from
-src to dest
-</pre>
-<p>If the graph is weighted, you should use Dijkstra. Since this is not weighted, using Dijkstra would also work, but BFS
-alone is enough.</p>
-<div class="highlight"><pre><span class="c1">// this is a undirected and unweighted graph</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">shortestPathUnweighted</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">edges</span><span class="o">,</span> <span class="kt">int</span> <span class="n">src</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">graph</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;());</span>
-    <span class="o">}</span>
-
-    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="c1">// a - b</span>
-        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/346-moving_average_from_data_stream.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -535,6 +548,8 @@ alone is enough.</p>
                             href="http://peter14f.github.io/pelican-blog/index45.html">45</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/index46.html">46</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/index47.html">47</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/index6.html">&raquo;</a></li>
         </ul>

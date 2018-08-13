@@ -82,6 +82,47 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/487-max_consecutive_ones_ii.html">487-max_consecutive_ones_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T22:49:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/max-consecutive-ones-ii/">LeetCode Problem Link</a></p>
+<p>Two variables. One counts the number consecutive ones before encountering the latest zero. The
+other counts the number of consecutive ones after encountering the latest zero.</p>
+<div class="highlight"><pre><span class="c1">//  1  0  1  1  0  1  1  1  1</span>
+<span class="c1">//</span>
+<span class="c1">//  1  2  3  4  3  4  5  6  7</span>
+<span class="c1">//  1  0  1  2  0  1  2  3  4</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaxConsecutiveOnes</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">beforeLatestZero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// consecutive ones counted before encountering</span>
+                              <span class="c1">// the latest zero</span>
+    <span class="kt">int</span> <span class="n">afterLatestZero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">// consecutive ones counted after encountering</span>
+                              <span class="c1">// the latest zero</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">afterLatestZero</span> <span class="o">=</span> <span class="n">beforeLatestZero</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">beforeLatestZero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">beforeLatestZero ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/487-max_consecutive_ones_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/486-predict_the_winner.html">486-predict_the_winner</a></h2>
                     <div>
 <footer class="post-info">
@@ -355,63 +396,6 @@ We start guessing from the most significant bit of the max XORed result.</p>
         <span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
         <span class="n">maskUpToNow ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/421-maximum_xor_of_two_numbers_in_an_array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">416-partial_equal_subset_sum</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-17T19:11:00-07:00"> Mar 17 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/knapsack-problem.html">Knapsack Problem</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/0-1-knapsack-problem.html">0-1 Knapsack Problem</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/partition-equal-subset-sum/">LeetCode Problem Link</a></p>
-<p>Recursive (DFS) solution. 1D array can also be thought of as a graph. Each element only has one successor,
-the element to the right. The last element has no successor. This approach takes O(2^n) time.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">totalSum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">totalSum</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">totalSum</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">totalSum</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">canPartitionIntoTwoEqualSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span>
-        <span class="kt">int</span> <span class="n">i</span><span class="o">,</span>
-        <span class="kt">int</span> <span class="n">currentSetASum</span><span class="o">,</span>
-        <span class="kt">int</span> <span class="n">totalSum</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">==</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">setBSum</span> <span class="o">=</span> <span class="n">totalSum</span> <span class="o">-</span> <span class="n">currentSetASum</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">setBSum</span> <span class="o">==</span> <span class="n">currentSetASum</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="c1">// include nums[i] in set A</span>
-    <span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">more ...</a>
                 </div>
             </article>
             <hr/>

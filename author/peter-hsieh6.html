@@ -79,6 +79,139 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/347-top_k_frequent_elements.html">347-top_k_frequent_elements</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T15:49:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/top-k-frequent-elements/">LeetCode Problem Link</a></p>
+<p>The O(nlogn) time solution is simple to implement with a max heap.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">topKFrequent</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">hist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">hist</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">num</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">hist</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">hist</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">hist</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">num</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;(</span><span class="n">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">key</span> <span class="o">:</span> <span class="n">hist</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="k">new</span> <span class="n">Entry</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">hist</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">)));</span>
+    <span class="o">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">().</span><span class="na">num</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span> <span class="kd">implements</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;{</span>
+    <span class="kt">int</span> <span class="n">num</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">freq</span><span class="o">;</span>
+
+    <span class="kd">public ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/347-top_k_frequent_elements.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">a04-shortest_distance_undirected_unweighted</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-19T14:33:00-07:00"> Mar 19 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><pre class="literal-block">
+Given a graph and two nodes src and dest, find the shortest distance and the shortest path from
+src to dest
+</pre>
+<p>If the graph is weighted, you should use Dijkstra. Since this is not weighted, using Dijkstra would also work, but BFS
+alone is enough.</p>
+<div class="highlight"><pre><span class="c1">// this is a undirected and unweighted graph</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">shortestPathUnweighted</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">edges</span><span class="o">,</span> <span class="kt">int</span> <span class="n">src</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dest</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;());</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// a - b</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">edges</span><span class="o">[</span><span class="n">i ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a04-shortest_distance_undirected_unweighted.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a05-number_of_ways_student_gets_penalty.html">a05-number_of_ways_student_gets_penalty</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-19T14:33:00-07:00"> Mar 19 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/counting-problems.html">counting problems</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>Attendance information has 3 possible states.</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>O: attendance
+L: late
+A: absence</dd>
+<dt>If a student is &quot;absent&quot; for 2 days in total OR</dt>
+<dd>&quot;late&quot; for 3 days in a row, he/she will get penalized.</dd>
+</dl>
+<p>There are 8 ways a student can get penalized in 3 days.</p>
+<p>LLL
+AAO
+AAL
+OAA
+LAA
+AOA
+ALA
+AAA</p>
+<p>N=3 -&gt; ans=8
+N=4 -&gt; ans 38</p>
+<p>P(consecutively late for 3...N days) + P(absent for a total of more than 2...N days)</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numWays</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span> <span class="c1">//0=A 1=O 2=L</span>
+
+    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a05-number_of_ways_student_gets_penalty.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/338-counting_bits.html">338-counting_bits</a></h2>
                     <div>
 <footer class="post-info">
@@ -275,122 +408,6 @@ generated by doing <tt class="docutils literal">nums[left] * nums[left]</tt> or
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/top_k_elements_bottom_k_elements.html">top_k_elements_bottom_k_elements</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-03-08T17:01:00-08:00"> Mar 08 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/heap.html">Heap</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>Given <tt class="docutils literal">n</tt> values, find the largest <tt class="docutils literal">k</tt> elements.</p>
-<p>Use a <strong>min heap</strong> if you are looking for the <strong>largest</strong> k elements.</p>
-<p>When the size of the min heap is less than <tt class="docutils literal">k</tt>, simply insert the current element <tt class="docutils literal">x</tt> into the min heap.</p>
-<p>When the size of the min heap reaches <tt class="docutils literal">k</tt>, we want to maintain the min heap's size at <tt class="docutils literal">k</tt>.</p>
-<p>If the current element <tt class="docutils literal">x</tt> is larger than minHeap.getMin(), do <tt class="docutils literal">minHeap.removeMin()</tt> and then <tt class="docutils literal">minHeap.insert(x)</tt>.</p>
-<p>The space complexity is this case if <tt class="docutils literal">O(k)</tt> and the time complexity is <tt class="docutils literal">O(nlogk)</tt>.</p>
-<p>Use a <strong>max heap ...</strong></p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/top_k_elements_bottom_k_elements.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/a02-design_a_deck_of_cards.html">a02-design_a_deck_of_cards</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-03-03T12:39:00-08:00"> Mar 03 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/ood.html">OOD</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>Typical design would need a Deck class and a Card class.</p>
-<p>What methods does the Deck class need?</p>
-<p>int numCardsLeft() - return how many cards are left to be dealt</p>
-<p>void shuffle(int n) - swap the locations of n pairs of card</p>
-<p>Card deal() - returns the next card</p>
-<pre class="literal-block">
-public enum Suit {
-    CLUB,
-    DIAMOND,
-    HEART,
-    SPADE
-}
-
-public enum Rank {
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN,
-    EIGHT,
-    NINE,
-    TEN,
-    JACK,
-    QUEEN,
-    KING,
-    ACE
-}
-</pre>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/a02-design_a_deck_of_cards.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">dijkstra_algorithm</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-03-02T17:49:00-08:00"> Mar 02 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/weighted-graph.html">Weighted Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/directed-graph.html">Directed Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/hashheap.html">Hashheap</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>In most pseudocode you will find for Dijkstra,  they will say initialize the Q such that all nodes are
-put in the Q.</p>
-<p>The problem with this approach in Java is that when you update the distance to the node, PrioirtyQueue does not
-provide an API where you can update an item's priority. So you must remove that element and then re-insert it
-again. Note that PQ.remove() will that O(n) time. If you want it to take only O(logn) time you will have to
-implement a Hashheap yourself to achieve the O(logn) time removal.</p>
-<p>Summary ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/author/peter-hsieh5.html">&laquo;</a>
@@ -487,6 +504,8 @@ implement a Hashheap yourself to achieve the O(logn) time removal.</p>
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh45.html">45</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/author/peter-hsieh46.html">46</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/author/peter-hsieh47.html">47</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/author/peter-hsieh7.html">&raquo;</a></li>
         </ul>
