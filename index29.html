@@ -54,6 +54,9 @@ Peter's Coding Notes            </a>
                             <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
                         </li>
                         <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/java.html">Java</a>
+                        </li>
+                        <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
                         <li >
@@ -75,6 +78,146 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">142-linked_list_cycle_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T15:38:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list.html">Linked List</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle-ii/">LeetCode Problem Link</a></p>
+<p>The implementation for this problem is not difficult. Once <tt class="docutils literal">fast</tt> catches up with <tt class="docutils literal">slow</tt>, at location <tt class="docutils literal">x</tt>.
+We set <tt class="docutils literal">cur</tt> to the head of the list and then try to advance both <tt class="docutils literal">x</tt> and <tt class="docutils literal">cur</tt> at the same rate.
+The location where <tt class="docutils literal">x</tt> meets with <tt class="docutils literal">cur</tt> is the start of the cycle.</p>
+<p>We can show why this is the case with some modular arithmetic. Let's say it takes <tt class="docutils literal">x</tt> steps for <tt class="docutils literal">slow</tt> to
+reach the start of the cycle at which point <tt class="docutils literal">fast</tt> has take <tt class="docutils literal">2x</tt> steps in total and has taken <tt class="docutils literal">x</tt> steps
+since it ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/142-linked_list_cycle_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">141-linked_list_cycle</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T14:53:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-lists.html">Linked Lists</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/linked-list-cycle.html">Linked List Cycle</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/linked-list-cycle/">LeetCode Problem Link</a></p>
+<p>Use two pointers, <tt class="docutils literal">fast</tt> and <tt class="docutils literal">slow</tt> both start at the head of the list. Make <tt class="docutils literal">fast</tt> take two steps
+and <tt class="docutils literal">slow</tt> take one step in each iteration. If there's a cycle in the linked list. The <tt class="docutils literal">fast</tt> pointer
+will eventually catch up with the <tt class="docutils literal">slow</tt> pointer.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+    <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">slow</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span> <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">fastAdvancedTwice</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">fastAdvancedTwice</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="o">)</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">fastAdvancedTwice</span><span class="o">)</span>
+            <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/141-linked_list_cycle.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/140-word_break_ii.html">140-word_break_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-13T00:20:00-08:00"> Dec 13 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-break-ii/">LeetCode Problem Link</a></p>
+<p>This problem is very similar to 132-palindrome_partitioning. After the 2D boolean array <tt class="docutils literal">inDict</tt> is filled in.
+We just need to perform dfs on it to find all the partitions. This alone will be too slow when running
+the big test case though. So like in the previous problem we must fill in the 1D boolean array <tt class="docutils literal">canBreak</tt> as
+well. And we only need to perform the dfs if <tt class="docutils literal">canBreak[0]</tt> is true. Otherwise, we know that there is simply
+no way to partition the input string <tt class="docutils literal">s</tt> into words that are in the dictionary.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/140-word_break_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/139-word_break.html">139-word_break</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2015-12-12T17:06:00-08:00"> Dec 12 2015</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/word-break/">LeetCode Problem Link</a></p>
+<p>131-palindrome_partitioning is actually a harder problem of this. Here we just need to check if each partition
+is in the dictionary. I use a 2D boolean <tt class="docutils literal">dict</tt>. <tt class="docutils literal"><span class="pre">dict[i][j]</span></tt> is true if the substring s(i, j) is in the
+dictionary. We need to the fill in the 2D array first. And then I create a 1D boolean array <tt class="docutils literal">canBreak</tt>.</p>
+<p><tt class="docutils literal">canBrea[i]</tt> is true if the substring s(i, n-1) can be partitioned into groups where all group words are
+in the dictionary. This array will be filled from right to left. And finally <tt class="docutils literal">canBreak[0 ...</tt></p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/139-word_break.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/138-copy_list_with_random_pointer.html">138-copy_list_with_random_pointer</a></h2>
                     <div>
@@ -229,175 +372,6 @@ In the first loop, set the current number of candy to the previous + 1 if the cu
 previous rating. Otherwise set <tt class="docutils literal">numCandy[i]</tt> to 1.</p>
 <p>Int the second loop, if the ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/135-candy.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/134-gas_station.html">134-gas_station</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-09T21:20:00-08:00"> Dec 09 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p>My first attempt is a O(n<sup>2</sup>) time solution. Basically start at each possible starting location and
-then try to go around the circle. This won't pass the large test case on OJ though.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">canCompleteCircuit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">gas</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">cost</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">gas</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">start</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">start</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">tank</span> <span class="o">=</span> <span class="n">gas</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
-        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">tank</span> <span class="o">&gt;=</span> <span class="n">cost</span><span class="o">[</span><span class="n">cur</span><span class="o">])</span> <span class="o">{</span>
-            <span class="n">tank</span> <span class="o">=</span> <span class="n">tank</span> <span class="o">-</span> <span class="n">cost</span><span class="o">[</span><span class="n">cur</span><span class="o">];</span>
-            <span class="n">cur</span><span class="o">++;</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">n</span><span class="o">)</span>
-                <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">cur</span><span class="o">==</span><span class="n">start</span><span class="o">)</span>
-                <span class="k">return</span> <span class="n">start</span><span class="o">;</span>
-
-            <span class="n">tank</span> <span class="o">+=</span> <span class="n">gas</span><span class="o">[</span><span class="n">cur</span><span class="o">];</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>My guess is that we will have to come up with a O(n) time ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/134-gas_station.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">133-clone_graph</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-09T20:57:00-08:00"> Dec 09 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/undirected-graph.html">Undirected Graph</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bfs.html">BFS</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/clone-graph/">LeetCode Problem Link</a></p>
-<p>Use recursion and DFS to deep copy the graph. <tt class="docutils literal">mapping</tt> is a mapping from the UndirectedGraphNode in the original
-graph to the UndirectedGraphNode in the new graph. Need to be careful with the condition of when the DFS should
-terminate.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">UndirectedGraphNode</span> <span class="nf">cloneGraph</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;();</span>
-    <span class="n">dfsCopy</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">mapping</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfsCopy</span><span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">node</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">UndirectedGraphNode</span><span class="o">,</span> <span class="n">UndirectedGraphNode</span><span class="o">&gt;</span> <span class="n">mapping</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">mapping</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">node</span><span class="o">))</span> <span class="o">{</span>
-        <span class="k">return</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="n">UndirectedGraphNode</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UndirectedGraphNode</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">label</span><span class="o">);</span>
-    <span class="n">mapping</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">newNode</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="n">UndirectedGraphNode</span> <span class="n">neighbor</span><span class="o">:</span> <span class="n">node</span><span class="o">.</span><span class="na">neighbors</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">dfsCopy</span><span class="o">(</span><span class="n">neighbor</span><span class="o">,</span> <span class="n">mapping ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/133-clone_graph.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">132-palindrome_partitioning_ii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-09T13:11:00-08:00"> Dec 09 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning-ii/">LeetCode Problem Link</a></p>
-<p>First, build the 2D boolean array as we did in the previous problem, 131-palindrome_partitioning.</p>
-<p>Let <tt class="docutils literal">n</tt> be the length of the input string. Allocate a boolean array of size <tt class="docutils literal">n</tt> and call it <tt class="docutils literal">minCuts</tt>.</p>
-<p><tt class="docutils literal">minCuts[i]</tt> is the minimum number of ways to cut the substring starting at index <tt class="docutils literal">i</tt></p>
-<p>We will fill in the elements of this array from right to left and finally return <tt class="docutils literal">minCuts[0]</tt> as the answer
-since we are looking for the minimum number of cuts needed to partition the input string <tt class="docutils literal">s</tt> into palindromes.</p>
-<p>We will first initialize all elements to ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/132-palindrome_partitioning_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">131-palindrome_partitioning</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-08T19:05:00-08:00"> Dec 08 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning/">LeetCode Problem Link</a></p>
-<p><tt class="docutils literal">isPalindrome</tt> is a 2D boolean array. <tt class="docutils literal"><span class="pre">isPalindrome[i][j]</span></tt> tells us if the substring s[i..j] is a palindrome.
-Notice that we will only be filling in the upper right half of the 2D array. Once this is built, we can do a
-dfs (i.e., recursion) and obtain all the parlindrone partitions.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">partition</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">partitions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">partitions</span><span class="o">;</span>
-
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">isPalindrome</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">more ...</a>
                 </div>
             </article>
             <hr/>

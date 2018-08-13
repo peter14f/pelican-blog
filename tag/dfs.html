@@ -55,6 +55,9 @@ Peter's Coding Notes            </a>
                             <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
                         </li>
                         <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/java.html">Java</a>
+                        </li>
+                        <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
                         <li >
@@ -76,6 +79,51 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/753-cracking_the_safe.html">753-cracking_the_safe</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-20T04:28:00-07:00"> Mar 20 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/dfs-with-backtracking.html">DFS with Backtracking</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/cracking-the-safe/">LeetCode Problem Link</a></p>
+<p>The password has <tt class="docutils literal">n</tt> digits. Each digit has <tt class="docutils literal">k</tt> different choices.
+The we know the total possible number passwords is <tt class="docutils literal">k^n</tt>.</p>
+<p>We are asked to generate a shortest possible string that covers all the possible
+passwords given <tt class="docutils literal">k</tt> and <tt class="docutils literal">n</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="n">String</span> <span class="nf">crackSafe</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span>
+    <span class="c1">// password has n digits</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="sc">&#39;0&#39;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+    <span class="n">visited</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+
+    <span class="n">dfs</span><span class="o">(</span><span class="n">sb</span><span class="o">,</span> <span class="n">total</span><span class="o">,</span> <span class="n">visited</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">k</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">dfs</span><span class="o">(</span><span class="n">StringBuilder</span> <span class="n">sb</span><span class="o">,</span> <span class="kt">int ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/753-cracking_the_safe.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/737-sentence_similarity_ii.html">737-sentence_similarity_ii</a></h2>
                     <div>
@@ -422,43 +470,6 @@ could avoid re-computation by using a cache.</p>
     <span class="k">if</span> <span class="o">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">prevRow</span> <span class="o">!=</span> <span class="n">row</span><span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">prevCol</span> <span class="o">!=</span> <span class="n">col</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
             <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">col ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/329-longest_increasing_path_in_a_matrix.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/320-generalized_abbreviation.html">320-generalized_abbreviation</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-27T13:30:00-08:00"> Feb 27 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/generalized-abbreviation/">LeetCode Problem Link</a></p>
-<p>The list of generalized abbreviations for the word <tt class="docutils literal">word</tt> is</p>
-<pre class="literal-block">
-[&quot;word&quot;, &quot;1ord&quot;, &quot;w1rd&quot;, &quot;wo1d&quot;, &quot;wor1&quot;, &quot;2rd&quot;, &quot;w2d&quot;, &quot;wo2&quot;, &quot;1o1d&quot;, &quot;1or1&quot;, &quot;w1r1&quot;, &quot;1o2&quot;, &quot;2r1&quot;, &quot;3d&quot;, &quot;w3&quot;, &quot;4&quot;]
-</pre>
-<p>So just by looking at the example, I am assuming an integer simply means the number of characters it represents.</p>
-<p>And it sure looks like you cannot have two integers next to each other. Notice that we have <tt class="docutils literal">1o1d</tt> but not <tt class="docutils literal">11rd</tt>.</p>
-<p>I think we can use recursion and DFS.</p>
-<p>My first attempt</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">generateAbbreviations</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
-
-    <span class="n">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">(</span><span class="n">word</span><span class="o">);</span>
-
-    <span class="n">findAllAbbreviations ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/320-generalized_abbreviation.html">more ...</a>
                 </div>
             </article>
             <hr/>

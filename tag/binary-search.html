@@ -55,6 +55,9 @@ Peter's Coding Notes            </a>
                             <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
                         </li>
                         <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/java.html">Java</a>
+                        </li>
+                        <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
                         <li >
@@ -76,6 +79,35 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/744-minimize_max_distance_to_gas_station.html">744-minimize_max_distance_to_gas_station</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-20T04:10:00-07:00"> Mar 20 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/heap.html">Heap</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/minimize-max-distance-to-gas-station/">LeetCode Problem Link</a></p>
+<p>Greedy will not work. Take this input <tt class="docutils literal">[1, 5, 10]</tt>
+When k=1, ans=4 (We put the one station right at 7.5
+When k=2, ans=2.5 (One station at 7.5 and another at 3)
+When k=3, ans=2 (One station at 3, one at 6.67, and last one at 5 + 5/3 + 5/3)</p>
+<p>Using a heap will do it. Note that when we construct a new Interval, k is initialized to 1 and
+that means there is not stations between <tt class="docutils literal">left</tt> and <tt class="docutils literal">right</tt>. This solution is too slow for ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/744-minimize_max_distance_to_gas_station.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/374-guess_number_higher_or_lower.html">374-guess_number_higher_or_lower</a></h2>
                     <div>
@@ -380,58 +412,6 @@ transform the index in the 1d array to the correct row and column index.</p>
         <span class="k">else</span> <span class="o">{</span>
             <span class="c1">// num too ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/074-search_a_2d_matrix.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/035-search_insert_position.html">035-search_insert_position</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-09-27T10:47:00-07:00"> Sep 27 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search.html">Binary Search</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/search-insert-position/">LeetCode Problem Link</a></p>
-<p>Use binary search. If the number is not found, the <tt class="docutils literal">l</tt> pointer actually will be the correct index if the
-number were to be inserted.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">searchInsert</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="o">(</span><span class="n">h</span><span class="o">-</span><span class="n">l</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">middleNum</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">middle</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">middleNum</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">middle</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">middleNum</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// look in the left part</span>
-            <span class="n">h</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="c1">// look in the right part</span>
-            <span class="n">l</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-
-    <span class="o">}</span>
-
-    <span class="c1">// not found, and now l == h + 1</span>
-    <span class="k">return</span> <span class="n">l</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/035-search_insert_position.html">more ...</a>
                 </div>
             </article>
             <hr/>

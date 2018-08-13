@@ -54,6 +54,9 @@ Peter's Coding Notes            </a>
                             <a href="http://peter14f.github.io/pelican-blog/category/data-structures.html">Data structures</a>
                         </li>
                         <li >
+                            <a href="http://peter14f.github.io/pelican-blog/category/java.html">Java</a>
+                        </li>
+                        <li >
                             <a href="http://peter14f.github.io/pelican-blog/category/leetcode.html">Leetcode</a>
                         </li>
                         <li >
@@ -75,6 +78,85 @@ Peter's Coding Notes            </a>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/513-find_bottom_left_tree_value.html">513-find_bottom_left_tree_value</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-18T00:01:00-07:00"> Mar 18 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/binary-tree-traversal.html">Binary Tree Traversal</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/find-bottom-left-tree-value/">LeetCode Problem Link</a></p>
+<p>First thing that came to my mind is that level-order traversal could help.
+I need two queues <tt class="docutils literal">q</tt> and <tt class="docutils literal">q2</tt>.</p>
+<p>At each iteration of the while I traverse all nodes in <tt class="docutils literal">q</tt> and store each
+node's children (left first, then right) into <tt class="docutils literal">q2</tt>.</p>
+<p>At the end of each iteration of the while loop, if <tt class="docutils literal">q2</tt>
+is empty, then I know <tt class="docutils literal">q</tt> contains the nodes in the very last level. And the very first element would give me the
+left most node.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findBottomLeftValue</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">&gt;();</span>
+    <span class="n">q</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+    <span class="n">ArrayList ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/513-find_bottom_left_tree_value.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/505-the_maze_ii.html">505-the_maze_iii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T23:51:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dijkstra.html">Dijkstra</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph.html">Graph</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/graph-problem-with-a-spin.html">Graph Problem With A Spin</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/the-maze-ii/">LeetCode Problem Link</a></p>
+<p>A good practice for implementing Dijkstra's algorithm.</p>
+<div class="highlight"><pre><span class="c1">// in this problem, we are not trying to figure out the path</span>
+<span class="c1">// we are only interested in knowing the shortest distance from</span>
+<span class="c1">// start to destination... This should yell Dijkstra for you.</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">shortestDistance</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">maze</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">destination</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="c1">// distant from start to all cells</span>
+    <span class="c1">// not found in map -&gt; distance is infinity</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">dist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="c1">// shortest distance from start has been figured out</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">done</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+
+    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">CellAndDist</span><span class="o">&gt;</span> <span class="n">pq ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/505-the_maze_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/494-target_sum.html">494-target_sum</a></h2>
                     <div>
@@ -331,89 +413,6 @@ maximizes its score (which minimizes player1's score).</p>
     <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// one element ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/486-predict_the_winner.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">477-total_hamming_distance</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-17T21:50:00-07:00"> Mar 17 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/couting-bits.html">Couting Bits</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/total-hamming-distance/">LeetCode Problem Link</a></p>
-<p>Imagine each number is just zero or one, the total hamming distance is just (number of ones)*(number of zeros)</p>
-<p>Do that for each bit and sum up the result at each bit.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">totalHammingDistance</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">totalDistance</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">numOnes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">numZeros</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">((</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">numOnes</span><span class="o">++;</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">numZeros</span><span class="o">++;</span>
-            <span class="o">}</span>
-            <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="n">totalDistance</span> <span class="o">+=</span> <span class="o">(</span><span class="n">numOnes</span> <span class="o">*</span> <span class="n">numZeros</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">totalDistance</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/464-can_i_win.html">464-can_i_win</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-17T20:53:00-07:00"> Mar 17 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/minimax.html">Minimax</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/bit-manipulation.html">Bit Manipulation</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/can-i-win/">LeetCode Problem Link</a></p>
-<p>Unlike the other Minimax problems (486-predict_the_winner and 375-guess_number_higher_or_lower_ii),
-we cannot specify a range for the input and work out shortening that range because in this
-problem, the player is free to pick from any number that is still available.</p>
-<p>The problem description says that <tt class="docutils literal">n</tt> will not be bigger than 20. This means that
-we could use a bit to represent what numbers are still left.</p>
-<p>Here is the purely recursive solution with no memoization.
-Once you make a pick, you want to know if the other player can win with whatever is left.
-If the the ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/464-can_i_win.html">more ...</a>
                 </div>
             </article>
             <hr/>
