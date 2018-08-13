@@ -79,6 +79,50 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/486-predict_the_winner.html">486-predict_the_winner</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2018-03-17T22:48:00-07:00"> Mar 17 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/dynamic-programming.html">Dynamic Programming</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/minimax.html">Minimax</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/predict-the-winner/">LeetCode Problem Link</a></p>
+<p>This problem asks us to write a method that returns if it's possible for player1 to win
+the game even in the case that player2 does its very best.</p>
+<p>The key observation is that once player1 makes a move, player2 will make a move that
+maximizes its score (which minimizes player1's score).</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">PredictTheWinner</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">playerOneScore</span> <span class="o">=</span> <span class="n">getScore</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">playerTwoScore</span> <span class="o">=</span> <span class="n">total</span> <span class="o">-</span> <span class="n">playerOneScore</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">playerOneScore</span> <span class="o">&gt;</span> <span class="n">playerTwoScore</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">getScore</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// one element ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/486-predict_the_winner.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/477-total_hamming_distance.html">477-total_hamming_distance</a></h2>
                     <div>
 <footer class="post-info">
@@ -365,54 +409,6 @@ the element to the right. The last element has no successor. This approach takes
     <span class="c1">// include nums[i] in set A</span>
     <span class="kt">int ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/416-partial_equal_subset_sum.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/406-queue_reconstruction.html">406-queue_reconstruction</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2018-03-17T19:00:00-07:00"> Mar 17 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/greedy.html">Greedy</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/queue-reconstruction-by-height/">LeetCode Problem Link</a></p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[][]</span> <span class="nf">reconstructQueue2</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">people</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">people</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span><span class="o">[][]</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][];</span>
-
-    <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">MyComparator</span><span class="o">());</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">entry</span> <span class="o">:</span> <span class="n">people</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">entry</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="n">LinkedList</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">ll</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
-    <span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">person</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
-        <span class="n">ll</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">person</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="n">Iterator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">[]&gt;</span> <span class="n">itr</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-    <span class="k">while</span> <span class="o">(</span><span class="n">itr</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
-        <span class="n">ans</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">itr</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
-        <span class="n">i</span><span class="o">++;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">ans</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/406-queue_reconstruction.html">more ...</a>
                 </div>
             </article>
             <hr/>

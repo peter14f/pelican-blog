@@ -79,6 +79,77 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/338-counting_bits.html">338-counting_bits</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-17T10:49:00-07:00"> Mar 17 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/counting-bits/">LeetCode Problem Link</a></p>
+<p>Read the first two hints and was able to solve this problem.</p>
+<pre class="literal-block">
+int[] bitCount = new int[num+1]
+</pre>
+<p><tt class="docutils literal">bitCount</tt> is the output array.</p>
+<p>Fill in <tt class="docutils literal">bitCount[0]</tt> and <tt class="docutils literal">bitCount[1]</tt> first.</p>
+<p>let the <tt class="docutils literal">msb</tt> be 2 first. How many numbers have the 2nd bit set?
+Two numbers - 2 and 3.</p>
+<p>Then we left shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 4. How many numbers have the 3rd bit set?
+Four numbers - 4, 5, 6, 7.</p>
+<p>Then we left shift <tt class="docutils literal">msb</tt>, <tt class="docutils literal">msb</tt> is now 8. How many numbers have the 4th bit set?
+Eight numbers - 8, 9, 10, 11, 12 ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/338-counting_bits.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/quick_sort.html">quick_sort</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-03-15T21:13:00-07:00"> Mar 15 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/quick-sort.html">Quick Sort</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/sorting.html">Sorting</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p>Note that in this implementation we always pick the last element as the pivot.
+The implementation is simpler and the runtime would be the same for the same input array.</p>
+<p>Unlike in quick select (215-kth_largest_element_in_an_array), we don't actually care about the rank for the pivot.
+We just need to make sure that after the while loop, the pivot element is placed at the its sorted position.</p>
+<p>Note the two recursive calls after the pivot element is properly placed.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span><span class="o">;</span>
+
+    <span class="n">quickSort</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">quickSort ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/quick_sort.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/336-palindrome_pairs.html">336-palindrome_pairs</a></h2>
                     <div>
 <footer class="post-info">
@@ -317,102 +388,6 @@ again. Note that PQ.remove() will that O(n) time. If you want it to take only O(
 implement a Hashheap yourself to achieve the O(logn) time removal.</p>
 <p>Summary ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/dijkstra_algorithm.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html">334-increasing_triplet_subsequence</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T21:33:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/increasing-triplet-subsequence/">LeetCode Problem Link</a></p>
-<p>Trivial solution is to use 3 nested for loops. But the time complexity is O(n <sup>3</sup>).</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">increasingTriplet</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
-                <span class="k">continue</span><span class="o">;</span>
-
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">])</span>
-                    <span class="k">continue</span><span class="o">;</span>
-
-                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
-                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-<p>Maintain <tt class="docutils literal">smallestSeen</tt> and <tt class="docutils literal">secondSmallestSeen</tt> s you traverse the array.</p>
-<p>We had to do similar comparisons back in 265-paint_house_ii.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">increasingTriplet</span><span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/334-increasing_triplet_subsequence.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/333-largest_bst_subtree.html">333-largest_bst_subtree</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-28T21:31:00-08:00"> Feb 28 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-search-trees.html">Binary Search Trees</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/binary-trees.html">Binary Trees</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/largest-bst-subtree/">LeetCode Problem Link</a></p>
-<p>Given a binary tree, return the size of the largest BST subtree you can find.</p>
-<div class="highlight"><pre><span class="c1">// size of the current tree</span>
-<span class="c1">// range of the nodes in current tree</span>
-<span class="kd">class</span> <span class="nc">Result</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">lower</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">upper</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Result</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">size</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
-        <span class="n">lower</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
-        <span class="n">upper</span> <span class="o">=</span> <span class="n">u</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="s">&quot;size=&quot;</span> <span class="o">+</span> <span class="n">size</span> <span class="o">+</span> <span class="s">&quot; low=&quot;</span> <span class="o">+</span> <span class="n">lower</span> <span class="o">+</span> <span class="s">&quot; high=&quot;</span> <span class="o">+</span> <span class="n">upper</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">largestBSTSubtree</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">};</span>
-    <span class="n">traverse</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">maxSize</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">maxSize</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="c1">// return a Result of -1 means subtree whose root is cur cannot be a BST</span>
-<span class="c1">//</span>
-<span class="c1">//</span>
-<span class="kd">private</span> <span class="n">Result</span> <span class="nf">traverse</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">cur</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">cur ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/333-largest_bst_subtree.html">more ...</a>
                 </div>
             </article>
             <hr/>

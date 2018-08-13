@@ -79,6 +79,84 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/159-longest_substring_with_at_most_two_distinct_characters.html">159-longest_substring_with_at_most_two_distinct_characters</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-07T23:15:00-08:00"> Jan 07 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/substrings.html">Substrings</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/">LeetCode Problem Link</a></p>
+<p>The O(n) time solution is quite hard. We will use a HashMap&lt;Character, Integer&gt; to store the two distinct characters
+closest to the current index <tt class="docutils literal">i</tt>.</p>
+<p>If the current index <tt class="docutils literal">i</tt> is a new character, i.e., a character different from the character at index <tt class="docutils literal">first</tt> and
+the character at index <tt class="docutils literal">second</tt>, we should immediately discard the information on the character at index <tt class="docutils literal">first</tt>
+and update <tt class="docutils literal">second</tt> to the current index <tt class="docutils literal">i</tt> since it's the newest character seen as of now. We also update
+<tt class="docutils literal">first</tt> to be the old value of <tt class="docutils literal">second</tt> since the last ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/159-longest_substring_with_at_most_two_distinct_characters.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/158-read_n_characters_given_read4_ii.html">158-read_n_characters_given_read4_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-01-06T21:58:00-08:00"> Jan 06 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/read4.html">read4</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/">LeetCode Problem Link</a></p>
+<p>Use a queue to store store the characters read using <tt class="docutils literal">read4</tt>.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="kd">extends</span> <span class="n">Reader4</span> <span class="o">{</span>
+    <span class="n">Queue</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">q</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Solution</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">q</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;();</span>
+    <span class="o">}</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @param buf Destination buffer</span>
+<span class="cm">     * @param n   Maximum number of characters to read</span>
+<span class="cm">     * @return    The number of characters read</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">read</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">buf</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">numWritten</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// number of chars written into buf</span>
+        <span class="kt">boolean</span> <span class="n">done</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">numWritten</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">read4</span><span class="o">(</span><span class="n">temp</span><span class="o">);</span>
+
+                <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">)</span>
+                    <span class="n">done</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">temp</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">numWritten ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/158-read_n_characters_given_read4_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/157-read_n_characters_given_read4.html">157-read_n_characters_given_read4</a></h2>
                     <div>
 <footer class="post-info">
@@ -341,87 +419,6 @@ test case.</p>
 <p><tt class="docutils literal">minProduct[i]</tt> is the smallest product some contiguous elements from element <tt class="docutils literal">0</tt> to element <tt class="docutils literal">i</tt> can form with
 the ith ...</p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/152-maximum_product_subarray.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/151-reverse_words_in_a_string.html">151-reverse_words_in_a_string</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-31T22:57:00-08:00"> Dec 31 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/c.html">C</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/in-place-string-manipulation.html">in-place string manipulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/reverse-words-in-a-string/">LeetCode Problem Link</a></p>
-<p>This problem is only interesting if it's done in-place in C. In Java strings are immutable so we cannot do this
-in-place.</p>
-<p>Reversing a string in-place is very easy. Simply use two pointers <tt class="docutils literal">front</tt> and <tt class="docutils literal">back</tt> and then swap the
-characters stored at the two pointers and then decrement <tt class="docutils literal">back</tt> and increment <tt class="docutils literal">front</tt> until <tt class="docutils literal">back</tt> is
-smaller than <tt class="docutils literal">front</tt>.</p>
-<p>First modify the string such that the leading spaces and the trailing spaces are gone.</p>
-<p>The way to do this problem is to first reverse the string and then reverse each word.</p>
-<p>The last operation that needs ...</p>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/151-reverse_words_in_a_string.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/150-evaluate_reverse_polish_notation.html">150-evaluate_reverse_polish_notation</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-28T20:15:00-08:00"> Dec 28 2015</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/evaluate-reverse-polish-notation/">LeetCode Problem Link</a></p>
-<p>The pattern is clear. When you see an operator, the first popped element is the second operand and the
-second popped element is the first operand. Once the operation is performed, the result needs to be pushed
-back onto the stack. When you see a non operator, simply push the integer on the stack.</p>
-<div class="highlight"><pre><span class="kd">private</span> <span class="kt">int</span> <span class="nf">isOperator</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">)</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="kt">char</span> <span class="n">op</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">()[</span><span class="mi">0</span><span class="o">];</span>
-    <span class="kt">int</span> <span class="n">operator</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-    <span class="k">switch</span><span class="o">(</span><span class="n">op</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="sc">&#39;+&#39;</span><span class="o">:</span>
-            <span class="n">operator</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="k">case</span> <span class="sc">&#39;-&#39;</span><span class="o">:</span>
-            <span class="n">operator</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="k">case</span> <span class="sc">&#39;*&#39;</span><span class="o">:</span>
-            <span class="n">operator</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="k">case</span> <span class="sc">&#39;/&#39;</span><span class="o">:</span>
-            <span class="n">operator</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
-            <span class="k">break</span><span class="o">;</span>
-        <span class="k">default</span><span class="o">:</span>
-            <span class="n">operator</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">operator</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/150-evaluate_reverse_polish_notation.html">more ...</a>
                 </div>
             </article>
             <hr/>

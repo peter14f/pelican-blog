@@ -79,6 +79,80 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">254-factor_combinations</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T10:52:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/factor-combinations/">LeetCode Problem Link</a></p>
+<p>I am using recursion to solve this problem. To avoid excessive number of recursive calls, we've got to
+make sure that we only make a recursive call for a valid factor.</p>
+<p><tt class="docutils literal">factorAhead</tt> is the previous factor found. The problem wants each list of factors to be in non-decreasing
+order.</p>
+<div class="highlight"><pre><span class="c1">// do not return 1 and n</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">getFactors</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">lists</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">lists</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">firstFactorToTry</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="o">%</span><span class="n">firstFactorToTry</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">firstFactorToTry</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span>
+        <span class="n">findListsOfFactors</span><span class="o">(</span>
+                <span class="n">n</span><span class="o">,</span> <span class="n">firstFactorToTry</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(),</span>
+                <span class="mi">0</span><span class="o">,</span> <span class="n">lists ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/253-meeting_rooms_ii.html">253-meeting_rooms_ii</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T00:46:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/checking-interval-overlaps.html">Checking Interval Overlaps</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/detect-maximum-number-of-overlaps.html">Detect Maximum Number of Overlaps</a>
+        /
+	<a href="http://peter14f.github.io/pelican-blog/tag/custom-comparator.html">Custom Comparator</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/meeting-rooms-ii/">LeetCode Problem Link</a></p>
+<p>Again, this is very similar to the problem 218-the_skyline_problem.</p>
+<p>The most number of intervals that overlap at any given time is the minimum number of meeting rooms required.</p>
+<p>What did we do in 218-the_skyline_problem? We defined an Edge class that has a field that denotes whether
+it is the left edge of an interval or the right edge of an interval.</p>
+<p>The intervals in this problem does not contain a height like in 218-the_skyline_problem.
+But we still need a custom comparator so that we could sort the edges.</p>
+<p>In my solution, I use a Stack&lt;Edge&gt; to ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/253-meeting_rooms_ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/252-meeting_rooms.html">252-meeting_rooms</a></h2>
                     <div>
 <footer class="post-info">
@@ -351,98 +425,6 @@ and the cases where leading zeros are not allowed.</p>
         <span class="n">ans</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;88&quot;</span><span class="o">);</span>
         <span class="n">ans</span><span class="o">.</span><span class="na">add ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/247-strobogrammatic_number_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/246-strobogrammatic_number.html">246-strobogrammatic_number</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-17T09:47:00-08:00"> Feb 17 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/strobogrammatic-numbers.html">Strobogrammatic Numbers</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/strobogrammatic-number/">LeetCode Problem Link</a></p>
-<p>'0', '1', '6', '8', '9' are the strobogrammatic characters. Use two poineters. It takes O(n) time.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isStrobogrammatic</span><span class="o">(</span><span class="n">String</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">h</span><span class="o">=</span><span class="n">num</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">l</span><span class="o">&lt;=</span><span class="n">h</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">char</span> <span class="n">left</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
-        <span class="kt">char</span> <span class="n">right</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
-
-        <span class="k">if</span> <span class="o">(!</span><span class="n">stroboChar</span><span class="o">(</span><span class="n">left</span><span class="o">)</span> <span class="o">||</span> <span class="o">!</span> <span class="n">stroboChar</span><span class="o">(</span><span class="n">right</span><span class="o">))</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">right</span> <span class="o">!=</span> <span class="sc">&#39;1&#39;</span><span class="o">)</span>
-                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="sc">&#39;8&#39;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">right</span> <span class="o">!=</span> <span class="sc">&#39;8&#39;</span><span class="o">)</span>
-                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="sc">&#39;6&#39;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">right</span> <span class="o">!=</span> <span class="sc">&#39;9&#39;</span><span class="o">)</span>
-                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="sc">&#39;9&#39;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">right</span> <span class="o">!=</span> <span class="sc">&#39;6&#39;</span><span class="o">)</span>
-                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">right</span> <span class="o">!=</span> <span class="sc">&#39;0&#39;</span><span class="o">)</span>
-                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">l</span><span class="o">++;</span>
-        <span class="n">h</span><span class="o">--;</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="kc">true ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/246-strobogrammatic_number.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/245-shortest_word_distance_iii.html">245-shortest_word_distance_iii</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-17T08:36:00-08:00"> Feb 17 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/shortest-word-distance-iii/">LeetCode Problem Link</a></p>
-<p>Pretty much the same problem as 243-shortest_word_distance. <tt class="docutils literal">word1</tt> and <tt class="docutils literal">word2</tt> may be the same
-string now, but they represent two different strings in the input array. Still a O(n) time solution.</p>
-<div class="highlight"><pre><span class="c1">// may assume word1 and word2 are in the input string array</span>
-<span class="c1">// word1 and word2 may be the same and they represent two individual words in the list</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">shortestWordDistance</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">words</span><span class="o">,</span> <span class="n">String</span> <span class="n">word1</span><span class="o">,</span> <span class="n">String</span> <span class="n">word2</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">minDistance</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">lastSeen1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">lastSeen2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
-
-    <span class="kt">boolean</span> <span class="n">same</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">word2</span><span class="o">);</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">words</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">words</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">word1</span><span class="o">))</span> <span class="o">{</span>
-
-            <span class="k">if ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/245-shortest_word_distance_iii.html">more ...</a>
                 </div>
             </article>
             <hr/>

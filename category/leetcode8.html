@@ -82,6 +82,69 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/319-bulb_switcher.html">319-bulb_switcher</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T23:05:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/brain-teaser.html">Brain Teaser</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/bulb-switcher/">LeetCode Problem Link</a></p>
+<p><tt class="docutils literal">n</tt> bulbs are initially OFF.</p>
+<p>Toggle every <tt class="docutils literal">k</tt> bulb starting at round k=1.</p>
+<p>So at round zero, all bulbs are ON.</p>
+<p>Find how many bulbs are ON after <tt class="docutils literal">n</tt> rounds.</p>
+<p>For <tt class="docutils literal">n &lt;= 0</tt> return <tt class="docutils literal">0</tt>.</p>
+<p>So we are returning a count, not the states of each bulb.</p>
+<p><tt class="docutils literal">n</tt> bulbs <tt class="docutils literal">n</tt> rounds.</p>
+<p>If you simulate <tt class="docutils literal">n</tt> rounds of <tt class="docutils literal">n</tt> bulbs, it will take you O(n <sup>2</sup>) time.</p>
+<p>But let's implement this straightforward solution anyways.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">bulbSwitch</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">states</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/319-bulb_switcher.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/318-maximum_product_of_word_lengths.html">318-maximum_product_of_word_lengths</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-26T22:01:00-08:00"> Feb 26 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/bookkeeping.html">Bookkeeping</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/maximum-product-of-word-lengths/">LeetCode Problem Link</a></p>
+<p>Well, if we can lookup whether two strings have any character in common in O(1) time, we could
+solve this problem in O(n <sup>2</sup>) time where <tt class="docutils literal">n</tt> is the input array size.</p>
+<p>What about a bitmap? An integer has 32 bits and each string contains only 'a' to 'z' so that's enough.</p>
+<p>So we need to allocate an int array of size <tt class="docutils literal">n</tt> called <tt class="docutils literal">bitMaps</tt>.</p>
+<p>To find out if <tt class="docutils literal">words[i]</tt> and <tt class="docutils literal">words[j]</tt> have any characters in common, we simply check if
+(bitMaps[i] &amp; bitMaps[j]) &gt; 0.</p>
+<p>Building the <tt class="docutils literal">bitMaps</tt> will take O ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/318-maximum_product_of_word_lengths.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/316-remove_duplicate_letters.html">316-remove_duplicate_letters</a></h2>
                     <div>
 <footer class="post-info">
@@ -315,64 +378,6 @@ dp[2][4] = numbers[2]*numbers[3]*numbers[4 ...</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/310-minimum_height_trees.html">310-minimum_height_trees</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-25T11:57:00-08:00"> Feb 25 2016</time>
-    </span>
-
-
-
-
-
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/minimum-height-trees/">LeetCode Problem Link</a></p>
-<p><tt class="docutils literal">n</tt> nodes labeled from <tt class="docutils literal">0</tt> to <tt class="docutils literal"><span class="pre">n-1</span></tt>.</p>
-<p>We need to build an undirected graph. Nodes with only one edge are leaf nodes. Nodes with more than one
-edge are internal nodes. The root of the minumum height tree cannot possibly be a leaf node.</p>
-<p>I go through each internal nodes and try to get the height of the tree using that node as the root.</p>
-<p>But I got TLE for large TC.</p>
-<p>What we can do it keep removing leaf nodes from the current graph until it's got &lt; 2 nodes left.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">findMinHeightTrees</span><span class="o">(</span><span class="kt">int ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/310-minimum_height_trees.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/309-best_time_to_buy_and_sell_stock_with_cooldown.html">309-best_time_to_buy_and_sell_stock</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-25T09:53:00-08:00"> Feb 25 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/best-time-to-buysell.html">Best Time To Buy/Sell</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">LeetCode Problem Link</a></p>
-<p>We can make as many trades as needed, but each buy cannot be immediately after a sell.</p>
-<p>int array <tt class="docutils literal">buy</tt> is the profit with one outstanding stock.
-int array <tt class="docutils literal">sell</tt> is the profit with no oustanding stock.</p>
-<dl class="docutils">
-<dt><tt class="docutils literal">buy[i]</tt> is the amount of cash with one outstanding stock position, it is purchased either at day <tt class="docutils literal">i</tt></dt>
-<dd>or any day before day <tt class="docutils literal">i</tt>.</dd>
-<dt><tt class="docutils literal">sell[i]</tt> is the amount of chash with no oustanding stock position, the last sold occurred on day <tt class="docutils literal">i</tt> or</dt>
-<dd>any day before day <tt class="docutils literal">i</tt>.</dd>
-</dl>
-<pre class="literal-block">
-buy[i] = Math.max(buy[i-1], sell[i-2] - prices[i ...</pre>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/309-best_time_to_buy_and_sell_stock_with_cooldown.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="http://peter14f.github.io/pelican-blog/category/leetcode7.html">&laquo;</a>
@@ -465,6 +470,8 @@ buy[i] = Math.max(buy[i-1], sell[i-2] - prices[i ...</pre>
                             href="http://peter14f.github.io/pelican-blog/category/leetcode43.html">43</a></li>
                     <li class=""><a
                             href="http://peter14f.github.io/pelican-blog/category/leetcode44.html">44</a></li>
+                    <li class=""><a
+                            href="http://peter14f.github.io/pelican-blog/category/leetcode45.html">45</a></li>
                 <li class="next"><a
                         href="http://peter14f.github.io/pelican-blog/category/leetcode9.html">&raquo;</a></li>
         </ul>
