@@ -80,6 +80,48 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">254-factor_combinations</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-18T10:52:00-08:00"> Feb 18 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/factor-combinations/">LeetCode Problem Link</a></p>
+<p>I am using recursion to solve this problem. To avoid excessive number of recursive calls, we've got to
+make sure that we only make a recursive call for a valid factor.</p>
+<p><tt class="docutils literal">factorAhead</tt> is the previous factor found. The problem wants each list of factors to be in non-decreasing
+order.</p>
+<div class="highlight"><pre><span class="c1">// do not return 1 and n</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">getFactors</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">lists</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">n</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span>
+        <span class="k">return</span> <span class="n">lists</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">firstFactorToTry</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="o">%</span><span class="n">firstFactorToTry</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">firstFactorToTry</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">firstFactorToTry</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">)</span>
+        <span class="n">findListsOfFactors</span><span class="o">(</span>
+                <span class="n">n</span><span class="o">,</span> <span class="n">firstFactorToTry</span><span class="o">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(),</span>
+                <span class="mi">0</span><span class="o">,</span> <span class="n">lists ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/254-factor_combinations.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/250-count_univalue_subtrees.html">250-count_univalue_subtrees</a></h2>
                     <div>
 <footer class="post-info">
@@ -383,49 +425,6 @@ dictionary. We need to the fill in the 2D array first. And then I create a 1D bo
 <p><tt class="docutils literal">canBrea[i]</tt> is true if the substring s(i, n-1) can be partitioned into groups where all group words are
 in the dictionary. This array will be filled from right to left. And finally <tt class="docutils literal">canBreak[0 ...</tt></p>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/139-word_break.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">131-palindrome_partitioning</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2015-12-08T19:05:00-08:00"> Dec 08 2015</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/dfs.html">DFS</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/palindromes.html">Palindromes</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/string-partitions.html">String Partitions</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/palindrome-partitioning/">LeetCode Problem Link</a></p>
-<p><tt class="docutils literal">isPalindrome</tt> is a 2D boolean array. <tt class="docutils literal"><span class="pre">isPalindrome[i][j]</span></tt> tells us if the substring s[i..j] is a palindrome.
-Notice that we will only be filling in the upper right half of the 2D array. Once this is built, we can do a
-dfs (i.e., recursion) and obtain all the parlindrone partitions.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">partition</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">partitions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">partitions</span><span class="o">;</span>
-
-    <span class="kt">char</span><span class="o">[]</span> <span class="n">sArr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">sArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">isPalindrome</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/131-palindrome_partitioning.html">more ...</a>
                 </div>
             </article>
             <hr/>
