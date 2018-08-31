@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/data-structures.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2016-02-28T11:36:00-08:00</updated><entry><title>fenwick_tree</title><link href="http://peter14f.github.io/pelican-blog/fenwick_tree.html" rel="alternate"></link><updated>2016-02-28T11:36:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/fenwick_tree.html</id><summary type="html">&lt;p&gt;Fenwick tree can be easily implemented using an array and is one-based.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Peter's Coding Notes</title><link href="http://peter14f.github.io/pelican-blog/" rel="alternate"></link><link href="http://peter14f.github.io/pelican-blog/feeds/data-structures.atom.xml" rel="self"></link><id>http://peter14f.github.io/pelican-blog/</id><updated>2016-02-28T11:36:00-08:00</updated><entry><title>fenwick_tree</title><link href="http://peter14f.github.io/pelican-blog/fenwick_tree.html" rel="alternate"></link><updated>2016-02-28T11:36:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/fenwick_tree.html</id><summary type="html">&lt;p&gt;Let's talk about which problem a Fenwick tree can help us solve.&lt;/p&gt;
+&lt;p&gt;Given an array of &lt;tt class="docutils literal"&gt;n&lt;/tt&gt; numbers (index &lt;tt class="docutils literal"&gt;0&lt;/tt&gt; to index &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;n-1&lt;/span&gt;&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;Let &lt;tt class="docutils literal"&gt;prefixSum(i)&lt;/tt&gt; denote the sum of elements from index &lt;tt class="docutils literal"&gt;0&lt;/tt&gt; to index &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;.
+Let &lt;tt class="docutils literal"&gt;rangeSum(p, q)&lt;/tt&gt; denote the sum of elements from index &lt;tt class="docutils literal"&gt;p&lt;/tt&gt; to index &lt;tt class="docutils literal"&gt;q&lt;/tt&gt;. (q &amp;gt;= p)&lt;/p&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+prefixSum(i) = rangeSum(0, i)
+
+rangeSum(p, q) = prefixSum(q) - prefixSum(p-1) for p &amp;gt; 0
+rangeSum(p, q) = prefixSum(q)                  for p = 0
+&lt;/pre&gt;
+&lt;p&gt;To solve this problem, we could build a &lt;tt class="docutils literal"&gt;prefixSum&lt;/tt&gt; array which takes O(n) time and with that array we will be
+able to answer the query in O(1) time. But what happens if updates can be made to the original input array?
+Each time an update is made, we will have to update our &lt;tt class="docutils literal"&gt;prefixSum&lt;/tt&gt; array which again takes O(n) time.&lt;/p&gt;
+&lt;p&gt;Fenwick tree can help us in this case. Each update will only take O(logn) time. And each query will take O(logn) time
+as well.&lt;/p&gt;
+&lt;p&gt;Fenwick tree can be easily implemented using an array and is one-based.&lt;/p&gt;
+&lt;p&gt;When we build a Fenwick tree from an input array &lt;tt class="docutils literal"&gt;nums&lt;/tt&gt;. We first initialize our &lt;tt class="docutils literal"&gt;tree&lt;/tt&gt; array based on the
+input array &lt;tt class="docutils literal"&gt;nums&lt;/tt&gt;. Basically &lt;tt class="docutils literal"&gt;tree[i]&lt;/tt&gt; = &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nums[i-1]&lt;/span&gt;&lt;/tt&gt; for i ranging from &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;n&lt;/tt&gt;. And then we loop from
+index &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;n&lt;/tt&gt; again, this time adding tree[index] to tree[immediateParentOfIndex].&lt;/p&gt;
+&lt;p&gt;To understand why we do that, let's look at the following to see how Fenwick tree works.&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 16 -10000 [ 1,15]          |
 15 - 1111 [15,15] |        |
@@ -18,19 +38,112 @@
  2 - 0010 [ 1, 2]   | | |  |
  1 - 0001 [ 1, 1] | | | |  |
 &lt;/pre&gt;
-&lt;p&gt;The value of the LSB of the index number tells us how many elements is being covered.&lt;/p&gt;
-&lt;p&gt;prefixSum(5) = sum(0, 5) = fenwickSum(6) = tree[6] + tree[4]&lt;/p&gt;
-&lt;p&gt;In Java, how do you quick get value when only the LSB of x is set?&lt;/p&gt;
+&lt;p&gt;The value of the least-significant-set-bit of the index number tells us how many elements is being covered.&lt;/p&gt;
+&lt;p&gt;Notice that for every index &lt;tt class="docutils literal"&gt;i&lt;/tt&gt; there is an immediate parent whose range is bigger than the range of index &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;
+that also covers index &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;'s range.&lt;/p&gt;
+&lt;p&gt;You can get to index &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;'s immediately parent by adding the value of least-significant-set-bit of &lt;tt class="docutils literal"&gt;i&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;In Java, how do you quick get value when only the least-significant-set-bit of x is set?&lt;/p&gt;
 &lt;p&gt;x &amp;amp; (-x) would do it&lt;/p&gt;
+&lt;p&gt;Now that the our Fenwick tree has been built, let's talk about the &lt;tt class="docutils literal"&gt;update()&lt;/tt&gt; operation because it is extremely
+similar to the build tree operation.&lt;/p&gt;
+&lt;p&gt;The api for &lt;tt class="docutils literal"&gt;update()&lt;/tt&gt; could be&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;::&lt;/dt&gt;
+&lt;dd&gt;void update(int index, int newVal)&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;which is why we actually store the original array in our Fenwick tree class as well, because we want to know
+what the delta between &lt;tt class="docutils literal"&gt;newVal&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;oldVal&lt;/tt&gt; is.&lt;/p&gt;
+&lt;p&gt;Remember that &lt;tt class="docutils literal"&gt;index&lt;/tt&gt; would be in &lt;tt class="docutils literal"&gt;tree[index+1]&lt;/tt&gt; because Fenwick tree is 1-based. We basically start at
+&lt;tt class="docutils literal"&gt;i=index+1&lt;/tt&gt; and add delta to &lt;tt class="docutils literal"&gt;tree[i]&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;'s ancestors (until &lt;tt class="docutils literal"&gt;i&lt;/tt&gt; exceeds the valid range)&lt;/p&gt;
+&lt;p&gt;This takes O(logn) time.&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
-public int numSquares(int m, int n) {
-    //
-}
+i = 5 (0b0101), value of least-significant-set-bit is 1 (0b1), 1+5 = 6 is the immediate parent
+i = 6 (0b0110), value of least-significant-set-bit is 2 (0b10), 2+6 = 8 is the immediate parent
 &lt;/pre&gt;
-&lt;p&gt;So let's first determine the size of the largest square we can find in the grid.&lt;/p&gt;
-&lt;p&gt;It must be &lt;tt class="docutils literal"&gt;min&lt;/tt&gt; x &lt;tt class="docutils literal"&gt;min&lt;/tt&gt; where &lt;tt class="docutils literal"&gt;min = Math.min(m, n)&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;The smallest square we can find in the grid is &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; x &lt;tt class="docutils literal"&gt;1&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;We can then work our way from [0][0] to [m-1][n-1] to look for squares of size &lt;tt class="docutils literal"&gt;1&lt;/tt&gt; x &lt;tt class="docutils literal"&gt;1&lt;/tt&gt;, ..., &lt;tt class="docutils literal"&gt;min&lt;/tt&gt; x &lt;tt class="docutils literal"&gt;min&lt;/tt&gt;&lt;/p&gt;
+&lt;p&gt;Lastly, let's go over how the &lt;tt class="docutils literal"&gt;query()&lt;/tt&gt; api is implemented. Notice that in &lt;tt class="docutils literal"&gt;buildTree()&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;update()&lt;/tt&gt; we are
+moving toward the direction of a larger range (i.e., the parent or going upward). For &lt;tt class="docutils literal"&gt;query()&lt;/tt&gt; we have to move
+toward the other direction.&lt;/p&gt;
+&lt;p&gt;So instead of adding the least-significant-set-bit value of &lt;tt class="docutils literal"&gt;index&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;index&lt;/tt&gt;, we would be subtracting the
+least-significant-set-bit value of &lt;tt class="docutils literal"&gt;index&lt;/tt&gt; from &lt;tt class="docutils literal"&gt;index&lt;/tt&gt;.&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;::&lt;/dt&gt;
+&lt;dd&gt;prefixSum(5) = sum(0, 5) = fenwickSum(6) = tree[6] (0b0110) + tree[4] (0b0100)
+prefixSum(12) = sum(0, 12) = fenwickSum(13) = tree[13] (0b1101) + tree[12] (0b1100) + tree[8] (0b1000)&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Again this is a O(logn) operation.&lt;/p&gt;
+&lt;p&gt;Just remember that adding the least-significant-set-bit of &lt;tt class="docutils literal"&gt;i&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;i&lt;/tt&gt; gets you to the immediate parent of &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;
+and that subtracting the least-significant-set-bit of &lt;tt class="docutils literal"&gt;i&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;i&lt;/tt&gt; gets you to the node that covers a non-overlapping
+range of sums for numbers that come before &lt;tt class="docutils literal"&gt;i&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;If you visualize the above example using a tree, you will get&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+              16
+          /  |   |  \
+        8    14  15  12
+     /  | \   |     /  \
+    4   6  7  13   11   10
+   / \  |                |
+  2   3 5                9
+ /
+1
+&lt;/pre&gt;
+&lt;p&gt;The point is to illustrate that don't think in terms of the tree structure. Think in terms of the bit representation of
+the index.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;FenwickTree&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// buildTree() takes O(n) time&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;FenwickTree&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// building the fenwick tree is an O(n) operation&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;(-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;immediateParent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+            &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;immediateParent&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// update() takes O(logn) time&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;newVal&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;delta&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;newVal&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;length&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;delta&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;(-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+            &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// lastly update our copy of the array as well&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;newVal&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// query() takes O(logn) time&lt;/span&gt;
+    &lt;span class="c1"&gt;// this answers sum(0, index)&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;query&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;sum&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;];&lt;/span&gt;
+            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;(-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+            &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 </summary><category term="BIT"></category><category term="Fenwick Tree"></category></entry><entry><title>segment_tree</title><link href="http://peter14f.github.io/pelican-blog/segment_tree.html" rel="alternate"></link><updated>2016-02-28T11:36:00-08:00</updated><author><name>Peter Hsieh</name></author><id>tag:peter14f.github.io,2016-02-28:pelican-blog/segment_tree.html</id><summary type="html">&lt;p&gt;Segment tree is useful when you need to perform some range operations repeatedly.&lt;/p&gt;
 &lt;p&gt;For example, given an array of integers &lt;tt class="docutils literal"&gt;nums&lt;/tt&gt;, find out the sum in the range &lt;tt class="docutils literal"&gt;[i,j]&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;A segment tree is a full binary tree. Each node either has 0 or 2 children.

@@ -79,6 +79,84 @@ Peter's Coding Notes            </a>
     <div class="row">
         <div class="col-lg-12">
             <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/312-burst_balloons.html">312-burst_balloons</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-25T15:07:00-08:00"> Feb 25 2016</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/burst-balloons/">LeetCode Problem Link</a></p>
+<p>pad a <tt class="docutils literal">1</tt> in the front and back of <tt class="docutils literal">nums</tt>.</p>
+<pre class="literal-block">
+int[] numbers = new int[n+2];
+</pre>
+<p>Now dp[left][right] is defined as the maximum coins when we burst all balloons
+between <tt class="docutils literal">left</tt> and <tt class="docutils literal">right</tt> (but not including balloons at <tt class="docutils literal">left</tt> and <tt class="docutils literal">right</tt>).</p>
+<p>For example, if the input array is [3, 1, 5, 8], then
+<tt class="docutils literal">numbers = [1, 3, 1, 5, 8, 1]</tt>
+and we want to return  <tt class="docutils literal"><span class="pre">dp[0][5]</span></tt>.</p>
+<p>dp[0][2] = numbers[0]*numbers[1]*numbers[2]
+dp[1][3] = numbers[1]*numbers[2]*numbers[3]
+dp[2][4] = numbers[2]*numbers[3]*numbers[4 ...</p>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/312-burst_balloons.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/311-sparse_matrix_multiplication.html">311-sparse_matrix_multiplication</a></h2>
+                    <div>
+<footer class="post-info">
+    <span class="published label label-default">
+        <time datetime="2016-02-25T15:06:00-08:00"> Feb 25 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default tag-lists">Tags</span>
+	<a href="http://peter14f.github.io/pelican-blog/tag/matrix-multiplication.html">Matrix Multiplication</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/sparse-matrix-multiplication/">LeetCode Problem Link</a></p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">int</span><span class="o">[][]</span> <span class="nf">multiply</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">A</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">B</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">B</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">][];</span>
+
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">B</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">denseA</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">denseA</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">row</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">denseA</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">row</span><span class="o">,</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;());</span>
+                <span class="o">}</span>
+                <span class="n">denseA</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">row</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="n">col</span><span class="o">,</span> <span class="n">A</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">denseB</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;&gt;();</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/311-sparse_matrix_multiplication.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/310-minimum_height_trees.html">310-minimum_height_trees</a></h2>
                     <div>
 <footer class="post-info">
@@ -304,98 +382,6 @@ time.</p>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">find</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">while</span> <span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">!=</span> <span class="n">x ...</span></pre></div>
                     <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/305-number_of_islands_ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/304-range_sum_query_2d_immutable.html">304-range_sum_query_2d_immutable</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-23T22:52:00-08:00"> Feb 23 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/range-sum.html">Range Sum</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/range-sum-query-2d-immutable/">LeetCode Problem Link</a></p>
-<p>My original thought is to use the same approach used in 303-range_sum_query. The <tt class="docutils literal">prefixSum</tt> array just has <tt class="docutils literal">m</tt>
-rows instead of just 1.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumMatrix</span> <span class="o">{</span>
-    <span class="kt">int</span><span class="o">[][]</span> <span class="n">prefixSum</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">NumMatrix</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">matrix</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">m</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span>
-            <span class="k">return</span><span class="o">;</span>
-
-        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
-
-        <span class="n">prefixSum</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">prefixSum</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="mi">0</span><span class="o">];</span>
-
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="n">prefixSum</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">]</span> <span class="o">=</span> <span class="n">prefixSum</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">matrix</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">col</span><span class="o">];</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">deepToString</span><span class="o">(</span><span class="n">prefixSum</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">prefixSum</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumRegion</span><span class="o">(</span><span class="kt">int</span> <span class="n">row1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">col1 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/304-range_sum_query_2d_immutable.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2 class="article-title"><a href="http://peter14f.github.io/pelican-blog/303-range_sum_query.html">303-range_sum_query</a></h2>
-                    <div>
-<footer class="post-info">
-    <span class="published label label-default">
-        <time datetime="2016-02-23T20:34:00-08:00"> Feb 23 2016</time>
-    </span>
-
-
-
-
-
-<span class="label label-default tag-lists">Tags</span>
-	<a href="http://peter14f.github.io/pelican-blog/tag/memoization.html">Memoization</a>
-        /
-	<a href="http://peter14f.github.io/pelican-blog/tag/range-sum.html">Range Sum</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary article-summary"><p><a class="reference external" href="https://leetcode.com/problems/range-sum-query-immutable/">LeetCode Problem Link</a></p>
-<p>There are many calls to <tt class="docutils literal">sumRange()</tt>, so if we can store the result then <tt class="docutils literal">sumRange()</tt> can become O(1) time.</p>
-<p>We could use a 2d int array called <tt class="docutils literal">sum</tt> where <tt class="docutils literal"><span class="pre">sum[i][j]</span></tt> is the sum from index <tt class="docutils literal">i</tt> all the way to
-index <tt class="docutils literal">j</tt>.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumArray</span> <span class="o">{</span>
-
-    <span class="kt">int</span><span class="o">[][]</span> <span class="n">sum</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">NumArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-
-        <span class="n">sum</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="c1">// sum over a single value</span>
-            <span class="n">sum</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">row</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">row</span><span class="o">];</span>
-        <span class="o">}</span>
-
-        <span class="c1">// d is the distance from diagonal</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">d</span><span class="o">&lt;</span><span class="n">n</span><span class="o">;</span> <span class="n">d</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://peter14f.github.io/pelican-blog/303-range_sum_query.html">more ...</a>
                 </div>
             </article>
             <hr/>
